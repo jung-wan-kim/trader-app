@@ -1,30 +1,60 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tiktok_clone_flutter/main.dart';
+import 'package:tiktok_clone_flutter/screens/main_screen.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  group('TraderApp Main Screen Tests', () {
+    testWidgets('should display TraderApp with correct title', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const ProviderScope(
+          child: TraderApp(),
+        ),
+      );
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+      // Verify app launches successfully
+      expect(find.byType(MaterialApp), findsOneWidget);
+      expect(find.byType(MainScreen), findsOneWidget);
+    });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    testWidgets('should have dark theme configured', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const ProviderScope(
+          child: TraderApp(),
+        ),
+      );
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      final MaterialApp app = tester.widget(find.byType(MaterialApp));
+      expect(app.theme?.brightness, equals(Brightness.dark));
+      expect(app.theme?.primaryColor, equals(Colors.black));
+      expect(app.theme?.scaffoldBackgroundColor, equals(Colors.black));
+    });
+
+    testWidgets('should have correct color scheme', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const ProviderScope(
+          child: TraderApp(),
+        ),
+      );
+
+      final MaterialApp app = tester.widget(find.byType(MaterialApp));
+      final colorScheme = app.theme?.colorScheme;
+      
+      expect(colorScheme?.primary, equals(Colors.white));
+      expect(colorScheme?.secondary, equals(const Color(0xFF00D632))); // Green for up
+      expect(colorScheme?.tertiary, equals(const Color(0xFFFF3B30))); // Red for down
+    });
+
+    testWidgets('should not show debug banner', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const ProviderScope(
+          child: TraderApp(),
+        ),
+      );
+
+      final MaterialApp app = tester.widget(find.byType(MaterialApp));
+      expect(app.debugShowCheckedModeBanner, isFalse);
+    });
   });
 }
