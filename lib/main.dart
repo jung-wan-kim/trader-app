@@ -14,25 +14,26 @@ void main() async {
   
   runApp(
     const ProviderScope(
-      child: TikTokCloneApp(),
+      child: TraderApp(),
     ),
   );
 }
 
-class TikTokCloneApp extends StatelessWidget {
-  const TikTokCloneApp({super.key});
+class TraderApp extends StatelessWidget {
+  const TraderApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'TikTok Clone',
+      title: 'Trader App',
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.black,
         scaffoldBackgroundColor: Colors.black,
         colorScheme: const ColorScheme.dark(
           primary: Colors.white,
-          secondary: Color(0xFFFF0050),
+          secondary: Color(0xFF00D632), // 녹색으로 변경 (상승 컬러)
+          tertiary: Color(0xFFFF3B30), // 빨간색 (하락 컬러)
         ),
       ),
       debugShowCheckedModeBanner: false,

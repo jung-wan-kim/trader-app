@@ -16,7 +16,6 @@
 
 ## 프로젝트 구조
 ```
-- App.js
 - android/
 - ios/
 - lib/
@@ -25,30 +24,34 @@
     - stock_recommendation.dart
     - trader_strategy.dart
     - user_subscription.dart
+    - video_model.dart (기존)
   - screens/
     - home_screen.dart (추천 목록)
     - strategy_detail_screen.dart (전략별 상세)
     - position_screen.dart (포지션 관리)
     - subscription_screen.dart (구독 관리)
+    - main_screen.dart (네비게이션)
   - widgets/
     - recommendation_card.dart
     - risk_calculator.dart
-- src/
-  - components/
-  - config/
-  - screens/
-- scripts/
+    - video_player_item.dart (기존)
+- assets/
+  - images/
+  - icons/
 - supabase/
   - migrations/
     - stock_recommendations.sql
     - user_subscriptions.sql
-- tests/
+- test/
+- pubspec.yaml
+- analysis_options.yaml
 ```
 
 ## 기술 스택
-- Frontend: Flutter (Dart), React Native
+- Frontend: Flutter (Dart)
 - Backend: Supabase
 - Database: PostgreSQL (Supabase)
+- State Management: Riverpod
 - Infrastructure: iOS/Android native
 - API Integration: 실시간 주가 데이터, 기술적 지표 API
 - AI/ML: 패턴 인식 및 전략 매칭 알고리즘
