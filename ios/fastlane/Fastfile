@@ -1,0 +1,167 @@
+default_platform(:ios)
+
+platform :ios do
+  before_all do
+    setup_circle_ci if ENV['CI']
+  end
+
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    build_app(
+      workspace: "Runner.xcworkspace",
+      scheme: "Runner",
+      export_method: "app-store",
+      configuration: "Release"
+    )
+    upload_to_testflight
+  end
+
+  desc "Build for development"
+  lane :build_development do
+    match(
+      type: "development",
+      readonly: true
+    )
+    
+    build_app(
+      workspace: "Runner.xcworkspace",
+      scheme: "Runner",
+      configuration: "Debug",
+      export_method: "development",
+      output_directory: "./build",
+      output_name: "trader-app-dev.ipa"
+    )
+  end
+
+  desc "Build for staging"
+  lane :build_staging do
+    match(
+      type: "adhoc",
+      readonly: true
+    )
+    
+    build_app(
+      workspace: "Runner.xcworkspace",
+      scheme: "Runner",
+      configuration: "Release",
+      export_method: "ad-hoc",
+      output_directory: "./build",
+      output_name: "trader-app-staging.ipa"
+    )
+  end
+
+  desc "Deploy to development (TestFlight)"
+  lane :deploy_development do
+    match(
+      type: "appstore",
+      readonly: true
+    )
+    
+    build_app(
+      workspace: "Runner.xcworkspace",
+      scheme: "Runner",
+      configuration: "Release",
+      export_method: "app-store"
+    )
+    
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+      distribute_external: false,
+      groups: ["Internal Testers"]
+    )
+  end
+
+  desc "Deploy to staging (TestFlight)"
+  lane :deploy_staging do
+    match(
+      type: "appstore",
+      readonly: true
+    )
+    
+    build_app(
+      workspace: "Runner.xcworkspace",
+      scheme: "Runner",
+      configuration: "Release",
+      export_method: "app-store"
+    )
+    
+    upload_to_testflight(
+      skip_waiting_for_build_processing: false,
+      distribute_external: true,
+      groups: ["Beta Testers"],
+      changelog: "Latest staging build"
+    )
+  end
+
+  desc "Deploy to production (App Store)"
+  lane :deploy_production do
+    match(
+      type: "appstore",
+      readonly: true
+    )
+    
+    build_app(
+      workspace: "Runner.xcworkspace",
+      scheme: "Runner",
+      configuration: "Release",
+      export_method: "app-store"
+    )
+    
+    upload_to_app_store(
+      skip_metadata: false,
+      skip_screenshots: false,
+      submit_for_review: false,
+      automatic_release: false,
+      phased_release: true,
+      precheck_include_in_app_purchases: false
+    )
+  end
+
+  desc "Take screenshots"
+  lane :screenshots do
+    capture_screenshots
+    frame_screenshots(white: true)
+  end
+
+  desc "Upload metadata only"
+  lane :upload_metadata do
+    upload_to_app_store(
+      skip_binary_upload: true,
+      skip_screenshots: false,
+      skip_metadata: false
+    )
+  end
+
+  desc "Setup certificates and provisioning profiles"
+  lane :setup_signing do
+    match(
+      type: "development",
+      readonly: false
+    )
+    match(
+      type: "adhoc",
+      readonly: false
+    )
+    match(
+      type: "appstore",
+      readonly: false
+    )
+  end
+
+  desc "Refresh dsyms"
+  lane :refresh_dsyms do
+    download_dsyms(
+      version: "latest",
+      build_number: "latest"
+    )
+    upload_symbols_to_crashlytics
+  end
+
+  error do |lane, exception|
+    # Handle errors
+    slack(
+      message: "Error in lane #{lane}: #{exception}",
+      success: false
+    ) if ENV["SLACK_URL"]
+  end
+end

@@ -1,0 +1,105 @@
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Build debug APK"
+  lane :build_debug do
+    gradle(
+      task: "clean assembleDebug",
+      project_dir: "../"
+    )
+  end
+
+  desc "Build release APK"
+  lane :build_release do
+    gradle(
+      task: "clean assembleRelease",
+      project_dir: "../",
+      properties: {
+        "android.injected.signing.store.file" => ENV["ANDROID_KEYSTORE_PATH"],
+        "android.injected.signing.store.password" => ENV["ANDROID_KEYSTORE_PASSWORD"],
+        "android.injected.signing.key.alias" => ENV["ANDROID_KEY_ALIAS"],
+        "android.injected.signing.key.password" => ENV["ANDROID_KEY_PASSWORD"],
+      }
+    )
+  end
+
+  desc "Build release bundle"
+  lane :build_bundle do
+    gradle(
+      task: "clean bundleRelease",
+      project_dir: "../",
+      properties: {
+        "android.injected.signing.store.file" => ENV["ANDROID_KEYSTORE_PATH"],
+        "android.injected.signing.store.password" => ENV["ANDROID_KEYSTORE_PASSWORD"],
+        "android.injected.signing.key.alias" => ENV["ANDROID_KEY_ALIAS"],
+        "android.injected.signing.key.password" => ENV["ANDROID_KEY_PASSWORD"],
+      }
+    )
+  end
+
+  desc "Deploy to development track"
+  lane :deploy_development do
+    build_bundle
+    upload_to_play_store(
+      track: "internal",
+      release_status: "draft",
+      json_key: ENV["PLAY_STORE_SERVICE_ACCOUNT_JSON"],
+      aab: "../build/app/outputs/bundle/release/app-release.aab"
+    )
+  end
+
+  desc "Deploy to staging track"
+  lane :deploy_staging do
+    build_bundle
+    upload_to_play_store(
+      track: "alpha",
+      release_status: "completed",
+      json_key: ENV["PLAY_STORE_SERVICE_ACCOUNT_JSON"],
+      aab: "../build/app/outputs/bundle/release/app-release.aab"
+    )
+  end
+
+  desc "Deploy to production"
+  lane :deploy_production do
+    build_bundle
+    upload_to_play_store(
+      track: "production",
+      release_status: "completed",
+      rollout: "0.1", # 10% rollout
+      json_key: ENV["PLAY_STORE_SERVICE_ACCOUNT_JSON"],
+      aab: "../build/app/outputs/bundle/release/app-release.aab"
+    )
+  end
+
+  desc "Promote from staging to production"
+  lane :promote_to_production do
+    upload_to_play_store(
+      track: "alpha",
+      track_promote_to: "production",
+      rollout: "0.1",
+      json_key: ENV["PLAY_STORE_SERVICE_ACCOUNT_JSON"]
+    )
+  end
+
+  desc "Take screenshots"
+  lane :screenshots do
+    capture_android_screenshots
+  end
+
+  desc "Upload metadata"
+  lane :upload_metadata do
+    upload_to_play_store(
+      skip_upload_apk: true,
+      skip_upload_aab: true,
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false,
+      json_key: ENV["PLAY_STORE_SERVICE_ACCOUNT_JSON"]
+    )
+  end
+end
