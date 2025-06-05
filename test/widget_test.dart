@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tiktok_clone_flutter/main.dart';
-import 'package:tiktok_clone_flutter/screens/main_screen.dart';
+import 'package:trader_app/main.dart';
+import 'package:trader_app/screens/main_screen.dart';
 
 void main() {
   group('TraderApp Main Screen Tests', () {
