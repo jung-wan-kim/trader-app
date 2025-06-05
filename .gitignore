@@ -100,3 +100,6 @@ supabase/.branches/
 *.tmp
 *.temp
 .cache/
+
+# Backend development files (will be handled by backend RP)
+.backend/

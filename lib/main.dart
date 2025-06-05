@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'screens/main_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Supabase 초기화
-  await Supabase.initialize(
-    url: 'https://puoscoaltsznczqdfjh.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB1b3Njb2FsdHN6bmN6cWRmamgiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTczMjg2MDk2NSwiZXhwIjoyMDQ4NDM2OTY1fQ.P2FrZXJdcds7O7enI2qLrO-qCgBKu-51lzoMfBU6Nxo',
-  );
+  // TODO: 백엔드 연동 시 초기화 코드 추가
+  // 현재는 목업 데이터로 개발 진행
   
   runApp(
     const ProviderScope(
