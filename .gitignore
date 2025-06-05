@@ -100,3 +100,6 @@ supabase/.branches/
 *.tmp
 *.temp
 .cache/
+
+# RP 자동화 시스템 파일
+.rp/
