@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'home_screen.dart';
+import 'position_screen.dart';
 import 'discover_screen.dart';
-import 'upload_screen.dart';
-import 'inbox_screen.dart';
+import 'subscription_screen.dart';
 import 'profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -18,9 +18,9 @@ class _MainScreenState extends State<MainScreen> {
   
   final List<Widget> _screens = [
     const HomeScreen(),
+    const PositionScreen(),
     const DiscoverScreen(),
-    const UploadScreen(),
-    const InboxScreen(),
+    const SubscriptionScreen(),
     const ProfileScreen(),
   ];
   
@@ -32,12 +32,14 @@ class _MainScreenState extends State<MainScreen> {
   
   @override
   Widget build(BuildContext context) {
-    // 홈 화면에서는 상태 표시줄을 숨김
-    if (_selectedIndex == 0) {
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    } else {
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    }
+    // 상태 표시줄 설정
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
     
     return Scaffold(
       body: _screens[_selectedIndex],
@@ -54,24 +56,24 @@ class _MainScreenState extends State<MainScreen> {
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: Colors.black,
-          selectedItemColor: Colors.white,
+          selectedItemColor: const Color(0xFF00D632),
           unselectedItemColor: Colors.grey,
           currentIndex: _selectedIndex,
           onTap: _onItemTapped,
           showSelectedLabels: true,
           showUnselectedLabels: true,
-          selectedFontSize: 10,
-          unselectedFontSize: 10,
+          selectedFontSize: 11,
+          unselectedFontSize: 11,
           items: [
             const BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined, size: 28),
-              activeIcon: Icon(Icons.home, size: 28),
-              label: '홈',
+              icon: Icon(Icons.show_chart_outlined, size: 26),
+              activeIcon: Icon(Icons.show_chart, size: 26),
+              label: 'Signals',
             ),
             const BottomNavigationBarItem(
-              icon: Icon(Icons.search_outlined, size: 28),
-              activeIcon: Icon(Icons.search, size: 28),
-              label: '검색',
+              icon: Icon(Icons.account_balance_wallet_outlined, size: 26),
+              activeIcon: Icon(Icons.account_balance_wallet, size: 26),
+              label: 'Portfolio',
             ),
             BottomNavigationBarItem(
               icon: Container(
@@ -81,30 +83,30 @@ class _MainScreenState extends State<MainScreen> {
                   borderRadius: BorderRadius.circular(8),
                   gradient: const LinearGradient(
                     colors: [
-                      Color(0xFF69C9D0),
-                      Color(0xFFEE1D52),
+                      Color(0xFF00D632),
+                      Color(0xFF00A025),
                     ],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                   ),
                 ),
                 child: const Icon(
-                  Icons.add,
+                  Icons.explore_outlined,
                   color: Colors.white,
                   size: 20,
                 ),
               ),
-              label: '',
+              label: 'Discover',
             ),
             const BottomNavigationBarItem(
-              icon: Icon(Icons.inbox_outlined, size: 28),
-              activeIcon: Icon(Icons.inbox, size: 28),
-              label: '받은 메시지함',
+              icon: Icon(Icons.diamond_outlined, size: 26),
+              activeIcon: Icon(Icons.diamond, size: 26),
+              label: 'Premium',
             ),
             const BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline, size: 28),
-              activeIcon: Icon(Icons.person, size: 28),
-              label: '프로필',
+              icon: Icon(Icons.person_outline, size: 26),
+              activeIcon: Icon(Icons.person, size: 26),
+              label: 'Profile',
             ),
           ],
         ),
