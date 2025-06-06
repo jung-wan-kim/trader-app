@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/portfolio_provider.dart';
+import '../generated/l10n/app_localizations.dart';
 
 class PositionScreen extends ConsumerWidget {
   const PositionScreen({super.key});
@@ -27,7 +28,7 @@ class PositionScreen extends ConsumerWidget {
                 ),
                 error: (error, stack) => Center(
                   child: Text(
-                    'Error loading positions',
+                    AppLocalizations.of(context).errorLoadingPositions,
                     style: TextStyle(color: Colors.grey[400]),
                   ),
                 ),
@@ -50,7 +51,7 @@ class PositionScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'Portfolio',
+                AppLocalizations.of(context).portfolio,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 28,
@@ -115,7 +116,7 @@ class PositionScreen extends ConsumerWidget {
                     ),
                   ),
                   Text(
-                    ' today',
+                    ' ${AppLocalizations.of(context).today}',
                     style: TextStyle(
                       color: Colors.grey[400],
                       fontSize: 16,
@@ -138,7 +139,7 @@ class PositionScreen extends ConsumerWidget {
         children: [
           Expanded(
             child: _buildStatCard(
-              title: 'Win Rate',
+              title: AppLocalizations.of(context).winRate,
               value: '${stats.winRate.toStringAsFixed(1)}%',
               icon: Icons.check_circle_outline,
               color: const Color(0xFF00D632),
@@ -147,7 +148,7 @@ class PositionScreen extends ConsumerWidget {
           const SizedBox(width: 12),
           Expanded(
             child: _buildStatCard(
-              title: 'Positions',
+              title: AppLocalizations.of(context).positions,
               value: stats.openPositions.toString(),
               icon: Icons.account_balance_wallet_outlined,
               color: Colors.blue,
@@ -156,7 +157,7 @@ class PositionScreen extends ConsumerWidget {
           const SizedBox(width: 12),
           Expanded(
             child: _buildStatCard(
-              title: 'Day P&L',
+              title: AppLocalizations.of(context).dayPnL,
               value: '\$${stats.dayPnL.toStringAsFixed(0)}',
               icon: stats.dayPnL >= 0 
                   ? Icons.trending_up 
@@ -232,7 +233,7 @@ class PositionScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              'No open positions',
+              AppLocalizations.of(context).noOpenPositions,
               style: TextStyle(
                 color: Colors.grey[400],
                 fontSize: 16,
@@ -240,7 +241,7 @@ class PositionScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              'Start trading to see your positions',
+              AppLocalizations.of(context).startTradingToSeePositions,
               style: TextStyle(
                 color: Colors.grey[600],
                 fontSize: 14,
@@ -340,25 +341,25 @@ class PositionScreen extends ConsumerWidget {
             children: [
               Expanded(
                 child: _buildPositionDetail(
-                  label: 'Quantity',
+                  label: AppLocalizations.of(context).quantity,
                   value: position.quantity.toString(),
                 ),
               ),
               Expanded(
                 child: _buildPositionDetail(
-                  label: 'Avg Cost',
+                  label: AppLocalizations.of(context).avgCost,
                   value: '\$${position.entryPrice.toStringAsFixed(2)}',
                 ),
               ),
               Expanded(
                 child: _buildPositionDetail(
-                  label: 'Current',
+                  label: AppLocalizations.of(context).current,
                   value: '\$${position.currentPrice.toStringAsFixed(2)}',
                 ),
               ),
               Expanded(
                 child: _buildPositionDetail(
-                  label: 'P&L',
+                  label: AppLocalizations.of(context).pnl,
                   value: '\$${position.unrealizedPnL.toStringAsFixed(2)}',
                   valueColor: pnlColor,
                 ),
@@ -382,7 +383,7 @@ class PositionScreen extends ConsumerWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          'SL: \$${position.stopLoss!.toStringAsFixed(2)}',
+                          '${AppLocalizations.of(context).sl}: \$${position.stopLoss!.toStringAsFixed(2)}',
                           style: TextStyle(
                             color: Colors.red[400],
                             fontSize: 12,
@@ -402,7 +403,7 @@ class PositionScreen extends ConsumerWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          'TP: \$${position.takeProfit!.toStringAsFixed(2)}',
+                          '${AppLocalizations.of(context).tp}: \$${position.takeProfit!.toStringAsFixed(2)}',
                           style: TextStyle(
                             color: Colors.green[400],
                             fontSize: 12,
@@ -429,7 +430,7 @@ class PositionScreen extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: const Text('Close'),
+                  child: Text(AppLocalizations.of(context).close),
                 ),
               ),
               const SizedBox(width: 12),
@@ -445,7 +446,7 @@ class PositionScreen extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: const Text('Edit'),
+                  child: Text(AppLocalizations.of(context).edit),
                 ),
               ),
             ],
@@ -489,7 +490,7 @@ class PositionScreen extends ConsumerWidget {
       builder: (context) => AlertDialog(
         backgroundColor: Colors.grey[900],
         title: const Text(
-          'Close Position',
+          AppLocalizations.of(context).closePosition,
           style: TextStyle(color: Colors.white),
         ),
         content: Column(
@@ -513,7 +514,7 @@ class PositionScreen extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'P&L',
+                    AppLocalizations.of(context).pnl,
                     style: TextStyle(color: Colors.grey[400]),
                   ),
                   Text(
@@ -534,7 +535,7 @@ class PositionScreen extends ConsumerWidget {
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
-              'Cancel',
+              AppLocalizations.of(context).cancel,
               style: TextStyle(color: Colors.grey[400]),
             ),
           ),
@@ -544,7 +545,7 @@ class PositionScreen extends ConsumerWidget {
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text('Position closed successfully'),
+                  content: Text(AppLocalizations.of(context).positionClosedSuccessfully),
                   backgroundColor: Color(0xFF00D632),
                 ),
               );
@@ -552,7 +553,7 @@ class PositionScreen extends ConsumerWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF00D632),
             ),
-            child: const Text('Close Position'),
+            child: Text(AppLocalizations.of(context).closePosition),
           ),
         ],
       ),
