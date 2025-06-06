@@ -222,7 +222,10 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get upgrade => 'Upgrade';
+  String get upgrade => 'アップグレード';
+
+  @override
+  String get downgrade => 'ダウングレード';
 
   @override
   String get billingHistory => 'Billing History';

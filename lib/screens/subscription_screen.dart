@@ -236,6 +236,7 @@ class SubscriptionScreen extends ConsumerWidget {
             isCurrentPlan: currentPlan?.id == plan.id,
             ref: ref,
             context: context,
+            currentPlan: currentPlan,
           )).toList(),
           const SizedBox(height: 16),
           const _SubscriptionTermsSection(),
@@ -249,6 +250,7 @@ class SubscriptionScreen extends ConsumerWidget {
     required bool isCurrentPlan,
     required WidgetRef ref,
     required BuildContext context,
+    SubscriptionPlan? currentPlan,
   }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -419,7 +421,11 @@ class SubscriptionScreen extends ConsumerWidget {
                       ),
                     ),
                     child: Text(
-                      isCurrentPlan ? AppLocalizations.of(context)!.currentPlan : AppLocalizations.of(context)!.upgrade,
+                      isCurrentPlan 
+                          ? AppLocalizations.of(context)!.currentPlan 
+                          : _isUpgrade(plan, currentPlan)
+                              ? AppLocalizations.of(context)!.upgrade
+                              : AppLocalizations.of(context)!.downgrade,
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
@@ -649,6 +655,24 @@ class SubscriptionScreen extends ConsumerWidget {
       default:
         return featureKey; // Fallback to key if not found
     }
+  }
+  
+  bool _isUpgrade(SubscriptionPlan newPlan, SubscriptionPlan? currentPlan) {
+    if (currentPlan == null) return true;
+    
+    // Compare tier values
+    final tierOrder = {
+      SubscriptionTier.free: 0,
+      SubscriptionTier.basic: 1,
+      SubscriptionTier.pro: 2,
+      SubscriptionTier.premium: 3,
+      SubscriptionTier.enterprise: 4,
+    };
+    
+    final currentTierValue = tierOrder[currentPlan.tier] ?? 0;
+    final newTierValue = tierOrder[newPlan.tier] ?? 0;
+    
+    return newTierValue > currentTierValue;
   }
 }
 

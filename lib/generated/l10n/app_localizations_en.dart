@@ -231,6 +231,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get upgrade => 'Upgrade';
 
   @override
+  String get downgrade => 'Downgrade';
+
+  @override
   String get billingHistory => 'Billing History';
 
   @override

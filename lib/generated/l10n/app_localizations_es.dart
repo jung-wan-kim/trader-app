@@ -232,7 +232,10 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get upgrade => 'Upgrade';
+  String get upgrade => 'Actualizar';
+
+  @override
+  String get downgrade => 'Degradar';
 
   @override
   String get billingHistory => 'Billing History';

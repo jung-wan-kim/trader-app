@@ -232,6 +232,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get upgrade => 'Upgrade';
 
   @override
+  String get downgrade => 'Herabstufen';
+
+  @override
   String get billingHistory => 'Billing History';
 
   @override

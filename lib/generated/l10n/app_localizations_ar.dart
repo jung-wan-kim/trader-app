@@ -226,7 +226,10 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get upgrade => 'Upgrade';
+  String get upgrade => 'ترقية';
+
+  @override
+  String get downgrade => 'خفض الخطة';
 
   @override
   String get billingHistory => 'Billing History';

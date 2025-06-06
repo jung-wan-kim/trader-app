@@ -233,7 +233,10 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get upgrade => 'Upgrade';
+  String get upgrade => 'Mettre à niveau';
+
+  @override
+  String get downgrade => 'Rétrograder';
 
   @override
   String get billingHistory => 'Billing History';

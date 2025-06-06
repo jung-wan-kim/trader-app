@@ -226,6 +226,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get upgrade => '업그레이드';
 
   @override
+  String get downgrade => '다운그레이드';
+
+  @override
   String get billingHistory => '결제 내역';
 
   @override

@@ -220,7 +220,10 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get upgrade => 'Upgrade';
+  String get upgrade => '升级';
+
+  @override
+  String get downgrade => '降级';
 
   @override
   String get billingHistory => 'Billing History';

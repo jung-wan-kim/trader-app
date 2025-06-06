@@ -227,7 +227,10 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get upgrade => 'Upgrade';
+  String get upgrade => 'अपग्रेड';
+
+  @override
+  String get downgrade => 'डाउनग्रेड';
 
   @override
   String get billingHistory => 'Billing History';

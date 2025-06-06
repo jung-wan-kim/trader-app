@@ -522,6 +522,12 @@ abstract class AppLocalizations {
   /// **'Upgrade'**
   String get upgrade;
 
+  /// No description provided for @downgrade.
+  ///
+  /// In en, this message translates to:
+  /// **'Downgrade'**
+  String get downgrade;
+
   /// No description provided for @billingHistory.
   ///
   /// In en, this message translates to:

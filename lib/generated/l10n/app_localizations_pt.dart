@@ -232,7 +232,10 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
-  String get upgrade => 'Upgrade';
+  String get upgrade => 'Atualizar';
+
+  @override
+  String get downgrade => 'Rebaixar';
 
   @override
   String get billingHistory => 'Billing History';
