@@ -128,5 +128,7 @@
   "search": "検索",
   "signals": "シグナル",
   "discover": "ディスカバー",
-  "premium": "プレミアム"
+  "premium": "プレミアム",
+  "upgrade": "アップグレード",
+  "downgrade": "ダウングレード"
 }

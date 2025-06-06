@@ -128,5 +128,7 @@
   "search": "खोजें",
   "signals": "सिग्नल",
   "discover": "खोजें",
-  "premium": "प्रीमियम"
+  "premium": "प्रीमियम",
+  "upgrade": "अपग्रेड",
+  "downgrade": "डाउनग्रेड"
 }

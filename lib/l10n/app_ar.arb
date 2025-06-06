@@ -128,5 +128,7 @@
   "search": "بحث",
   "signals": "إشارات",
   "discover": "اكتشف",
-  "premium": "بريميوم"
+  "premium": "بريميوم",
+  "upgrade": "ترقية",
+  "downgrade": "خفض الخطة"
 }

@@ -128,5 +128,7 @@
   "search": "Pesquisar",
   "signals": "Sinais",
   "discover": "Descobrir",
-  "premium": "Premium"
+  "premium": "Premium",
+  "upgrade": "Atualizar",
+  "downgrade": "Rebaixar"
 }

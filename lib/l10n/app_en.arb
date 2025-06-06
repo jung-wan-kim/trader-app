@@ -105,6 +105,7 @@
     }
   },
   "upgrade": "Upgrade",
+  "downgrade": "Downgrade",
   "billingHistory": "Billing History",
   "upgradePlan": "Upgrade Plan",
   "upgradePlanConfirm": "Upgrade to {planName}?",

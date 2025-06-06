@@ -128,5 +128,7 @@
   "search": "搜索",
   "signals": "信号",
   "discover": "发现",
-  "premium": "高级"
+  "premium": "高级",
+  "upgrade": "升级",
+  "downgrade": "降级"
 }

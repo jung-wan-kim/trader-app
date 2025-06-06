@@ -138,6 +138,7 @@
   "popular": "인기",
   "savePercent": "{percent}% 할인",
   "upgrade": "업그레이드",
+  "downgrade": "다운그레이드",
   "billingHistory": "결제 내역",
   "upgradePlan": "플랜 업그레이드",
   "upgradePlanConfirm": "{planName}으로 업그레이드하시겠습니까?",

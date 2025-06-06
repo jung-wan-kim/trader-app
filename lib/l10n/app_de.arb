@@ -128,5 +128,7 @@
   "search": "Suchen",
   "signals": "Signale",
   "discover": "Entdecken",
-  "premium": "Premium"
+  "premium": "Premium",
+  "upgrade": "Upgrade",
+  "downgrade": "Herabstufen"
 }
