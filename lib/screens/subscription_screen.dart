@@ -233,6 +233,8 @@ class SubscriptionScreen extends ConsumerWidget {
             ref: ref,
             context: context,
           )).toList(),
+          const SizedBox(height: 16),
+          const _SubscriptionTermsSection(),
         ],
       ),
     );
@@ -588,5 +590,53 @@ class SubscriptionScreen extends ConsumerWidget {
       case SubscriptionTier.enterprise:
         return 'Custom solutions for teams';
     }
+  }
+}
+
+class _SubscriptionTermsSection extends StatelessWidget {
+  const _SubscriptionTermsSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.blue.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.blue.withOpacity(0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.info_outline, color: Colors.blue[700], size: 20),
+              const SizedBox(width: 8),
+              Text(
+                '구독 약관',
+                style: TextStyle(
+                  color: Colors.blue[700],
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            '• 구독은 구매 확인 시 iTunes 계정으로 청구됩니다\n'
+            '• 현재 기간 종료 24시간 전까지 자동 갱신을 끄지 않으면 구독이 자동으로 갱신됩니다\n'
+            '• 현재 기간 종료 24시간 이내에 갱신 요금이 청구됩니다\n'
+            '• 구독은 구매 후 계정 설정에서 관리할 수 있습니다\n'
+            '• 무료 체험 기간의 미사용 부분은 구독 구매 시 소멸됩니다',
+            style: TextStyle(
+              color: Colors.grey[400],
+              fontSize: 11,
+              height: 1.5,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -28,6 +28,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         child: Column(
           children: [
             _buildHeader(),
+            _buildDisclaimer(),
             _buildFilters(),
             Expanded(
               child: recommendationsAsync.when(
@@ -106,6 +107,37 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             style: TextStyle(
               color: Colors.grey[400],
               fontSize: 14,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDisclaimer() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.amber.withOpacity(0.1),
+        border: Border.all(color: Colors.amber.withOpacity(0.3)),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        children: [
+          Icon(
+            Icons.info_outline,
+            color: Colors.amber[700],
+            size: 20,
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              '투자 참고용 정보입니다. 투자 결정은 본인 책임입니다.',
+              style: TextStyle(
+                color: Colors.amber[700],
+                fontSize: 12,
+              ),
             ),
           ),
         ],
