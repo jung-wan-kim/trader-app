@@ -1,0 +1,33 @@
+flutter_native_splash:
+  # 배경색
+  color: "#000000"
+  
+  # 이미지 (선택사항)
+  # image: assets/splash.png
+  
+  # 브랜딩 이미지 (Android 12+)
+  # branding: assets/dart.png
+  
+  # 앱 아이콘
+  # color_dark: "#000000"
+  # image_dark: assets/splash-invert.png
+  
+  # Android 12+ 설정
+  android_12:
+    # 이미지 또는 아이콘
+    # image: assets/android12splash.png
+    
+    # 아이콘 배경색
+    icon_background_color: "#000000"
+    
+    # 스플래시 화면 배경색
+    color: "#000000"
+  
+  # iOS 설정
+  ios: true
+  
+  # 웹 설정
+  web: false
+  
+  # 전체 화면 모드
+  fullscreen: true
