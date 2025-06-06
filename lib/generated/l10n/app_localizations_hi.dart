@@ -197,4 +197,97 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get poweredBy => 'पौराणिक ट्रेडरों द्वारा संचालित';
+
+  @override
+  String get errorLoadingRecommendations => 'सिफारिशें लोड करने में त्रुटि';
+
+  @override
+  String get retry => 'पुनः प्रयास करें';
+
+  @override
+  String get allActions => 'सभी कार्रवाइयाँ';
+
+  @override
+  String get buy => 'खरीदें';
+
+  @override
+  String get sell => 'बेचें';
+
+  @override
+  String get hold => 'होल्ड';
+
+  @override
+  String get latest => 'नवीनतम';
+
+  @override
+  String get confidence => 'विश्वास';
+
+  @override
+  String get profitPotential => 'लाभ की संभावना';
+
+  @override
+  String get noRecommendationsFound => 'कोई सिफारिश नहीं मिली';
+
+  @override
+  String get portfolio => 'पोर्टफोलियो';
+
+  @override
+  String get errorLoadingPositions => 'पोजीशन लोड करने में त्रुटि';
+
+  @override
+  String get today => 'आज';
+
+  @override
+  String get winRate => 'जीत दर';
+
+  @override
+  String get positions => 'पोजीशन्स';
+
+  @override
+  String get dayPL => 'दैनिक लाभ हानि';
+
+  @override
+  String get noOpenPositions => 'कोई खुली पोजीशन नहीं';
+
+  @override
+  String get startTradingToSeePositions =>
+      'अपनी पोजीशन देखने के लिए ट्रेडिंग शुरू करें';
+
+  @override
+  String get quantity => 'मात्रा';
+
+  @override
+  String get avgCost => 'औसत लागत';
+
+  @override
+  String get current => 'वर्तमान';
+
+  @override
+  String get pl => 'लाभ हानि';
+
+  @override
+  String get close => 'बंद करें';
+
+  @override
+  String get edit => 'संपादित करें';
+
+  @override
+  String get closePosition => 'पोजीशन बंद करें';
+
+  @override
+  String closePositionConfirm(int quantity, String stockCode) {
+    return '$stockCode के $quantity शेयर बंद करें?';
+  }
+
+  @override
+  String get cancel => 'रद्द करें';
+
+  @override
+  String get positionClosedSuccessfully => 'पोजीशन सफलतापूर्वक बंद हुई';
+
+  @override
+  String get sl => 'एसएल';
+
+  @override
+  String get tp => 'टीपी';
 }

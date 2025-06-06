@@ -66,5 +66,43 @@
   
   "dataDelayWarning": "قد تتأخر البيانات الفورية 15 دقيقة",
   "dataSource": "البيانات مقدمة من Finnhub",
-  "poweredBy": "مدعوم بواسطة المتداولين الأسطوريين"
+  "poweredBy": "مدعوم بواسطة المتداولين الأسطوريين",
+  
+  "errorLoadingRecommendations": "خطأ في تحميل التوصيات",
+  "retry": "إعادة المحاولة",
+  "allActions": "جميع الإجراءات",
+  "buy": "شراء",
+  "sell": "بيع",
+  "hold": "احتفاظ",
+  "latest": "الأحدث",
+  "confidence": "الثقة",
+  "profitPotential": "إمكانية الربح",
+  "noRecommendationsFound": "لم يتم العثور على توصيات",
+  
+  "portfolio": "المحفظة",
+  "errorLoadingPositions": "خطأ في تحميل المراكز",
+  "today": "اليوم",
+  "winRate": "معدل الفوز",
+  "positions": "المراكز",
+  "dayPL": "ربح/خسارة اليوم",
+  "noOpenPositions": "لا توجد مراكز مفتوحة",
+  "startTradingToSeePositions": "ابدأ التداول لرؤية مراكزك",
+  "quantity": "الكمية",
+  "avgCost": "متوسط التكلفة",
+  "current": "الحالي",
+  "pl": "الربح/الخسارة",
+  "close": "إغلاق",
+  "edit": "تعديل",
+  "closePosition": "إغلاق المركز",
+  "closePositionConfirm": "إغلاق {quantity} سهم من {stockCode}؟",
+  "@closePositionConfirm": {
+    "placeholders": {
+      "quantity": {"type": "int"},
+      "stockCode": {"type": "String"}
+    }
+  },
+  "cancel": "إلغاء",
+  "positionClosedSuccessfully": "تم إغلاق المركز بنجاح",
+  "sl": "وقف الخسارة",
+  "tp": "جني الربح"
 }

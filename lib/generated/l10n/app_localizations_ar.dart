@@ -196,4 +196,96 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get poweredBy => 'مدعوم بواسطة المتداولين الأسطوريين';
+
+  @override
+  String get errorLoadingRecommendations => 'خطأ في تحميل التوصيات';
+
+  @override
+  String get retry => 'إعادة المحاولة';
+
+  @override
+  String get allActions => 'جميع الإجراءات';
+
+  @override
+  String get buy => 'شراء';
+
+  @override
+  String get sell => 'بيع';
+
+  @override
+  String get hold => 'احتفاظ';
+
+  @override
+  String get latest => 'الأحدث';
+
+  @override
+  String get confidence => 'الثقة';
+
+  @override
+  String get profitPotential => 'إمكانية الربح';
+
+  @override
+  String get noRecommendationsFound => 'لم يتم العثور على توصيات';
+
+  @override
+  String get portfolio => 'المحفظة';
+
+  @override
+  String get errorLoadingPositions => 'خطأ في تحميل المراكز';
+
+  @override
+  String get today => 'اليوم';
+
+  @override
+  String get winRate => 'معدل الفوز';
+
+  @override
+  String get positions => 'المراكز';
+
+  @override
+  String get dayPL => 'ربح/خسارة اليوم';
+
+  @override
+  String get noOpenPositions => 'لا توجد مراكز مفتوحة';
+
+  @override
+  String get startTradingToSeePositions => 'ابدأ التداول لرؤية مراكزك';
+
+  @override
+  String get quantity => 'الكمية';
+
+  @override
+  String get avgCost => 'متوسط التكلفة';
+
+  @override
+  String get current => 'الحالي';
+
+  @override
+  String get pl => 'الربح/الخسارة';
+
+  @override
+  String get close => 'إغلاق';
+
+  @override
+  String get edit => 'تعديل';
+
+  @override
+  String get closePosition => 'إغلاق المركز';
+
+  @override
+  String closePositionConfirm(int quantity, String stockCode) {
+    return 'إغلاق $quantity سهم من $stockCode؟';
+  }
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get positionClosedSuccessfully => 'تم إغلاق المركز بنجاح';
+
+  @override
+  String get sl => 'وقف الخسارة';
+
+  @override
+  String get tp => 'جني الربح';
 }

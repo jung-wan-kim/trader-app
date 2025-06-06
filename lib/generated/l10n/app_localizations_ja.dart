@@ -192,4 +192,96 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get poweredBy => '伝説のトレーダーによる';
+
+  @override
+  String get errorLoadingRecommendations => '推奨の読み込み中にエラーが発生しました';
+
+  @override
+  String get retry => '再試行';
+
+  @override
+  String get allActions => 'すべてのアクション';
+
+  @override
+  String get buy => '買い';
+
+  @override
+  String get sell => '売り';
+
+  @override
+  String get hold => '保有';
+
+  @override
+  String get latest => '最新';
+
+  @override
+  String get confidence => '信頼度';
+
+  @override
+  String get profitPotential => '利益潜在力';
+
+  @override
+  String get noRecommendationsFound => '推奨が見つかりません';
+
+  @override
+  String get portfolio => 'ポートフォリオ';
+
+  @override
+  String get errorLoadingPositions => 'ポジションの読み込み中にエラーが発生しました';
+
+  @override
+  String get today => '今日';
+
+  @override
+  String get winRate => '勝率';
+
+  @override
+  String get positions => 'ポジション';
+
+  @override
+  String get dayPL => '日次損益';
+
+  @override
+  String get noOpenPositions => 'オープンポジションはありません';
+
+  @override
+  String get startTradingToSeePositions => '取引を開始してポジションを確認してください';
+
+  @override
+  String get quantity => '数量';
+
+  @override
+  String get avgCost => '平均コスト';
+
+  @override
+  String get current => '現在値';
+
+  @override
+  String get pl => '損益';
+
+  @override
+  String get close => '決済';
+
+  @override
+  String get edit => '編集';
+
+  @override
+  String get closePosition => 'ポジション決済';
+
+  @override
+  String closePositionConfirm(int quantity, String stockCode) {
+    return '$stockCode $quantity株を決済しますか？';
+  }
+
+  @override
+  String get cancel => 'キャンセル';
+
+  @override
+  String get positionClosedSuccessfully => 'ポジションが正常に決済されました';
+
+  @override
+  String get sl => '損切り';
+
+  @override
+  String get tp => '利確';
 }

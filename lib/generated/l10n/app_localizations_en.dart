@@ -198,4 +198,97 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get poweredBy => 'Powered by Legendary Traders';
+
+  @override
+  String get errorLoadingRecommendations => 'Error loading recommendations';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get allActions => 'All Actions';
+
+  @override
+  String get buy => 'Buy';
+
+  @override
+  String get sell => 'Sell';
+
+  @override
+  String get hold => 'Hold';
+
+  @override
+  String get latest => 'Latest';
+
+  @override
+  String get confidence => 'Confidence';
+
+  @override
+  String get profitPotential => 'Profit Potential';
+
+  @override
+  String get noRecommendationsFound => 'No recommendations found';
+
+  @override
+  String get portfolio => 'Portfolio';
+
+  @override
+  String get errorLoadingPositions => 'Error loading positions';
+
+  @override
+  String get today => 'today';
+
+  @override
+  String get winRate => 'Win Rate';
+
+  @override
+  String get positions => 'Positions';
+
+  @override
+  String get dayPL => 'Day P&L';
+
+  @override
+  String get noOpenPositions => 'No open positions';
+
+  @override
+  String get startTradingToSeePositions =>
+      'Start trading to see your positions';
+
+  @override
+  String get quantity => 'Quantity';
+
+  @override
+  String get avgCost => 'Avg Cost';
+
+  @override
+  String get current => 'Current';
+
+  @override
+  String get pl => 'P&L';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get closePosition => 'Close Position';
+
+  @override
+  String closePositionConfirm(int quantity, String stockCode) {
+    return 'Close $quantity shares of $stockCode?';
+  }
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get positionClosedSuccessfully => 'Position closed successfully';
+
+  @override
+  String get sl => 'SL';
+
+  @override
+  String get tp => 'TP';
 }

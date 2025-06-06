@@ -4,6 +4,7 @@ import '../providers/recommendations_provider.dart';
 import '../models/stock_recommendation.dart';
 import '../widgets/recommendation_card.dart';
 import 'strategy_detail_screen.dart';
+import '../generated/l10n/app_localizations.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -20,6 +21,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final recommendationsAsync = ref.watch(recommendationsProvider);
 
     return Scaffold(
@@ -49,7 +51,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        'Error loading recommendations',
+                        l10n?.errorLoadingRecommendations ?? 'Error loading recommendations',
                         style: TextStyle(color: Colors.grey[400]),
                       ),
                       const SizedBox(height: 8),
@@ -60,7 +62,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFF00D632),
                         ),
-                        child: const Text('Retry'),
+                        child: Text(l10n?.retry ?? 'Retry'),
                       ),
                     ],
                   ),
@@ -82,9 +84,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Trading Signals',
-                style: TextStyle(
+              Text(
+                l10n?.tradingSignals ?? 'Trading Signals',
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -103,7 +105,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Real-time recommendations from top traders',
+            l10n?.realTimeRecommendations ?? 'Real-time recommendations from top traders',
             style: TextStyle(
               color: Colors.grey[400],
               fontSize: 14,
@@ -133,7 +135,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              '투자 참고용 정보입니다. 투자 결정은 본인 책임입니다.',
+              l10n?.investmentReferenceNotice ?? 'For investment reference. Investment decisions are your responsibility.',
               style: TextStyle(
                 color: Colors.amber[700],
                 fontSize: 12,
@@ -157,7 +159,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: Row(
               children: [
                 _buildFilterChip(
-                  label: 'All Actions',
+                  label: l10n?.allActions ?? 'All Actions',
                   isSelected: selectedAction == null,
                   onTap: () {
                     setState(() => selectedAction = null);
@@ -166,7 +168,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 const SizedBox(width: 8),
                 _buildFilterChip(
-                  label: 'Buy',
+                  label: l10n?.buy ?? 'Buy',
                   isSelected: selectedAction == 'BUY',
                   onTap: () {
                     setState(() => selectedAction = 'BUY');
@@ -176,7 +178,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 const SizedBox(width: 8),
                 _buildFilterChip(
-                  label: 'Sell',
+                  label: l10n?.sell ?? 'Sell',
                   isSelected: selectedAction == 'SELL',
                   onTap: () {
                     setState(() => selectedAction = 'SELL');
@@ -186,7 +188,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 const SizedBox(width: 8),
                 _buildFilterChip(
-                  label: 'Hold',
+                  label: l10n?.hold ?? 'Hold',
                   isSelected: selectedAction == 'HOLD',
                   onTap: () {
                     setState(() => selectedAction = 'HOLD');
@@ -203,7 +205,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             child: Row(
               children: [
                 _buildSortChip(
-                  label: 'Latest',
+                  label: l10n?.latest ?? 'Latest',
                   isSelected: sortBy == 'date',
                   onTap: () {
                     setState(() => sortBy = 'date');
@@ -212,7 +214,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 const SizedBox(width: 8),
                 _buildSortChip(
-                  label: 'Confidence',
+                  label: l10n?.confidence ?? 'Confidence',
                   isSelected: sortBy == 'confidence',
                   onTap: () {
                     setState(() => sortBy = 'confidence');
@@ -221,7 +223,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 const SizedBox(width: 8),
                 _buildSortChip(
-                  label: 'Profit Potential',
+                  label: l10n?.profitPotential ?? 'Profit Potential',
                   isSelected: sortBy == 'profit',
                   onTap: () {
                     setState(() => sortBy = 'profit');
@@ -318,7 +320,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              'No recommendations found',
+              l10n?.noRecommendationsFound ?? 'No recommendations found',
               style: TextStyle(
                 color: Colors.grey[400],
                 fontSize: 16,

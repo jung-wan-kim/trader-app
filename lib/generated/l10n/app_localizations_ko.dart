@@ -193,4 +193,96 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get poweredBy => '전설적 트레이더들의 전략';
+
+  @override
+  String get errorLoadingRecommendations => '추천 목록을 불러오는 중 오류가 발생했습니다';
+
+  @override
+  String get retry => '다시 시도';
+
+  @override
+  String get allActions => '모든 액션';
+
+  @override
+  String get buy => '매수';
+
+  @override
+  String get sell => '매도';
+
+  @override
+  String get hold => '보유';
+
+  @override
+  String get latest => '최신';
+
+  @override
+  String get confidence => '신뢰도';
+
+  @override
+  String get profitPotential => '수익 잠재력';
+
+  @override
+  String get noRecommendationsFound => '추천 종목이 없습니다';
+
+  @override
+  String get portfolio => '포트폴리오';
+
+  @override
+  String get errorLoadingPositions => '포지션을 불러오는 중 오류가 발생했습니다';
+
+  @override
+  String get today => '오늘';
+
+  @override
+  String get winRate => '승률';
+
+  @override
+  String get positions => '포지션';
+
+  @override
+  String get dayPL => '일일 손익';
+
+  @override
+  String get noOpenPositions => '보유 포지션이 없습니다';
+
+  @override
+  String get startTradingToSeePositions => '거래를 시작하여 포지션을 확인하세요';
+
+  @override
+  String get quantity => '수량';
+
+  @override
+  String get avgCost => '평균 단가';
+
+  @override
+  String get current => '현재가';
+
+  @override
+  String get pl => '손익';
+
+  @override
+  String get close => '청산';
+
+  @override
+  String get edit => '편집';
+
+  @override
+  String get closePosition => '포지션 청산';
+
+  @override
+  String closePositionConfirm(int quantity, String stockCode) {
+    return '$stockCode $quantity주를 청산하시겠습니까?';
+  }
+
+  @override
+  String get cancel => '취소';
+
+  @override
+  String get positionClosedSuccessfully => '포지션이 성공적으로 청산되었습니다';
+
+  @override
+  String get sl => '손절';
+
+  @override
+  String get tp => '익절';
 }

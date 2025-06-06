@@ -66,5 +66,43 @@
   
   "dataDelayWarning": "रीयल-टाइम डेटा में 15 मिनट की देरी हो सकती है",
   "dataSource": "डेटा Finnhub द्वारा प्रदान किया गया",
-  "poweredBy": "पौराणिक ट्रेडरों द्वारा संचालित"
+  "poweredBy": "पौराणिक ट्रेडरों द्वारा संचालित",
+  
+  "errorLoadingRecommendations": "सिफारिशें लोड करने में त्रुटि",
+  "retry": "पुनः प्रयास करें",
+  "allActions": "सभी कार्रवाइयाँ",
+  "buy": "खरीदें",
+  "sell": "बेचें",
+  "hold": "होल्ड",
+  "latest": "नवीनतम",
+  "confidence": "विश्वास",
+  "profitPotential": "लाभ की संभावना",
+  "noRecommendationsFound": "कोई सिफारिश नहीं मिली",
+  
+  "portfolio": "पोर्टफोलियो",
+  "errorLoadingPositions": "पोजीशन लोड करने में त्रुटि",
+  "today": "आज",
+  "winRate": "जीत दर",
+  "positions": "पोजीशन्स",
+  "dayPL": "दैनिक लाभ हानि",
+  "noOpenPositions": "कोई खुली पोजीशन नहीं",
+  "startTradingToSeePositions": "अपनी पोजीशन देखने के लिए ट्रेडिंग शुरू करें",
+  "quantity": "मात्रा",
+  "avgCost": "औसत लागत",
+  "current": "वर्तमान",
+  "pl": "लाभ हानि",
+  "close": "बंद करें",
+  "edit": "संपादित करें",
+  "closePosition": "पोजीशन बंद करें",
+  "closePositionConfirm": "{stockCode} के {quantity} शेयर बंद करें?",
+  "@closePositionConfirm": {
+    "placeholders": {
+      "quantity": {"type": "int"},
+      "stockCode": {"type": "String"}
+    }
+  },
+  "cancel": "रद्द करें",
+  "positionClosedSuccessfully": "पोजीशन सफलतापूर्वक बंद हुई",
+  "sl": "एसएल",
+  "tp": "टीपी"
 }

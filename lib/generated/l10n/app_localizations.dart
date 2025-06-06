@@ -467,6 +467,186 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Powered by Legendary Traders'**
   String get poweredBy;
+
+  /// No description provided for @errorLoadingRecommendations.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading recommendations'**
+  String get errorLoadingRecommendations;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @allActions.
+  ///
+  /// In en, this message translates to:
+  /// **'All Actions'**
+  String get allActions;
+
+  /// No description provided for @buy.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy'**
+  String get buy;
+
+  /// No description provided for @sell.
+  ///
+  /// In en, this message translates to:
+  /// **'Sell'**
+  String get sell;
+
+  /// No description provided for @hold.
+  ///
+  /// In en, this message translates to:
+  /// **'Hold'**
+  String get hold;
+
+  /// No description provided for @latest.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest'**
+  String get latest;
+
+  /// No description provided for @confidence.
+  ///
+  /// In en, this message translates to:
+  /// **'Confidence'**
+  String get confidence;
+
+  /// No description provided for @profitPotential.
+  ///
+  /// In en, this message translates to:
+  /// **'Profit Potential'**
+  String get profitPotential;
+
+  /// No description provided for @noRecommendationsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No recommendations found'**
+  String get noRecommendationsFound;
+
+  /// No description provided for @portfolio.
+  ///
+  /// In en, this message translates to:
+  /// **'Portfolio'**
+  String get portfolio;
+
+  /// No description provided for @errorLoadingPositions.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading positions'**
+  String get errorLoadingPositions;
+
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'today'**
+  String get today;
+
+  /// No description provided for @winRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Win Rate'**
+  String get winRate;
+
+  /// No description provided for @positions.
+  ///
+  /// In en, this message translates to:
+  /// **'Positions'**
+  String get positions;
+
+  /// No description provided for @dayPL.
+  ///
+  /// In en, this message translates to:
+  /// **'Day P&L'**
+  String get dayPL;
+
+  /// No description provided for @noOpenPositions.
+  ///
+  /// In en, this message translates to:
+  /// **'No open positions'**
+  String get noOpenPositions;
+
+  /// No description provided for @startTradingToSeePositions.
+  ///
+  /// In en, this message translates to:
+  /// **'Start trading to see your positions'**
+  String get startTradingToSeePositions;
+
+  /// No description provided for @quantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity'**
+  String get quantity;
+
+  /// No description provided for @avgCost.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg Cost'**
+  String get avgCost;
+
+  /// No description provided for @current.
+  ///
+  /// In en, this message translates to:
+  /// **'Current'**
+  String get current;
+
+  /// No description provided for @pl.
+  ///
+  /// In en, this message translates to:
+  /// **'P&L'**
+  String get pl;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @closePosition.
+  ///
+  /// In en, this message translates to:
+  /// **'Close Position'**
+  String get closePosition;
+
+  /// No description provided for @closePositionConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Close {quantity} shares of {stockCode}?'**
+  String closePositionConfirm(int quantity, String stockCode);
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @positionClosedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Position closed successfully'**
+  String get positionClosedSuccessfully;
+
+  /// No description provided for @sl.
+  ///
+  /// In en, this message translates to:
+  /// **'SL'**
+  String get sl;
+
+  /// No description provided for @tp.
+  ///
+  /// In en, this message translates to:
+  /// **'TP'**
+  String get tp;
 }
 
 class _AppLocalizationsDelegate

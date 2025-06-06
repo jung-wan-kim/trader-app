@@ -66,5 +66,43 @@
   
   "dataDelayWarning": "Los datos en tiempo real pueden retrasarse 15 minutos",
   "dataSource": "Datos proporcionados por Finnhub",
-  "poweredBy": "Impulsado por Traders Legendarios"
+  "poweredBy": "Impulsado por Traders Legendarios",
+  
+  "errorLoadingRecommendations": "Error al cargar recomendaciones",
+  "retry": "Reintentar",
+  "allActions": "Todas las acciones",
+  "buy": "Comprar",
+  "sell": "Vender",
+  "hold": "Mantener",
+  "latest": "Más reciente",
+  "confidence": "Confianza",
+  "profitPotential": "Potencial de beneficio",
+  "noRecommendationsFound": "No se encontraron recomendaciones",
+  
+  "portfolio": "Portafolio",
+  "errorLoadingPositions": "Error al cargar posiciones",
+  "today": "hoy",
+  "winRate": "Tasa de éxito",
+  "positions": "Posiciones",
+  "dayPL": "P&G del día",
+  "noOpenPositions": "Sin posiciones abiertas",
+  "startTradingToSeePositions": "Comienza a operar para ver tus posiciones",
+  "quantity": "Cantidad",
+  "avgCost": "Costo promedio",
+  "current": "Actual",
+  "pl": "P&G",
+  "close": "Cerrar",
+  "edit": "Editar",
+  "closePosition": "Cerrar posición",
+  "closePositionConfirm": "¿Cerrar {quantity} acciones de {stockCode}?",
+  "@closePositionConfirm": {
+    "placeholders": {
+      "quantity": {"type": "int"},
+      "stockCode": {"type": "String"}
+    }
+  },
+  "cancel": "Cancelar",
+  "positionClosedSuccessfully": "Posición cerrada exitosamente",
+  "sl": "SL",
+  "tp": "TP"
 }

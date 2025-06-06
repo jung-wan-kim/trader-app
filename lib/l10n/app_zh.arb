@@ -66,5 +66,43 @@
   
   "dataDelayWarning": "实时数据可能延迟15分钟",
   "dataSource": "数据提供方：Finnhub",
-  "poweredBy": "由传奇交易员提供支持"
+  "poweredBy": "由传奇交易员提供支持",
+  
+  "errorLoadingRecommendations": "加载推荐时出错",
+  "retry": "重试",
+  "allActions": "所有操作",
+  "buy": "买入",
+  "sell": "卖出",
+  "hold": "持有",
+  "latest": "最新",
+  "confidence": "置信度",
+  "profitPotential": "盈利潜力",
+  "noRecommendationsFound": "未找到推荐",
+  
+  "portfolio": "投资组合",
+  "errorLoadingPositions": "加载仓位时出错",
+  "today": "今天",
+  "winRate": "胜率",
+  "positions": "仓位",
+  "dayPL": "日盈亏",
+  "noOpenPositions": "无持仓",
+  "startTradingToSeePositions": "开始交易以查看您的仓位",
+  "quantity": "数量",
+  "avgCost": "平均成本",
+  "current": "当前价",
+  "pl": "盈亏",
+  "close": "平仓",
+  "edit": "编辑",
+  "closePosition": "平仓",
+  "closePositionConfirm": "平仓{stockCode} {quantity}股？",
+  "@closePositionConfirm": {
+    "placeholders": {
+      "quantity": {"type": "int"},
+      "stockCode": {"type": "String"}
+    }
+  },
+  "cancel": "取消",
+  "positionClosedSuccessfully": "仓位已成功平仓",
+  "sl": "止损",
+  "tp": "止盈"
 }

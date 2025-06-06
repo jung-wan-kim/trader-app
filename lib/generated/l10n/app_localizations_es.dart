@@ -202,4 +202,97 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get poweredBy => 'Impulsado por Traders Legendarios';
+
+  @override
+  String get errorLoadingRecommendations => 'Error al cargar recomendaciones';
+
+  @override
+  String get retry => 'Reintentar';
+
+  @override
+  String get allActions => 'Todas las acciones';
+
+  @override
+  String get buy => 'Comprar';
+
+  @override
+  String get sell => 'Vender';
+
+  @override
+  String get hold => 'Mantener';
+
+  @override
+  String get latest => 'Más reciente';
+
+  @override
+  String get confidence => 'Confianza';
+
+  @override
+  String get profitPotential => 'Potencial de beneficio';
+
+  @override
+  String get noRecommendationsFound => 'No se encontraron recomendaciones';
+
+  @override
+  String get portfolio => 'Portafolio';
+
+  @override
+  String get errorLoadingPositions => 'Error al cargar posiciones';
+
+  @override
+  String get today => 'hoy';
+
+  @override
+  String get winRate => 'Tasa de éxito';
+
+  @override
+  String get positions => 'Posiciones';
+
+  @override
+  String get dayPL => 'P&G del día';
+
+  @override
+  String get noOpenPositions => 'Sin posiciones abiertas';
+
+  @override
+  String get startTradingToSeePositions =>
+      'Comienza a operar para ver tus posiciones';
+
+  @override
+  String get quantity => 'Cantidad';
+
+  @override
+  String get avgCost => 'Costo promedio';
+
+  @override
+  String get current => 'Actual';
+
+  @override
+  String get pl => 'P&G';
+
+  @override
+  String get close => 'Cerrar';
+
+  @override
+  String get edit => 'Editar';
+
+  @override
+  String get closePosition => 'Cerrar posición';
+
+  @override
+  String closePositionConfirm(int quantity, String stockCode) {
+    return '¿Cerrar $quantity acciones de $stockCode?';
+  }
+
+  @override
+  String get cancel => 'Cancelar';
+
+  @override
+  String get positionClosedSuccessfully => 'Posición cerrada exitosamente';
+
+  @override
+  String get sl => 'SL';
+
+  @override
+  String get tp => 'TP';
 }

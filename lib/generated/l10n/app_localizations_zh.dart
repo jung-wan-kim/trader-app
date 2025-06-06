@@ -190,4 +190,96 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get poweredBy => '由传奇交易员提供支持';
+
+  @override
+  String get errorLoadingRecommendations => '加载推荐时出错';
+
+  @override
+  String get retry => '重试';
+
+  @override
+  String get allActions => '所有操作';
+
+  @override
+  String get buy => '买入';
+
+  @override
+  String get sell => '卖出';
+
+  @override
+  String get hold => '持有';
+
+  @override
+  String get latest => '最新';
+
+  @override
+  String get confidence => '置信度';
+
+  @override
+  String get profitPotential => '盈利潜力';
+
+  @override
+  String get noRecommendationsFound => '未找到推荐';
+
+  @override
+  String get portfolio => '投资组合';
+
+  @override
+  String get errorLoadingPositions => '加载仓位时出错';
+
+  @override
+  String get today => '今天';
+
+  @override
+  String get winRate => '胜率';
+
+  @override
+  String get positions => '仓位';
+
+  @override
+  String get dayPL => '日盈亏';
+
+  @override
+  String get noOpenPositions => '无持仓';
+
+  @override
+  String get startTradingToSeePositions => '开始交易以查看您的仓位';
+
+  @override
+  String get quantity => '数量';
+
+  @override
+  String get avgCost => '平均成本';
+
+  @override
+  String get current => '当前价';
+
+  @override
+  String get pl => '盈亏';
+
+  @override
+  String get close => '平仓';
+
+  @override
+  String get edit => '编辑';
+
+  @override
+  String get closePosition => '平仓';
+
+  @override
+  String closePositionConfirm(int quantity, String stockCode) {
+    return '平仓$stockCode $quantity股？';
+  }
+
+  @override
+  String get cancel => '取消';
+
+  @override
+  String get positionClosedSuccessfully => '仓位已成功平仓';
+
+  @override
+  String get sl => '止损';
+
+  @override
+  String get tp => '止盈';
 }

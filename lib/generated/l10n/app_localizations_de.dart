@@ -199,4 +199,98 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get poweredBy => 'Unterstützt von legendären Tradern';
+
+  @override
+  String get errorLoadingRecommendations =>
+      'Fehler beim Laden der Empfehlungen';
+
+  @override
+  String get retry => 'Erneut versuchen';
+
+  @override
+  String get allActions => 'Alle Aktionen';
+
+  @override
+  String get buy => 'Kaufen';
+
+  @override
+  String get sell => 'Verkaufen';
+
+  @override
+  String get hold => 'Halten';
+
+  @override
+  String get latest => 'Neueste';
+
+  @override
+  String get confidence => 'Vertrauen';
+
+  @override
+  String get profitPotential => 'Gewinnpotenzial';
+
+  @override
+  String get noRecommendationsFound => 'Keine Empfehlungen gefunden';
+
+  @override
+  String get portfolio => 'Portfolio';
+
+  @override
+  String get errorLoadingPositions => 'Fehler beim Laden der Positionen';
+
+  @override
+  String get today => 'heute';
+
+  @override
+  String get winRate => 'Gewinnrate';
+
+  @override
+  String get positions => 'Positionen';
+
+  @override
+  String get dayPL => 'Tages-G&V';
+
+  @override
+  String get noOpenPositions => 'Keine offenen Positionen';
+
+  @override
+  String get startTradingToSeePositions =>
+      'Beginnen Sie mit dem Handel, um Ihre Positionen zu sehen';
+
+  @override
+  String get quantity => 'Menge';
+
+  @override
+  String get avgCost => 'Durchschnittliche Kosten';
+
+  @override
+  String get current => 'Aktuell';
+
+  @override
+  String get pl => 'G&V';
+
+  @override
+  String get close => 'Schließen';
+
+  @override
+  String get edit => 'Bearbeiten';
+
+  @override
+  String get closePosition => 'Position schließen';
+
+  @override
+  String closePositionConfirm(int quantity, String stockCode) {
+    return '$quantity Aktien von $stockCode schließen?';
+  }
+
+  @override
+  String get cancel => 'Abbrechen';
+
+  @override
+  String get positionClosedSuccessfully => 'Position erfolgreich geschlossen';
+
+  @override
+  String get sl => 'SL';
+
+  @override
+  String get tp => 'TP';
 }

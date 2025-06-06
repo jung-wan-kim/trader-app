@@ -80,5 +80,43 @@
   
   "dataDelayWarning": "Real-time data may be delayed by 15 minutes",
   "dataSource": "Data provided by Finnhub",
-  "poweredBy": "Powered by Legendary Traders"
+  "poweredBy": "Powered by Legendary Traders",
+  
+  "errorLoadingRecommendations": "Error loading recommendations",
+  "retry": "Retry",
+  "allActions": "All Actions",
+  "buy": "Buy",
+  "sell": "Sell",
+  "hold": "Hold",
+  "latest": "Latest",
+  "confidence": "Confidence",
+  "profitPotential": "Profit Potential",
+  "noRecommendationsFound": "No recommendations found",
+  
+  "portfolio": "Portfolio",
+  "errorLoadingPositions": "Error loading positions",
+  "today": "today",
+  "winRate": "Win Rate",
+  "positions": "Positions",
+  "dayPL": "Day P&L",
+  "noOpenPositions": "No open positions",
+  "startTradingToSeePositions": "Start trading to see your positions",
+  "quantity": "Quantity",
+  "avgCost": "Avg Cost",
+  "current": "Current",
+  "pl": "P&L",
+  "close": "Close",
+  "edit": "Edit",
+  "closePosition": "Close Position",
+  "closePositionConfirm": "Close {quantity} shares of {stockCode}?",
+  "@closePositionConfirm": {
+    "placeholders": {
+      "quantity": {"type": "int"},
+      "stockCode": {"type": "String"}
+    }
+  },
+  "cancel": "Cancel",
+  "positionClosedSuccessfully": "Position closed successfully",
+  "sl": "SL",
+  "tp": "TP"
 }

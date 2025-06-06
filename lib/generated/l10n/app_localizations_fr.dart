@@ -203,4 +203,98 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get poweredBy => 'Alimenté par des Traders Légendaires';
+
+  @override
+  String get errorLoadingRecommendations =>
+      'Erreur lors du chargement des recommandations';
+
+  @override
+  String get retry => 'Réessayer';
+
+  @override
+  String get allActions => 'Toutes les actions';
+
+  @override
+  String get buy => 'Acheter';
+
+  @override
+  String get sell => 'Vendre';
+
+  @override
+  String get hold => 'Conserver';
+
+  @override
+  String get latest => 'Dernières';
+
+  @override
+  String get confidence => 'Confiance';
+
+  @override
+  String get profitPotential => 'Potentiel de profit';
+
+  @override
+  String get noRecommendationsFound => 'Aucune recommandation trouvée';
+
+  @override
+  String get portfolio => 'Portefeuille';
+
+  @override
+  String get errorLoadingPositions => 'Erreur lors du chargement des positions';
+
+  @override
+  String get today => 'aujourd\'hui';
+
+  @override
+  String get winRate => 'Taux de réussite';
+
+  @override
+  String get positions => 'Positions';
+
+  @override
+  String get dayPL => 'P&P du jour';
+
+  @override
+  String get noOpenPositions => 'Aucune position ouverte';
+
+  @override
+  String get startTradingToSeePositions =>
+      'Commencez à trader pour voir vos positions';
+
+  @override
+  String get quantity => 'Quantité';
+
+  @override
+  String get avgCost => 'Coût moyen';
+
+  @override
+  String get current => 'Actuel';
+
+  @override
+  String get pl => 'P&P';
+
+  @override
+  String get close => 'Fermer';
+
+  @override
+  String get edit => 'Modifier';
+
+  @override
+  String get closePosition => 'Fermer la position';
+
+  @override
+  String closePositionConfirm(int quantity, String stockCode) {
+    return 'Fermer $quantity actions de $stockCode ?';
+  }
+
+  @override
+  String get cancel => 'Annuler';
+
+  @override
+  String get positionClosedSuccessfully => 'Position fermée avec succès';
+
+  @override
+  String get sl => 'SL';
+
+  @override
+  String get tp => 'TP';
 }

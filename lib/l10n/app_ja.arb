@@ -66,5 +66,43 @@
   
   "dataDelayWarning": "リアルタイムデータは15分遅延する場合があります",
   "dataSource": "データ提供：Finnhub",
-  "poweredBy": "伝説のトレーダーによる"
+  "poweredBy": "伝説のトレーダーによる",
+  
+  "errorLoadingRecommendations": "推奨の読み込み中にエラーが発生しました",
+  "retry": "再試行",
+  "allActions": "すべてのアクション",
+  "buy": "買い",
+  "sell": "売り",
+  "hold": "保有",
+  "latest": "最新",
+  "confidence": "信頼度",
+  "profitPotential": "利益潜在力",
+  "noRecommendationsFound": "推奨が見つかりません",
+  
+  "portfolio": "ポートフォリオ",
+  "errorLoadingPositions": "ポジションの読み込み中にエラーが発生しました",
+  "today": "今日",
+  "winRate": "勝率",
+  "positions": "ポジション",
+  "dayPL": "日次損益",
+  "noOpenPositions": "オープンポジションはありません",
+  "startTradingToSeePositions": "取引を開始してポジションを確認してください",
+  "quantity": "数量",
+  "avgCost": "平均コスト",
+  "current": "現在値",
+  "pl": "損益",
+  "close": "決済",
+  "edit": "編集",
+  "closePosition": "ポジション決済",
+  "closePositionConfirm": "{stockCode} {quantity}株を決済しますか？",
+  "@closePositionConfirm": {
+    "placeholders": {
+      "quantity": {"type": "int"},
+      "stockCode": {"type": "String"}
+    }
+  },
+  "cancel": "キャンセル",
+  "positionClosedSuccessfully": "ポジションが正常に決済されました",
+  "sl": "損切り",
+  "tp": "利確"
 }
