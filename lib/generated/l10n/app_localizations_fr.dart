@@ -15,7 +15,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get appSubtitle => 'Recommandations d\'Actions Alimentées par l\'IA';
 
   @override
-  String get subscription => 'Subscription';
+  String get subscription => 'Abonnement';
 
   @override
   String get chooseLanguage => 'Choisissez votre langue';
@@ -208,28 +208,29 @@ class AppLocalizationsFr extends AppLocalizations {
   String get poweredBy => 'Alimenté par des Traders Légendaires';
 
   @override
-  String get errorLoadingSubscription => 'Error loading subscription';
+  String get errorLoadingSubscription =>
+      'Erreur lors du chargement de l\'abonnement';
 
   @override
-  String get active => 'Active';
+  String get active => 'Actif';
 
   @override
-  String get inactive => 'Inactive';
+  String get inactive => 'Inactif';
 
   @override
   String autoRenewalOff(String date) {
-    return 'Auto-renewal is off. Your plan will expire on $date';
+    return 'Le renouvellement automatique est désactivé. Votre plan expirera le $date';
   }
 
   @override
-  String get availablePlans => 'Available Plans';
+  String get availablePlans => 'Plans Disponibles';
 
   @override
-  String get popular => 'POPULAR';
+  String get popular => 'POPULAIRE';
 
   @override
   String savePercent(int percent) {
-    return 'Save $percent%';
+    return 'Économisez $percent%';
   }
 
   @override
@@ -239,38 +240,38 @@ class AppLocalizationsFr extends AppLocalizations {
   String get downgrade => 'Rétrograder';
 
   @override
-  String get billingHistory => 'Billing History';
+  String get billingHistory => 'Historique de Facturation';
 
   @override
-  String get upgradePlan => 'Upgrade Plan';
+  String get upgradePlan => 'Mettre à Niveau le Plan';
 
   @override
   String upgradePlanConfirm(String planName) {
-    return 'Upgrade to $planName?';
+    return 'Passer à $planName ?';
   }
 
   @override
-  String get price => 'Price';
+  String get price => 'Prix';
 
   @override
   String upgradeSuccessful(String planName) {
-    return 'Successfully upgraded to $planName';
+    return 'Mise à niveau réussie vers $planName';
   }
 
   @override
-  String get tierDescFree => 'Get started with basic features';
+  String get tierDescFree => 'Commencez avec les fonctionnalités de base';
 
   @override
-  String get tierDescBasic => 'For individual traders';
+  String get tierDescBasic => 'Pour les traders individuels';
 
   @override
-  String get tierDescPro => 'Advanced tools for serious traders';
+  String get tierDescPro => 'Outils avancés pour les traders sérieux';
 
   @override
-  String get tierDescPremium => 'Everything you need to succeed';
+  String get tierDescPremium => 'Tout ce dont vous avez besoin pour réussir';
 
   @override
-  String get tierDescEnterprise => 'Custom solutions for teams';
+  String get tierDescEnterprise => 'Solutions personnalisées pour les équipes';
 
   @override
   String get errorLoadingRecommendations =>
@@ -424,76 +425,81 @@ class AppLocalizationsFr extends AppLocalizations {
   String get premium => 'Premium';
 
   @override
-  String get planFeatureBasicRecommendations => 'Basic recommendations';
+  String get planFeatureBasicRecommendations => 'Recommandations de base';
 
   @override
   String planFeatureLimitedPositions(int count) {
-    return 'Limited to $count positions';
+    return 'Limité à $count positions';
   }
 
   @override
-  String get planFeatureCommunitySupport => 'Community support';
+  String get planFeatureCommunitySupport => 'Support communautaire';
 
   @override
-  String get planFeatureAllFreeFeatures => 'All Free features';
+  String get planFeatureAllFreeFeatures =>
+      'Toutes les fonctionnalités gratuites';
 
   @override
   String planFeatureUpToPositions(int count) {
-    return 'Up to $count positions';
+    return 'Jusqu\'à $count positions';
   }
 
   @override
-  String get planFeatureEmailSupport => 'Email support';
+  String get planFeatureEmailSupport => 'Support par e-mail';
 
   @override
-  String get planFeatureBasicAnalytics => 'Basic analytics';
+  String get planFeatureBasicAnalytics => 'Analyses de base';
 
   @override
-  String get planFeatureAllBasicFeatures => 'All Basic features';
+  String get planFeatureAllBasicFeatures =>
+      'Toutes les fonctionnalités de base';
 
   @override
-  String get planFeatureRealtimeRecommendations => 'Real-time recommendations';
+  String get planFeatureRealtimeRecommendations =>
+      'Recommandations en temps réel';
 
   @override
-  String get planFeatureAdvancedAnalytics => 'Advanced analytics';
+  String get planFeatureAdvancedAnalytics => 'Analyses avancées';
 
   @override
-  String get planFeaturePrioritySupport => 'Priority support';
+  String get planFeaturePrioritySupport => 'Support prioritaire';
 
   @override
-  String get planFeatureRiskManagementTools => 'Risk management tools';
+  String get planFeatureRiskManagementTools => 'Outils de gestion des risques';
 
   @override
-  String get planFeatureCustomAlerts => 'Custom alerts';
+  String get planFeatureCustomAlerts => 'Alertes personnalisées';
 
   @override
-  String get planFeatureAllProFeatures => 'All Pro Monthly features';
+  String get planFeatureAllProFeatures =>
+      'Toutes les fonctionnalités Pro mensuelles';
 
   @override
   String planFeatureMonthsFree(int count) {
-    return '$count months free';
+    return '$count mois gratuits';
   }
 
   @override
-  String get planFeatureAnnualReview => 'Annual performance review';
+  String get planFeatureAnnualReview => 'Révision annuelle des performances';
 
   @override
-  String get planFeatureAllProFeaturesUnlimited => 'All Pro features';
+  String get planFeatureAllProFeaturesUnlimited =>
+      'Toutes les fonctionnalités Pro';
 
   @override
-  String get planFeatureUnlimitedPositions => 'Unlimited positions';
+  String get planFeatureUnlimitedPositions => 'Positions illimitées';
 
   @override
-  String get planFeatureApiAccess => 'API access';
+  String get planFeatureApiAccess => 'Accès API';
 
   @override
-  String get planFeatureDedicatedManager => 'Dedicated account manager';
+  String get planFeatureDedicatedManager => 'Gestionnaire de compte dédié';
 
   @override
-  String get planFeatureCustomStrategies => 'Custom strategies';
+  String get planFeatureCustomStrategies => 'Stratégies personnalisées';
 
   @override
-  String get planFeatureWhiteLabelOptions => 'White-label options';
+  String get planFeatureWhiteLabelOptions => 'Options de marque blanche';
 
   @override
   String get termsTitle => 'Trader App Terms of Service';
@@ -582,4 +588,72 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get termsSupplementaryDate =>
       'These terms are effective from February 21, 2025.';
+
+  @override
+  String get privacyTitle => 'Trader App Privacy Policy';
+
+  @override
+  String get privacyEffectiveDate => 'Effective Date: February 21, 2025';
+
+  @override
+  String get privacySection1Title =>
+      '1. Purpose of Collection and Use of Personal Information';
+
+  @override
+  String get privacySection1Content =>
+      'Trader App collects personal information for the following purposes:\n• Member registration and management\n• Providing customized investment information\n• Service improvement and new service development\n• Customer inquiry response';
+
+  @override
+  String get privacySection2Title =>
+      '2. Items of Personal Information Collected';
+
+  @override
+  String get privacySection2Content =>
+      '• Required items: Email, password\n• Optional items: Name, phone number, investment interests\n• Automatically collected items: Device information, app usage history, IP address';
+
+  @override
+  String get privacySection3Title =>
+      '3. Retention and Use Period of Personal Information';
+
+  @override
+  String get privacySection3Content =>
+      '• Until membership withdrawal\n• However, retained for the required period if preservation is necessary according to relevant laws\n• Contract or subscription withdrawal records under e-commerce law: 5 years\n• Consumer complaint or dispute handling records: 3 years';
+
+  @override
+  String get privacySection4Title =>
+      '4. Provision of Personal Information to Third Parties';
+
+  @override
+  String get privacySection4Content =>
+      'Trader App does not provide users\' personal information to third parties in principle.\nHowever, exceptions are made in the following cases:\n• When user consent is obtained\n• When required by laws and regulations';
+
+  @override
+  String get privacySection5Title =>
+      '5. Personal Information Protection Measures';
+
+  @override
+  String get privacySection5Content =>
+      '• Personal information encryption\n• Technical measures against hacking\n• Limiting access to personal information\n• Minimizing and training personnel handling personal information';
+
+  @override
+  String get privacySection6Title => '6. User Rights';
+
+  @override
+  String get privacySection6Content =>
+      'Users can exercise the following rights at any time:\n• Request to view personal information\n• Request to correct or delete personal information\n• Request to stop processing personal information\n• Request to transfer personal information';
+
+  @override
+  String get privacySection7Title =>
+      '7. Personal Information Protection Officer';
+
+  @override
+  String get privacySection7Content =>
+      'Personal Information Protection Officer: Hong Gil-dong\nEmail: privacy@traderapp.com\nPhone: 02-1234-5678';
+
+  @override
+  String get privacySection8Title => '8. Changes to Privacy Policy';
+
+  @override
+  String get privacySection8Content =>
+      'This privacy policy may be modified to reflect changes in laws and services.\nChanges will be announced through in-app notifications.';
 }

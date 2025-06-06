@@ -1157,6 +1157,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'These terms are effective from February 21, 2025.'**
   String get termsSupplementaryDate;
+
+  /// No description provided for @privacyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Trader App Privacy Policy'**
+  String get privacyTitle;
+
+  /// No description provided for @privacyEffectiveDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Effective Date: February 21, 2025'**
+  String get privacyEffectiveDate;
+
+  /// No description provided for @privacySection1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'1. Purpose of Collection and Use of Personal Information'**
+  String get privacySection1Title;
+
+  /// No description provided for @privacySection1Content.
+  ///
+  /// In en, this message translates to:
+  /// **'Trader App collects personal information for the following purposes:\n• Member registration and management\n• Providing customized investment information\n• Service improvement and new service development\n• Customer inquiry response'**
+  String get privacySection1Content;
+
+  /// No description provided for @privacySection2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'2. Items of Personal Information Collected'**
+  String get privacySection2Title;
+
+  /// No description provided for @privacySection2Content.
+  ///
+  /// In en, this message translates to:
+  /// **'• Required items: Email, password\n• Optional items: Name, phone number, investment interests\n• Automatically collected items: Device information, app usage history, IP address'**
+  String get privacySection2Content;
+
+  /// No description provided for @privacySection3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'3. Retention and Use Period of Personal Information'**
+  String get privacySection3Title;
+
+  /// No description provided for @privacySection3Content.
+  ///
+  /// In en, this message translates to:
+  /// **'• Until membership withdrawal\n• However, retained for the required period if preservation is necessary according to relevant laws\n• Contract or subscription withdrawal records under e-commerce law: 5 years\n• Consumer complaint or dispute handling records: 3 years'**
+  String get privacySection3Content;
+
+  /// No description provided for @privacySection4Title.
+  ///
+  /// In en, this message translates to:
+  /// **'4. Provision of Personal Information to Third Parties'**
+  String get privacySection4Title;
+
+  /// No description provided for @privacySection4Content.
+  ///
+  /// In en, this message translates to:
+  /// **'Trader App does not provide users\' personal information to third parties in principle.\nHowever, exceptions are made in the following cases:\n• When user consent is obtained\n• When required by laws and regulations'**
+  String get privacySection4Content;
+
+  /// No description provided for @privacySection5Title.
+  ///
+  /// In en, this message translates to:
+  /// **'5. Personal Information Protection Measures'**
+  String get privacySection5Title;
+
+  /// No description provided for @privacySection5Content.
+  ///
+  /// In en, this message translates to:
+  /// **'• Personal information encryption\n• Technical measures against hacking\n• Limiting access to personal information\n• Minimizing and training personnel handling personal information'**
+  String get privacySection5Content;
+
+  /// No description provided for @privacySection6Title.
+  ///
+  /// In en, this message translates to:
+  /// **'6. User Rights'**
+  String get privacySection6Title;
+
+  /// No description provided for @privacySection6Content.
+  ///
+  /// In en, this message translates to:
+  /// **'Users can exercise the following rights at any time:\n• Request to view personal information\n• Request to correct or delete personal information\n• Request to stop processing personal information\n• Request to transfer personal information'**
+  String get privacySection6Content;
+
+  /// No description provided for @privacySection7Title.
+  ///
+  /// In en, this message translates to:
+  /// **'7. Personal Information Protection Officer'**
+  String get privacySection7Title;
+
+  /// No description provided for @privacySection7Content.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Information Protection Officer: Hong Gil-dong\nEmail: privacy@traderapp.com\nPhone: 02-1234-5678'**
+  String get privacySection7Content;
+
+  /// No description provided for @privacySection8Title.
+  ///
+  /// In en, this message translates to:
+  /// **'8. Changes to Privacy Policy'**
+  String get privacySection8Title;
+
+  /// No description provided for @privacySection8Content.
+  ///
+  /// In en, this message translates to:
+  /// **'This privacy policy may be modified to reflect changes in laws and services.\nChanges will be announced through in-app notifications.'**
+  String get privacySection8Content;
 }
 
 class _AppLocalizationsDelegate

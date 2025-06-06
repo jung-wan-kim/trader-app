@@ -575,4 +575,72 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get termsSupplementaryDate =>
       'These terms are effective from February 21, 2025.';
+
+  @override
+  String get privacyTitle => 'Trader App Privacy Policy';
+
+  @override
+  String get privacyEffectiveDate => 'Effective Date: February 21, 2025';
+
+  @override
+  String get privacySection1Title =>
+      '1. Purpose of Collection and Use of Personal Information';
+
+  @override
+  String get privacySection1Content =>
+      'Trader App collects personal information for the following purposes:\n• Member registration and management\n• Providing customized investment information\n• Service improvement and new service development\n• Customer inquiry response';
+
+  @override
+  String get privacySection2Title =>
+      '2. Items of Personal Information Collected';
+
+  @override
+  String get privacySection2Content =>
+      '• Required items: Email, password\n• Optional items: Name, phone number, investment interests\n• Automatically collected items: Device information, app usage history, IP address';
+
+  @override
+  String get privacySection3Title =>
+      '3. Retention and Use Period of Personal Information';
+
+  @override
+  String get privacySection3Content =>
+      '• Until membership withdrawal\n• However, retained for the required period if preservation is necessary according to relevant laws\n• Contract or subscription withdrawal records under e-commerce law: 5 years\n• Consumer complaint or dispute handling records: 3 years';
+
+  @override
+  String get privacySection4Title =>
+      '4. Provision of Personal Information to Third Parties';
+
+  @override
+  String get privacySection4Content =>
+      'Trader App does not provide users\' personal information to third parties in principle.\nHowever, exceptions are made in the following cases:\n• When user consent is obtained\n• When required by laws and regulations';
+
+  @override
+  String get privacySection5Title =>
+      '5. Personal Information Protection Measures';
+
+  @override
+  String get privacySection5Content =>
+      '• Personal information encryption\n• Technical measures against hacking\n• Limiting access to personal information\n• Minimizing and training personnel handling personal information';
+
+  @override
+  String get privacySection6Title => '6. User Rights';
+
+  @override
+  String get privacySection6Content =>
+      'Users can exercise the following rights at any time:\n• Request to view personal information\n• Request to correct or delete personal information\n• Request to stop processing personal information\n• Request to transfer personal information';
+
+  @override
+  String get privacySection7Title =>
+      '7. Personal Information Protection Officer';
+
+  @override
+  String get privacySection7Content =>
+      'Personal Information Protection Officer: Hong Gil-dong\nEmail: privacy@traderapp.com\nPhone: 02-1234-5678';
+
+  @override
+  String get privacySection8Title => '8. Changes to Privacy Policy';
+
+  @override
+  String get privacySection8Content =>
+      'This privacy policy may be modified to reflect changes in laws and services.\nChanges will be announced through in-app notifications.';
 }

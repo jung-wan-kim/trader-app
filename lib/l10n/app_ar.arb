@@ -130,5 +130,83 @@
   "discover": "اكتشف",
   "premium": "بريميوم",
   "upgrade": "ترقية",
-  "downgrade": "خفض الخطة"
+  "downgrade": "خفض الخطة",
+  
+  "subscription": "الاشتراك",
+  "errorLoadingSubscription": "خطأ في تحميل الاشتراك",
+  "active": "نشط",
+  "inactive": "غير نشط",
+  "autoRenewalOff": "التجديد التلقائي متوقف. ستنتهي خطتك في {date}",
+  "@autoRenewalOff": {
+    "placeholders": {
+      "date": {"type": "String"}
+    }
+  },
+  "availablePlans": "الخطط المتاحة",
+  "popular": "شائع",
+  "savePercent": "وفر {percent}%",
+  "@savePercent": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
+  "billingHistory": "تاريخ الفواتير",
+  "upgradePlan": "ترقية الخطة",
+  "upgradePlanConfirm": "ترقية إلى {planName}؟",
+  "@upgradePlanConfirm": {
+    "placeholders": {
+      "planName": {"type": "String"}
+    }
+  },
+  "price": "السعر",
+  "upgradeSuccessful": "تم الترقية بنجاح إلى {planName}",
+  "@upgradeSuccessful": {
+    "placeholders": {
+      "planName": {"type": "String"}
+    }
+  },
+  
+  "tierDescFree": "ابدأ بالميزات الأساسية",
+  "tierDescBasic": "للمتداولين الأفراد",
+  "tierDescPro": "أدوات متقدمة للمتداولين الجادين",
+  "tierDescPremium": "كل ما تحتاجه للنجاح",
+  "tierDescEnterprise": "حلول مخصصة للفرق",
+  
+  "planFeatureBasicRecommendations": "توصيات أساسية",
+  "planFeatureLimitedPositions": "محدود بـ {count} مراكز",
+  "@planFeatureLimitedPositions": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureCommunitySupport": "دعم المجتمع",
+  "planFeatureAllFreeFeatures": "جميع الميزات المجانية",
+  "planFeatureUpToPositions": "حتى {count} مراكز",
+  "@planFeatureUpToPositions": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureEmailSupport": "دعم البريد الإلكتروني",
+  "planFeatureBasicAnalytics": "تحليلات أساسية",
+  "planFeatureAllBasicFeatures": "جميع الميزات الأساسية",
+  "planFeatureRealtimeRecommendations": "توصيات في الوقت الفعلي",
+  "planFeatureAdvancedAnalytics": "تحليلات متقدمة",
+  "planFeaturePrioritySupport": "دعم أولوي",
+  "planFeatureRiskManagementTools": "أدوات إدارة المخاطر",
+  "planFeatureCustomAlerts": "تنبيهات مخصصة",
+  "planFeatureAllProFeatures": "جميع ميزات برو الشهرية",
+  "planFeatureMonthsFree": "{count} أشهر مجاناً",
+  "@planFeatureMonthsFree": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureAnnualReview": "مراجعة الأداء السنوية",
+  "planFeatureAllProFeaturesUnlimited": "جميع ميزات برو",
+  "planFeatureUnlimitedPositions": "مراكز غير محدودة",
+  "planFeatureApiAccess": "وصول API",
+  "planFeatureDedicatedManager": "مدير حساب مخصص",
+  "planFeatureCustomStrategies": "استراتيجيات مخصصة",
+  "planFeatureWhiteLabelOptions": "خيارات العلامة البيضاء"
 }

@@ -130,5 +130,83 @@
   "discover": "Entdecken",
   "premium": "Premium",
   "upgrade": "Upgrade",
-  "downgrade": "Herabstufen"
+  "downgrade": "Herabstufen",
+  
+  "subscription": "Abonnement",
+  "errorLoadingSubscription": "Fehler beim Laden des Abonnements",
+  "active": "Aktiv",
+  "inactive": "Inaktiv",
+  "autoRenewalOff": "Automatische Erneuerung ist aus. Ihr Plan läuft am {date} ab",
+  "@autoRenewalOff": {
+    "placeholders": {
+      "date": {"type": "String"}
+    }
+  },
+  "availablePlans": "Verfügbare Pläne",
+  "popular": "BELIEBT",
+  "savePercent": "{percent}% sparen",
+  "@savePercent": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
+  "billingHistory": "Abrechnungshistorie",
+  "upgradePlan": "Plan upgraden",
+  "upgradePlanConfirm": "Auf {planName} upgraden?",
+  "@upgradePlanConfirm": {
+    "placeholders": {
+      "planName": {"type": "String"}
+    }
+  },
+  "price": "Preis",
+  "upgradeSuccessful": "Erfolgreich auf {planName} upgegradet",
+  "@upgradeSuccessful": {
+    "placeholders": {
+      "planName": {"type": "String"}
+    }
+  },
+  
+  "tierDescFree": "Erste Schritte mit grundlegenden Funktionen",
+  "tierDescBasic": "Für einzelne Trader",
+  "tierDescPro": "Erweiterte Tools für ernsthafte Trader",
+  "tierDescPremium": "Alles was Sie zum Erfolg brauchen",
+  "tierDescEnterprise": "Individuelle Lösungen für Teams",
+  
+  "planFeatureBasicRecommendations": "Grundlegende Empfehlungen",
+  "planFeatureLimitedPositions": "Begrenzt auf {count} Positionen",
+  "@planFeatureLimitedPositions": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureCommunitySupport": "Community-Support",
+  "planFeatureAllFreeFeatures": "Alle kostenlosen Funktionen",
+  "planFeatureUpToPositions": "Bis zu {count} Positionen",
+  "@planFeatureUpToPositions": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureEmailSupport": "E-Mail-Support",
+  "planFeatureBasicAnalytics": "Grundlegende Analysen",
+  "planFeatureAllBasicFeatures": "Alle Basic-Funktionen",
+  "planFeatureRealtimeRecommendations": "Echtzeit-Empfehlungen",
+  "planFeatureAdvancedAnalytics": "Erweiterte Analysen",
+  "planFeaturePrioritySupport": "Prioritäts-Support",
+  "planFeatureRiskManagementTools": "Risikomanagement-Tools",
+  "planFeatureCustomAlerts": "Benutzerdefinierte Alarme",
+  "planFeatureAllProFeatures": "Alle Pro-Monatsfunktionen",
+  "planFeatureMonthsFree": "{count} Monate kostenlos",
+  "@planFeatureMonthsFree": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureAnnualReview": "Jährliche Leistungsüberprüfung",
+  "planFeatureAllProFeaturesUnlimited": "Alle Pro-Funktionen",
+  "planFeatureUnlimitedPositions": "Unbegrenzte Positionen",
+  "planFeatureApiAccess": "API-Zugang",
+  "planFeatureDedicatedManager": "Persönlicher Account-Manager",
+  "planFeatureCustomStrategies": "Individuelle Strategien",
+  "planFeatureWhiteLabelOptions": "White-Label-Optionen"
 }

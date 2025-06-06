@@ -130,5 +130,83 @@
   "discover": "खोजें",
   "premium": "प्रीमियम",
   "upgrade": "अपग्रेड",
-  "downgrade": "डाउनग्रेड"
+  "downgrade": "डाउनग्रेड",
+  
+  "subscription": "सब्सक्रिप्शन",
+  "errorLoadingSubscription": "सब्सक्रिप्शन लोड करने में त्रुटि",
+  "active": "सक्रिय",
+  "inactive": "निष्क्रिय",
+  "autoRenewalOff": "स्वचालित नवीनीकरण बंद है। आपकी योजना {date} को समाप्त हो जाएगी",
+  "@autoRenewalOff": {
+    "placeholders": {
+      "date": {"type": "String"}
+    }
+  },
+  "availablePlans": "उपलब्ध योजनाएं",
+  "popular": "लोकप्रिय",
+  "savePercent": "{percent}% बचाएं",
+  "@savePercent": {
+    "placeholders": {
+      "percent": {"type": "int"}
+    }
+  },
+  "billingHistory": "बिलिंग इतिहास",
+  "upgradePlan": "योजना अपग्रेड करें",
+  "upgradePlanConfirm": "{planName} में अपग्रेड करें?",
+  "@upgradePlanConfirm": {
+    "placeholders": {
+      "planName": {"type": "String"}
+    }
+  },
+  "price": "मूल्य",
+  "upgradeSuccessful": "सफलतापूर्वक {planName} में अपग्रेड हुआ",
+  "@upgradeSuccessful": {
+    "placeholders": {
+      "planName": {"type": "String"}
+    }
+  },
+  
+  "tierDescFree": "बुनियादी सुविधाओं के साथ शुरुआत करें",
+  "tierDescBasic": "व्यक्तिगत ट्रेडरों के लिए",
+  "tierDescPro": "गंभीर ट्रेडरों के लिए उन्नत उपकरण",
+  "tierDescPremium": "सफल होने के लिए आवश्यक सब कुछ",
+  "tierDescEnterprise": "टीमों के लिए कस्टम समाधान",
+  
+  "planFeatureBasicRecommendations": "बुनियादी सिफारिशें",
+  "planFeatureLimitedPositions": "{count} पोजीशन तक सीमित",
+  "@planFeatureLimitedPositions": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureCommunitySupport": "समुदायिक सहायता",
+  "planFeatureAllFreeFeatures": "सभी मुफ्त सुविधाएं",
+  "planFeatureUpToPositions": "{count} पोजीशन तक",
+  "@planFeatureUpToPositions": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureEmailSupport": "ईमेल सहायता",
+  "planFeatureBasicAnalytics": "बुनियादी विश्लेषण",
+  "planFeatureAllBasicFeatures": "सभी बुनियादी सुविधाएं",
+  "planFeatureRealtimeRecommendations": "रीयल-टाइम सिफारिशें",
+  "planFeatureAdvancedAnalytics": "उन्नत विश्लेषण",
+  "planFeaturePrioritySupport": "प्राथमिकता सहायता",
+  "planFeatureRiskManagementTools": "जोखिम प्रबंधन उपकरण",
+  "planFeatureCustomAlerts": "कस्टम अलर्ट",
+  "planFeatureAllProFeatures": "सभी प्रो मासिक सुविधाएं",
+  "planFeatureMonthsFree": "{count} महीने मुफ्त",
+  "@planFeatureMonthsFree": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureAnnualReview": "वार्षिक प्रदर्शन समीक्षा",
+  "planFeatureAllProFeaturesUnlimited": "सभी प्रो सुविधाएं",
+  "planFeatureUnlimitedPositions": "असीमित पोजीशन्स",
+  "planFeatureApiAccess": "API एक्सेस",
+  "planFeatureDedicatedManager": "समर्पित खाता प्रबंधक",
+  "planFeatureCustomStrategies": "कस्टम रणनीतियां",
+  "planFeatureWhiteLabelOptions": "व्हाइट-लेबल विकल्प"
 }
