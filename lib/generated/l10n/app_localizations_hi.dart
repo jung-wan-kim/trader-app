@@ -1,0 +1,200 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Hindi (`hi`).
+class AppLocalizationsHi extends AppLocalizations {
+  AppLocalizationsHi([String locale = 'hi']) : super(locale);
+
+  @override
+  String get appTitle => 'ट्रेडर ऐप';
+
+  @override
+  String get appSubtitle => 'AI-संचालित स्टॉक सिफारिशें';
+
+  @override
+  String get chooseLanguage => 'अपनी भाषा चुनें';
+
+  @override
+  String get selectLanguageDescription => 'ऐप के लिए अपनी पसंदीदा भाषा चुनें';
+
+  @override
+  String get continueButton => 'जारी रखें';
+
+  @override
+  String get onboardingTitle1 => 'पौराणिक ट्रेडर रणनीतियाँ';
+
+  @override
+  String get onboardingDesc1 =>
+      'जेसी लिवरमोर, विलियम ओ\'नील जैसे इतिहास के सबसे सफल ट्रेडरों की सिद्ध निवेश रणनीतियों का उपयोग करें';
+
+  @override
+  String get onboardingTitle2 => 'AI-संचालित स्टॉक सिफारिशें';
+
+  @override
+  String get onboardingDesc2 =>
+      'उन्नत AI बाजार विश्लेषण के माध्यम से पौराणिक ट्रेडर रणनीतियों से मेल खाने वाली इष्टतम स्टॉक सिफारिशें प्राप्त करें';
+
+  @override
+  String get onboardingTitle3 => 'जोखिम प्रबंधन';
+
+  @override
+  String get onboardingDesc3 =>
+      'पोजीशन साइज़ कैलकुलेटर और स्टॉप-लॉस/टेक-प्रॉफिट रणनीतियों के साथ सुरक्षित निवेश प्राप्त करें';
+
+  @override
+  String get onboardingTitle4 => 'रीयल-टाइम बाजार विश्लेषण';
+
+  @override
+  String get onboardingDesc4 =>
+      'रीयल-टाइम चार्ट और तकनीकी संकेतकों के साथ बाजार के रुझान को समझें और इष्टतम समय को पकड़ें';
+
+  @override
+  String get getStarted => 'शुरू करें';
+
+  @override
+  String get next => 'अगला';
+
+  @override
+  String get skip => 'छोड़ें';
+
+  @override
+  String get email => 'ईमेल';
+
+  @override
+  String get password => 'पासवर्ड';
+
+  @override
+  String get login => 'लॉगिन';
+
+  @override
+  String get or => 'या';
+
+  @override
+  String get signInWithApple => 'Apple के साथ साइन इन करें';
+
+  @override
+  String get demoModeNotice => 'डेमो मोड: टेस्ट अकाउंट स्वतः भर दिया गया';
+
+  @override
+  String get privacyPolicy => 'गोपनीयता नीति';
+
+  @override
+  String get termsOfService => 'सेवा की शर्तें';
+
+  @override
+  String get investmentWarning => 'केवल संदर्भ के लिए, निवेश सलाह नहीं';
+
+  @override
+  String get profile => 'प्रोफाइल';
+
+  @override
+  String get trader => 'ट्रेडर';
+
+  @override
+  String get subscriptionManagement => 'सब्सक्रिप्शन प्रबंधन';
+
+  @override
+  String subscribedPlan(String planName) {
+    return '$planName सक्रिय';
+  }
+
+  @override
+  String daysRemaining(int days) {
+    return '$days दिन शेष';
+  }
+
+  @override
+  String get upgradeToPremiun => 'प्रीमियम में अपग्रेड करें';
+
+  @override
+  String get freePlan => 'मुफ्त योजना';
+
+  @override
+  String get investmentPerformance => 'निवेश प्रदर्शन';
+
+  @override
+  String get performanceDescription => 'रिटर्न और ट्रेडिंग इतिहास की जांच करें';
+
+  @override
+  String get watchlist => 'वॉचलिस्ट';
+
+  @override
+  String get watchlistDescription => 'सहेजे गए स्टॉक्स का प्रबंधन करें';
+
+  @override
+  String get notificationSettings => 'सूचना सेटिंग्स';
+
+  @override
+  String get notificationDescription =>
+      'सिफारिशें और बाजार अलर्ट प्रबंधित करें';
+
+  @override
+  String get legalInformation => 'कानूनी जानकारी';
+
+  @override
+  String get customerSupport => 'ग्राहक सहायता';
+
+  @override
+  String get appInfo => 'ऐप की जानकारी';
+
+  @override
+  String get versionInfo => 'संस्करण जानकारी';
+
+  @override
+  String get logout => 'लॉगआउट';
+
+  @override
+  String get investmentWarningTitle => 'निवेश जोखिम चेतावनी';
+
+  @override
+  String get investmentWarningText =>
+      'इस ऐप में प्रदान की गई सभी जानकारी केवल संदर्भ के लिए है और निवेश सलाह नहीं है। सभी निवेश निर्णय आपके अपने निर्णय और जिम्मेदारी पर लिए जाने चाहिए।';
+
+  @override
+  String get settings => 'सेटिंग्स';
+
+  @override
+  String get tradingSignals => 'ट्रेडिंग सिग्नल';
+
+  @override
+  String get realTimeRecommendations => 'शीर्ष ट्रेडरों से रीयल-टाइम सिफारिशें';
+
+  @override
+  String get investmentReferenceNotice =>
+      'निवेश संदर्भ के लिए। निवेश निर्णय आपकी जिम्मेदारी हैं।';
+
+  @override
+  String get currentPlan => 'वर्तमान योजना';
+
+  @override
+  String get nextBilling => 'अगला बिलिंग';
+
+  @override
+  String get amount => 'राशि';
+
+  @override
+  String get notScheduled => 'निर्धारित नहीं';
+
+  @override
+  String get subscriptionInfo => 'सब्सक्रिप्शन जानकारी';
+
+  @override
+  String get subscriptionTerms => 'सब्सक्रिप्शन शर्तें';
+
+  @override
+  String get subscriptionTermsText =>
+      '• सब्सक्रिप्शन खरीदारी की पुष्टि पर आपके iTunes अकाउंट से चार्ज किया जाता है\\n• सब्सक्रिप्शन स्वचालित रूप से नवीनीकृत होते हैं जब तक कि वर्तमान अवधि के अंत से कम से कम 24 घंटे पहले स्वचालित नवीनीकरण बंद नहीं किया जाता\\n• नवीनीकरण शुल्क वर्तमान अवधि के अंत के 24 घंटे के भीतर लिया जाता है\\n• सब्सक्रिप्शन खरीदारी के बाद आपके अकाउंट सेटिंग्स में प्रबंधित किया जा सकता है\\n• सब्सक्रिप्शन खरीदने पर मुफ्त ट्रायल अवधि का कोई भी अप्रयुक्त हिस्सा जब्त हो जाएगा';
+
+  @override
+  String get dataDelayWarning =>
+      'रीयल-टाइम डेटा में 15 मिनट की देरी हो सकती है';
+
+  @override
+  String get dataSource => 'डेटा Finnhub द्वारा प्रदान किया गया';
+
+  @override
+  String get poweredBy => 'पौराणिक ट्रेडरों द्वारा संचालित';
+}

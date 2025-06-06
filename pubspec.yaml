@@ -9,10 +9,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   
   # UI & Navigation
   cupertino_icons: ^1.0.6
   flutter_svg: ^2.0.9
+  
+  # Internationalization
+  intl: ^0.20.2
   
   # State Management
   flutter_riverpod: ^2.4.9
@@ -26,7 +31,6 @@ dependencies:
   
   # Utils
   shared_preferences: ^2.2.2
-  intl: ^0.18.1
   http: ^1.2.0
   
   # Charts
@@ -55,6 +59,7 @@ dev_dependencies:
   coverage: ^1.7.2
 
 flutter:
+  generate: true
   uses-material-design: true
   
   # Assets

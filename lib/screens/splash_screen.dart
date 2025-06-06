@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
 import '../config/app_config.dart';
+import 'language_selection_screen.dart';
 import 'onboarding_screen.dart';
 import 'login_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -72,42 +73,37 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
     if (!mounted) return;
 
-    // SharedPreferences에서 온보딩 완료 여부 확인
+    // SharedPreferences에서 설정 확인
     final prefs = await SharedPreferences.getInstance();
+    final hasSelectedLanguage = prefs.getString('selectedLanguage') != null;
     final hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
 
     if (!mounted) return;
 
-    // 온보딩 완료 여부에 따라 분기
-    if (hasSeenOnboarding) {
-      Navigator.pushReplacement(
-        context,
-        PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => const LoginScreen(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
-          },
-          transitionDuration: const Duration(milliseconds: 800),
-        ),
-      );
+    Widget nextScreen;
+    
+    // 언어 선택 → 온보딩 → 로그인 순서
+    if (!hasSelectedLanguage) {
+      nextScreen = const LanguageSelectionScreen();
+    } else if (!hasSeenOnboarding) {
+      nextScreen = const OnboardingScreen();
     } else {
-      Navigator.pushReplacement(
-        context,
-        PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => const OnboardingScreen(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
-          },
-          transitionDuration: const Duration(milliseconds: 800),
-        ),
-      );
+      nextScreen = const LoginScreen();
     }
+
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => nextScreen,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 800),
+      ),
+    );
   }
 
   @override

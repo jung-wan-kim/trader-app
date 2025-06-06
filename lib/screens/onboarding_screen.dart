@@ -214,16 +214,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> with TickerProvider
                 child: Transform.translate(
                   offset: Offset(0, _slideAnimation.value),
                   child: Container(
-            width: 200,
-            height: 200,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: page.iconColor.withOpacity(0.1),
-            ),
-            child: Icon(
-              page.icon,
-              size: 100,
-              color: page.iconColor,
+                    width: 200,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: page.iconColor.withOpacity(0.1),
+                    ),
+                    child: Icon(
+                      page.icon,
+                      size: 100,
+                      color: page.iconColor,
+                    ),
                   ),
                 ),
               ),
@@ -232,25 +233,25 @@ class _OnboardingScreenState extends State<OnboardingScreen> with TickerProvider
               FadeTransition(
                 opacity: _fadeAnimation,
                 child: Text(
-            page.title,
-            style: const TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+                  page.title,
+                  style: const TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
-            ),
             const SizedBox(height: 20),
             // 설명
             FadeTransition(
               opacity: _fadeAnimation,
               child: Text(
-            page.description,
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.grey[400],
-              height: 1.5,
+                page.description,
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey[400],
+                  height: 1.5,
                 ),
                 textAlign: TextAlign.center,
               ),

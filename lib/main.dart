@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'generated/l10n/app_localizations.dart';
 import 'screens/splash_screen.dart';
 import 'config/app_config.dart';
+import 'providers/language_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,13 +19,23 @@ void main() async {
   );
 }
 
-class TraderApp extends StatelessWidget {
+class TraderApp extends ConsumerWidget {
   const TraderApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(languageProvider);
+    
     return MaterialApp(
       title: 'Trader App',
+      locale: locale,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: LanguageNotifier.supportedLocales,
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.black,
