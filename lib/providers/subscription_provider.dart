@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/user_subscription.dart';
 import '../services/mock_data_service.dart';
+import 'mock_data_provider.dart';
 
 class SubscriptionPlan {
   final String id;

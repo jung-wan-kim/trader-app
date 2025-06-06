@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/stock_recommendation.dart';
 import '../services/mock_data_service.dart';
+import 'mock_data_provider.dart';
 
 class Position {
   final String id;
@@ -279,6 +280,6 @@ final portfolioStatsProvider = Provider<PortfolioStats>((ref) {
     openPositions: positions.length,
     winningPositions: winningPositions,
     losingPositions: losingPositions,
-    winRate: winRate,
+    winRate: winRate.toDouble(),
   );
 });

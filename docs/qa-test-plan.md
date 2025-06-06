@@ -48,6 +48,18 @@
 
 ## 3. 테스트 케이스
 
+### 3.0 앱 실행 테스트 (App Launch Tests) - 신규 추가
+| TC ID | 테스트 케이스 | 우선순위 | 테스트 유형 |
+|-------|-------------|---------|-----------|
+| TC000-1 | 앱이 크래시 없이 시작되는지 확인 | Critical | 실행 |
+| TC000-2 | 모든 화면이 정상적으로 렌더링되는지 검증 | Critical | 실행 |
+| TC000-3 | 네비게이션이 올바르게 작동하는지 확인 | Critical | 실행 |
+| TC000-4 | Provider 초기화가 정상적인지 검증 | Critical | 실행 |
+| TC000-5 | 로딩 상태가 적절히 표시되는지 확인 | High | UI |
+| TC000-6 | 화면 회전 시 앱이 정상 작동하는지 | Medium | 호환성 |
+| TC000-7 | 메모리 누수 없이 실행되는지 확인 | High | 성능 |
+| TC000-8 | 플랫폼별 빌드 및 실행 검증 (iOS/Android/Web) | Critical | 호환성 |
+
 ### 3.1 홈 화면 (Home Screen)
 | TC ID | 테스트 케이스 | 우선순위 | 테스트 유형 |
 |-------|-------------|---------|-----------|
@@ -123,6 +135,24 @@
 
 ## 5. 테스트 환경
 
+### 5.0 플랫폼별 빌드 및 실행 테스트 환경 - 신규 추가
+- **iOS 빌드 테스트**
+  - macOS 환경 필수
+  - Xcode 14.0 이상
+  - iOS Simulator (iPhone 14, iPhone 14 Pro)
+  - 실제 디바이스 테스트 (선택사항)
+  
+- **Android 빌드 테스트**
+  - Android Studio 또는 Command Line Tools
+  - Android Emulator (API 29, 30, 31)
+  - 실제 디바이스 테스트 (선택사항)
+  
+- **Web 빌드 테스트**
+  - Chrome/Chromium 브라우저
+  - Firefox (선택사항)
+  - Safari (macOS에서만)
+  - Lighthouse 성능 검사
+
 ### 5.1 디바이스
 - iOS: iPhone 12 Pro, iPhone 14, iPad Pro
 - Android: Samsung Galaxy S21, Pixel 6
@@ -151,6 +181,12 @@
 - **정적 분석**: flutter analyze
 - **보안 스캔**: MobSF
 
+### 6.3 CI/CD 통합 도구 - 신규 추가
+- **GitHub Actions**: 자동화된 빌드 및 테스트
+- **플랫폼별 테스트 스크립트**: test-ios-build.sh, test-android-build.sh, test-web-build.sh
+- **통합 테스트 러너**: test-all-platforms.sh
+- **스크린샷 캡처**: 각 플랫폼별 자동 스크린샷
+
 ## 7. 테스트 일정
 
 ### 7.1 마일스톤
@@ -163,6 +199,12 @@
 - 매일: 단위 테스트, 위젯 테스트
 - 주 2회: 통합 테스트
 - 주 1회: E2E 테스트, 성능 테스트
+
+### 7.3 CI/CD 파이프라인 자동 테스트 - 신규 추가
+- **PR 생성 시**: 단위 테스트, 위젯 테스트, 코드 분석
+- **main 브랜치 머지 시**: 전체 테스트 스위트 + 플랫폼별 빌드
+- **일일 스케줄 (새벽 2시)**: 플랫폼별 전체 테스트
+- **릴리즈 태그 시**: 전체 테스트 + 성능 벤치마크
 
 ## 8. 위험 관리
 

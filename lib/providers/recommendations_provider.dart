@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/stock_recommendation.dart';
 import '../services/mock_data_service.dart';
+import 'mock_data_provider.dart';
 
 class RecommendationsNotifier extends StateNotifier<AsyncValue<List<StockRecommendation>>> {
   final MockDataService _mockDataService;
@@ -82,10 +83,6 @@ class RecommendationsNotifier extends StateNotifier<AsyncValue<List<StockRecomme
 }
 
 // Provider definitions
-final mockDataServiceProvider = Provider<MockDataService>((ref) {
-  return MockDataService();
-});
-
 final recommendationsProvider = 
     StateNotifierProvider<RecommendationsNotifier, AsyncValue<List<StockRecommendation>>>((ref) {
   final mockDataService = ref.watch(mockDataServiceProvider);

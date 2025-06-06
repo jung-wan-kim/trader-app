@@ -1,0 +1,264 @@
+name: Platform Specific Tests
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Platform to test'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - ios
+          - android
+          - web
+
+env:
+  FLUTTER_VERSION: '3.16.0'
+
+jobs:
+  test-matrix:
+    name: Determine test matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+    - id: set-matrix
+      run: |
+        if [ "${{ github.event.inputs.platform }}" = "ios" ]; then
+          echo "matrix={\"include\":[{\"os\":\"macos-latest\",\"platform\":\"ios\"}]}" >> $GITHUB_OUTPUT
+        elif [ "${{ github.event.inputs.platform }}" = "android" ]; then
+          echo "matrix={\"include\":[{\"os\":\"ubuntu-latest\",\"platform\":\"android\"}]}" >> $GITHUB_OUTPUT
+        elif [ "${{ github.event.inputs.platform }}" = "web" ]; then
+          echo "matrix={\"include\":[{\"os\":\"ubuntu-latest\",\"platform\":\"web\"}]}" >> $GITHUB_OUTPUT
+        else
+          echo "matrix={\"include\":[{\"os\":\"macos-latest\",\"platform\":\"ios\"},{\"os\":\"ubuntu-latest\",\"platform\":\"android\"},{\"os\":\"ubuntu-latest\",\"platform\":\"web\"}]}" >> $GITHUB_OUTPUT
+        fi
+
+  platform-test:
+    name: Test ${{ matrix.platform }} on ${{ matrix.os }}
+    needs: test-matrix
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix: ${{fromJson(needs.test-matrix.outputs.matrix)}}
+      fail-fast: false
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - uses: actions/setup-java@v3
+      if: matrix.platform != 'web'
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+    
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: ${{ env.FLUTTER_VERSION }}
+        channel: 'stable'
+    
+    - name: Install dependencies
+      run: flutter pub get
+    
+    # iOS specific tests
+    - name: iOS - Install pods
+      if: matrix.platform == 'ios'
+      run: |
+        cd ios
+        pod install
+        cd ..
+    
+    - name: iOS - Build
+      if: matrix.platform == 'ios'
+      run: flutter build ios --simulator --debug
+    
+    - name: iOS - Start simulator
+      if: matrix.platform == 'ios'
+      run: |
+        # List available devices
+        xcrun simctl list devices
+        
+        # Boot iPhone 14 Pro
+        UDID=$(xcrun simctl list devices | grep "iPhone 14 Pro (" | grep -E -o -i "([0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})" | head -n 1)
+        if [ -z "$UDID" ]; then
+          # Fallback to iPhone 14
+          UDID=$(xcrun simctl list devices | grep "iPhone 14 (" | grep -E -o -i "([0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12})" | head -n 1)
+        fi
+        xcrun simctl boot $UDID || true
+        
+        # Wait for boot
+        sleep 10
+    
+    - name: iOS - Run tests
+      if: matrix.platform == 'ios'
+      run: |
+        flutter test integration_test/app_launch_test.dart
+        
+        # Take screenshot
+        xcrun simctl io booted screenshot ios_screenshot_${{ github.run_number }}.png
+    
+    - name: iOS - Check for memory leaks
+      if: matrix.platform == 'ios'
+      run: |
+        # Install the app
+        flutter install --debug
+        
+        # Launch app
+        xcrun simctl launch booted com.example.traderApp
+        
+        # Wait for app to stabilize
+        sleep 5
+        
+        # Get memory usage
+        xcrun simctl spawn booted log stream --predicate 'processImagePath contains "Runner"' --style compact > ios_logs.txt &
+        LOG_PID=$!
+        
+        sleep 10
+        kill $LOG_PID
+    
+    # Android specific tests
+    - name: Android - Build APK
+      if: matrix.platform == 'android'
+      run: flutter build apk --debug
+    
+    - name: Android - Run tests on multiple API levels
+      if: matrix.platform == 'android'
+      strategy:
+        matrix:
+          api-level: [29, 30, 31]
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: ${{ matrix.api-level }}
+        arch: x86_64
+        profile: Nexus 6
+        script: |
+          flutter test integration_test/app_launch_test.dart
+          
+          # Performance profiling
+          adb shell am start -n com.example.trader_app/.MainActivity
+          sleep 5
+          
+          # Capture screenshot
+          adb shell screencap -p /sdcard/screenshot.png
+          adb pull /sdcard/screenshot.png android_screenshot_api${{ matrix.api-level }}_${{ github.run_number }}.png
+          
+          # Check for ANRs
+          adb logcat -d | grep "ANR" || echo "No ANRs detected"
+          
+          # Memory profiling
+          adb shell dumpsys meminfo com.example.trader_app | tee android_memory_api${{ matrix.api-level }}.txt
+    
+    # Web specific tests
+    - name: Web - Build
+      if: matrix.platform == 'web'
+      run: |
+        flutter build web --release --web-renderer canvaskit
+        flutter build web --release --web-renderer html
+    
+    - name: Web - Test on multiple browsers
+      if: matrix.platform == 'web'
+      run: |
+        # Test on Chrome
+        flutter test integration_test/app_launch_test.dart --platform chrome --headless
+        
+        # Start web server
+        cd build/web
+        python3 -m http.server 8080 &
+        SERVER_PID=$!
+        cd ../..
+        sleep 3
+        
+        # Test with curl
+        curl -I http://localhost:8080
+        
+        # Lighthouse audit (if available)
+        if command -v lighthouse &> /dev/null; then
+          lighthouse http://localhost:8080 --output=json --output-path=./lighthouse_report.json --chrome-flags="--headless"
+        fi
+        
+        # Stop server
+        kill $SERVER_PID
+    
+    - name: Web - Check bundle size
+      if: matrix.platform == 'web'
+      run: |
+        echo "Web bundle sizes:"
+        du -h build/web/main.dart.js
+        du -h build/web/
+        
+        # Check if bundle size is reasonable (< 5MB)
+        SIZE=$(du -b build/web/main.dart.js | cut -f1)
+        if [ $SIZE -gt 5242880 ]; then
+          echo "Warning: JavaScript bundle is larger than 5MB"
+        fi
+    
+    # Upload artifacts
+    - name: Upload screenshots
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: ${{ matrix.platform }}-screenshots-${{ github.run_number }}
+        path: |
+          *_screenshot_*.png
+    
+    - name: Upload logs
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: ${{ matrix.platform }}-logs-${{ github.run_number }}
+        path: |
+          *.txt
+          *.log
+          lighthouse_report.json
+    
+    - name: Upload performance reports
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: ${{ matrix.platform }}-performance-${{ github.run_number }}
+        path: |
+          *_memory_*.txt
+          performance_*.txt
+
+  test-summary:
+    name: Generate Test Summary
+    needs: platform-test
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Download all artifacts
+      uses: actions/download-artifact@v3
+    
+    - name: Generate summary report
+      run: |
+        echo "# Platform Test Summary - Run #${{ github.run_number }}" > PLATFORM_TEST_SUMMARY.md
+        echo "" >> PLATFORM_TEST_SUMMARY.md
+        echo "Date: $(date)" >> PLATFORM_TEST_SUMMARY.md
+        echo "" >> PLATFORM_TEST_SUMMARY.md
+        echo "## Test Results" >> PLATFORM_TEST_SUMMARY.md
+        echo "" >> PLATFORM_TEST_SUMMARY.md
+        
+        # List all artifacts
+        echo "### Artifacts Generated" >> PLATFORM_TEST_SUMMARY.md
+        find . -name "*.png" -o -name "*.txt" -o -name "*.json" | while read f; do
+          echo "- $f" >> PLATFORM_TEST_SUMMARY.md
+        done
+        
+        echo "" >> PLATFORM_TEST_SUMMARY.md
+        echo "## Next Steps" >> PLATFORM_TEST_SUMMARY.md
+        echo "1. Review screenshots for visual issues" >> PLATFORM_TEST_SUMMARY.md
+        echo "2. Check memory reports for leaks" >> PLATFORM_TEST_SUMMARY.md
+        echo "3. Analyze performance metrics" >> PLATFORM_TEST_SUMMARY.md
+    
+    - name: Upload summary
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-summary-${{ github.run_number }}
+        path: PLATFORM_TEST_SUMMARY.md
