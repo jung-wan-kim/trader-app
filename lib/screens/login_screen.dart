@@ -3,6 +3,7 @@ import '../config/app_config.dart';
 import 'main_screen.dart';
 import 'privacy_policy_screen.dart';
 import 'terms_of_service_screen.dart';
+import '../generated/l10n/app_localizations.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -55,6 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -70,18 +72,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Colors.green,
               ),
               const SizedBox(height: 24),
-              const Text(
-                'Trader App',
-                style: TextStyle(
+              Text(
+                l10n?.appTitle ?? 'Trader App',
+                style: const TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8),
-              const Text(
-                'AI 기반 주식 추천 서비스',
-                style: TextStyle(
+              Text(
+                l10n?.appSubtitle ?? 'AI-Powered Stock Recommendations',
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.grey,
                 ),
@@ -91,10 +93,10 @@ class _LoginScreenState extends State<LoginScreen> {
               // 이메일 입력
               TextField(
                 controller: _emailController,
-                decoration: const InputDecoration(
-                  labelText: '이메일',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.email),
+                decoration: InputDecoration(
+                  labelText: l10n?.email ?? 'Email',
+                  border: const OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.email),
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
@@ -102,10 +104,10 @@ class _LoginScreenState extends State<LoginScreen> {
               // 비밀번호 입력
               TextField(
                 controller: _passwordController,
-                decoration: const InputDecoration(
-                  labelText: '비밀번호',
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(Icons.lock),
+                decoration: InputDecoration(
+                  labelText: l10n?.password ?? 'Password',
+                  border: const OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.lock),
                 ),
                 obscureText: true,
               ),
@@ -116,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 48),
                 ),
-                child: const Text('로그인'),
+                child: Text(l10n?.login ?? 'Login'),
               ),
               const SizedBox(height: 16),
               // 구분선
@@ -126,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Text(
-                      '또는',
+                      l10n?.or ?? 'or',
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                   ),
@@ -138,9 +140,9 @@ class _LoginScreenState extends State<LoginScreen> {
               ElevatedButton.icon(
                 onPressed: _signInWithApple,
                 icon: const Icon(Icons.apple, color: Colors.white),
-                label: const Text(
-                  'Sign in with Apple',
-                  style: TextStyle(color: Colors.white),
+                label: Text(
+                  l10n?.signInWithApple ?? 'Sign in with Apple',
+                  style: const TextStyle(color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.black,
@@ -162,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          '데모 모드: 테스트 계정이 자동 입력되었습니다.',
+                          l10n?.demoModeNotice ?? 'Demo Mode: Test account auto-filled',
                           style: TextStyle(
                             color: Colors.blue[700],
                             fontSize: 12,
@@ -186,7 +188,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       );
                     },
-                    child: const Text('개인정보처리방침'),
+                    child: Text(l10n?.privacyPolicy ?? 'Privacy Policy'),
                   ),
                   const Text('•'),
                   TextButton(
@@ -198,7 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       );
                     },
-                    child: const Text('이용약관'),
+                    child: Text(l10n?.termsOfService ?? 'Terms of Service'),
                   ),
                 ],
               ),
@@ -212,7 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  '투자 권유가 아닌 참고 정보를 제공합니다.',
+                  l10n?.investmentWarning ?? 'For reference only, not investment advice',
                   style: TextStyle(
                     color: Colors.amber[700],
                     fontSize: 11,
