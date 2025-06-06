@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'login_screen.dart';
+import '../generated/l10n/app_localizations.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -16,36 +17,43 @@ class _OnboardingScreenState extends State<OnboardingScreen> with TickerProvider
   late Animation<double> _fadeAnimation;
   late Animation<double> _slideAnimation;
 
-  final List<OnboardingPage> _pages = [
-    OnboardingPage(
-      icon: Icons.analytics,
-      iconColor: Colors.blue,
-      title: '전설적 트레이더의 전략',
-      description: '제시 리버모어, 윌리엄 오닐 등\n역사상 가장 성공한 트레이더들의\n검증된 투자 전략을 활용하세요',
-      image: 'assets/images/onboarding1.png',
-    ),
-    OnboardingPage(
-      icon: Icons.psychology,
-      iconColor: Colors.green,
-      title: 'AI 기반 종목 추천',
-      description: '최신 AI 기술로 시장을 분석하고\n전설적 트레이더의 전략에 맞는\n최적의 종목을 추천받으세요',
-      image: 'assets/images/onboarding2.png',
-    ),
-    OnboardingPage(
-      icon: Icons.security,
-      iconColor: Colors.orange,
-      title: '리스크 관리',
-      description: '포지션 사이즈 계산기와\n손절/익절 전략으로\n안전한 투자를 실현하세요',
-      image: 'assets/images/onboarding3.png',
-    ),
-    OnboardingPage(
-      icon: Icons.trending_up,
-      iconColor: Colors.purple,
-      title: '실시간 시장 분석',
-      description: '실시간 차트와 기술적 지표로\n시장의 흐름을 파악하고\n최적의 타이밍을 포착하세요',
-      image: 'assets/images/onboarding4.png',
-    ),
-  ];
+  List<OnboardingPage> _pages = [];
+  
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final l10n = AppLocalizations.of(context);
+    _pages = [
+      OnboardingPage(
+        icon: Icons.analytics,
+        iconColor: Colors.blue,
+        title: l10n?.onboardingTitle1 ?? 'Legendary Trader Strategies',
+        description: l10n?.onboardingDesc1 ?? 'Utilize proven investment strategies from history\'s most successful traders',
+        image: 'assets/images/onboarding1.png',
+      ),
+      OnboardingPage(
+        icon: Icons.psychology,
+        iconColor: Colors.green,
+        title: l10n?.onboardingTitle2 ?? 'AI-Powered Stock Recommendations',
+        description: l10n?.onboardingDesc2 ?? 'Get optimal stock recommendations that match legendary trader strategies',
+        image: 'assets/images/onboarding2.png',
+      ),
+      OnboardingPage(
+        icon: Icons.security,
+        iconColor: Colors.orange,
+        title: l10n?.onboardingTitle3 ?? 'Risk Management',
+        description: l10n?.onboardingDesc3 ?? 'Achieve safe investing with position size calculator',
+        image: 'assets/images/onboarding3.png',
+      ),
+      OnboardingPage(
+        icon: Icons.trending_up,
+        iconColor: Colors.purple,
+        title: l10n?.onboardingTitle4 ?? 'Real-time Market Analysis',
+        description: l10n?.onboardingDesc4 ?? 'Understand market trends and capture optimal timing',
+        image: 'assets/images/onboarding4.png',
+      ),
+    ];
+  }
 
   @override
   void initState() {
@@ -104,6 +112,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> with TickerProvider
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
@@ -116,9 +125,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> with TickerProvider
                 padding: const EdgeInsets.all(16.0),
                 child: TextButton(
                   onPressed: _completeOnboarding,
-                  child: const Text(
-                    'Skip',
-                    style: TextStyle(
+                  child: Text(
+                    l10n?.skip ?? 'Skip',
+                    style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 16,
                     ),
@@ -153,9 +162,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> with TickerProvider
                           borderRadius: BorderRadius.circular(28),
                         ),
                       ),
-                      child: const Text(
-                        '시작하기',
-                        style: TextStyle(
+                      child: Text(
+                        l10n?.getStarted ?? 'Get Started',
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -179,9 +188,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> with TickerProvider
                                 borderRadius: BorderRadius.circular(28),
                               ),
                             ),
-                            child: const Text(
-                              '다음',
-                              style: TextStyle(
+                            child: Text(
+                              l10n?.next ?? 'Next',
+                              style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
