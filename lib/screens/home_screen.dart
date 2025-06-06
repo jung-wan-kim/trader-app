@@ -29,12 +29,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            _buildHeader(),
-            _buildDisclaimer(),
-            _buildFilters(),
+            _buildHeader(context),
+            _buildDisclaimer(context),
+            _buildFilters(context),
             Expanded(
               child: recommendationsAsync.when(
-                data: (recommendations) => _buildRecommendationsList(recommendations),
+                data: (recommendations) => _buildRecommendationsList(recommendations, context),
                 loading: () => const Center(
                   child: CircularProgressIndicator(
                     color: Color(0xFF00D632),
@@ -75,7 +75,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -116,7 +117,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Widget _buildDisclaimer() {
+  Widget _buildDisclaimer(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       padding: const EdgeInsets.all(12),
@@ -147,7 +149,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Widget _buildFilters() {
+  Widget _buildFilters(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       height: 120,
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -307,7 +310,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Widget _buildRecommendationsList(List<StockRecommendation> recommendations) {
+  Widget _buildRecommendationsList(List<StockRecommendation> recommendations, BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     if (recommendations.isEmpty) {
       return Center(
         child: Column(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/subscription_provider.dart';
 import '../models/user_subscription.dart';
+import '../generated/l10n/app_localizations.dart';
 
 class SubscriptionScreen extends ConsumerWidget {
   const SubscriptionScreen({super.key});
@@ -17,9 +18,9 @@ class SubscriptionScreen extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 0,
-        title: const Text(
-          'Subscription',
-          style: TextStyle(color: Colors.white),
+        title: Text(
+          AppLocalizations.of(context)!.subscription,
+          style: const TextStyle(color: Colors.white),
         ),
       ),
       body: subscriptionAsync.when(
@@ -27,9 +28,9 @@ class SubscriptionScreen extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (subscription != null) _buildCurrentPlan(subscription, currentPlan),
+              if (subscription != null) _buildCurrentPlan(subscription, currentPlan, context),
               _buildPlansSection(availablePlans, currentPlan, ref, context),
-              if (subscription != null) _buildBillingHistory(subscription),
+              if (subscription != null) _buildBillingHistory(subscription, context),
               const SizedBox(height: 100),
             ],
           ),
@@ -41,7 +42,7 @@ class SubscriptionScreen extends ConsumerWidget {
         ),
         error: (error, stack) => Center(
           child: Text(
-            'Error loading subscription',
+            AppLocalizations.of(context)!.errorLoadingSubscription,
             style: TextStyle(color: Colors.grey[400]),
           ),
         ),
@@ -49,7 +50,7 @@ class SubscriptionScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildCurrentPlan(UserSubscription subscription, SubscriptionPlan? currentPlan) {
+  Widget _buildCurrentPlan(UserSubscription subscription, SubscriptionPlan? currentPlan, BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(20),
@@ -76,9 +77,9 @@ class SubscriptionScreen extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Current Plan',
-                    style: TextStyle(
+                  Text(
+                    AppLocalizations.of(context)!.currentPlan,
+                    style: const TextStyle(
                       color: Colors.grey,
                       fontSize: 14,
                     ),
@@ -103,7 +104,7 @@ class SubscriptionScreen extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  subscription.isActive ? 'Active' : 'Inactive',
+                  subscription.isActive ? AppLocalizations.of(context)!.active : AppLocalizations.of(context)!.inactive,
                   style: TextStyle(
                     color: subscription.isActive 
                         ? const Color(0xFF00D632)
@@ -119,16 +120,18 @@ class SubscriptionScreen extends ConsumerWidget {
           Row(
             children: [
               _buildPlanInfo(
+                context: context,
                 icon: Icons.calendar_today_outlined,
-                label: 'Next Billing',
+                label: AppLocalizations.of(context)!.nextBilling,
                 value: subscription.nextBillingDate != null
                     ? _formatDate(subscription.nextBillingDate!)
-                    : 'Not scheduled',
+                    : AppLocalizations.of(context)!.notScheduled,
               ),
               const SizedBox(width: 20),
               _buildPlanInfo(
+                context: context,
                 icon: Icons.payment_outlined,
-                label: 'Amount',
+                label: AppLocalizations.of(context)!.amount,
                 value: '\$${subscription.finalPrice.toStringAsFixed(2)}/${_getBillingPeriod(currentPlan)}',
               ),
             ],
@@ -154,7 +157,7 @@ class SubscriptionScreen extends ConsumerWidget {
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      'Auto-renewal is off. Your plan will expire on ${_formatDate(subscription.endDate!)}',
+                      AppLocalizations.of(context)!.autoRenewalOff(_formatDate(subscription.endDate!)),
                       style: TextStyle(
                         color: Colors.orange[400],
                         fontSize: 12,
@@ -171,6 +174,7 @@ class SubscriptionScreen extends ConsumerWidget {
   }
 
   Widget _buildPlanInfo({
+    required BuildContext context,
     required IconData icon,
     required String label,
     required String value,
@@ -218,9 +222,9 @@ class SubscriptionScreen extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Available Plans',
-            style: TextStyle(
+          Text(
+            AppLocalizations.of(context)!.availablePlans,
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -274,9 +278,9 @@ class SubscriptionScreen extends ConsumerWidget {
                   color: Colors.blue,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Text(
-                  'POPULAR',
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context)!.popular,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
@@ -305,7 +309,7 @@ class SubscriptionScreen extends ConsumerWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          _getTierDescription(plan.tier),
+                          _getTierDescription(plan.tier, context),
                           style: TextStyle(
                             color: Colors.grey[400],
                             fontSize: 12,
@@ -353,7 +357,7 @@ class SubscriptionScreen extends ConsumerWidget {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
-                              'Save ${plan.discount!.toStringAsFixed(0)}%',
+                              AppLocalizations.of(context)!.savePercent(plan.discount!.toInt()),
                               style: const TextStyle(
                                 color: Color(0xFF00D632),
                                 fontSize: 10,
@@ -415,7 +419,7 @@ class SubscriptionScreen extends ConsumerWidget {
                       ),
                     ),
                     child: Text(
-                      isCurrentPlan ? 'Current Plan' : 'Upgrade',
+                      isCurrentPlan ? AppLocalizations.of(context)!.currentPlan : AppLocalizations.of(context)!.upgrade,
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
@@ -431,15 +435,15 @@ class SubscriptionScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildBillingHistory(UserSubscription subscription) {
+  Widget _buildBillingHistory(UserSubscription subscription, BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Billing History',
-            style: TextStyle(
+          Text(
+            AppLocalizations.of(context)!.billingHistory,
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -499,16 +503,16 @@ class SubscriptionScreen extends ConsumerWidget {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.grey[900],
-        title: const Text(
-          'Upgrade Plan',
-          style: TextStyle(color: Colors.white),
+        title: Text(
+          AppLocalizations.of(context)!.upgradePlan,
+          style: const TextStyle(color: Colors.white),
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Upgrade to ${plan.name}?',
+              AppLocalizations.of(context)!.upgradePlanConfirm(plan.name),
               style: TextStyle(color: Colors.grey[300]),
             ),
             const SizedBox(height: 16),
@@ -522,7 +526,7 @@ class SubscriptionScreen extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Price',
+                    AppLocalizations.of(context)!.price,
                     style: TextStyle(color: Colors.grey[400]),
                   ),
                   Text(
@@ -541,7 +545,7 @@ class SubscriptionScreen extends ConsumerWidget {
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
-              'Cancel',
+              AppLocalizations.of(context)!.cancel,
               style: TextStyle(color: Colors.grey[400]),
             ),
           ),
@@ -551,7 +555,7 @@ class SubscriptionScreen extends ConsumerWidget {
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text('Successfully upgraded to ${plan.name}'),
+                  content: Text(AppLocalizations.of(context)!.upgradeSuccessful(plan.name)),
                   backgroundColor: const Color(0xFF00D632),
                 ),
               );
@@ -559,7 +563,7 @@ class SubscriptionScreen extends ConsumerWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF00D632),
             ),
-            child: const Text('Upgrade'),
+            child: Text(AppLocalizations.of(context)!.upgrade),
           ),
         ],
       ),
@@ -577,18 +581,19 @@ class SubscriptionScreen extends ConsumerWidget {
     return plan.billingPeriod == 'YEARLY' ? 'year' : 'month';
   }
 
-  String _getTierDescription(SubscriptionTier tier) {
+  String _getTierDescription(SubscriptionTier tier, BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     switch (tier) {
       case SubscriptionTier.free:
-        return 'Get started with basic features';
+        return l10n.tierDescFree;
       case SubscriptionTier.basic:
-        return 'For individual traders';
+        return l10n.tierDescBasic;
       case SubscriptionTier.pro:
-        return 'Advanced tools for serious traders';
+        return l10n.tierDescPro;
       case SubscriptionTier.premium:
-        return 'Everything you need to succeed';
+        return l10n.tierDescPremium;
       case SubscriptionTier.enterprise:
-        return 'Custom solutions for teams';
+        return l10n.tierDescEnterprise;
     }
   }
 }
@@ -614,7 +619,7 @@ class _SubscriptionTermsSection extends StatelessWidget {
               Icon(Icons.info_outline, color: Colors.blue[700], size: 20),
               const SizedBox(width: 8),
               Text(
-                '구독 약관',
+                AppLocalizations.of(context)!.subscriptionTerms,
                 style: TextStyle(
                   color: Colors.blue[700],
                   fontWeight: FontWeight.bold,
@@ -624,11 +629,7 @@ class _SubscriptionTermsSection extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            '• 구독은 구매 확인 시 iTunes 계정으로 청구됩니다\n'
-            '• 현재 기간 종료 24시간 전까지 자동 갱신을 끄지 않으면 구독이 자동으로 갱신됩니다\n'
-            '• 현재 기간 종료 24시간 이내에 갱신 요금이 청구됩니다\n'
-            '• 구독은 구매 후 계정 설정에서 관리할 수 있습니다\n'
-            '• 무료 체험 기간의 미사용 부분은 구독 구매 시 소멸됩니다',
+            AppLocalizations.of(context)!.subscriptionTermsText,
             style: TextStyle(
               color: Colors.grey[400],
               fontSize: 11,

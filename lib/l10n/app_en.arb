@@ -2,6 +2,7 @@
   "@@locale": "en",
   "appTitle": "Trader App",
   "appSubtitle": "AI-Powered Stock Recommendations",
+  "subscription": "Subscription",
   
   "chooseLanguage": "Choose Your Language",
   "selectLanguageDescription": "Select your preferred language for the app",
@@ -81,6 +82,54 @@
   "dataDelayWarning": "Real-time data may be delayed by 15 minutes",
   "dataSource": "Data provided by Finnhub",
   "poweredBy": "Powered by Legendary Traders",
+  
+  "errorLoadingSubscription": "Error loading subscription",
+  "active": "Active",
+  "inactive": "Inactive",
+  "autoRenewalOff": "Auto-renewal is off. Your plan will expire on {date}",
+  "@autoRenewalOff": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "availablePlans": "Available Plans",
+  "popular": "POPULAR",
+  "savePercent": "Save {percent}%",
+  "@savePercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "upgrade": "Upgrade",
+  "billingHistory": "Billing History",
+  "upgradePlan": "Upgrade Plan",
+  "upgradePlanConfirm": "Upgrade to {planName}?",
+  "@upgradePlanConfirm": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
+  "price": "Price",
+  "upgradeSuccessful": "Successfully upgraded to {planName}",
+  "@upgradeSuccessful": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "tierDescFree": "Get started with basic features",
+  "tierDescBasic": "For individual traders",
+  "tierDescPro": "Advanced tools for serious traders",
+  "tierDescPremium": "Everything you need to succeed",
+  "tierDescEnterprise": "Custom solutions for teams",
   
   "errorLoadingRecommendations": "Error loading recommendations",
   "retry": "Retry",

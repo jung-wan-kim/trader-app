@@ -16,11 +16,11 @@ class PositionScreen extends ConsumerWidget {
       body: SafeArea(
         child: Column(
           children: [
-            _buildHeader(portfolioStats),
-            _buildStatsCards(portfolioStats),
+            _buildHeader(portfolioStats, context),
+            _buildStatsCards(portfolioStats, context),
             Expanded(
               child: positionsAsync.when(
-                data: (positions) => _buildPositionsList(positions, ref),
+                data: (positions) => _buildPositionsList(positions, ref, context),
                 loading: () => const Center(
                   child: CircularProgressIndicator(
                     color: Color(0xFF00D632),
@@ -28,7 +28,7 @@ class PositionScreen extends ConsumerWidget {
                 ),
                 error: (error, stack) => Center(
                   child: Text(
-                    AppLocalizations.of(context).errorLoadingPositions,
+                    AppLocalizations.of(context)!.errorLoadingPositions,
                     style: TextStyle(color: Colors.grey[400]),
                   ),
                 ),
@@ -40,7 +40,7 @@ class PositionScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildHeader(PortfolioStats stats) {
+  Widget _buildHeader(PortfolioStats stats, BuildContext context) {
     final isProfit = stats.totalPnL >= 0;
 
     return Container(
@@ -50,8 +50,8 @@ class PositionScreen extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                AppLocalizations.of(context).portfolio,
+              Text(
+                AppLocalizations.of(context)!.portfolio,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 28,
@@ -116,7 +116,7 @@ class PositionScreen extends ConsumerWidget {
                     ),
                   ),
                   Text(
-                    ' ${AppLocalizations.of(context).today}',
+                    ' ${AppLocalizations.of(context)!.today}',
                     style: TextStyle(
                       color: Colors.grey[400],
                       fontSize: 16,
@@ -131,7 +131,7 @@ class PositionScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildStatsCards(PortfolioStats stats) {
+  Widget _buildStatsCards(PortfolioStats stats, BuildContext context) {
     return Container(
       height: 100,
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -139,7 +139,7 @@ class PositionScreen extends ConsumerWidget {
         children: [
           Expanded(
             child: _buildStatCard(
-              title: AppLocalizations.of(context).winRate,
+              title: AppLocalizations.of(context)!.winRate,
               value: '${stats.winRate.toStringAsFixed(1)}%',
               icon: Icons.check_circle_outline,
               color: const Color(0xFF00D632),
@@ -148,7 +148,7 @@ class PositionScreen extends ConsumerWidget {
           const SizedBox(width: 12),
           Expanded(
             child: _buildStatCard(
-              title: AppLocalizations.of(context).positions,
+              title: AppLocalizations.of(context)!.positions,
               value: stats.openPositions.toString(),
               icon: Icons.account_balance_wallet_outlined,
               color: Colors.blue,
@@ -157,7 +157,7 @@ class PositionScreen extends ConsumerWidget {
           const SizedBox(width: 12),
           Expanded(
             child: _buildStatCard(
-              title: AppLocalizations.of(context).dayPnL,
+              title: AppLocalizations.of(context)!.dayPL,
               value: '\$${stats.dayPnL.toStringAsFixed(0)}',
               icon: stats.dayPnL >= 0 
                   ? Icons.trending_up 
@@ -218,7 +218,7 @@ class PositionScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildPositionsList(List<Position> positions, WidgetRef ref) {
+  Widget _buildPositionsList(List<Position> positions, WidgetRef ref, BuildContext context) {
     final openPositions = positions.where((p) => p.status == 'OPEN').toList();
 
     if (openPositions.isEmpty) {
@@ -233,7 +233,7 @@ class PositionScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              AppLocalizations.of(context).noOpenPositions,
+              AppLocalizations.of(context)!.noOpenPositions,
               style: TextStyle(
                 color: Colors.grey[400],
                 fontSize: 16,
@@ -241,7 +241,7 @@ class PositionScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              AppLocalizations.of(context).startTradingToSeePositions,
+              AppLocalizations.of(context)!.startTradingToSeePositions,
               style: TextStyle(
                 color: Colors.grey[600],
                 fontSize: 14,
@@ -341,25 +341,25 @@ class PositionScreen extends ConsumerWidget {
             children: [
               Expanded(
                 child: _buildPositionDetail(
-                  label: AppLocalizations.of(context).quantity,
+                  label: AppLocalizations.of(context)!.quantity,
                   value: position.quantity.toString(),
                 ),
               ),
               Expanded(
                 child: _buildPositionDetail(
-                  label: AppLocalizations.of(context).avgCost,
+                  label: AppLocalizations.of(context)!.avgCost,
                   value: '\$${position.entryPrice.toStringAsFixed(2)}',
                 ),
               ),
               Expanded(
                 child: _buildPositionDetail(
-                  label: AppLocalizations.of(context).current,
+                  label: AppLocalizations.of(context)!.current,
                   value: '\$${position.currentPrice.toStringAsFixed(2)}',
                 ),
               ),
               Expanded(
                 child: _buildPositionDetail(
-                  label: AppLocalizations.of(context).pnl,
+                  label: AppLocalizations.of(context)!.pl,
                   value: '\$${position.unrealizedPnL.toStringAsFixed(2)}',
                   valueColor: pnlColor,
                 ),
@@ -383,7 +383,7 @@ class PositionScreen extends ConsumerWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          '${AppLocalizations.of(context).sl}: \$${position.stopLoss!.toStringAsFixed(2)}',
+                          '${AppLocalizations.of(context)!.sl}: \$${position.stopLoss!.toStringAsFixed(2)}',
                           style: TextStyle(
                             color: Colors.red[400],
                             fontSize: 12,
@@ -403,7 +403,7 @@ class PositionScreen extends ConsumerWidget {
                         ),
                         const SizedBox(width: 4),
                         Text(
-                          '${AppLocalizations.of(context).tp}: \$${position.takeProfit!.toStringAsFixed(2)}',
+                          '${AppLocalizations.of(context)!.tp}: \$${position.takeProfit!.toStringAsFixed(2)}',
                           style: TextStyle(
                             color: Colors.green[400],
                             fontSize: 12,
@@ -430,7 +430,7 @@ class PositionScreen extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text(AppLocalizations.of(context).close),
+                  child: Text(AppLocalizations.of(context)!.close),
                 ),
               ),
               const SizedBox(width: 12),
@@ -446,7 +446,7 @@ class PositionScreen extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text(AppLocalizations.of(context).edit),
+                  child: Text(AppLocalizations.of(context)!.edit),
                 ),
               ),
             ],
@@ -489,16 +489,16 @@ class PositionScreen extends ConsumerWidget {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.grey[900],
-        title: const Text(
-          AppLocalizations.of(context).closePosition,
-          style: TextStyle(color: Colors.white),
+        title: Text(
+          AppLocalizations.of(context)!.closePosition,
+          style: const TextStyle(color: Colors.white),
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Close ${position.quantity} shares of ${position.stockCode}?',
+              AppLocalizations.of(context)!.closePositionConfirm(position.quantity, position.stockCode),
               style: TextStyle(color: Colors.grey[300]),
             ),
             const SizedBox(height: 16),
@@ -514,7 +514,7 @@ class PositionScreen extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    AppLocalizations.of(context).pnl,
+                    AppLocalizations.of(context)!.pl,
                     style: TextStyle(color: Colors.grey[400]),
                   ),
                   Text(
@@ -535,7 +535,7 @@ class PositionScreen extends ConsumerWidget {
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
-              AppLocalizations.of(context).cancel,
+              AppLocalizations.of(context)!.cancel,
               style: TextStyle(color: Colors.grey[400]),
             ),
           ),
@@ -544,16 +544,16 @@ class PositionScreen extends ConsumerWidget {
               ref.read(portfolioProvider.notifier).closePosition(position.id);
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text(AppLocalizations.of(context).positionClosedSuccessfully),
-                  backgroundColor: Color(0xFF00D632),
+                SnackBar(
+                  content: Text(AppLocalizations.of(context)!.positionClosedSuccessfully),
+                  backgroundColor: const Color(0xFF00D632),
                 ),
               );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF00D632),
             ),
-            child: Text(AppLocalizations.of(context).closePosition),
+            child: Text(AppLocalizations.of(context)!.closePosition),
           ),
         ],
       ),

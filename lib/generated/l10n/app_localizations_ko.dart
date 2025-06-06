@@ -15,6 +15,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get appSubtitle => 'AI 기반 주식 추천 서비스';
 
   @override
+  String get subscription => 'Subscription';
+
+  @override
   String get chooseLanguage => '언어를 선택하세요';
 
   @override
@@ -193,6 +196,68 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get poweredBy => '전설적 트레이더들의 전략';
+
+  @override
+  String get errorLoadingSubscription => 'Error loading subscription';
+
+  @override
+  String get active => 'Active';
+
+  @override
+  String get inactive => 'Inactive';
+
+  @override
+  String autoRenewalOff(String date) {
+    return 'Auto-renewal is off. Your plan will expire on $date';
+  }
+
+  @override
+  String get availablePlans => 'Available Plans';
+
+  @override
+  String get popular => 'POPULAR';
+
+  @override
+  String savePercent(int percent) {
+    return 'Save $percent%';
+  }
+
+  @override
+  String get upgrade => 'Upgrade';
+
+  @override
+  String get billingHistory => 'Billing History';
+
+  @override
+  String get upgradePlan => 'Upgrade Plan';
+
+  @override
+  String upgradePlanConfirm(String planName) {
+    return 'Upgrade to $planName?';
+  }
+
+  @override
+  String get price => 'Price';
+
+  @override
+  String upgradeSuccessful(String planName) {
+    return 'Successfully upgraded to $planName';
+  }
+
+  @override
+  String get tierDescFree => 'Get started with basic features';
+
+  @override
+  String get tierDescBasic => 'For individual traders';
+
+  @override
+  String get tierDescPro => 'Advanced tools for serious traders';
+
+  @override
+  String get tierDescPremium => 'Everything you need to succeed';
+
+  @override
+  String get tierDescEnterprise => 'Custom solutions for teams';
 
   @override
   String get errorLoadingRecommendations => '추천 목록을 불러오는 중 오류가 발생했습니다';

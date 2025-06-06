@@ -126,6 +126,12 @@ abstract class AppLocalizations {
   /// **'AI-Powered Stock Recommendations'**
   String get appSubtitle;
 
+  /// No description provided for @subscription.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription'**
+  String get subscription;
+
   /// No description provided for @chooseLanguage.
   ///
   /// In en, this message translates to:
@@ -467,6 +473,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Powered by Legendary Traders'**
   String get poweredBy;
+
+  /// No description provided for @errorLoadingSubscription.
+  ///
+  /// In en, this message translates to:
+  /// **'Error loading subscription'**
+  String get errorLoadingSubscription;
+
+  /// No description provided for @active.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get active;
+
+  /// No description provided for @inactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get inactive;
+
+  /// No description provided for @autoRenewalOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto-renewal is off. Your plan will expire on {date}'**
+  String autoRenewalOff(String date);
+
+  /// No description provided for @availablePlans.
+  ///
+  /// In en, this message translates to:
+  /// **'Available Plans'**
+  String get availablePlans;
+
+  /// No description provided for @popular.
+  ///
+  /// In en, this message translates to:
+  /// **'POPULAR'**
+  String get popular;
+
+  /// No description provided for @savePercent.
+  ///
+  /// In en, this message translates to:
+  /// **'Save {percent}%'**
+  String savePercent(int percent);
+
+  /// No description provided for @upgrade.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade'**
+  String get upgrade;
+
+  /// No description provided for @billingHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Billing History'**
+  String get billingHistory;
+
+  /// No description provided for @upgradePlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade Plan'**
+  String get upgradePlan;
+
+  /// No description provided for @upgradePlanConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Upgrade to {planName}?'**
+  String upgradePlanConfirm(String planName);
+
+  /// No description provided for @price.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get price;
+
+  /// No description provided for @upgradeSuccessful.
+  ///
+  /// In en, this message translates to:
+  /// **'Successfully upgraded to {planName}'**
+  String upgradeSuccessful(String planName);
+
+  /// No description provided for @tierDescFree.
+  ///
+  /// In en, this message translates to:
+  /// **'Get started with basic features'**
+  String get tierDescFree;
+
+  /// No description provided for @tierDescBasic.
+  ///
+  /// In en, this message translates to:
+  /// **'For individual traders'**
+  String get tierDescBasic;
+
+  /// No description provided for @tierDescPro.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced tools for serious traders'**
+  String get tierDescPro;
+
+  /// No description provided for @tierDescPremium.
+  ///
+  /// In en, this message translates to:
+  /// **'Everything you need to succeed'**
+  String get tierDescPremium;
+
+  /// No description provided for @tierDescEnterprise.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom solutions for teams'**
+  String get tierDescEnterprise;
 
   /// No description provided for @errorLoadingRecommendations.
   ///
