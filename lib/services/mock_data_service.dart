@@ -1,6 +1,7 @@
 import 'dart:math';
 import '../models/stock_recommendation.dart';
 import '../models/trader_strategy.dart';
+import '../models/candle_data.dart';
 
 class MockDataService {
   final Random _random = Random();
@@ -169,5 +170,53 @@ class MockDataService {
     ];
 
     return strategies;
+  }
+
+  // 캔들 차트 데이터 생성
+  List<CandleData> getCandleData(String symbol, double currentPrice) {
+    final List<CandleData> candles = [];
+    final now = DateTime.now();
+    double price = currentPrice * 0.8; // 20% 아래에서 시작
+    
+    // 최근 60일 데이터 생성
+    for (int i = 59; i >= 0; i--) {
+      final date = now.subtract(Duration(days: i));
+      
+      // 랜덤 변동폭 (±2%)
+      final changePercent = (_random.nextDouble() - 0.5) * 0.04;
+      price = price * (1 + changePercent);
+      
+      final open = price;
+      final close = price * (1 + (_random.nextDouble() - 0.5) * 0.02);
+      final high = max(open, close) * (1 + _random.nextDouble() * 0.01);
+      final low = min(open, close) * (1 - _random.nextDouble() * 0.01);
+      final volume = 1000000 + _random.nextInt(9000000);
+      
+      candles.add(CandleData(
+        date: date,
+        open: open,
+        high: high,
+        low: low,
+        close: close,
+        volume: volume.toDouble(),
+      ));
+      
+      price = close; // 다음 캔들의 시작가는 이전 캔들의 종가
+    }
+    
+    // 마지막 캔들이 현재가에 근접하도록 조정
+    if (candles.isNotEmpty) {
+      final lastCandle = candles.last;
+      candles[candles.length - 1] = CandleData(
+        date: lastCandle.date,
+        open: lastCandle.open,
+        high: max(lastCandle.open, currentPrice) * 1.005,
+        low: min(lastCandle.open, currentPrice) * 0.995,
+        close: currentPrice,
+        volume: lastCandle.volume,
+      );
+    }
+    
+    return candles;
   }
 }

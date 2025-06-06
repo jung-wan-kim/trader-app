@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/stock_recommendation.dart';
+import '../models/candle_data.dart';
 import '../providers/portfolio_provider.dart';
+import '../providers/mock_data_provider.dart';
+import '../providers/stock_data_provider.dart';
 import '../widgets/risk_calculator.dart';
 import '../widgets/position_size_calculator.dart';
+import '../widgets/candle_chart.dart';
 
 class StrategyDetailScreen extends ConsumerStatefulWidget {
   final StockRecommendation recommendation;
@@ -54,6 +58,7 @@ class _StrategyDetailScreenState extends ConsumerState<StrategyDetailScreen> {
           children: [
             _buildStockHeader(),
             _buildActionSection(),
+            _buildCandleChart(),
             _buildPriceTargets(),
             _buildReasoningSection(),
             _buildTechnicalIndicators(),
@@ -223,6 +228,71 @@ class _StrategyDetailScreenState extends ConsumerState<StrategyDetailScreen> {
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildCandleChart() {
+    final candleDataAsync = ref.watch(
+      stockCandleDataProvider(widget.recommendation.stockCode),
+    );
+    
+    return Container(
+      margin: const EdgeInsets.all(20),
+      child: candleDataAsync.when(
+        data: (candles) => CandleChart(
+          candles: candles,
+          currentPrice: widget.recommendation.currentPrice,
+          stopLoss: widget.recommendation.stopLoss,
+          takeProfit: widget.recommendation.targetPrice,
+        ),
+        loading: () => Container(
+          height: 400,
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: const Center(
+            child: CircularProgressIndicator(
+              color: Color(0xFF00D632),
+            ),
+          ),
+        ),
+        error: (error, stack) => Container(
+          height: 400,
+          decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.error_outline,
+                  color: Colors.grey[600],
+                  size: 48,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'Failed to load chart data',
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Using simulated data',
+                  style: TextStyle(
+                    color: Colors.grey[700],
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

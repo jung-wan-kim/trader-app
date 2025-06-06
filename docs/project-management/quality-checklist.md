@@ -218,9 +218,14 @@
 
 - [ ] **iOS 가이드라인 준수**
   - [ ] Human Interface Guidelines 준수
-  - [ ] App Store Review Guidelines 준수
+  - [ ] App Store Review Guidelines 준수 (⚠️ [iOS 앱 심사 체크리스트 참조](launch-checklist.md#✅-ios-앱-심사-가이드라인-준수))
   - [ ] iOS 13.0+ 호환성
   - [ ] 다양한 iPhone 화면 크기 지원
+  - [ ] **금융 앱 iOS 심사 특별 주의사항**
+    - [ ] 투자 위험 경고 표시
+    - [ ] 금융 데이터 암호화 필수
+    - [ ] 면책조항 명확히 표시
+    - [ ] 데모 계정 제공 필수
 
 - [ ] **iOS 특화 기능**
   - [ ] Face ID / Touch ID 지원

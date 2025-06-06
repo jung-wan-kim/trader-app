@@ -27,6 +27,10 @@ dependencies:
   # Utils
   shared_preferences: ^2.2.2
   intl: ^0.18.1
+  http: ^1.2.0
+  
+  # Charts
+  fl_chart: ^0.68.0
   
   # Image & File
   image_picker: ^1.0.7
