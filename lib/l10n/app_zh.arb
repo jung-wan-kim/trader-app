@@ -125,5 +125,8 @@
     }
   },
   "messages": "消息",
-  "search": "搜索"
+  "search": "搜索",
+  "signals": "信号",
+  "discover": "发现",
+  "premium": "高级"
 }

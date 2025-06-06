@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import '../generated/l10n/app_localizations.dart';
 
 class InboxScreen extends StatelessWidget {
   const InboxScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: const Text(
-          '받은 메시지함',
-          style: TextStyle(color: Colors.white),
+        title: Text(
+          l10n?.inbox ?? 'Inbox',
+          style: const TextStyle(color: Colors.white),
         ),
         actions: [
           IconButton(
@@ -30,9 +32,9 @@ class InboxScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '활동',
-                  style: TextStyle(
+                Text(
+                  l10n?.activity ?? 'Activity',
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -42,22 +44,22 @@ class InboxScreen extends StatelessWidget {
                 _buildActivityItem(
                   icon: Icons.favorite,
                   iconColor: Colors.red,
-                  title: '새로운 좋아요',
-                  subtitle: '지난 주',
+                  title: l10n?.newLikes ?? 'New Likes',
+                  subtitle: l10n?.lastWeek ?? 'Last week',
                   count: '23',
                 ),
                 _buildActivityItem(
                   icon: Icons.person_add,
                   iconColor: Colors.blue,
-                  title: '새로운 팔로워',
-                  subtitle: '어제',
+                  title: l10n?.newFollowers ?? 'New Followers',
+                  subtitle: l10n?.yesterday ?? 'Yesterday',
                   count: '8',
                 ),
                 _buildActivityItem(
                   icon: Icons.comment,
                   iconColor: Colors.green,
-                  title: '새로운 댓글',
-                  subtitle: '2시간 전',
+                  title: l10n?.newComments ?? 'New Comments',
+                  subtitle: l10n?.hoursAgo(2) ?? '2 hours ago',
                   count: '15',
                 ),
               ],
@@ -72,9 +74,9 @@ class InboxScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '메시지',
-                  style: TextStyle(
+                Text(
+                  l10n?.messages ?? 'Messages',
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

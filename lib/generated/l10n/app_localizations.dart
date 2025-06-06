@@ -761,6 +761,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'TP'**
   String get tp;
+
+  /// No description provided for @upload.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload'**
+  String get upload;
+
+  /// No description provided for @uploadVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload Video'**
+  String get uploadVideo;
+
+  /// No description provided for @uploadDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Select from gallery or shoot with camera'**
+  String get uploadDescription;
+
+  /// No description provided for @gallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Gallery'**
+  String get gallery;
+
+  /// No description provided for @camera.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera'**
+  String get camera;
+
+  /// No description provided for @inbox.
+  ///
+  /// In en, this message translates to:
+  /// **'Inbox'**
+  String get inbox;
+
+  /// No description provided for @activity.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity'**
+  String get activity;
+
+  /// No description provided for @newLikes.
+  ///
+  /// In en, this message translates to:
+  /// **'New Likes'**
+  String get newLikes;
+
+  /// No description provided for @lastWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'Last week'**
+  String get lastWeek;
+
+  /// No description provided for @yesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get yesterday;
+
+  /// No description provided for @newFollowers.
+  ///
+  /// In en, this message translates to:
+  /// **'New Followers'**
+  String get newFollowers;
+
+  /// No description provided for @newComments.
+  ///
+  /// In en, this message translates to:
+  /// **'New Comments'**
+  String get newComments;
+
+  /// No description provided for @hoursAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours} hours ago'**
+  String hoursAgo(int hours);
+
+  /// No description provided for @messages.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages'**
+  String get messages;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @signals.
+  ///
+  /// In en, this message translates to:
+  /// **'Signals'**
+  String get signals;
+
+  /// No description provided for @discover.
+  ///
+  /// In en, this message translates to:
+  /// **'Discover'**
+  String get discover;
+
+  /// No description provided for @premium.
+  ///
+  /// In en, this message translates to:
+  /// **'Premium'**
+  String get premium;
 }
 
 class _AppLocalizationsDelegate

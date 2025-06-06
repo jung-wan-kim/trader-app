@@ -188,5 +188,8 @@
     }
   },
   "messages": "Messages",
-  "search": "Search"
+  "search": "Search",
+  "signals": "Signals",
+  "discover": "Discover",
+  "premium": "Premium"
 }

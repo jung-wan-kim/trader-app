@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import '../generated/l10n/app_localizations.dart';
 
 class UploadScreen extends StatelessWidget {
   const UploadScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: const Text(
-          '업로드',
-          style: TextStyle(color: Colors.white),
+        title: Text(
+          l10n?.upload ?? 'Upload',
+          style: const TextStyle(color: Colors.white),
         ),
         centerTitle: true,
       ),
@@ -36,9 +38,9 @@ class UploadScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const Text(
-              '동영상 업로드',
-              style: TextStyle(
+            Text(
+              l10n?.uploadVideo ?? 'Upload Video',
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -46,7 +48,7 @@ class UploadScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Text(
-              '갤러리에서 선택하거나 카메라로 촬영하세요',
+              l10n?.uploadDescription ?? 'Select from gallery or shoot with camera',
               style: TextStyle(
                 color: Colors.grey.shade400,
                 fontSize: 14,
@@ -58,7 +60,7 @@ class UploadScreen extends StatelessWidget {
               children: [
                 _buildUploadOption(
                   icon: Icons.photo_library,
-                  label: '갤러리',
+                  label: l10n?.gallery ?? 'Gallery',
                   onTap: () {
                     // 갤러리 열기
                   },
@@ -66,7 +68,7 @@ class UploadScreen extends StatelessWidget {
                 const SizedBox(width: 40),
                 _buildUploadOption(
                   icon: Icons.camera_alt,
-                  label: '카메라',
+                  label: l10n?.camera ?? 'Camera',
                   onTap: () {
                     // 카메라 열기
                   },

@@ -349,4 +349,60 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get tp => '利確';
+
+  @override
+  String get upload => 'アップロード';
+
+  @override
+  String get uploadVideo => '動画をアップロード';
+
+  @override
+  String get uploadDescription => 'ギャラリーから選択またはカメラで撮影';
+
+  @override
+  String get gallery => 'ギャラリー';
+
+  @override
+  String get camera => 'カメラ';
+
+  @override
+  String get inbox => '受信トレイ';
+
+  @override
+  String get activity => 'アクティビティ';
+
+  @override
+  String get newLikes => '新しいいいね';
+
+  @override
+  String get lastWeek => '先週';
+
+  @override
+  String get yesterday => '昨日';
+
+  @override
+  String get newFollowers => '新しいフォロワー';
+
+  @override
+  String get newComments => '新しいコメント';
+
+  @override
+  String hoursAgo(int hours) {
+    return '$hours時間前';
+  }
+
+  @override
+  String get messages => 'メッセージ';
+
+  @override
+  String get search => '検索';
+
+  @override
+  String get signals => 'シグナル';
+
+  @override
+  String get discover => 'ディスカバー';
+
+  @override
+  String get premium => 'プレミアム';
 }

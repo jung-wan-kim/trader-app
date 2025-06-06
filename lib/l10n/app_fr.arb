@@ -125,5 +125,8 @@
     }
   },
   "messages": "Messages",
-  "search": "Rechercher"
+  "search": "Rechercher",
+  "signals": "Signaux",
+  "discover": "Découvrir",
+  "premium": "Premium"
 }

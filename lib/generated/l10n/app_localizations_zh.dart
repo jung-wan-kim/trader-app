@@ -347,4 +347,60 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get tp => '止盈';
+
+  @override
+  String get upload => '上传';
+
+  @override
+  String get uploadVideo => '上传视频';
+
+  @override
+  String get uploadDescription => '从相册选择或用相机拍摄';
+
+  @override
+  String get gallery => '相册';
+
+  @override
+  String get camera => '相机';
+
+  @override
+  String get inbox => '收件箱';
+
+  @override
+  String get activity => '活动';
+
+  @override
+  String get newLikes => '新的喜欢';
+
+  @override
+  String get lastWeek => '上周';
+
+  @override
+  String get yesterday => '昨天';
+
+  @override
+  String get newFollowers => '新的关注者';
+
+  @override
+  String get newComments => '新的评论';
+
+  @override
+  String hoursAgo(int hours) {
+    return '$hours小时前';
+  }
+
+  @override
+  String get messages => '消息';
+
+  @override
+  String get search => '搜索';
+
+  @override
+  String get signals => '信号';
+
+  @override
+  String get discover => '发现';
+
+  @override
+  String get premium => '高级';
 }

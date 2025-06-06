@@ -5,6 +5,7 @@ import 'position_screen.dart';
 import 'discover_screen.dart';
 import 'subscription_screen.dart';
 import 'profile_screen.dart';
+import '../generated/l10n/app_localizations.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -32,6 +33,8 @@ class _MainScreenState extends State<MainScreen> {
   
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    
     // 상태 표시줄 설정
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     SystemChrome.setSystemUIOverlayStyle(
@@ -65,15 +68,15 @@ class _MainScreenState extends State<MainScreen> {
           selectedFontSize: 11,
           unselectedFontSize: 11,
           items: [
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.show_chart_outlined, size: 26),
-              activeIcon: Icon(Icons.show_chart, size: 26),
-              label: 'Signals',
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.show_chart_outlined, size: 26),
+              activeIcon: const Icon(Icons.show_chart, size: 26),
+              label: l10n?.signals ?? 'Signals',
             ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.account_balance_wallet_outlined, size: 26),
-              activeIcon: Icon(Icons.account_balance_wallet, size: 26),
-              label: 'Portfolio',
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.account_balance_wallet_outlined, size: 26),
+              activeIcon: const Icon(Icons.account_balance_wallet, size: 26),
+              label: l10n?.portfolio ?? 'Portfolio',
             ),
             BottomNavigationBarItem(
               icon: Container(
@@ -96,17 +99,17 @@ class _MainScreenState extends State<MainScreen> {
                   size: 20,
                 ),
               ),
-              label: 'Discover',
+              label: l10n?.discover ?? 'Discover',
             ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.diamond_outlined, size: 26),
-              activeIcon: Icon(Icons.diamond, size: 26),
-              label: 'Premium',
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.diamond_outlined, size: 26),
+              activeIcon: const Icon(Icons.diamond, size: 26),
+              label: l10n?.premium ?? 'Premium',
             ),
-            const BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline, size: 26),
-              activeIcon: Icon(Icons.person, size: 26),
-              label: 'Profile',
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.person_outline, size: 26),
+              activeIcon: const Icon(Icons.person, size: 26),
+              label: l10n?.profile ?? 'Profile',
             ),
           ],
         ),

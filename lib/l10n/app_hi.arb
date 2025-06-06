@@ -125,5 +125,8 @@
     }
   },
   "messages": "संदेश",
-  "search": "खोजें"
+  "search": "खोजें",
+  "signals": "सिग्नल",
+  "discover": "खोजें",
+  "premium": "प्रीमियम"
 }

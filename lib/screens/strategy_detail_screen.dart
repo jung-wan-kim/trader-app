@@ -8,6 +8,7 @@ import '../providers/stock_data_provider.dart';
 import '../widgets/risk_calculator.dart';
 import '../widgets/position_size_calculator.dart';
 import '../widgets/candle_chart.dart';
+import '../generated/l10n/app_localizations.dart';
 
 class StrategyDetailScreen extends ConsumerStatefulWidget {
   final StockRecommendation recommendation;

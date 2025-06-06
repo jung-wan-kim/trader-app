@@ -125,5 +125,8 @@
     }
   },
   "messages": "الرسائل",
-  "search": "بحث"
+  "search": "بحث",
+  "signals": "إشارات",
+  "discover": "اكتشف",
+  "premium": "بريميوم"
 }

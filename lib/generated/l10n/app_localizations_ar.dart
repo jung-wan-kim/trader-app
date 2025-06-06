@@ -353,4 +353,60 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get tp => 'جني الربح';
+
+  @override
+  String get upload => 'رفع';
+
+  @override
+  String get uploadVideo => 'رفع فيديو';
+
+  @override
+  String get uploadDescription => 'اختر من المعرض أو التقط بالكاميرا';
+
+  @override
+  String get gallery => 'المعرض';
+
+  @override
+  String get camera => 'الكاميرا';
+
+  @override
+  String get inbox => 'صندوق الوارد';
+
+  @override
+  String get activity => 'النشاط';
+
+  @override
+  String get newLikes => 'إعجابات جديدة';
+
+  @override
+  String get lastWeek => 'الأسبوع الماضي';
+
+  @override
+  String get yesterday => 'أمس';
+
+  @override
+  String get newFollowers => 'متابعون جدد';
+
+  @override
+  String get newComments => 'تعليقات جديدة';
+
+  @override
+  String hoursAgo(int hours) {
+    return 'منذ $hours ساعات';
+  }
+
+  @override
+  String get messages => 'الرسائل';
+
+  @override
+  String get search => 'بحث';
+
+  @override
+  String get signals => 'إشارات';
+
+  @override
+  String get discover => 'اكتشف';
+
+  @override
+  String get premium => 'بريميوم';
 }

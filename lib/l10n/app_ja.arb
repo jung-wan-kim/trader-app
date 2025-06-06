@@ -125,5 +125,8 @@
     }
   },
   "messages": "メッセージ",
-  "search": "検索"
+  "search": "検索",
+  "signals": "シグナル",
+  "discover": "ディスカバー",
+  "premium": "プレミアム"
 }

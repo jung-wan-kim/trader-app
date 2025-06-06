@@ -355,4 +355,60 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get tp => 'टीपी';
+
+  @override
+  String get upload => 'अपलोड';
+
+  @override
+  String get uploadVideo => 'वीडियो अपलोड करें';
+
+  @override
+  String get uploadDescription => 'गैलरी से चुनें या कैमरा से शूट करें';
+
+  @override
+  String get gallery => 'गैलरी';
+
+  @override
+  String get camera => 'कैमरा';
+
+  @override
+  String get inbox => 'इनबॉक्स';
+
+  @override
+  String get activity => 'गतिविधि';
+
+  @override
+  String get newLikes => 'नए पसंद';
+
+  @override
+  String get lastWeek => 'पिछले सप्ताह';
+
+  @override
+  String get yesterday => 'कल';
+
+  @override
+  String get newFollowers => 'नए अनुयायी';
+
+  @override
+  String get newComments => 'नई टिप्पणियाँ';
+
+  @override
+  String hoursAgo(int hours) {
+    return '$hours घंटे पहले';
+  }
+
+  @override
+  String get messages => 'संदेश';
+
+  @override
+  String get search => 'खोजें';
+
+  @override
+  String get signals => 'सिग्नल';
+
+  @override
+  String get discover => 'खोजें';
+
+  @override
+  String get premium => 'प्रीमियम';
 }

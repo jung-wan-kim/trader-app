@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../generated/l10n/app_localizations.dart';
 
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
@@ -26,6 +27,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -41,7 +43,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
             controller: _searchController,
             style: const TextStyle(color: Colors.white),
             decoration: InputDecoration(
-              hintText: '검색',
+              hintText: l10n?.search ?? 'Search',
               hintStyle: TextStyle(color: Colors.grey.shade600),
               prefixIcon: Icon(
                 Icons.search,

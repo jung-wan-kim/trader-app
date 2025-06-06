@@ -360,4 +360,61 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get tp => 'TP';
+
+  @override
+  String get upload => 'Carregar';
+
+  @override
+  String get uploadVideo => 'Carregar vídeo';
+
+  @override
+  String get uploadDescription =>
+      'Selecionar da galeria ou gravar com a câmera';
+
+  @override
+  String get gallery => 'Galeria';
+
+  @override
+  String get camera => 'Câmera';
+
+  @override
+  String get inbox => 'Caixa de entrada';
+
+  @override
+  String get activity => 'Atividade';
+
+  @override
+  String get newLikes => 'Novas curtidas';
+
+  @override
+  String get lastWeek => 'Semana passada';
+
+  @override
+  String get yesterday => 'Ontem';
+
+  @override
+  String get newFollowers => 'Novos seguidores';
+
+  @override
+  String get newComments => 'Novos comentários';
+
+  @override
+  String hoursAgo(int hours) {
+    return '$hours horas atrás';
+  }
+
+  @override
+  String get messages => 'Mensagens';
+
+  @override
+  String get search => 'Pesquisar';
+
+  @override
+  String get signals => 'Sinais';
+
+  @override
+  String get discover => 'Descobrir';
+
+  @override
+  String get premium => 'Premium';
 }

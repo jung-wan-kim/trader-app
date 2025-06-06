@@ -350,4 +350,60 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get tp => '익절';
+
+  @override
+  String get upload => '업로드';
+
+  @override
+  String get uploadVideo => '동영상 업로드';
+
+  @override
+  String get uploadDescription => '갤러리에서 선택하거나 카메라로 촬영하세요';
+
+  @override
+  String get gallery => '갤러리';
+
+  @override
+  String get camera => '카메라';
+
+  @override
+  String get inbox => '받은 메시지함';
+
+  @override
+  String get activity => '활동';
+
+  @override
+  String get newLikes => '새로운 좋아요';
+
+  @override
+  String get lastWeek => '지난주';
+
+  @override
+  String get yesterday => '어제';
+
+  @override
+  String get newFollowers => '새로운 팔로워';
+
+  @override
+  String get newComments => '새로운 댓글';
+
+  @override
+  String hoursAgo(int hours) {
+    return '$hours시간 전';
+  }
+
+  @override
+  String get messages => '메시지';
+
+  @override
+  String get search => '검색';
+
+  @override
+  String get signals => '시그널';
+
+  @override
+  String get discover => '발견';
+
+  @override
+  String get premium => '프리미엄';
 }
