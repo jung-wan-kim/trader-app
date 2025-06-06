@@ -130,5 +130,91 @@
   "discover": "ディスカバー",
   "premium": "プレミアム",
   "upgrade": "アップグレード",
-  "downgrade": "ダウングレード"
+  "downgrade": "ダウングレード",
+  
+  "subscription": "サブスクリプション",
+  "errorLoadingSubscription": "サブスクリプションの読み込み中にエラーが発生しました",
+  "active": "アクティブ",
+  "inactive": "非アクティブ",
+  "autoRenewalOff": "自動更新がオフになっています。プランは{date}に期限切れとなります",
+  "@autoRenewalOff": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "availablePlans": "利用可能なプラン",
+  "popular": "人気",
+  "savePercent": "{percent}%節約",
+  "@savePercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "billingHistory": "請求履歴",
+  "upgradePlan": "プランをアップグレード",
+  "upgradePlanConfirm": "{planName}にアップグレードしますか？",
+  "@upgradePlanConfirm": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
+  "price": "価格",
+  "upgradeSuccessful": "{planName}へのアップグレードが完了しました",
+  "@upgradeSuccessful": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "tierDescFree": "基本機能から始める",
+  "tierDescBasic": "個人トレーダー向け",
+  "tierDescPro": "真剣なトレーダー向けの高度なツール",
+  "tierDescPremium": "成功に必要なすべてが揃っています",
+  "tierDescEnterprise": "チーム向けのカスタムソリューション",
+  
+  "planFeatureBasicRecommendations": "基本的な推奨",
+  "planFeatureLimitedPositions": "{count}ポジションまで制限",
+  "@planFeatureLimitedPositions": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureCommunitySupport": "コミュニティサポート",
+  "planFeatureAllFreeFeatures": "すべての無料機能",
+  "planFeatureUpToPositions": "最大{count}ポジション",
+  "@planFeatureUpToPositions": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureEmailSupport": "メールサポート",
+  "planFeatureBasicAnalytics": "基本分析",
+  "planFeatureAllBasicFeatures": "すべてのベーシック機能",
+  "planFeatureRealtimeRecommendations": "リアルタイム推奨",
+  "planFeatureAdvancedAnalytics": "高度な分析",
+  "planFeaturePrioritySupport": "優先サポート",
+  "planFeatureRiskManagementTools": "リスク管理ツール",
+  "planFeatureCustomAlerts": "カスタムアラート",
+  "planFeatureAllProFeatures": "すべてのPro月額機能",
+  "planFeatureMonthsFree": "{count}ヶ月無料",
+  "@planFeatureMonthsFree": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureAnnualReview": "年次パフォーマンスレビュー",
+  "planFeatureAllProFeaturesUnlimited": "すべてのPro機能",
+  "planFeatureUnlimitedPositions": "無制限ポジション",
+  "planFeatureApiAccess": "APIアクセス",
+  "planFeatureDedicatedManager": "専属アカウントマネージャー",
+  "planFeatureCustomStrategies": "カスタム戦略",
+  "planFeatureWhiteLabelOptions": "ホワイトラベルオプション"
 }

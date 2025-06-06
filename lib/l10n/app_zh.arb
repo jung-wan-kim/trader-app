@@ -130,5 +130,91 @@
   "discover": "发现",
   "premium": "高级",
   "upgrade": "升级",
-  "downgrade": "降级"
+  "downgrade": "降级",
+  
+  "subscription": "订阅",
+  "errorLoadingSubscription": "加载订阅时出错",
+  "active": "活跃中",
+  "inactive": "非活跃",
+  "autoRenewalOff": "自动续费已关闭。您的计划将在{date}到期",
+  "@autoRenewalOff": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "availablePlans": "可用计划",
+  "popular": "热门",
+  "savePercent": "节省{percent}%",
+  "@savePercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "billingHistory": "计费历史",
+  "upgradePlan": "升级计划",
+  "upgradePlanConfirm": "升级到{planName}？",
+  "@upgradePlanConfirm": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
+  "price": "价格",
+  "upgradeSuccessful": "成功升级到{planName}",
+  "@upgradeSuccessful": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "tierDescFree": "从基本功能开始",
+  "tierDescBasic": "适合个人交易者",
+  "tierDescPro": "为专业交易者提供高级工具",
+  "tierDescPremium": "成功所需的一切",
+  "tierDescEnterprise": "针对团队的定制解决方案",
+  
+  "planFeatureBasicRecommendations": "基本推荐",
+  "planFeatureLimitedPositions": "限制为{count}个仓位",
+  "@planFeatureLimitedPositions": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureCommunitySupport": "社区支持",
+  "planFeatureAllFreeFeatures": "所有免费功能",
+  "planFeatureUpToPositions": "最多{count}个仓位",
+  "@planFeatureUpToPositions": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureEmailSupport": "邮件支持",
+  "planFeatureBasicAnalytics": "基本分析",
+  "planFeatureAllBasicFeatures": "所有基本功能",
+  "planFeatureRealtimeRecommendations": "实时推荐",
+  "planFeatureAdvancedAnalytics": "高级分析",
+  "planFeaturePrioritySupport": "优先支持",
+  "planFeatureRiskManagementTools": "风险管理工具",
+  "planFeatureCustomAlerts": "自定义警报",
+  "planFeatureAllProFeatures": "所有Pro月度功能",
+  "planFeatureMonthsFree": "{count}个月免费",
+  "@planFeatureMonthsFree": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureAnnualReview": "年度绩效评估",
+  "planFeatureAllProFeaturesUnlimited": "所有Pro功能",
+  "planFeatureUnlimitedPositions": "无限仓位",
+  "planFeatureApiAccess": "API访问",
+  "planFeatureDedicatedManager": "专属客户经理",
+  "planFeatureCustomStrategies": "自定义策略",
+  "planFeatureWhiteLabelOptions": "白牌选项"
 }

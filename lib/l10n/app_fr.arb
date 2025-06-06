@@ -130,5 +130,91 @@
   "discover": "Découvrir",
   "premium": "Premium",
   "upgrade": "Mettre à niveau",
-  "downgrade": "Rétrograder"
+  "downgrade": "Rétrograder",
+  
+  "subscription": "Abonnement",
+  "errorLoadingSubscription": "Erreur lors du chargement de l'abonnement",
+  "active": "Actif",
+  "inactive": "Inactif",
+  "autoRenewalOff": "Le renouvellement automatique est désactivé. Votre plan expirera le {date}",
+  "@autoRenewalOff": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "availablePlans": "Plans Disponibles",
+  "popular": "POPULAIRE",
+  "savePercent": "Économisez {percent}%",
+  "@savePercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "billingHistory": "Historique de Facturation",
+  "upgradePlan": "Mettre à Niveau le Plan",
+  "upgradePlanConfirm": "Passer à {planName} ?",
+  "@upgradePlanConfirm": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
+  "price": "Prix",
+  "upgradeSuccessful": "Mise à niveau réussie vers {planName}",
+  "@upgradeSuccessful": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "tierDescFree": "Commencez avec les fonctionnalités de base",
+  "tierDescBasic": "Pour les traders individuels",
+  "tierDescPro": "Outils avancés pour les traders sérieux",
+  "tierDescPremium": "Tout ce dont vous avez besoin pour réussir",
+  "tierDescEnterprise": "Solutions personnalisées pour les équipes",
+  
+  "planFeatureBasicRecommendations": "Recommandations de base",
+  "planFeatureLimitedPositions": "Limité à {count} positions",
+  "@planFeatureLimitedPositions": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureCommunitySupport": "Support communautaire",
+  "planFeatureAllFreeFeatures": "Toutes les fonctionnalités gratuites",
+  "planFeatureUpToPositions": "Jusqu'à {count} positions",
+  "@planFeatureUpToPositions": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureEmailSupport": "Support par e-mail",
+  "planFeatureBasicAnalytics": "Analyses de base",
+  "planFeatureAllBasicFeatures": "Toutes les fonctionnalités de base",
+  "planFeatureRealtimeRecommendations": "Recommandations en temps réel",
+  "planFeatureAdvancedAnalytics": "Analyses avancées",
+  "planFeaturePrioritySupport": "Support prioritaire",
+  "planFeatureRiskManagementTools": "Outils de gestion des risques",
+  "planFeatureCustomAlerts": "Alertes personnalisées",
+  "planFeatureAllProFeatures": "Toutes les fonctionnalités Pro mensuelles",
+  "planFeatureMonthsFree": "{count} mois gratuits",
+  "@planFeatureMonthsFree": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureAnnualReview": "Révision annuelle des performances",
+  "planFeatureAllProFeaturesUnlimited": "Toutes les fonctionnalités Pro",
+  "planFeatureUnlimitedPositions": "Positions illimitées",
+  "planFeatureApiAccess": "Accès API",
+  "planFeatureDedicatedManager": "Gestionnaire de compte dédié",
+  "planFeatureCustomStrategies": "Stratégies personnalisées",
+  "planFeatureWhiteLabelOptions": "Options de marque blanche"
 }

@@ -130,5 +130,91 @@
   "discover": "Descobrir",
   "premium": "Premium",
   "upgrade": "Atualizar",
-  "downgrade": "Rebaixar"
+  "downgrade": "Rebaixar",
+  
+  "subscription": "Assinatura",
+  "errorLoadingSubscription": "Erro ao carregar assinatura",
+  "active": "Ativo",
+  "inactive": "Inativo",
+  "autoRenewalOff": "A renovação automática está desligada. Seu plano expirará em {date}",
+  "@autoRenewalOff": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "availablePlans": "Planos Disponíveis",
+  "popular": "POPULAR",
+  "savePercent": "Economize {percent}%",
+  "@savePercent": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "billingHistory": "Histórico de Cobrança",
+  "upgradePlan": "Atualizar Plano",
+  "upgradePlanConfirm": "Atualizar para {planName}?",
+  "@upgradePlanConfirm": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
+  "price": "Preço",
+  "upgradeSuccessful": "Atualizado com sucesso para {planName}",
+  "@upgradeSuccessful": {
+    "placeholders": {
+      "planName": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "tierDescFree": "Comece com recursos básicos",
+  "tierDescBasic": "Para traders individuais",
+  "tierDescPro": "Ferramentas avançadas para traders sérios",
+  "tierDescPremium": "Tudo que você precisa para ter sucesso",
+  "tierDescEnterprise": "Soluções personalizadas para equipes",
+  
+  "planFeatureBasicRecommendations": "Recomendações básicas",
+  "planFeatureLimitedPositions": "Limitado a {count} posições",
+  "@planFeatureLimitedPositions": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureCommunitySupport": "Suporte da comunidade",
+  "planFeatureAllFreeFeatures": "Todos os recursos gratuitos",
+  "planFeatureUpToPositions": "Até {count} posições",
+  "@planFeatureUpToPositions": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureEmailSupport": "Suporte por e-mail",
+  "planFeatureBasicAnalytics": "Análises básicas",
+  "planFeatureAllBasicFeatures": "Todos os recursos básicos",
+  "planFeatureRealtimeRecommendations": "Recomendações em tempo real",
+  "planFeatureAdvancedAnalytics": "Análises avançadas",
+  "planFeaturePrioritySupport": "Suporte prioritário",
+  "planFeatureRiskManagementTools": "Ferramentas de gestão de risco",
+  "planFeatureCustomAlerts": "Alertas personalizados",
+  "planFeatureAllProFeatures": "Todos os recursos Pro mensais",
+  "planFeatureMonthsFree": "{count} meses grátis",
+  "@planFeatureMonthsFree": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureAnnualReview": "Revisão anual de desempenho",
+  "planFeatureAllProFeaturesUnlimited": "Todos os recursos Pro",
+  "planFeatureUnlimitedPositions": "Posições ilimitadas",
+  "planFeatureApiAccess": "Acesso à API",
+  "planFeatureDedicatedManager": "Gerente de conta dedicado",
+  "planFeatureCustomStrategies": "Estratégias personalizadas",
+  "planFeatureWhiteLabelOptions": "Opções de marca branca"
 }
