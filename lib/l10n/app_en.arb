@@ -191,5 +191,43 @@
   "search": "Search",
   "signals": "Signals",
   "discover": "Discover",
-  "premium": "Premium"
+  "premium": "Premium",
+  
+  "planFeatureBasicRecommendations": "Basic recommendations",
+  "planFeatureLimitedPositions": "Limited to {count} positions",
+  "@planFeatureLimitedPositions": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureCommunitySupport": "Community support",
+  "planFeatureAllFreeFeatures": "All Free features",
+  "planFeatureUpToPositions": "Up to {count} positions",
+  "@planFeatureUpToPositions": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureEmailSupport": "Email support",
+  "planFeatureBasicAnalytics": "Basic analytics",
+  "planFeatureAllBasicFeatures": "All Basic features",
+  "planFeatureRealtimeRecommendations": "Real-time recommendations",
+  "planFeatureAdvancedAnalytics": "Advanced analytics",
+  "planFeaturePrioritySupport": "Priority support",
+  "planFeatureRiskManagementTools": "Risk management tools",
+  "planFeatureCustomAlerts": "Custom alerts",
+  "planFeatureAllProFeatures": "All Pro Monthly features",
+  "planFeatureMonthsFree": "{count} months free",
+  "@planFeatureMonthsFree": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "planFeatureAnnualReview": "Annual performance review",
+  "planFeatureAllProFeaturesUnlimited": "All Pro features",
+  "planFeatureUnlimitedPositions": "Unlimited positions",
+  "planFeatureApiAccess": "API access",
+  "planFeatureDedicatedManager": "Dedicated account manager",
+  "planFeatureCustomStrategies": "Custom strategies",
+  "planFeatureWhiteLabelOptions": "White-label options"
 }

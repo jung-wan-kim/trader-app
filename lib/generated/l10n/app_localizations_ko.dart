@@ -198,66 +198,66 @@ class AppLocalizationsKo extends AppLocalizations {
   String get poweredBy => '전설적 트레이더들의 전략';
 
   @override
-  String get errorLoadingSubscription => 'Error loading subscription';
+  String get errorLoadingSubscription => '구독 정보를 불러오는 중 오류가 발생했습니다';
 
   @override
-  String get active => 'Active';
+  String get active => '활성';
 
   @override
-  String get inactive => 'Inactive';
+  String get inactive => '비활성';
 
   @override
   String autoRenewalOff(String date) {
-    return 'Auto-renewal is off. Your plan will expire on $date';
+    return '자동 갱신이 꺼져 있습니다. $date에 만료됩니다';
   }
 
   @override
-  String get availablePlans => 'Available Plans';
+  String get availablePlans => '이용 가능한 플랜';
 
   @override
-  String get popular => 'POPULAR';
+  String get popular => '인기';
 
   @override
   String savePercent(int percent) {
-    return 'Save $percent%';
+    return '$percent% 할인';
   }
 
   @override
-  String get upgrade => 'Upgrade';
+  String get upgrade => '업그레이드';
 
   @override
-  String get billingHistory => 'Billing History';
+  String get billingHistory => '결제 내역';
 
   @override
-  String get upgradePlan => 'Upgrade Plan';
+  String get upgradePlan => '플랜 업그레이드';
 
   @override
   String upgradePlanConfirm(String planName) {
-    return 'Upgrade to $planName?';
+    return '$planName으로 업그레이드하시겠습니까?';
   }
 
   @override
-  String get price => 'Price';
+  String get price => '가격';
 
   @override
   String upgradeSuccessful(String planName) {
-    return 'Successfully upgraded to $planName';
+    return '$planName으로 성공적으로 업그레이드되었습니다';
   }
 
   @override
-  String get tierDescFree => 'Get started with basic features';
+  String get tierDescFree => '기본 기능으로 시작하기';
 
   @override
-  String get tierDescBasic => 'For individual traders';
+  String get tierDescBasic => '개인 트레이더를 위한 플랜';
 
   @override
-  String get tierDescPro => 'Advanced tools for serious traders';
+  String get tierDescPro => '진지한 트레이더를 위한 고급 도구';
 
   @override
-  String get tierDescPremium => 'Everything you need to succeed';
+  String get tierDescPremium => '성공에 필요한 모든 것';
 
   @override
-  String get tierDescEnterprise => 'Custom solutions for teams';
+  String get tierDescEnterprise => '팀을 위한 맞춤 솔루션';
 
   @override
   String get errorLoadingRecommendations => '추천 목록을 불러오는 중 오류가 발생했습니다';
@@ -406,4 +406,76 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get premium => '프리미엄';
+
+  @override
+  String get planFeatureBasicRecommendations => '기본 추천';
+
+  @override
+  String planFeatureLimitedPositions(int count) {
+    return '최대 $count개 포지션';
+  }
+
+  @override
+  String get planFeatureCommunitySupport => '커뮤니티 지원';
+
+  @override
+  String get planFeatureAllFreeFeatures => '모든 무료 기능';
+
+  @override
+  String planFeatureUpToPositions(int count) {
+    return '최대 $count개 포지션';
+  }
+
+  @override
+  String get planFeatureEmailSupport => '이메일 지원';
+
+  @override
+  String get planFeatureBasicAnalytics => '기본 분석';
+
+  @override
+  String get planFeatureAllBasicFeatures => '모든 기본 기능';
+
+  @override
+  String get planFeatureRealtimeRecommendations => '실시간 추천';
+
+  @override
+  String get planFeatureAdvancedAnalytics => '고급 분석';
+
+  @override
+  String get planFeaturePrioritySupport => '우선 지원';
+
+  @override
+  String get planFeatureRiskManagementTools => '리스크 관리 도구';
+
+  @override
+  String get planFeatureCustomAlerts => '사용자 정의 알림';
+
+  @override
+  String get planFeatureAllProFeatures => '모든 프로 월간 기능';
+
+  @override
+  String planFeatureMonthsFree(int count) {
+    return '$count개월 무료';
+  }
+
+  @override
+  String get planFeatureAnnualReview => '연간 성과 검토';
+
+  @override
+  String get planFeatureAllProFeaturesUnlimited => '모든 프로 기능';
+
+  @override
+  String get planFeatureUnlimitedPositions => '무제한 포지션';
+
+  @override
+  String get planFeatureApiAccess => 'API 액세스';
+
+  @override
+  String get planFeatureDedicatedManager => '전담 계정 관리자';
+
+  @override
+  String get planFeatureCustomStrategies => '맞춤 전략';
+
+  @override
+  String get planFeatureWhiteLabelOptions => '화이트 라벨 옵션';
 }

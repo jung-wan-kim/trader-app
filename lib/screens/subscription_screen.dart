@@ -373,7 +373,7 @@ class SubscriptionScreen extends ConsumerWidget {
                 const SizedBox(height: 16),
                 const Divider(color: Colors.grey),
                 const SizedBox(height: 16),
-                ...plan.features.map((feature) => Padding(
+                ...plan.features.map((featureKey) => Padding(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: Row(
                     children: [
@@ -385,7 +385,7 @@ class SubscriptionScreen extends ConsumerWidget {
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          feature,
+                          _getFeatureText(featureKey, plan, context),
                           style: TextStyle(
                             color: Colors.grey[300],
                             fontSize: 13,
@@ -594,6 +594,60 @@ class SubscriptionScreen extends ConsumerWidget {
         return l10n.tierDescPremium;
       case SubscriptionTier.enterprise:
         return l10n.tierDescEnterprise;
+    }
+  }
+  
+  String _getFeatureText(String featureKey, SubscriptionPlan plan, BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    
+    switch (featureKey) {
+      case PlanFeatureKeys.basicRecommendations:
+        return l10n.planFeatureBasicRecommendations;
+      case PlanFeatureKeys.limitedPositions:
+        return l10n.planFeatureLimitedPositions(5);
+      case PlanFeatureKeys.communitySupport:
+        return l10n.planFeatureCommunitySupport;
+      case PlanFeatureKeys.allFreeFeatures:
+        return l10n.planFeatureAllFreeFeatures;
+      case PlanFeatureKeys.upToPositions:
+        final maxPositions = plan.limits['maxPositions'] as int;
+        return l10n.planFeatureUpToPositions(maxPositions);
+      case PlanFeatureKeys.emailSupport:
+        return l10n.planFeatureEmailSupport;
+      case PlanFeatureKeys.basicAnalytics:
+        return l10n.planFeatureBasicAnalytics;
+      case PlanFeatureKeys.allBasicFeatures:
+        return l10n.planFeatureAllBasicFeatures;
+      case PlanFeatureKeys.realtimeRecommendations:
+        return l10n.planFeatureRealtimeRecommendations;
+      case PlanFeatureKeys.advancedAnalytics:
+        return l10n.planFeatureAdvancedAnalytics;
+      case PlanFeatureKeys.prioritySupport:
+        return l10n.planFeaturePrioritySupport;
+      case PlanFeatureKeys.riskManagementTools:
+        return l10n.planFeatureRiskManagementTools;
+      case PlanFeatureKeys.customAlerts:
+        return l10n.planFeatureCustomAlerts;
+      case PlanFeatureKeys.allProFeatures:
+        return l10n.planFeatureAllProFeatures;
+      case PlanFeatureKeys.monthsFree:
+        return l10n.planFeatureMonthsFree(2);
+      case PlanFeatureKeys.annualReview:
+        return l10n.planFeatureAnnualReview;
+      case PlanFeatureKeys.allProFeaturesUnlimited:
+        return l10n.planFeatureAllProFeaturesUnlimited;
+      case PlanFeatureKeys.unlimitedPositions:
+        return l10n.planFeatureUnlimitedPositions;
+      case PlanFeatureKeys.apiAccess:
+        return l10n.planFeatureApiAccess;
+      case PlanFeatureKeys.dedicatedManager:
+        return l10n.planFeatureDedicatedManager;
+      case PlanFeatureKeys.customStrategies:
+        return l10n.planFeatureCustomStrategies;
+      case PlanFeatureKeys.whiteLabelOptions:
+        return l10n.planFeatureWhiteLabelOptions;
+      default:
+        return featureKey; // Fallback to key if not found
     }
   }
 }

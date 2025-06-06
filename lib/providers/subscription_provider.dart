@@ -203,6 +203,32 @@ final subscriptionProvider =
   return SubscriptionNotifier(mockDataService);
 });
 
+// Plan feature keys for localization
+class PlanFeatureKeys {
+  static const basicRecommendations = 'planFeatureBasicRecommendations';
+  static const limitedPositions = 'planFeatureLimitedPositions';
+  static const communitySupport = 'planFeatureCommunitySupport';
+  static const allFreeFeatures = 'planFeatureAllFreeFeatures';
+  static const upToPositions = 'planFeatureUpToPositions';
+  static const emailSupport = 'planFeatureEmailSupport';
+  static const basicAnalytics = 'planFeatureBasicAnalytics';
+  static const allBasicFeatures = 'planFeatureAllBasicFeatures';
+  static const realtimeRecommendations = 'planFeatureRealtimeRecommendations';
+  static const advancedAnalytics = 'planFeatureAdvancedAnalytics';
+  static const prioritySupport = 'planFeaturePrioritySupport';
+  static const riskManagementTools = 'planFeatureRiskManagementTools';
+  static const customAlerts = 'planFeatureCustomAlerts';
+  static const allProFeatures = 'planFeatureAllProFeatures';
+  static const monthsFree = 'planFeatureMonthsFree';
+  static const annualReview = 'planFeatureAnnualReview';
+  static const allProFeaturesUnlimited = 'planFeatureAllProFeaturesUnlimited';
+  static const unlimitedPositions = 'planFeatureUnlimitedPositions';
+  static const apiAccess = 'planFeatureApiAccess';
+  static const dedicatedManager = 'planFeatureDedicatedManager';
+  static const customStrategies = 'planFeatureCustomStrategies';
+  static const whiteLabelOptions = 'planFeatureWhiteLabelOptions';
+}
+
 final availablePlansProvider = Provider<List<SubscriptionPlan>>((ref) {
   return [
     SubscriptionPlan(
@@ -213,9 +239,9 @@ final availablePlansProvider = Provider<List<SubscriptionPlan>>((ref) {
       currency: 'USD',
       billingPeriod: 'MONTHLY',
       features: [
-        'Basic recommendations',
-        'Limited to 5 positions',
-        'Community support',
+        PlanFeatureKeys.basicRecommendations,
+        PlanFeatureKeys.limitedPositions,
+        PlanFeatureKeys.communitySupport,
       ],
       limits: {
         'maxPositions': 5,
@@ -231,10 +257,10 @@ final availablePlansProvider = Provider<List<SubscriptionPlan>>((ref) {
       currency: 'USD',
       billingPeriod: 'MONTHLY',
       features: [
-        'All Free features',
-        'Up to 20 positions',
-        'Email support',
-        'Basic analytics',
+        PlanFeatureKeys.allFreeFeatures,
+        PlanFeatureKeys.upToPositions,
+        PlanFeatureKeys.emailSupport,
+        PlanFeatureKeys.basicAnalytics,
       ],
       limits: {
         'maxPositions': 20,
@@ -250,13 +276,13 @@ final availablePlansProvider = Provider<List<SubscriptionPlan>>((ref) {
       currency: 'USD',
       billingPeriod: 'MONTHLY',
       features: [
-        'All Basic features',
-        'Real-time recommendations',
-        'Advanced analytics',
-        'Priority support',
-        'Up to 50 positions',
-        'Risk management tools',
-        'Custom alerts',
+        PlanFeatureKeys.allBasicFeatures,
+        PlanFeatureKeys.realtimeRecommendations,
+        PlanFeatureKeys.advancedAnalytics,
+        PlanFeatureKeys.prioritySupport,
+        PlanFeatureKeys.upToPositions,
+        PlanFeatureKeys.riskManagementTools,
+        PlanFeatureKeys.customAlerts,
       ],
       limits: {
         'maxPositions': 50,
@@ -273,9 +299,9 @@ final availablePlansProvider = Provider<List<SubscriptionPlan>>((ref) {
       currency: 'USD',
       billingPeriod: 'YEARLY',
       features: [
-        'All Pro Monthly features',
-        '2 months free',
-        'Annual performance review',
+        PlanFeatureKeys.allProFeatures,
+        PlanFeatureKeys.monthsFree,
+        PlanFeatureKeys.annualReview,
       ],
       limits: {
         'maxPositions': 50,
@@ -292,12 +318,12 @@ final availablePlansProvider = Provider<List<SubscriptionPlan>>((ref) {
       currency: 'USD',
       billingPeriod: 'MONTHLY',
       features: [
-        'All Pro features',
-        'Unlimited positions',
-        'API access',
-        'Dedicated account manager',
-        'Custom strategies',
-        'White-label options',
+        PlanFeatureKeys.allProFeaturesUnlimited,
+        PlanFeatureKeys.unlimitedPositions,
+        PlanFeatureKeys.apiAccess,
+        PlanFeatureKeys.dedicatedManager,
+        PlanFeatureKeys.customStrategies,
+        PlanFeatureKeys.whiteLabelOptions,
       ],
       limits: {
         'maxPositions': -1, // Unlimited

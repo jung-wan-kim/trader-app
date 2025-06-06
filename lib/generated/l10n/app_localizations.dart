@@ -869,6 +869,138 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Premium'**
   String get premium;
+
+  /// No description provided for @planFeatureBasicRecommendations.
+  ///
+  /// In en, this message translates to:
+  /// **'Basic recommendations'**
+  String get planFeatureBasicRecommendations;
+
+  /// No description provided for @planFeatureLimitedPositions.
+  ///
+  /// In en, this message translates to:
+  /// **'Limited to {count} positions'**
+  String planFeatureLimitedPositions(int count);
+
+  /// No description provided for @planFeatureCommunitySupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Community support'**
+  String get planFeatureCommunitySupport;
+
+  /// No description provided for @planFeatureAllFreeFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'All Free features'**
+  String get planFeatureAllFreeFeatures;
+
+  /// No description provided for @planFeatureUpToPositions.
+  ///
+  /// In en, this message translates to:
+  /// **'Up to {count} positions'**
+  String planFeatureUpToPositions(int count);
+
+  /// No description provided for @planFeatureEmailSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Email support'**
+  String get planFeatureEmailSupport;
+
+  /// No description provided for @planFeatureBasicAnalytics.
+  ///
+  /// In en, this message translates to:
+  /// **'Basic analytics'**
+  String get planFeatureBasicAnalytics;
+
+  /// No description provided for @planFeatureAllBasicFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'All Basic features'**
+  String get planFeatureAllBasicFeatures;
+
+  /// No description provided for @planFeatureRealtimeRecommendations.
+  ///
+  /// In en, this message translates to:
+  /// **'Real-time recommendations'**
+  String get planFeatureRealtimeRecommendations;
+
+  /// No description provided for @planFeatureAdvancedAnalytics.
+  ///
+  /// In en, this message translates to:
+  /// **'Advanced analytics'**
+  String get planFeatureAdvancedAnalytics;
+
+  /// No description provided for @planFeaturePrioritySupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Priority support'**
+  String get planFeaturePrioritySupport;
+
+  /// No description provided for @planFeatureRiskManagementTools.
+  ///
+  /// In en, this message translates to:
+  /// **'Risk management tools'**
+  String get planFeatureRiskManagementTools;
+
+  /// No description provided for @planFeatureCustomAlerts.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom alerts'**
+  String get planFeatureCustomAlerts;
+
+  /// No description provided for @planFeatureAllProFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'All Pro Monthly features'**
+  String get planFeatureAllProFeatures;
+
+  /// No description provided for @planFeatureMonthsFree.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} months free'**
+  String planFeatureMonthsFree(int count);
+
+  /// No description provided for @planFeatureAnnualReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Annual performance review'**
+  String get planFeatureAnnualReview;
+
+  /// No description provided for @planFeatureAllProFeaturesUnlimited.
+  ///
+  /// In en, this message translates to:
+  /// **'All Pro features'**
+  String get planFeatureAllProFeaturesUnlimited;
+
+  /// No description provided for @planFeatureUnlimitedPositions.
+  ///
+  /// In en, this message translates to:
+  /// **'Unlimited positions'**
+  String get planFeatureUnlimitedPositions;
+
+  /// No description provided for @planFeatureApiAccess.
+  ///
+  /// In en, this message translates to:
+  /// **'API access'**
+  String get planFeatureApiAccess;
+
+  /// No description provided for @planFeatureDedicatedManager.
+  ///
+  /// In en, this message translates to:
+  /// **'Dedicated account manager'**
+  String get planFeatureDedicatedManager;
+
+  /// No description provided for @planFeatureCustomStrategies.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom strategies'**
+  String get planFeatureCustomStrategies;
+
+  /// No description provided for @planFeatureWhiteLabelOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'White-label options'**
+  String get planFeatureWhiteLabelOptions;
 }
 
 class _AppLocalizationsDelegate

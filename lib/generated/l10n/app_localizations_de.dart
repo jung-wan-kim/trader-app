@@ -415,4 +415,76 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get premium => 'Premium';
+
+  @override
+  String get planFeatureBasicRecommendations => 'Basic recommendations';
+
+  @override
+  String planFeatureLimitedPositions(int count) {
+    return 'Limited to $count positions';
+  }
+
+  @override
+  String get planFeatureCommunitySupport => 'Community support';
+
+  @override
+  String get planFeatureAllFreeFeatures => 'All Free features';
+
+  @override
+  String planFeatureUpToPositions(int count) {
+    return 'Up to $count positions';
+  }
+
+  @override
+  String get planFeatureEmailSupport => 'Email support';
+
+  @override
+  String get planFeatureBasicAnalytics => 'Basic analytics';
+
+  @override
+  String get planFeatureAllBasicFeatures => 'All Basic features';
+
+  @override
+  String get planFeatureRealtimeRecommendations => 'Real-time recommendations';
+
+  @override
+  String get planFeatureAdvancedAnalytics => 'Advanced analytics';
+
+  @override
+  String get planFeaturePrioritySupport => 'Priority support';
+
+  @override
+  String get planFeatureRiskManagementTools => 'Risk management tools';
+
+  @override
+  String get planFeatureCustomAlerts => 'Custom alerts';
+
+  @override
+  String get planFeatureAllProFeatures => 'All Pro Monthly features';
+
+  @override
+  String planFeatureMonthsFree(int count) {
+    return '$count months free';
+  }
+
+  @override
+  String get planFeatureAnnualReview => 'Annual performance review';
+
+  @override
+  String get planFeatureAllProFeaturesUnlimited => 'All Pro features';
+
+  @override
+  String get planFeatureUnlimitedPositions => 'Unlimited positions';
+
+  @override
+  String get planFeatureApiAccess => 'API access';
+
+  @override
+  String get planFeatureDedicatedManager => 'Dedicated account manager';
+
+  @override
+  String get planFeatureCustomStrategies => 'Custom strategies';
+
+  @override
+  String get planFeatureWhiteLabelOptions => 'White-label options';
 }
