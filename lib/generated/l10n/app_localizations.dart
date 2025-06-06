@@ -1007,6 +1007,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'White-label options'**
   String get planFeatureWhiteLabelOptions;
+
+  /// No description provided for @termsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Trader App Terms of Service'**
+  String get termsTitle;
+
+  /// No description provided for @termsEffectiveDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Effective Date: February 21, 2025'**
+  String get termsEffectiveDate;
+
+  /// No description provided for @termsSection1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Article 1 (Purpose)'**
+  String get termsSection1Title;
+
+  /// No description provided for @termsSection1Content.
+  ///
+  /// In en, this message translates to:
+  /// **'These terms are intended to stipulate the rights, obligations, and responsibilities of the company and users regarding the use of mobile application services (hereinafter referred to as \"Services\") provided by Trader App (hereinafter referred to as \"Company\").'**
+  String get termsSection1Content;
+
+  /// No description provided for @termsSection2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Article 2 (Definitions)'**
+  String get termsSection2Title;
+
+  /// No description provided for @termsSection2Content.
+  ///
+  /// In en, this message translates to:
+  /// **'1. \"Service\" refers to the AI-based stock recommendation and investment information service provided by the Company.\n2. \"User\" refers to members and non-members who receive services provided by the Company under these terms.\n3. \"Member\" refers to a person who has registered as a member by providing personal information to the Company, continuously receives Company information, and can continuously use the Service.'**
+  String get termsSection2Content;
+
+  /// No description provided for @termsSection3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Article 3 (Effectiveness and Changes to Terms)'**
+  String get termsSection3Title;
+
+  /// No description provided for @termsSection3Content.
+  ///
+  /// In en, this message translates to:
+  /// **'1. These terms become effective by posting them on the service screen or notifying users through other means.\n2. The Company may change these terms when deemed necessary, and changed terms will be announced 7 days before the application date.'**
+  String get termsSection3Content;
+
+  /// No description provided for @termsSection4Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Article 4 (Provision of Services)'**
+  String get termsSection4Title;
+
+  /// No description provided for @termsSection4Content.
+  ///
+  /// In en, this message translates to:
+  /// **'1. The Company provides the following services:\n   • AI-based stock recommendation service\n   • Legendary trader strategy information\n   • Real-time stock price information\n   • Portfolio management tools\n   • Risk calculator\n\n2. Services are provided 24 hours a day, 365 days a year in principle. However, they may be temporarily suspended due to system maintenance.'**
+  String get termsSection4Content;
+
+  /// No description provided for @termsFinancialDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'All information provided by this service is for reference only and does not constitute investment advice or investment recommendations.\n\n• All investment decisions must be made under the user\'s own judgment and responsibility.\n• Stock investment carries the risk of principal loss.\n• Past returns do not guarantee future profits.\n• The Company assumes no responsibility for investment results based on the information provided.'**
+  String get termsFinancialDisclaimer;
+
+  /// No description provided for @termsSection5Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Article 5 (Membership Registration)'**
+  String get termsSection5Title;
+
+  /// No description provided for @termsSection5Content.
+  ///
+  /// In en, this message translates to:
+  /// **'1. Membership registration is concluded when the user agrees to the contents of the terms and applies for membership registration, and the Company approves such application.\n2. The Company may not approve or later terminate the usage contract for applications that fall under the following:\n   • Using a false name or another person\'s name\n   • Providing false information or not providing information requested by the Company\n   • Not meeting other application requirements'**
+  String get termsSection5Content;
+
+  /// No description provided for @termsSection6Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Article 6 (User Obligations)'**
+  String get termsSection6Title;
+
+  /// No description provided for @termsSection6Content.
+  ///
+  /// In en, this message translates to:
+  /// **'Users must not engage in the following activities:\n1. Stealing others\' information\n2. Infringing on the Company\'s intellectual property rights\n3. Intentionally interfering with service operations\n4. Other activities that violate relevant laws and regulations'**
+  String get termsSection6Content;
+
+  /// No description provided for @termsSection7Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Article 7 (Service Usage Fees)'**
+  String get termsSection7Title;
+
+  /// No description provided for @termsSection7Content.
+  ///
+  /// In en, this message translates to:
+  /// **'1. Basic services are provided free of charge.\n2. Premium services require payment of separate usage fees.\n3. Usage fees for paid services follow the fee policy specified within the service.\n4. The Company may change paid service usage fees and will notify 30 days in advance of changes.'**
+  String get termsSection7Content;
+
+  /// No description provided for @termsSection8Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Article 8 (Disclaimer)'**
+  String get termsSection8Title;
+
+  /// No description provided for @termsSection8Content.
+  ///
+  /// In en, this message translates to:
+  /// **'1. The Company is exempt from responsibility for providing services when unable to provide services due to natural disasters or force majeure equivalent thereto.\n2. The Company is not responsible for service usage obstacles due to user\'s fault.\n3. All investment information provided by the Company is for reference only, and the responsibility for investment decisions lies entirely with the user.'**
+  String get termsSection8Content;
+
+  /// No description provided for @termsSection9Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Article 9 (Privacy Protection)'**
+  String get termsSection9Title;
+
+  /// No description provided for @termsSection9Content.
+  ///
+  /// In en, this message translates to:
+  /// **'The Company establishes and complies with a privacy policy to protect users\' personal information. For details, please refer to the Privacy Policy.'**
+  String get termsSection9Content;
+
+  /// No description provided for @termsSection10Title.
+  ///
+  /// In en, this message translates to:
+  /// **'Article 10 (Dispute Resolution)'**
+  String get termsSection10Title;
+
+  /// No description provided for @termsSection10Content.
+  ///
+  /// In en, this message translates to:
+  /// **'1. Disputes between the Company and users shall be resolved through mutual consultation in principle.\n2. If consultation cannot be reached, it shall be resolved in the competent court according to relevant laws.'**
+  String get termsSection10Content;
+
+  /// No description provided for @termsSupplementary.
+  ///
+  /// In en, this message translates to:
+  /// **'Supplementary Provisions'**
+  String get termsSupplementary;
+
+  /// No description provided for @termsSupplementaryDate.
+  ///
+  /// In en, this message translates to:
+  /// **'These terms are effective from February 21, 2025.'**
+  String get termsSupplementaryDate;
 }
 
 class _AppLocalizationsDelegate

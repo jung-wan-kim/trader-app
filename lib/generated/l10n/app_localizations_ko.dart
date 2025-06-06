@@ -481,4 +481,90 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get planFeatureWhiteLabelOptions => '화이트 라벨 옵션';
+
+  @override
+  String get termsTitle => 'Trader App 이용약관';
+
+  @override
+  String get termsEffectiveDate => '시행일: 2025년 2월 21일';
+
+  @override
+  String get termsSection1Title => '제1조 (목적)';
+
+  @override
+  String get termsSection1Content =>
+      '이 약관은 Trader App(이하 \"회사\")이 제공하는 모바일 애플리케이션 서비스(이하 \"서비스\")의 이용과 관련하여 회사와 이용자의 권리, 의무 및 책임사항을 규정함을 목적으로 합니다.';
+
+  @override
+  String get termsSection2Title => '제2조 (정의)';
+
+  @override
+  String get termsSection2Content =>
+      '1. \"서비스\"란 회사가 제공하는 AI 기반 주식 추천 및 투자 정보 제공 서비스를 의미합니다.\n2. \"이용자\"란 이 약관에 따라 회사가 제공하는 서비스를 받는 회원 및 비회원을 말합니다.\n3. \"회원\"이란 회사에 개인정보를 제공하여 회원등록을 한 자로서, 회사의 정보를 지속적으로 제공받으며 서비스를 계속적으로 이용할 수 있는 자를 말합니다.';
+
+  @override
+  String get termsSection3Title => '제3조 (약관의 효력 및 변경)';
+
+  @override
+  String get termsSection3Content =>
+      '1. 이 약관은 서비스 화면에 게시하거나 기타의 방법으로 이용자에게 공지함으로써 효력을 발생합니다.\n2. 회사는 필요하다고 인정되는 경우 이 약관을 변경할 수 있으며, 변경된 약관은 적용일 7일 전에 공지합니다.';
+
+  @override
+  String get termsSection4Title => '제4조 (서비스의 제공)';
+
+  @override
+  String get termsSection4Content =>
+      '1. 회사는 다음과 같은 서비스를 제공합니다:\n   • AI 기반 주식 추천 서비스\n   • 전설적 트레이더 전략 정보 제공\n   • 실시간 주식 시세 정보\n   • 포트폴리오 관리 도구\n   • 리스크 계산기\n\n2. 서비스는 연중무휴, 1일 24시간 제공함을 원칙으로 합니다. 단, 시스템 점검 등의 필요에 의해 일시적으로 중단될 수 있습니다.';
+
+  @override
+  String get termsFinancialDisclaimer =>
+      '본 서비스에서 제공하는 모든 정보는 투자 참고 자료이며, 투자 권유나 투자 자문에 해당하지 않습니다.\n\n• 모든 투자 결정은 이용자 본인의 판단과 책임 하에 이루어져야 합니다.\n• 주식 투자는 원금 손실의 위험이 있습니다.\n• 과거의 수익률이 미래의 수익을 보장하지 않습니다.\n• 회사는 제공된 정보를 바탕으로 한 투자 결과에 대해 어떠한 책임도 지지 않습니다.';
+
+  @override
+  String get termsSection5Title => '제5조 (회원가입)';
+
+  @override
+  String get termsSection5Content =>
+      '1. 회원가입은 이용자가 약관의 내용에 대하여 동의를 하고 회원가입신청을 한 후 회사가 이러한 신청에 대하여 승낙함으로써 체결됩니다.\n2. 회사는 다음 각 호에 해당하는 신청에 대하여는 승낙을 하지 않거나 사후에 이용계약을 해지할 수 있습니다:\n   • 실명이 아니거나 타인의 명의를 이용한 경우\n   • 허위의 정보를 기재하거나, 회사가 제시하는 내용을 기재하지 않은 경우\n   • 기타 이용신청 요건을 충족하지 못한 경우';
+
+  @override
+  String get termsSection6Title => '제6조 (이용자의 의무)';
+
+  @override
+  String get termsSection6Content =>
+      '이용자는 다음 행위를 하여서는 안 됩니다:\n1. 타인의 정보를 도용하는 행위\n2. 회사의 지적재산권을 침해하는 행위\n3. 서비스의 운영을 고의로 방해하는 행위\n4. 기타 관계법령에 위배되는 행위';
+
+  @override
+  String get termsSection7Title => '제7조 (서비스 이용요금)';
+
+  @override
+  String get termsSection7Content =>
+      '1. 기본 서비스는 무료로 제공됩니다.\n2. 프리미엄 서비스는 별도의 이용요금을 지불하여야 합니다.\n3. 유료서비스의 이용요금은 서비스 내에 명시된 요금정책에 따릅니다.\n4. 회사는 유료서비스 이용요금을 변경할 수 있으며, 변경 시 30일 전에 공지합니다.';
+
+  @override
+  String get termsSection8Title => '제8조 (면책조항)';
+
+  @override
+  String get termsSection8Content =>
+      '1. 회사는 천재지변 또는 이에 준하는 불가항력으로 인하여 서비스를 제공할 수 없는 경우에는 서비스 제공에 관한 책임이 면제됩니다.\n2. 회사는 이용자의 귀책사유로 인한 서비스 이용의 장애에 대하여는 책임을 지지 않습니다.\n3. 회사가 제공하는 모든 투자 정보는 참고 자료일 뿐이며, 투자 결정에 따른 책임은 전적으로 이용자에게 있습니다.';
+
+  @override
+  String get termsSection9Title => '제9조 (개인정보보호)';
+
+  @override
+  String get termsSection9Content =>
+      '회사는 이용자의 개인정보를 보호하기 위하여 개인정보처리방침을 수립하고 이를 준수합니다. 자세한 내용은 개인정보처리방침을 참고하시기 바랍니다.';
+
+  @override
+  String get termsSection10Title => '제10조 (분쟁해결)';
+
+  @override
+  String get termsSection10Content =>
+      '1. 회사와 이용자 간에 발생한 분쟁은 상호 협의하여 해결하는 것을 원칙으로 합니다.\n2. 협의가 이루어지지 않을 경우, 관련 법령에 따른 관할 법원에서 해결합니다.';
+
+  @override
+  String get termsSupplementary => '부칙';
+
+  @override
+  String get termsSupplementaryDate => '이 약관은 2025년 2월 21일부터 시행합니다.';
 }

@@ -176,16 +176,6 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                       letterSpacing: 2,
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  // 서브타이틀
-                  Text(
-                    'AI 기반 주식 추천 서비스',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[400],
-                      letterSpacing: 1,
-                    ),
-                  ),
                   const SizedBox(height: 60),
                   // 로딩 인디케이터
                   SizedBox(
