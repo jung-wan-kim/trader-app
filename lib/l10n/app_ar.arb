@@ -104,5 +104,26 @@
   "cancel": "إلغاء",
   "positionClosedSuccessfully": "تم إغلاق المركز بنجاح",
   "sl": "وقف الخسارة",
-  "tp": "جني الربح"
+  "tp": "جني الربح",
+  
+  "upload": "رفع",
+  "uploadVideo": "رفع فيديو",
+  "uploadDescription": "اختر من المعرض أو التقط بالكاميرا",
+  "gallery": "المعرض",
+  "camera": "الكاميرا",
+  "inbox": "صندوق الوارد",
+  "activity": "النشاط",
+  "newLikes": "إعجابات جديدة",
+  "lastWeek": "الأسبوع الماضي",
+  "yesterday": "أمس",
+  "newFollowers": "متابعون جدد",
+  "newComments": "تعليقات جديدة",
+  "hoursAgo": "منذ {hours} ساعات",
+  "@hoursAgo": {
+    "placeholders": {
+      "hours": {"type": "int"}
+    }
+  },
+  "messages": "الرسائل",
+  "search": "بحث"
 }

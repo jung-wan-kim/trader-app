@@ -104,5 +104,26 @@
   "cancel": "取消",
   "positionClosedSuccessfully": "仓位已成功平仓",
   "sl": "止损",
-  "tp": "止盈"
+  "tp": "止盈",
+  
+  "upload": "上传",
+  "uploadVideo": "上传视频",
+  "uploadDescription": "从相册选择或用相机拍摄",
+  "gallery": "相册",
+  "camera": "相机",
+  "inbox": "收件箱",
+  "activity": "活动",
+  "newLikes": "新的喜欢",
+  "lastWeek": "上周",
+  "yesterday": "昨天",
+  "newFollowers": "新的关注者",
+  "newComments": "新的评论",
+  "hoursAgo": "{hours}小时前",
+  "@hoursAgo": {
+    "placeholders": {
+      "hours": {"type": "int"}
+    }
+  },
+  "messages": "消息",
+  "search": "搜索"
 }

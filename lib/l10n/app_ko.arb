@@ -104,5 +104,26 @@
   "cancel": "취소",
   "positionClosedSuccessfully": "포지션이 성공적으로 청산되었습니다",
   "sl": "손절",
-  "tp": "익절"
+  "tp": "익절",
+  
+  "upload": "업로드",
+  "uploadVideo": "동영상 업로드",
+  "uploadDescription": "갤러리에서 선택하거나 카메라로 촬영하세요",
+  "gallery": "갤러리",
+  "camera": "카메라",
+  "inbox": "받은 메시지함",
+  "activity": "활동",
+  "newLikes": "새로운 좋아요",
+  "lastWeek": "지난주",
+  "yesterday": "어제",
+  "newFollowers": "새로운 팔로워",
+  "newComments": "새로운 댓글",
+  "hoursAgo": "{hours}시간 전",
+  "@hoursAgo": {
+    "placeholders": {
+      "hours": {"type": "int"}
+    }
+  },
+  "messages": "메시지",
+  "search": "검색"
 }

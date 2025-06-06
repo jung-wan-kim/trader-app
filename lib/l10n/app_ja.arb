@@ -104,5 +104,26 @@
   "cancel": "キャンセル",
   "positionClosedSuccessfully": "ポジションが正常に決済されました",
   "sl": "損切り",
-  "tp": "利確"
+  "tp": "利確",
+  
+  "upload": "アップロード",
+  "uploadVideo": "動画をアップロード",
+  "uploadDescription": "ギャラリーから選択またはカメラで撮影",
+  "gallery": "ギャラリー",
+  "camera": "カメラ",
+  "inbox": "受信トレイ",
+  "activity": "アクティビティ",
+  "newLikes": "新しいいいね",
+  "lastWeek": "先週",
+  "yesterday": "昨日",
+  "newFollowers": "新しいフォロワー",
+  "newComments": "新しいコメント",
+  "hoursAgo": "{hours}時間前",
+  "@hoursAgo": {
+    "placeholders": {
+      "hours": {"type": "int"}
+    }
+  },
+  "messages": "メッセージ",
+  "search": "検索"
 }

@@ -104,5 +104,26 @@
   "cancel": "Annuler",
   "positionClosedSuccessfully": "Position fermée avec succès",
   "sl": "SL",
-  "tp": "TP"
+  "tp": "TP",
+  
+  "upload": "Télécharger",
+  "uploadVideo": "Télécharger une vidéo",
+  "uploadDescription": "Sélectionner dans la galerie ou filmer avec la caméra",
+  "gallery": "Galerie",
+  "camera": "Caméra",
+  "inbox": "Boîte de réception",
+  "activity": "Activité",
+  "newLikes": "Nouveaux j'aime",
+  "lastWeek": "Semaine dernière",
+  "yesterday": "Hier",
+  "newFollowers": "Nouveaux abonnés",
+  "newComments": "Nouveaux commentaires",
+  "hoursAgo": "il y a {hours} heures",
+  "@hoursAgo": {
+    "placeholders": {
+      "hours": {"type": "int"}
+    }
+  },
+  "messages": "Messages",
+  "search": "Rechercher"
 }

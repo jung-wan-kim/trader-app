@@ -104,5 +104,26 @@
   "cancel": "रद्द करें",
   "positionClosedSuccessfully": "पोजीशन सफलतापूर्वक बंद हुई",
   "sl": "एसएल",
-  "tp": "टीपी"
+  "tp": "टीपी",
+  
+  "upload": "अपलोड",
+  "uploadVideo": "वीडियो अपलोड करें",
+  "uploadDescription": "गैलरी से चुनें या कैमरा से शूट करें",
+  "gallery": "गैलरी",
+  "camera": "कैमरा",
+  "inbox": "इनबॉक्स",
+  "activity": "गतिविधि",
+  "newLikes": "नए पसंद",
+  "lastWeek": "पिछले सप्ताह",
+  "yesterday": "कल",
+  "newFollowers": "नए अनुयायी",
+  "newComments": "नई टिप्पणियाँ",
+  "hoursAgo": "{hours} घंटे पहले",
+  "@hoursAgo": {
+    "placeholders": {
+      "hours": {"type": "int"}
+    }
+  },
+  "messages": "संदेश",
+  "search": "खोजें"
 }
