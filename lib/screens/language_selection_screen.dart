@@ -208,27 +208,13 @@ class _LanguageSelectionScreenState extends ConsumerState<LanguageSelectionScree
                             const SizedBox(width: 16),
                             // 언어 이름
                             Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    language.nativeName,
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                      color: isSelected ? Colors.green : Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    language.name,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      color: isSelected 
-                                          ? Colors.green.shade300
-                                          : Colors.grey[400],
-                                    ),
-                                  ),
-                                ],
+                              child: Text(
+                                language.nativeName,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  color: isSelected ? Colors.green : Colors.white,
+                                ),
                               ),
                             ),
                             // 선택 아이콘
