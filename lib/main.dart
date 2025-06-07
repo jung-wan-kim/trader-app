@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'generated/l10n/app_localizations.dart';
 import 'screens/splash_screen.dart';
 import 'config/app_config.dart';
@@ -12,6 +13,9 @@ import 'services/portfolio_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // Firebase 초기화
+  await Firebase.initializeApp();
   
   // Supabase 초기화
   await Supabase.initialize(

@@ -77,6 +77,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get signInWithApple => 'Appleでサインイン';
 
   @override
+  String get signInWithGoogle => 'Googleでサインイン';
+
+  @override
   String get demoModeNotice => 'デモモード：テストアカウントが自動入力されました';
 
   @override

@@ -78,6 +78,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get signInWithApple => 'Apple로 로그인';
 
   @override
+  String get signInWithGoogle => 'Google로 로그인';
+
+  @override
   String get demoModeNotice => '데모 모드: 테스트 계정이 자동 입력되었습니다';
 
   @override

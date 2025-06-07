@@ -79,6 +79,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get signInWithApple => 'تسجيل الدخول بـ Apple';
 
   @override
+  String get signInWithGoogle => 'تسجيل الدخول بـ Google';
+
+  @override
   String get demoModeNotice => 'الوضع التجريبي: تم ملء حساب الاختبار تلقائياً';
 
   @override

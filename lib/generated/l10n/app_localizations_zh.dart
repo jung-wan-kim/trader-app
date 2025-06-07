@@ -75,6 +75,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get signInWithApple => '使用Apple登录';
 
   @override
+  String get signInWithGoogle => '使用Google登录';
+
+  @override
   String get demoModeNotice => '演示模式：测试账户已自动填写';
 
   @override

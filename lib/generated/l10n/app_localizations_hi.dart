@@ -79,6 +79,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get signInWithApple => 'Apple के साथ साइन इन करें';
 
   @override
+  String get signInWithGoogle => 'Google के साथ साइन इन करें';
+
+  @override
   String get demoModeNotice => 'डेमो मोड: टेस्ट अकाउंट स्वतः भर दिया गया';
 
   @override

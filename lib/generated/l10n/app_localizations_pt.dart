@@ -80,6 +80,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get signInWithApple => 'Entrar com Apple';
 
   @override
+  String get signInWithGoogle => 'Entrar com Google';
+
+  @override
   String get demoModeNotice =>
       'Modo Demo: Conta de teste preenchida automaticamente';
 

@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../config/app_config.dart';
+import '../providers/auth_provider.dart';
 import 'main_screen.dart';
 import 'privacy_policy_screen.dart';
 import 'terms_of_service_screen.dart';
 import '../generated/l10n/app_localizations.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -43,14 +45,18 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  void _signInWithApple() {
-    // Sign in with Apple 구현
-    // 실제 구현 시에는 sign_in_with_apple 패키지 사용
-    if (AppConfig.isDemoMode) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const MainScreen()),
-      );
+  void _signInWithGoogle() async {
+    // Google 로그인
+    await ref.read(authStateProvider.notifier).signInWithGoogle();
+    
+    // 인증 성공 시 메인 화면으로 이동
+    if (ref.read(authStateProvider).status == AuthStatus.authenticated) {
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const MainScreen()),
+        );
+      }
     }
   }
 
@@ -136,17 +142,26 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
               const SizedBox(height: 16),
-              // Sign in with Apple 버튼
+              // Google 로그인 버튼
               ElevatedButton.icon(
-                onPressed: _signInWithApple,
-                icon: const Icon(Icons.apple, color: Colors.white),
+                onPressed: _signInWithGoogle,
+                icon: Image.asset(
+                  'assets/icons/google_logo.png',
+                  height: 24,
+                  width: 24,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(Icons.g_mobiledata, color: Colors.white);
+                  },
+                ),
                 label: Text(
-                  l10n?.signInWithApple ?? 'Sign in with Apple',
-                  style: const TextStyle(color: Colors.white),
+                  l10n?.signInWithGoogle ?? 'Sign in with Google',
+                  style: const TextStyle(color: Colors.black87),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black87,
                   minimumSize: const Size(double.infinity, 48),
+                  side: const BorderSide(color: Colors.grey),
                 ),
               ),
               const SizedBox(height: 16),

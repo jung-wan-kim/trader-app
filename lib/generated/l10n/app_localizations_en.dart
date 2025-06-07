@@ -80,6 +80,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signInWithApple => 'Sign in with Apple';
 
   @override
+  String get signInWithGoogle => 'Sign in with Google';
+
+  @override
   String get demoModeNotice => 'Demo Mode: Test account auto-filled';
 
   @override

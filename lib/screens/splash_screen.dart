@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../config/app_config.dart';
+import '../providers/auth_provider.dart';
 import 'language_selection_screen.dart';
 import 'onboarding_screen.dart';
 import 'login_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'main_screen.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
+class _SplashScreenState extends ConsumerState<SplashScreen> with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _scaleController;
   late Animation<double> _fadeAnimation;
@@ -80,10 +83,17 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
     if (!mounted) return;
 
+    // 인증 상태 확인
+    final authState = ref.read(authStateProvider);
+    
     Widget nextScreen;
     
+    // 이미 로그인된 경우 메인 화면으로
+    if (authState.status == AuthStatus.authenticated) {
+      nextScreen = const MainScreen();
+    }
     // 언어 선택 → 온보딩 → 로그인 순서
-    if (!hasSelectedLanguage) {
+    else if (!hasSelectedLanguage) {
       nextScreen = const LanguageSelectionScreen();
     } else if (!hasSeenOnboarding) {
       nextScreen = const OnboardingScreen();
