@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../config/app_config.dart';
-import '../providers/auth_provider.dart';
+// import '../providers/auth_provider.dart';
 import 'main_screen.dart';
 import 'privacy_policy_screen.dart';
 import 'terms_of_service_screen.dart';
@@ -46,18 +46,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   void _signInWithGoogle() async {
-    // Google 로그인
-    await ref.read(authStateProvider.notifier).signInWithGoogle();
-    
-    // 인증 성공 시 메인 화면으로 이동
-    if (ref.read(authStateProvider).status == AuthStatus.authenticated) {
-      if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const MainScreen()),
-        );
-      }
-    }
+    // Google 로그인 (임시로 바로 메인 화면으로 이동)
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const MainScreen()),
+    );
   }
 
   @override
@@ -65,11 +58,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: MediaQuery.of(context).size.height - 
+                        MediaQuery.of(context).padding.top - 
+                        MediaQuery.of(context).padding.bottom - 48,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
               const Spacer(),
               // 로고
               const Icon(
@@ -191,8 +190,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
               const Spacer(),
               // 법적 링크
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Wrap(
+                alignment: WrapAlignment.center,
                 children: [
                   TextButton(
                     onPressed: () {
@@ -203,9 +202,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ),
                       );
                     },
-                    child: Text(l10n?.privacyPolicy ?? 'Privacy Policy'),
+                    child: Text(
+                      l10n?.privacyPolicy ?? 'Privacy Policy',
+                      style: const TextStyle(fontSize: 12),
+                    ),
                   ),
-                  const Text('•'),
+                  const Text('•', style: TextStyle(fontSize: 12)),
                   TextButton(
                     onPressed: () {
                       Navigator.push(
@@ -215,7 +217,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ),
                       );
                     },
-                    child: Text(l10n?.termsOfService ?? 'Terms of Service'),
+                    child: Text(
+                      l10n?.termsOfService ?? 'Terms of Service',
+                      style: const TextStyle(fontSize: 12),
+                    ),
                   ),
                 ],
               ),
@@ -238,7 +243,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 16),
-            ],
+              ],
+            ),
           ),
         ),
       ),

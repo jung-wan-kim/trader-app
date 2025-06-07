@@ -31,27 +31,27 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get onboardingDesc1 =>
-      '제시 리버모어, 윌리엄 오닐 등\\n역사상 가장 성공한 트레이더들의\\n검증된 투자 전략을 활용하세요';
+      '제시 리버모어, 윌리엄 오닐 등\\\\n역사상 가장 성공한 트레이더들의\\\\n검증된 투자 전략을 활용하세요';
 
   @override
   String get onboardingTitle2 => 'AI 기반 종목 추천';
 
   @override
   String get onboardingDesc2 =>
-      '최신 AI 기술로 시장을 분석하고\\n전설적 트레이더의 전략에 맞는\\n최적의 종목을 추천받으세요';
+      '최신 AI 기술로 시장을 분석하고\\\\n전설적 트레이더의 전략에 맞는\\\\n최적의 종목을 추천받으세요';
 
   @override
   String get onboardingTitle3 => '리스크 관리';
 
   @override
-  String get onboardingDesc3 => '포지션 사이즈 계산기와\\n손절/익절 전략으로\\n안전한 투자를 실현하세요';
+  String get onboardingDesc3 => '포지션 사이즈 계산기와\\\\n손절/익절 전략으로\\\\n안전한 투자를 실현하세요';
 
   @override
   String get onboardingTitle4 => '실시간 시장 분석';
 
   @override
   String get onboardingDesc4 =>
-      '실시간 차트와 기술적 지표로\\n시장의 흐름을 파악하고\\n최적의 타이밍을 포착하세요';
+      '실시간 차트와 기술적 지표로\\\\n시장의 흐름을 파악하고\\\\n최적의 타이밍을 포착하세요';
 
   @override
   String get getStarted => '시작하기';
@@ -227,7 +227,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get subscriptionTermsText =>
-      '• 구독은 구매 확인 시 iTunes 계정으로 청구됩니다\\n• 현재 기간 종료 24시간 전까지 자동 갱신을 끄지 않으면 구독이 자동으로 갱신됩니다\\n• 현재 기간 종료 24시간 이내에 갱신 요금이 청구됩니다\\n• 구독은 구매 후 계정 설정에서 관리할 수 있습니다\\n• 무료 체험 기간의 미사용 부분은 구독 구매 시 소멸됩니다';
+      '• 구독은 구매 확인 시 iTunes 계정으로 청구됩니다\\\\n• 현재 기간 종료 24시간 전까지 자동 갱신을 끄지 않으면 구독이 자동으로 갱신됩니다\\\\n• 현재 기간 종료 24시간 이내에 갱신 요금이 청구됩니다\\\\n• 구독은 구매 후 계정 설정에서 관리할 수 있습니다\\\\n• 무료 체험 기간의 미사용 부분은 구독 구매 시 소멸됩니다';
 
   @override
   String get dataDelayWarning => '실시간 데이터는 15분 지연될 수 있습니다';

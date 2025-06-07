@@ -531,7 +531,7 @@ abstract class AppLocalizations {
   /// No description provided for @subscriptionTermsText.
   ///
   /// In en, this message translates to:
-  /// **'• Subscriptions are charged to your iTunes account upon purchase confirmation\\n• Subscriptions automatically renew unless auto-renewal is turned off at least 24 hours before the end of the current period\\n• Renewal charges are made within 24 hours of the end of the current period\\n• Subscriptions can be managed in your account settings after purchase\\n• Any unused portion of free trial period will be forfeited when purchasing a subscription'**
+  /// **'• Subscriptions are charged to your iTunes account upon purchase confirmation\\\\n• Subscriptions automatically renew unless auto-renewal is turned off at least 24 hours before the end of the current period\\\\n• Renewal charges are made within 24 hours of the end of the current period\\\\n• Subscriptions can be managed in your account settings after purchase\\\\n• Any unused portion of free trial period will be forfeited when purchasing a subscription'**
   String get subscriptionTermsText;
 
   /// No description provided for @dataDelayWarning.

@@ -31,26 +31,27 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get onboardingDesc1 =>
-      'ジェシー・リバモア、ウィリアム・オニールなど\\n歴史上最も成功したトレーダーの\\n実証済み投資戦略を活用';
+      'ジェシー・リバモア、ウィリアム・オニールなど\\\\n歴史上最も成功したトレーダーの\\\\n実証済み投資戦略を活用';
 
   @override
   String get onboardingTitle2 => 'AI駆動の株式推奨';
 
   @override
-  String get onboardingDesc2 => '最新のAI技術で市場を分析し\\n伝説のトレーダー戦略に合った\\n最適な株式推奨を取得';
+  String get onboardingDesc2 =>
+      '最新のAI技術で市場を分析し\\\\n伝説のトレーダー戦略に合った\\\\n最適な株式推奨を取得';
 
   @override
   String get onboardingTitle3 => 'リスク管理';
 
   @override
-  String get onboardingDesc3 => 'ポジションサイズ計算機と\\n損切り/利確戦略で\\n安全な投資を実現';
+  String get onboardingDesc3 => 'ポジションサイズ計算機と\\\\n損切り/利確戦略で\\\\n安全な投資を実現';
 
   @override
   String get onboardingTitle4 => 'リアルタイム市場分析';
 
   @override
   String get onboardingDesc4 =>
-      'リアルタイムチャートとテクニカル指標で\\n市場の流れを把握し\\n最適なタイミングを捉える';
+      'リアルタイムチャートとテクニカル指標で\\\\n市場の流れを把握し\\\\n最適なタイミングを捉える';
 
   @override
   String get getStarted => '始める';
@@ -226,7 +227,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get subscriptionTermsText =>
-      '• サブスクリプションは購入確認時にiTunesアカウントに請求されます\\n• 現在の期間終了の少なくとも24時間前に自動更新をオフにしない限り、サブスクリプションは自動的に更新されます\\n• 更新料金は現在の期間終了の24時間以内に請求されます\\n• サブスクリプションは購入後にアカウント設定で管理できます\\n• サブスクリプションを購入すると、無料試用期間の未使用部分は失効します';
+      '• サブスクリプションは購入確認時にiTunesアカウントに請求されます\\\\n• 現在の期間終了の少なくとも24時間前に自動更新をオフにしない限り、サブスクリプションは自動的に更新されます\\\\n• 更新料金は現在の期間終了の24時間以内に請求されます\\\\n• サブスクリプションは購入後にアカウント設定で管理できます\\\\n• サブスクリプションを購入すると、無料試用期間の未使用部分は失効します';
 
   @override
   String get dataDelayWarning => 'リアルタイムデータは15分遅延する場合があります';

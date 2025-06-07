@@ -236,7 +236,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get subscriptionTermsText =>
-      '• Las suscripciones se cargan a su cuenta de iTunes al confirmar la compra\\n• Las suscripciones se renuevan automáticamente a menos que la renovación automática se desactive al menos 24 horas antes del final del período actual\\n• Los cargos de renovación se realizan dentro de las 24 horas del final del período actual\\n• Las suscripciones se pueden gestionar en la configuración de su cuenta después de la compra\\n• Cualquier parte no utilizada del período de prueba gratuita se perderá al comprar una suscripción';
+      '• Las suscripciones se cargan a su cuenta de iTunes al confirmar la compra\\\\n• Las suscripciones se renuevan automáticamente a menos que la renovación automática se desactive al menos 24 horas antes del final del período actual\\\\n• Los cargos de renovación se realizan dentro de las 24 horas del final del período actual\\\\n• Las suscripciones se pueden gestionar en la configuración de su cuenta después de la compra\\\\n• Cualquier parte no utilizada del período de prueba gratuita se perderá al comprar una suscripción';
 
   @override
   String get dataDelayWarning =>

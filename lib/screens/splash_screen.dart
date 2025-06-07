@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../config/app_config.dart';
-import '../providers/auth_provider.dart';
+// import '../providers/auth_provider.dart';
 import 'language_selection_screen.dart';
 import 'onboarding_screen.dart';
 import 'login_screen.dart';
@@ -83,13 +83,13 @@ class _SplashScreenState extends ConsumerState<SplashScreen> with TickerProvider
 
     if (!mounted) return;
 
-    // 인증 상태 확인
-    final authState = ref.read(authStateProvider);
+    // 인증 상태 확인 (임시 비활성화)
+    // final authState = ref.read(authStateProvider);
     
     Widget nextScreen;
     
-    // 이미 로그인된 경우 메인 화면으로
-    if (authState.status == AuthStatus.authenticated) {
+    // 이미 로그인된 경우 메인 화면으로 (임시로 false)
+    if (false) { // authState.status == AuthStatus.authenticated
       nextScreen = const MainScreen();
     }
     // 언어 선택 → 온보딩 → 로그인 순서

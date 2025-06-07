@@ -236,7 +236,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get subscriptionTermsText =>
-      '• As assinaturas são cobradas em sua conta do iTunes na confirmação da compra\\n• As assinaturas renovam automaticamente a menos que a renovação automática seja desativada pelo menos 24 horas antes do final do período atual\\n• As taxas de renovação são cobradas dentro de 24 horas do final do período atual\\n• As assinaturas podem ser gerenciadas nas configurações de sua conta após a compra\\n• Qualquer parte não utilizada do período de teste gratuito será perdida ao comprar uma assinatura';
+      '• As assinaturas são cobradas em sua conta do iTunes na confirmação da compra\\\\n• As assinaturas renovam automaticamente a menos que a renovação automática seja desativada pelo menos 24 horas antes do final do período atual\\\\n• As taxas de renovação são cobradas dentro de 24 horas do final do período atual\\\\n• As assinaturas podem ser gerenciadas nas configurações de sua conta após a compra\\\\n• Qualquer parte não utilizada do período de teste gratuito será perdida ao comprar uma assinatura';
 
   @override
   String get dataDelayWarning =>

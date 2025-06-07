@@ -233,7 +233,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get subscriptionTermsText =>
-      '• Abonnements werden bei Kaufbestätigung Ihrem iTunes-Konto belastet\\n• Abonnements erneuern sich automatisch, es sei denn, die automatische Erneuerung wird mindestens 24 Stunden vor Ende des aktuellen Zeitraums deaktiviert\\n• Erneuerungsgebühren werden innerhalb von 24 Stunden vor Ende des aktuellen Zeitraums erhoben\\n• Abonnements können nach dem Kauf in Ihren Kontoeinstellungen verwaltet werden\\n• Jeder ungenutzte Teil der kostenlosen Testphase verfällt beim Kauf eines Abonnements';
+      '• Abonnements werden bei Kaufbestätigung Ihrem iTunes-Konto belastet\\\\n• Abonnements erneuern sich automatisch, es sei denn, die automatische Erneuerung wird mindestens 24 Stunden vor Ende des aktuellen Zeitraums deaktiviert\\\\n• Erneuerungsgebühren werden innerhalb von 24 Stunden vor Ende des aktuellen Zeitraums erhoben\\\\n• Abonnements können nach dem Kauf in Ihren Kontoeinstellungen verwaltet werden\\\\n• Jeder ungenutzte Teil der kostenlosen Testphase verfällt beim Kauf eines Abonnements';
 
   @override
   String get dataDelayWarning =>

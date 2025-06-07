@@ -237,7 +237,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get subscriptionTermsText =>
-      '• Les abonnements sont facturés à votre compte iTunes lors de la confirmation d\'achat\\n• Les abonnements se renouvellent automatiquement sauf si le renouvellement automatique est désactivé au moins 24 heures avant la fin de la période actuelle\\n• Les frais de renouvellement sont prélevés dans les 24 heures précédant la fin de la période actuelle\\n• Les abonnements peuvent être gérés dans les paramètres de votre compte après achat\\n• Toute partie inutilisée de la période d\'essai gratuite sera perdue lors de l\'achat d\'un abonnement';
+      '• Les abonnements sont facturés à votre compte iTunes lors de la confirmation d\'achat\\\\n• Les abonnements se renouvellent automatiquement sauf si le renouvellement automatique est désactivé au moins 24 heures avant la fin de la période actuelle\\\\n• Les frais de renouvellement sont prélevés dans les 24 heures précédant la fin de la période actuelle\\\\n• Les abonnements peuvent être gérés dans les paramètres de votre compte après achat\\\\n• Toute partie inutilisée de la période d\'essai gratuite sera perdue lors de l\'achat d\'un abonnement';
 
   @override
   String get dataDelayWarning =>
