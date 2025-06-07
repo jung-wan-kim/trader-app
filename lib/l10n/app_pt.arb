@@ -68,7 +68,7 @@
   "notScheduled": "Não agendado",
   "subscriptionInfo": "Informações de Assinatura",
   "subscriptionTerms": "Termos de Assinatura",
-  "subscriptionTermsText": "• As assinaturas são cobradas em sua conta do iTunes na confirmação da compra\\n• As assinaturas renovam automaticamente a menos que a renovação automática seja desativada pelo menos 24 horas antes do final do período atual\\n• As taxas de renovação são cobradas dentro de 24 horas do final do período atual\\n• As assinaturas podem ser gerenciadas nas configurações de sua conta após a compra\\n• Qualquer parte não utilizada do período de teste gratuito será perdida ao comprar uma assinatura",
+  "subscriptionTermsText": "• As assinaturas são cobradas em sua conta do iTunes na confirmação da compra\\\\n• As assinaturas renovam automaticamente a menos que a renovação automática seja desativada pelo menos 24 horas antes do final do período atual\\\\n• As taxas de renovação são cobradas dentro de 24 horas do final do período atual\\\\n• As assinaturas podem ser gerenciadas nas configurações de sua conta após a compra\\\\n• Qualquer parte não utilizada do período de teste gratuito será perdida ao comprar uma assinatura",
   "dataDelayWarning": "Dados em tempo real podem ter atraso de 15 minutos",
   "dataSource": "Dados fornecidos pela Finnhub",
   "poweredBy": "Alimentado por Traders Lendários",

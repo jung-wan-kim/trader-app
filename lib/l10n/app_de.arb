@@ -68,7 +68,7 @@
   "notScheduled": "Nicht geplant",
   "subscriptionInfo": "Abonnement-Informationen",
   "subscriptionTerms": "Abonnement-Bedingungen",
-  "subscriptionTermsText": "• Abonnements werden bei Kaufbestätigung Ihrem iTunes-Konto belastet\\n• Abonnements erneuern sich automatisch, es sei denn, die automatische Erneuerung wird mindestens 24 Stunden vor Ende des aktuellen Zeitraums deaktiviert\\n• Erneuerungsgebühren werden innerhalb von 24 Stunden vor Ende des aktuellen Zeitraums erhoben\\n• Abonnements können nach dem Kauf in Ihren Kontoeinstellungen verwaltet werden\\n• Jeder ungenutzte Teil der kostenlosen Testphase verfällt beim Kauf eines Abonnements",
+  "subscriptionTermsText": "• Abonnements werden bei Kaufbestätigung Ihrem iTunes-Konto belastet\\\\n• Abonnements erneuern sich automatisch, es sei denn, die automatische Erneuerung wird mindestens 24 Stunden vor Ende des aktuellen Zeitraums deaktiviert\\\\n• Erneuerungsgebühren werden innerhalb von 24 Stunden vor Ende des aktuellen Zeitraums erhoben\\\\n• Abonnements können nach dem Kauf in Ihren Kontoeinstellungen verwaltet werden\\\\n• Jeder ungenutzte Teil der kostenlosen Testphase verfällt beim Kauf eines Abonnements",
   "dataDelayWarning": "Echtzeitdaten können um 15 Minuten verzögert sein",
   "dataSource": "Daten bereitgestellt von Finnhub",
   "poweredBy": "Unterstützt von legendären Tradern",

@@ -68,7 +68,7 @@
   "notScheduled": "No programado",
   "subscriptionInfo": "Información de Suscripción",
   "subscriptionTerms": "Términos de Suscripción",
-  "subscriptionTermsText": "• Las suscripciones se cargan a su cuenta de iTunes al confirmar la compra\\n• Las suscripciones se renuevan automáticamente a menos que la renovación automática se desactive al menos 24 horas antes del final del período actual\\n• Los cargos de renovación se realizan dentro de las 24 horas del final del período actual\\n• Las suscripciones se pueden gestionar en la configuración de su cuenta después de la compra\\n• Cualquier parte no utilizada del período de prueba gratuita se perderá al comprar una suscripción",
+  "subscriptionTermsText": "• Las suscripciones se cargan a su cuenta de iTunes al confirmar la compra\\\\n• Las suscripciones se renuevan automáticamente a menos que la renovación automática se desactive al menos 24 horas antes del final del período actual\\\\n• Los cargos de renovación se realizan dentro de las 24 horas del final del período actual\\\\n• Las suscripciones se pueden gestionar en la configuración de su cuenta después de la compra\\\\n• Cualquier parte no utilizada del período de prueba gratuita se perderá al comprar una suscripción",
   "dataDelayWarning": "Los datos en tiempo real pueden retrasarse 15 minutos",
   "dataSource": "Datos proporcionados por Finnhub",
   "poweredBy": "Impulsado por Traders Legendarios",
