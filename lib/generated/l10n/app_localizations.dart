@@ -1481,6 +1481,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Stock removed from watchlist'**
   String get stockRemovedFromWatchlist;
+
+  /// No description provided for @chooseTrader.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Your Trading Master'**
+  String get chooseTrader;
+
+  /// No description provided for @performance.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance'**
+  String get performance;
+
+  /// No description provided for @keyStrategy.
+  ///
+  /// In en, this message translates to:
+  /// **'Key Strategy'**
+  String get keyStrategy;
+
+  /// No description provided for @selected.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected'**
+  String get selected;
+
+  /// No description provided for @continueWithSelection.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Selection'**
+  String get continueWithSelection;
 }
 
 class _AppLocalizationsDelegate

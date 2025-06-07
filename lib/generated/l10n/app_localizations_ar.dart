@@ -745,4 +745,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get stockRemovedFromWatchlist => 'تم إزالة السهم من قائمة المراقبة';
+
+  @override
+  String get chooseTrader => 'اختر معلم التداول الخاص بك';
+
+  @override
+  String get performance => 'الأداء';
+
+  @override
+  String get keyStrategy => 'الاستراتيجية الرئيسية';
+
+  @override
+  String get selected => 'محدد';
+
+  @override
+  String get continueWithSelection => 'المتابعة مع التحديد';
 }

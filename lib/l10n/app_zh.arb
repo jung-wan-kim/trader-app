@@ -21,6 +21,7 @@
   "login": "登录",
   "or": "或",
   "signInWithApple": "使用Apple登录",
+  "signInWithGoogle": "使用Google登录",
   "demoModeNotice": "演示模式：测试账户已自动填写",
   "privacyPolicy": "隐私政策",
   "termsOfService": "服务条款",

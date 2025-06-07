@@ -684,7 +684,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get totalTrades => '총 거래 수';
 
   @override
-  String get bestTrade => '최고 거래';
+  String get bestTrade => '최고의 거래';
 
   @override
   String get recentTrades => '최근 거래';
@@ -739,4 +739,19 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get stockRemovedFromWatchlist => '관심 종목에서 삭제되었습니다';
+
+  @override
+  String get chooseTrader => '당신의 트레이딩 마스터를 선택하세요';
+
+  @override
+  String get performance => '성과';
+
+  @override
+  String get keyStrategy => '핵심 전략';
+
+  @override
+  String get selected => '선택됨';
+
+  @override
+  String get continueWithSelection => '선택 항목으로 계속하기';
 }

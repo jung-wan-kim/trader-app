@@ -683,7 +683,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get totalTrades => '総取引数';
 
   @override
-  String get bestTrade => '最高取引';
+  String get bestTrade => '最高の取引';
 
   @override
   String get recentTrades => '最近の取引';
@@ -738,4 +738,19 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get stockRemovedFromWatchlist => '銘柄をウォッチリストから削除しました';
+
+  @override
+  String get chooseTrader => 'あなたのトレーディングマスターを選択';
+
+  @override
+  String get performance => 'パフォーマンス';
+
+  @override
+  String get keyStrategy => '主要戦略';
+
+  @override
+  String get selected => '選択済み';
+
+  @override
+  String get continueWithSelection => '選択を続行';
 }

@@ -21,6 +21,7 @@
   "login": "ログイン",
   "or": "または",
   "signInWithApple": "Appleでサインイン",
+  "signInWithGoogle": "Googleでサインイン",
   "demoModeNotice": "デモモード：テストアカウントが自動入力されました",
   "privacyPolicy": "プライバシーポリシー",
   "termsOfService": "利用規約",

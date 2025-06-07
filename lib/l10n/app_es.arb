@@ -21,6 +21,7 @@
   "login": "Iniciar sesión",
   "or": "o",
   "signInWithApple": "Iniciar sesión con Apple",
+  "signInWithGoogle": "Iniciar sesión con Google",
   "demoModeNotice": "Modo Demo: Cuenta de prueba rellenada automáticamente",
   "privacyPolicy": "Política de Privacidad",
   "termsOfService": "Términos de Servicio",

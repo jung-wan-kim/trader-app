@@ -763,4 +763,19 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get stockRemovedFromWatchlist => 'Acción eliminada de la lista';
+
+  @override
+  String get chooseTrader => 'Elige a Tu Maestro del Trading';
+
+  @override
+  String get performance => 'Rendimiento';
+
+  @override
+  String get keyStrategy => 'Estrategia Clave';
+
+  @override
+  String get selected => 'Seleccionado';
+
+  @override
+  String get continueWithSelection => 'Continuar con la Selección';
 }

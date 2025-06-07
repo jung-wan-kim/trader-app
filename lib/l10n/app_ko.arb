@@ -25,6 +25,7 @@
   "login": "로그인",
   "or": "또는",
   "signInWithApple": "Apple로 로그인",
+  "signInWithGoogle": "Google로 로그인",
   "demoModeNotice": "데모 모드: 테스트 계정이 자동 입력되었습니다",
   "privacyPolicy": "개인정보처리방침",
   "termsOfService": "이용약관",

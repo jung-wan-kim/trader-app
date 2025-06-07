@@ -732,4 +732,19 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get stockRemovedFromWatchlist => '股票已从关注列表移除';
+
+  @override
+  String get chooseTrader => '选择您的交易大师';
+
+  @override
+  String get performance => '业绩表现';
+
+  @override
+  String get keyStrategy => '核心策略';
+
+  @override
+  String get selected => '已选择';
+
+  @override
+  String get continueWithSelection => '继续选择';
 }

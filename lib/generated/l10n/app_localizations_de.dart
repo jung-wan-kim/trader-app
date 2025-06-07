@@ -756,4 +756,19 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get stockRemovedFromWatchlist => 'Aktie aus Watchlist entfernt';
+
+  @override
+  String get chooseTrader => 'Wählen Sie Ihren Trading-Meister';
+
+  @override
+  String get performance => 'Performance';
+
+  @override
+  String get keyStrategy => 'Kernstrategie';
+
+  @override
+  String get selected => 'Ausgewählt';
+
+  @override
+  String get continueWithSelection => 'Mit Auswahl fortfahren';
 }

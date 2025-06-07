@@ -21,6 +21,7 @@
   "login": "تسجيل الدخول",
   "or": "أو",
   "signInWithApple": "تسجيل الدخول بـ Apple",
+  "signInWithGoogle": "تسجيل الدخول بـ Google",
   "demoModeNotice": "الوضع التجريبي: تم ملء حساب الاختبار تلقائياً",
   "privacyPolicy": "سياسة الخصوصية",
   "termsOfService": "شروط الخدمة",

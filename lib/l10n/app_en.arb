@@ -26,6 +26,7 @@
   "login": "Login",
   "or": "or",
   "signInWithApple": "Sign in with Apple",
+  "signInWithGoogle": "Sign in with Google",
   "demoModeNotice": "Demo Mode: Test account auto-filled",
   "privacyPolicy": "Privacy Policy",
   "termsOfService": "Terms of Service",

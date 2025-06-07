@@ -695,7 +695,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get totalTrades => 'कुल ट्रेड';
 
   @override
-  String get bestTrade => 'सर्वोत्तम ट्रेड';
+  String get bestTrade => 'सर्वश्रेष्ठ ट्रेड';
 
   @override
   String get recentTrades => 'हाल की ट्रेड';
@@ -750,4 +750,19 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get stockRemovedFromWatchlist => 'स्टॉक वॉचलिस्ट से हटाया गया';
+
+  @override
+  String get chooseTrader => 'अपने ट्रेडिंग गुरु को चुनें';
+
+  @override
+  String get performance => 'प्रदर्शन';
+
+  @override
+  String get keyStrategy => 'मुख्य रणनीति';
+
+  @override
+  String get selected => 'चयनित';
+
+  @override
+  String get continueWithSelection => 'चयन के साथ जारी रखें';
 }
