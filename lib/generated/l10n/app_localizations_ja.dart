@@ -147,6 +147,44 @@ class AppLocalizationsJa extends AppLocalizations {
   String get logout => 'ログアウト';
 
   @override
+  String get accountManagement => 'アカウント管理';
+
+  @override
+  String get cancelSubscription => 'サブスクリプションをキャンセル';
+
+  @override
+  String get deleteAccount => 'アカウントを削除';
+
+  @override
+  String get cancelSubscriptionTitle => 'サブスクリプションのキャンセル';
+
+  @override
+  String get cancelSubscriptionMessage =>
+      '本当にサブスクリプションをキャンセルしますか？現在の請求期間が終了するまでアクセスを継続できます。';
+
+  @override
+  String get cancelSubscriptionConfirm => 'はい、キャンセルします';
+
+  @override
+  String get deleteAccountTitle => 'アカウントの削除';
+
+  @override
+  String get deleteAccountMessage =>
+      '本当にアカウントを削除しますか？この操作は元に戻すことができず、すべてのデータが永久に削除されます。';
+
+  @override
+  String get deleteAccountConfirm => 'はい、アカウントを削除します';
+
+  @override
+  String get subscriptionCancelledSuccessfully => 'サブスクリプションが正常にキャンセルされました';
+
+  @override
+  String get accountDeletedSuccessfully => 'アカウントが正常に削除されました';
+
+  @override
+  String get languageSettings => '言語設定';
+
+  @override
   String get investmentWarningTitle => '投資リスク警告';
 
   @override
@@ -482,158 +520,222 @@ class AppLocalizationsJa extends AppLocalizations {
   String get planFeatureWhiteLabelOptions => 'ホワイトラベルオプション';
 
   @override
-  String get termsTitle => 'Trader App Terms of Service';
+  String get termsTitle => 'トレーダーアプリ利用規約';
 
   @override
-  String get termsEffectiveDate => 'Effective Date: February 21, 2025';
+  String get termsEffectiveDate => '施行日：2025年2月21日';
 
   @override
-  String get termsSection1Title => 'Article 1 (Purpose)';
+  String get termsSection1Title => '第1条（目的）';
 
   @override
   String get termsSection1Content =>
-      'These terms are intended to stipulate the rights, obligations, and responsibilities of the company and users regarding the use of mobile application services (hereinafter referred to as \"Services\") provided by Trader App (hereinafter referred to as \"Company\").';
+      '本規約は、トレーダーアプリ（以下「会社」という）が提供するモバイルアプリケーションサービス（以下「サービス」という）の利用に関して、会社と利用者の権利、義務及び責任事項を規定することを目的とします。';
 
   @override
-  String get termsSection2Title => 'Article 2 (Definitions)';
+  String get termsSection2Title => '第2条（定義）';
 
   @override
   String get termsSection2Content =>
-      '1. \"Service\" refers to the AI-based stock recommendation and investment information service provided by the Company.\n2. \"User\" refers to members and non-members who receive services provided by the Company under these terms.\n3. \"Member\" refers to a person who has registered as a member by providing personal information to the Company, continuously receives Company information, and can continuously use the Service.';
+      '1. 「サービス」とは、会社が提供するAIベースの株式推奨および投資情報提供サービスを意味します。\n2. 「利用者」とは、本規約に従って会社が提供するサービスを受ける会員および非会員を言います。\n3. 「会員」とは、会社に個人情報を提供して会員登録をした者で、会社の情報を継続的に提供されながらサービスを継続的に利用できる者を言います。';
 
   @override
-  String get termsSection3Title =>
-      'Article 3 (Effectiveness and Changes to Terms)';
+  String get termsSection3Title => '第3条（規約の効力及び変更）';
 
   @override
   String get termsSection3Content =>
-      '1. These terms become effective by posting them on the service screen or notifying users through other means.\n2. The Company may change these terms when deemed necessary, and changed terms will be announced 7 days before the application date.';
+      '1. 本規約は、サービス画面に掲示するかその他の方法により利用者に公知することによって効力を発生します。\n2. 会社は必要があると認める場合、本規約を変更することができ、変更された規約は適用日の7日前に告知します。';
 
   @override
-  String get termsSection4Title => 'Article 4 (Provision of Services)';
+  String get termsSection4Title => '第4条（サービスの提供）';
 
   @override
   String get termsSection4Content =>
-      '1. The Company provides the following services:\n   • AI-based stock recommendation service\n   • Legendary trader strategy information\n   • Real-time stock price information\n   • Portfolio management tools\n   • Risk calculator\n\n2. Services are provided 24 hours a day, 365 days a year in principle. However, they may be temporarily suspended due to system maintenance.';
+      '1. 会社は次のようなサービスを提供します：\n   • AIベースの株式推奨サービス\n   • 伝説的トレーダー戦略情報提供\n   • リアルタイム株式相場情報\n   • ポートフォリオ管理ツール\n   • リスク計算機\n\n2. サービスは年中無休、1日24時間提供することを原則とします。ただし、システム点検などの必要により一時的に中断される場合があります。';
 
   @override
   String get termsFinancialDisclaimer =>
-      'All information provided by this service is for reference only and does not constitute investment advice or investment recommendations.\n\n• All investment decisions must be made under the user\'s own judgment and responsibility.\n• Stock investment carries the risk of principal loss.\n• Past returns do not guarantee future profits.\n• The Company assumes no responsibility for investment results based on the information provided.';
+      '本サービスで提供されるすべての情報は投資参考資料であり、投資勧誘や投資助言に該当しません。\n\n• すべての投資決定は利用者本人の判断と責任の下で行われるべきです。\n• 株式投資には元本損失のリスクがあります。\n• 過去の収益率が将来の収益を保証するものではありません。\n• 会社は提供された情報に基づく投資結果についていかなる責任も負いません。';
 
   @override
-  String get termsSection5Title => 'Article 5 (Membership Registration)';
+  String get termsSection5Title => '第5条（会員登録）';
 
   @override
   String get termsSection5Content =>
-      '1. Membership registration is concluded when the user agrees to the contents of the terms and applies for membership registration, and the Company approves such application.\n2. The Company may not approve or later terminate the usage contract for applications that fall under the following:\n   • Using a false name or another person\'s name\n   • Providing false information or not providing information requested by the Company\n   • Not meeting other application requirements';
+      '1. 会員登録は、利用者が規約の内容について同意をし、会員登録申込をした後、会社がこのような申込に対して承諾することによって締結されます。\n2. 会社は次の各号に該当する申込について承諾をしないか事後に利用契約を解約することができます：\n   • 実名でないか他人の名義を利用した場合\n   • 虚偽の情報を記載したか、会社が提示する内容を記載しなかった場合\n   • その他利用申込要件を満たしていない場合';
 
   @override
-  String get termsSection6Title => 'Article 6 (User Obligations)';
+  String get termsSection6Title => '第6条（利用者の義務）';
 
   @override
   String get termsSection6Content =>
-      'Users must not engage in the following activities:\n1. Stealing others\' information\n2. Infringing on the Company\'s intellectual property rights\n3. Intentionally interfering with service operations\n4. Other activities that violate relevant laws and regulations';
+      '利用者は次の行為をしてはなりません：\n1. 他人の情報を盗用する行為\n2. 会社の知的財産権を侵害する行為\n3. サービスの運営を故意に妨害する行為\n4. その他関係法令に違反する行為';
 
   @override
-  String get termsSection7Title => 'Article 7 (Service Usage Fees)';
+  String get termsSection7Title => '第7条（サービス利用料金）';
 
   @override
   String get termsSection7Content =>
-      '1. Basic services are provided free of charge.\n2. Premium services require payment of separate usage fees.\n3. Usage fees for paid services follow the fee policy specified within the service.\n4. The Company may change paid service usage fees and will notify 30 days in advance of changes.';
+      '1. 基本サービスは無料で提供されます。\n2. プレミアムサービスは別途の利用料金を支払わなければなりません。\n3. 有料サービスの利用料金は、サービス内に明示された料金政策に従います。\n4. 会社は有料サービス利用料金を変更することができ、変更時は30日前に告知します。';
 
   @override
-  String get termsSection8Title => 'Article 8 (Disclaimer)';
+  String get termsSection8Title => '第8条（免責条項）';
 
   @override
   String get termsSection8Content =>
-      '1. The Company is exempt from responsibility for providing services when unable to provide services due to natural disasters or force majeure equivalent thereto.\n2. The Company is not responsible for service usage obstacles due to user\'s fault.\n3. All investment information provided by the Company is for reference only, and the responsibility for investment decisions lies entirely with the user.';
+      '1. 会社は天災地変またはこれに準ずる不可抗力によりサービスを提供できない場合には、サービス提供に関する責任が免除されます。\n2. 会社は利用者の帰責事由によるサービス利用の障害については責任を負いません。\n3. 会社が提供するすべての投資情報は参考資料に過ぎず、投資決定による責任は全面的に利用者にあります。';
 
   @override
-  String get termsSection9Title => 'Article 9 (Privacy Protection)';
+  String get termsSection9Title => '第9条（個人情報保護）';
 
   @override
   String get termsSection9Content =>
-      'The Company establishes and complies with a privacy policy to protect users\' personal information. For details, please refer to the Privacy Policy.';
+      '会社は利用者の個人情報を保護するために個人情報処理方針を策定し、これを遵守します。詳細については個人情報処理方針をご参照ください。';
 
   @override
-  String get termsSection10Title => 'Article 10 (Dispute Resolution)';
+  String get termsSection10Title => '第10条（紛争解決）';
 
   @override
   String get termsSection10Content =>
-      '1. Disputes between the Company and users shall be resolved through mutual consultation in principle.\n2. If consultation cannot be reached, it shall be resolved in the competent court according to relevant laws.';
+      '1. 会社と利用者間に発生した紛争は相互協議により解決することを原則とします。\n2. 協議が行われない場合、関連法令による管轄裁判所で解決します。';
 
   @override
-  String get termsSupplementary => 'Supplementary Provisions';
+  String get termsSupplementary => '附則';
 
   @override
-  String get termsSupplementaryDate =>
-      'These terms are effective from February 21, 2025.';
+  String get termsSupplementaryDate => '本規約は2025年2月21日から施行します。';
 
   @override
-  String get privacyTitle => 'Trader App Privacy Policy';
+  String get privacyTitle => 'トレーダーアプリ個人情報処理方針';
 
   @override
-  String get privacyEffectiveDate => 'Effective Date: February 21, 2025';
+  String get privacyEffectiveDate => '施行日：2025年2月21日';
 
   @override
-  String get privacySection1Title =>
-      '1. Purpose of Collection and Use of Personal Information';
+  String get privacySection1Title => '1. 個人情報の収集及び利用目的';
 
   @override
   String get privacySection1Content =>
-      'Trader App collects personal information for the following purposes:\n• Member registration and management\n• Providing customized investment information\n• Service improvement and new service development\n• Customer inquiry response';
+      'トレーダーアプリは次の目的のために個人情報を収集しています：\n• 会員登録および管理\n• カスタマイズされた投資情報提供\n• サービス改善および新規サービス開発\n• 顧客問い合わせ対応';
 
   @override
-  String get privacySection2Title =>
-      '2. Items of Personal Information Collected';
+  String get privacySection2Title => '2. 収集する個人情報の項目';
 
   @override
   String get privacySection2Content =>
-      '• Required items: Email, password\n• Optional items: Name, phone number, investment interests\n• Automatically collected items: Device information, app usage history, IP address';
+      '• 必須項目：メールアドレス、パスワード\n• 選択項目：氏名、電話番号、投資関心事\n• 自動収集項目：デバイス情報、アプリ使用記録、IPアドレス';
 
   @override
-  String get privacySection3Title =>
-      '3. Retention and Use Period of Personal Information';
+  String get privacySection3Title => '3. 個人情報の保有及び利用期間';
 
   @override
   String get privacySection3Content =>
-      '• Until membership withdrawal\n• However, retained for the required period if preservation is necessary according to relevant laws\n• Contract or subscription withdrawal records under e-commerce law: 5 years\n• Consumer complaint or dispute handling records: 3 years';
+      '• 会員退会時まで\n• ただし、関連法令により保存が必要な場合は該当期間中保管\n• 電子商取引法による契約または請約撤回記録：5年\n• 消費者不満または紛争処理記録：3年';
 
   @override
-  String get privacySection4Title =>
-      '4. Provision of Personal Information to Third Parties';
+  String get privacySection4Title => '4. 個人情報の第三者提供';
 
   @override
   String get privacySection4Content =>
-      'Trader App does not provide users\' personal information to third parties in principle.\nHowever, exceptions are made in the following cases:\n• When user consent is obtained\n• When required by laws and regulations';
+      'トレーダーアプリは原則的に利用者の個人情報を第三者に提供しません。\nただし、次の場合には例外とします：\n• 利用者の同意がある場合\n• 法令の規定による場合';
 
   @override
-  String get privacySection5Title =>
-      '5. Personal Information Protection Measures';
+  String get privacySection5Title => '5. 個人情報の保護措置';
 
   @override
   String get privacySection5Content =>
-      '• Personal information encryption\n• Technical measures against hacking\n• Limiting access to personal information\n• Minimizing and training personnel handling personal information';
+      '• 個人情報暗号化\n• ハッキングなどに備えた技術的対策\n• 個人情報アクセス権限制限\n• 個人情報取扱職員の最小化及び教育';
 
   @override
-  String get privacySection6Title => '6. User Rights';
+  String get privacySection6Title => '6. 利用者の権利';
 
   @override
   String get privacySection6Content =>
-      'Users can exercise the following rights at any time:\n• Request to view personal information\n• Request to correct or delete personal information\n• Request to stop processing personal information\n• Request to transfer personal information';
+      '利用者はいつでも次の権利を行使することができます：\n• 個人情報閲覧要求\n• 個人情報訂正・削除要求\n• 個人情報処理停止要求\n• 個人情報移動要求';
 
   @override
-  String get privacySection7Title =>
-      '7. Personal Information Protection Officer';
+  String get privacySection7Title => '7. 個人情報保護責任者';
 
   @override
   String get privacySection7Content =>
-      'Personal Information Protection Officer: Hong Gil-dong\nEmail: privacy@traderapp.com\nPhone: 02-1234-5678';
+      '個人情報保護責任者：洪吉東\nメールアドレス：privacy@traderapp.com\n電話：02-1234-5678';
 
   @override
-  String get privacySection8Title => '8. Changes to Privacy Policy';
+  String get privacySection8Title => '8. 個人情報処理方針の変更';
 
   @override
   String get privacySection8Content =>
-      'This privacy policy may be modified to reflect changes in laws and services.\nChanges will be announced through in-app notifications.';
+      '本個人情報処理方針は法令およびサービス変更事項を反映するために修正される場合があります。\n変更事項はアプリ内お知らせを通じて案内いたします。';
+
+  @override
+  String get totalPortfolioValue => 'ポートフォリオ総額';
+
+  @override
+  String get portfolioPerformance30Days => 'ポートフォリオパフォーマンス（30日）';
+
+  @override
+  String get performanceStatistics => 'パフォーマンス統計';
+
+  @override
+  String get avgReturn => '平均リターン';
+
+  @override
+  String get totalTrades => '総取引数';
+
+  @override
+  String get bestTrade => '最高取引';
+
+  @override
+  String get recentTrades => '最近の取引';
+
+  @override
+  String get monthlyReturns => '月次リターン';
+
+  @override
+  String get jan => '1月';
+
+  @override
+  String get feb => '2月';
+
+  @override
+  String get mar => '3月';
+
+  @override
+  String get apr => '4月';
+
+  @override
+  String get may => '5月';
+
+  @override
+  String get jun => '6月';
+
+  @override
+  String get marketSummary => 'マーケット概要';
+
+  @override
+  String get addStock => '銘柄追加';
+
+  @override
+  String get stocks => '銘柄';
+
+  @override
+  String get searchStocks => '銘柄検索...';
+
+  @override
+  String get nothingInWatchlist => 'ウォッチリストに銘柄がありません';
+
+  @override
+  String get addStocksToWatchlist => 'パフォーマンスを追跡する銘柄を追加';
+
+  @override
+  String get remove => '削除';
+
+  @override
+  String get addToWatchlist => 'ウォッチリストに追加';
+
+  @override
+  String get stockAddedToWatchlist => '銘柄をウォッチリストに追加しました';
+
+  @override
+  String get stockRemovedFromWatchlist => '銘柄をウォッチリストから削除しました';
 }

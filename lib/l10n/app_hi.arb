@@ -2,11 +2,9 @@
   "@@locale": "hi",
   "appTitle": "ट्रेडर ऐप",
   "appSubtitle": "AI-संचालित स्टॉक सिफारिशें",
-  
   "chooseLanguage": "अपनी भाषा चुनें",
   "selectLanguageDescription": "ऐप के लिए अपनी पसंदीदा भाषा चुनें",
   "continueButton": "जारी रखें",
-  
   "onboardingTitle1": "पौराणिक ट्रेडर रणनीतियाँ",
   "onboardingDesc1": "जेसी लिवरमोर, विलियम ओ'नील जैसे इतिहास के सबसे सफल ट्रेडरों की सिद्ध निवेश रणनीतियों का उपयोग करें",
   "onboardingTitle2": "AI-संचालित स्टॉक सिफारिशें",
@@ -15,11 +13,9 @@
   "onboardingDesc3": "पोजीशन साइज़ कैलकुलेटर और स्टॉप-लॉस/टेक-प्रॉफिट रणनीतियों के साथ सुरक्षित निवेश प्राप्त करें",
   "onboardingTitle4": "रीयल-टाइम बाजार विश्लेषण",
   "onboardingDesc4": "रीयल-टाइम चार्ट और तकनीकी संकेतकों के साथ बाजार के रुझान को समझें और इष्टतम समय को पकड़ें",
-  
   "getStarted": "शुरू करें",
   "next": "अगला",
   "skip": "छोड़ें",
-  
   "email": "ईमेल",
   "password": "पासवर्ड",
   "login": "लॉगिन",
@@ -29,7 +25,6 @@
   "privacyPolicy": "गोपनीयता नीति",
   "termsOfService": "सेवा की शर्तें",
   "investmentWarning": "केवल संदर्भ के लिए, निवेश सलाह नहीं",
-  
   "profile": "प्रोफाइल",
   "trader": "ट्रेडर",
   "subscriptionManagement": "सब्सक्रिप्शन प्रबंधन",
@@ -62,12 +57,10 @@
   "languageSettings": "भाषा सेटिंग्स",
   "investmentWarningTitle": "निवेश जोखिम चेतावनी",
   "investmentWarningText": "इस ऐप में प्रदान की गई सभी जानकारी केवल संदर्भ के लिए है और निवेश सलाह नहीं है। सभी निवेश निर्णय आपके अपने निर्णय और जिम्मेदारी पर लिए जाने चाहिए।",
-  
   "settings": "सेटिंग्स",
   "tradingSignals": "ट्रेडिंग सिग्नल",
   "realTimeRecommendations": "शीर्ष ट्रेडरों से रीयल-टाइम सिफारिशें",
   "investmentReferenceNotice": "निवेश संदर्भ के लिए। निवेश निर्णय आपकी जिम्मेदारी हैं।",
-  
   "currentPlan": "वर्तमान योजना",
   "nextBilling": "अगला बिलिंग",
   "amount": "राशि",
@@ -75,11 +68,9 @@
   "subscriptionInfo": "सब्सक्रिप्शन जानकारी",
   "subscriptionTerms": "सब्सक्रिप्शन शर्तें",
   "subscriptionTermsText": "• सब्सक्रिप्शन खरीदारी की पुष्टि पर आपके iTunes अकाउंट से चार्ज किया जाता है\\n• सब्सक्रिप्शन स्वचालित रूप से नवीनीकृत होते हैं जब तक कि वर्तमान अवधि के अंत से कम से कम 24 घंटे पहले स्वचालित नवीनीकरण बंद नहीं किया जाता\\n• नवीनीकरण शुल्क वर्तमान अवधि के अंत के 24 घंटे के भीतर लिया जाता है\\n• सब्सक्रिप्शन खरीदारी के बाद आपके अकाउंट सेटिंग्स में प्रबंधित किया जा सकता है\\n• सब्सक्रिप्शन खरीदने पर मुफ्त ट्रायल अवधि का कोई भी अप्रयुक्त हिस्सा जब्त हो जाएगा",
-  
   "dataDelayWarning": "रीयल-टाइम डेटा में 15 मिनट की देरी हो सकती है",
   "dataSource": "डेटा Finnhub द्वारा प्रदान किया गया",
   "poweredBy": "पौराणिक ट्रेडरों द्वारा संचालित",
-  
   "errorLoadingRecommendations": "सिफारिशें लोड करने में त्रुटि",
   "retry": "पुनः प्रयास करें",
   "allActions": "सभी कार्रवाइयाँ",
@@ -90,7 +81,6 @@
   "confidence": "विश्वास",
   "profitPotential": "लाभ की संभावना",
   "noRecommendationsFound": "कोई सिफारिश नहीं मिली",
-  
   "portfolio": "पोर्टफोलियो",
   "errorLoadingPositions": "पोजीशन लोड करने में त्रुटि",
   "today": "आज",
@@ -109,15 +99,18 @@
   "closePositionConfirm": "{stockCode} के {quantity} शेयर बंद करें?",
   "@closePositionConfirm": {
     "placeholders": {
-      "quantity": {"type": "int"},
-      "stockCode": {"type": "String"}
+      "quantity": {
+        "type": "int"
+      },
+      "stockCode": {
+        "type": "String"
+      }
     }
   },
   "cancel": "रद्द करें",
   "positionClosedSuccessfully": "पोजीशन सफलतापूर्वक बंद हुई",
   "sl": "एसएल",
   "tp": "टीपी",
-  
   "upload": "अपलोड",
   "uploadVideo": "वीडियो अपलोड करें",
   "uploadDescription": "गैलरी से चुनें या कैमरा से शूट करें",
@@ -133,7 +126,9 @@
   "hoursAgo": "{hours} घंटे पहले",
   "@hoursAgo": {
     "placeholders": {
-      "hours": {"type": "int"}
+      "hours": {
+        "type": "int"
+      }
     }
   },
   "messages": "संदेश",
@@ -143,7 +138,6 @@
   "premium": "प्रीमियम",
   "upgrade": "अपग्रेड",
   "downgrade": "डाउनग्रेड",
-  
   "subscription": "सब्सक्रिप्शन",
   "errorLoadingSubscription": "सब्सक्रिप्शन लोड करने में त्रुटि",
   "active": "सक्रिय",
@@ -151,7 +145,9 @@
   "autoRenewalOff": "स्वचालित नवीनीकरण बंद है। आपकी योजना {date} को समाप्त हो जाएगी",
   "@autoRenewalOff": {
     "placeholders": {
-      "date": {"type": "String"}
+      "date": {
+        "type": "String"
+      }
     }
   },
   "availablePlans": "उपलब्ध योजनाएं",
@@ -159,7 +155,9 @@
   "savePercent": "{percent}% बचाएं",
   "@savePercent": {
     "placeholders": {
-      "percent": {"type": "int"}
+      "percent": {
+        "type": "int"
+      }
     }
   },
   "billingHistory": "बिलिंग इतिहास",
@@ -167,28 +165,32 @@
   "upgradePlanConfirm": "{planName} में अपग्रेड करें?",
   "@upgradePlanConfirm": {
     "placeholders": {
-      "planName": {"type": "String"}
+      "planName": {
+        "type": "String"
+      }
     }
   },
   "price": "मूल्य",
   "upgradeSuccessful": "सफलतापूर्वक {planName} में अपग्रेड हुआ",
   "@upgradeSuccessful": {
     "placeholders": {
-      "planName": {"type": "String"}
+      "planName": {
+        "type": "String"
+      }
     }
   },
-  
   "tierDescFree": "बुनियादी सुविधाओं के साथ शुरुआत करें",
   "tierDescBasic": "व्यक्तिगत ट्रेडरों के लिए",
   "tierDescPro": "गंभीर ट्रेडरों के लिए उन्नत उपकरण",
   "tierDescPremium": "सफल होने के लिए आवश्यक सब कुछ",
   "tierDescEnterprise": "टीमों के लिए कस्टम समाधान",
-  
   "planFeatureBasicRecommendations": "बुनियादी सिफारिशें",
   "planFeatureLimitedPositions": "{count} पोजीशन तक सीमित",
   "@planFeatureLimitedPositions": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "planFeatureCommunitySupport": "समुदायिक सहायता",
@@ -196,7 +198,9 @@
   "planFeatureUpToPositions": "{count} पोजीशन तक",
   "@planFeatureUpToPositions": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "planFeatureEmailSupport": "ईमेल सहायता",
@@ -211,7 +215,9 @@
   "planFeatureMonthsFree": "{count} महीने मुफ्त",
   "@planFeatureMonthsFree": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "planFeatureAnnualReview": "वार्षिक प्रदर्शन समीक्षा",
@@ -221,7 +227,6 @@
   "planFeatureDedicatedManager": "समर्पित खाता प्रबंधक",
   "planFeatureCustomStrategies": "कस्टम रणनीतियां",
   "planFeatureWhiteLabelOptions": "व्हाइट-लेबल विकल्प",
-  
   "termsTitle": "ट्रेडर ऐप सेवा की शर्तें",
   "termsEffectiveDate": "प्रभावी तिथि: 21 फरवरी 2025",
   "termsSection1Title": "अनुच्छेद 1 (उद्देश्य)",
@@ -247,7 +252,6 @@
   "termsSection10Content": "1. कंपनी और उपयोगकर्ताओं के बीच विवादों को सिद्धांत रूप से पारस्परिक परामर्श के माध्यम से हल किया जाना चाहिए।\n2. यदि कोई परामर्श नहीं पहुंचा जा सकता है, तो इसे प्रासंगिक कानूनों के अनुसार सक्षम न्यायालय में हल किया जाएगा।",
   "termsSupplementary": "पूरक प्रावधान",
   "termsSupplementaryDate": "ये शर्तें 21 फरवरी 2025 से प्रभावी हैं।",
-  
   "privacyTitle": "ट्रेडर ऐप गोपनीयता नीति",
   "privacyEffectiveDate": "प्रभावी तिथि: 21 फरवरी 2025",
   "privacySection1Title": "1. व्यक्तिगत जानकारी के संग्रह और उपयोग का उद्देश्य",
@@ -265,5 +269,29 @@
   "privacySection7Title": "7. व्यक्तिगत जानकारी सुरक्षा अधिकारी",
   "privacySection7Content": "व्यक्तिगत जानकारी सुरक्षा अधिकारी: हांग गिल-डोंग\nईमेल: privacy@traderapp.com\nफोन: 02-1234-5678",
   "privacySection8Title": "8. गोपनीयता नीति में परिवर्तन",
-  "privacySection8Content": "यह गोपनीयता नीति कानूनों और सेवाओं में परिवर्तनों को प्रतिबिंबित करने के लिए संशोधित की जा सकती है।\nपरिवर्तनों की घोषणा इन-ऐप नोटिफिकेशन के माध्यम से की जाएगी।"
+  "privacySection8Content": "यह गोपनीयता नीति कानूनों और सेवाओं में परिवर्तनों को प्रतिबिंबित करने के लिए संशोधित की जा सकती है।\nपरिवर्तनों की घोषणा इन-ऐप नोटिफिकेशन के माध्यम से की जाएगी।",
+  "totalPortfolioValue": "कुल पोर्टफोलियो मूल्य",
+  "portfolioPerformance30Days": "पोर्टफोलियो प्रदर्शन (30 दिन)",
+  "performanceStatistics": "प्रदर्शन आंकड़े",
+  "avgReturn": "औसत रिटर्न",
+  "totalTrades": "कुल ट्रेड",
+  "bestTrade": "सर्वोत्तम ट्रेड",
+  "recentTrades": "हाल की ट्रेड",
+  "monthlyReturns": "मासिक रिटर्न",
+  "jan": "जन",
+  "feb": "फरव",
+  "mar": "मार्च",
+  "apr": "अप्र",
+  "may": "मई",
+  "jun": "जून",
+  "marketSummary": "बाजार सारांश",
+  "addStock": "स्टॉक जोड़ें",
+  "stocks": "स्टॉक्स",
+  "searchStocks": "स्टॉक खोजें...",
+  "nothingInWatchlist": "आपकी वॉचलिस्ट में कुछ नहीं",
+  "addStocksToWatchlist": "प्रदर्शन ट्रैक करने के लिए स्टॉक जोड़ें",
+  "remove": "हटाएं",
+  "addToWatchlist": "वॉचलिस्ट में जोड़ें",
+  "stockAddedToWatchlist": "स्टॉक वॉचलिस्ट में जोड़ा गया",
+  "stockRemovedFromWatchlist": "स्टॉक वॉचलिस्ट से हटाया गया"
 }

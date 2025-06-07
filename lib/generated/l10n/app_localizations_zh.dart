@@ -145,6 +145,42 @@ class AppLocalizationsZh extends AppLocalizations {
   String get logout => '退出登录';
 
   @override
+  String get accountManagement => '账户管理';
+
+  @override
+  String get cancelSubscription => '取消订阅';
+
+  @override
+  String get deleteAccount => '删除账户';
+
+  @override
+  String get cancelSubscriptionTitle => '取消订阅';
+
+  @override
+  String get cancelSubscriptionMessage => '您确定要取消订阅吗？您将在当前计费周期结束前继续享有访问权限。';
+
+  @override
+  String get cancelSubscriptionConfirm => '是的，取消';
+
+  @override
+  String get deleteAccountTitle => '删除账户';
+
+  @override
+  String get deleteAccountMessage => '您确定要删除您的账户吗？此操作无法撤销，您的所有数据将被永久删除。';
+
+  @override
+  String get deleteAccountConfirm => '是的，删除账户';
+
+  @override
+  String get subscriptionCancelledSuccessfully => '订阅已成功取消';
+
+  @override
+  String get accountDeletedSuccessfully => '账户已成功删除';
+
+  @override
+  String get languageSettings => '语言设置';
+
+  @override
   String get investmentWarningTitle => '投资风险警告';
 
   @override
@@ -480,158 +516,220 @@ class AppLocalizationsZh extends AppLocalizations {
   String get planFeatureWhiteLabelOptions => '白牌选项';
 
   @override
-  String get termsTitle => 'Trader App Terms of Service';
+  String get termsTitle => '交易员应用服务条款';
 
   @override
-  String get termsEffectiveDate => 'Effective Date: February 21, 2025';
+  String get termsEffectiveDate => '生效日期：2025年2月21日';
 
   @override
-  String get termsSection1Title => 'Article 1 (Purpose)';
+  String get termsSection1Title => '第1条（目的）';
 
   @override
   String get termsSection1Content =>
-      'These terms are intended to stipulate the rights, obligations, and responsibilities of the company and users regarding the use of mobile application services (hereinafter referred to as \"Services\") provided by Trader App (hereinafter referred to as \"Company\").';
+      '本条款旨在规定交易员应用（以下简称\\\"公司\\\"）提供的移动应用服务（以下简称\\\"服务\\\"）使用中公司与用户的权利、义务和责任事项。';
 
   @override
-  String get termsSection2Title => 'Article 2 (Definitions)';
+  String get termsSection2Title => '第2条（定义）';
 
   @override
   String get termsSection2Content =>
-      '1. \"Service\" refers to the AI-based stock recommendation and investment information service provided by the Company.\n2. \"User\" refers to members and non-members who receive services provided by the Company under these terms.\n3. \"Member\" refers to a person who has registered as a member by providing personal information to the Company, continuously receives Company information, and can continuously use the Service.';
+      '1. \\\"服务\\\"是指公司提供的基于AI的股票推荐和投资信息服务。\\n2. \\\"用户\\\"是指根据本条款接受公司提供服务的会员和非会员。\\n3. \\\"会员\\\"是指向公司提供个人信息进行会员注册，持续接收公司信息并能持续使用服务的人员。';
 
   @override
-  String get termsSection3Title =>
-      'Article 3 (Effectiveness and Changes to Terms)';
+  String get termsSection3Title => '第3条（条款的效力和变更）';
 
   @override
   String get termsSection3Content =>
-      '1. These terms become effective by posting them on the service screen or notifying users through other means.\n2. The Company may change these terms when deemed necessary, and changed terms will be announced 7 days before the application date.';
+      '1. 本条款通过在服务界面发布或通过其他方式通知用户而生效。\\n2. 公司在认为必要时可以变更本条款，变更后的条款将在适用日期前7天公布。';
 
   @override
-  String get termsSection4Title => 'Article 4 (Provision of Services)';
+  String get termsSection4Title => '第4条（服务提供）';
 
   @override
   String get termsSection4Content =>
-      '1. The Company provides the following services:\n   • AI-based stock recommendation service\n   • Legendary trader strategy information\n   • Real-time stock price information\n   • Portfolio management tools\n   • Risk calculator\n\n2. Services are provided 24 hours a day, 365 days a year in principle. However, they may be temporarily suspended due to system maintenance.';
+      '1. 公司提供以下服务：\\n   • 基于AI的股票推荐服务\\n   • 传奇交易员策略信息\\n   • 实时股票价格信息\\n   • 投资组合管理工具\\n   • 风险计算器\\n\\n2. 服务原则上全年无休，每天24小时提供。但由于系统维护等需要可能暂时中断。';
 
   @override
   String get termsFinancialDisclaimer =>
-      'All information provided by this service is for reference only and does not constitute investment advice or investment recommendations.\n\n• All investment decisions must be made under the user\'s own judgment and responsibility.\n• Stock investment carries the risk of principal loss.\n• Past returns do not guarantee future profits.\n• The Company assumes no responsibility for investment results based on the information provided.';
+      '本服务提供的所有信息仅供参考，不构成投资建议或投资推荐。\\n\\n• 所有投资决策应在您自己的判断和责任下做出。\\n• 股票投资存在本金损失风险。\\n• 过去的收益不保证未来利润。\\n• 公司对基于所提供信息的投资结果不承担任何责任。';
 
   @override
-  String get termsSection5Title => 'Article 5 (Membership Registration)';
+  String get termsSection5Title => '第5条（会员注册）';
 
   @override
   String get termsSection5Content =>
-      '1. Membership registration is concluded when the user agrees to the contents of the terms and applies for membership registration, and the Company approves such application.\n2. The Company may not approve or later terminate the usage contract for applications that fall under the following:\n   • Using a false name or another person\'s name\n   • Providing false information or not providing information requested by the Company\n   • Not meeting other application requirements';
+      '1. 会员注册在用户同意条款内容并申请会员注册后，公司批准此类申请时完成。\\n2. 公司可能不批准或事后终止符合以下条件的申请使用合同：\\n   • 使用虚假姓名或他人姓名\\n   • 提供虚假信息或未提供公司要求的信息\\n   • 不符合其他申请要求';
 
   @override
-  String get termsSection6Title => 'Article 6 (User Obligations)';
+  String get termsSection6Title => '第6条（用户义务）';
 
   @override
   String get termsSection6Content =>
-      'Users must not engage in the following activities:\n1. Stealing others\' information\n2. Infringing on the Company\'s intellectual property rights\n3. Intentionally interfering with service operations\n4. Other activities that violate relevant laws and regulations';
+      '用户不得从事以下活动：\\n1. 盗取他人信息\\n2. 侵犯公司知识产权\\n3. 故意干扰服务运营\\n4. 其他违反相关法律法规的活动';
 
   @override
-  String get termsSection7Title => 'Article 7 (Service Usage Fees)';
+  String get termsSection7Title => '第7条（服务使用费）';
 
   @override
   String get termsSection7Content =>
-      '1. Basic services are provided free of charge.\n2. Premium services require payment of separate usage fees.\n3. Usage fees for paid services follow the fee policy specified within the service.\n4. The Company may change paid service usage fees and will notify 30 days in advance of changes.';
+      '1. 基础服务免费提供。\\n2. 高级服务需要支付单独的使用费。\\n3. 付费服务的使用费遵循服务内规定的费用政策。\\n4. 公司可以更改付费服务使用费，变更时将提前30天通知。';
 
   @override
-  String get termsSection8Title => 'Article 8 (Disclaimer)';
+  String get termsSection8Title => '第8条（免责声明）';
 
   @override
   String get termsSection8Content =>
-      '1. The Company is exempt from responsibility for providing services when unable to provide services due to natural disasters or force majeure equivalent thereto.\n2. The Company is not responsible for service usage obstacles due to user\'s fault.\n3. All investment information provided by the Company is for reference only, and the responsibility for investment decisions lies entirely with the user.';
+      '1. 公司因自然灾害或相当的不可抗力无法提供服务时，免除服务提供责任。\\n2. 公司对因用户过错导致的服务使用障碍不承担责任。\\n3. 公司提供的所有投资信息仅供参考，投资决策责任完全由用户承担。';
 
   @override
-  String get termsSection9Title => 'Article 9 (Privacy Protection)';
+  String get termsSection9Title => '第9条（隐私保护）';
 
   @override
-  String get termsSection9Content =>
-      'The Company establishes and complies with a privacy policy to protect users\' personal information. For details, please refer to the Privacy Policy.';
+  String get termsSection9Content => '公司制定并遵守隐私政策以保护用户个人信息。详情请参阅隐私政策。';
 
   @override
-  String get termsSection10Title => 'Article 10 (Dispute Resolution)';
+  String get termsSection10Title => '第10条（争议解决）';
 
   @override
   String get termsSection10Content =>
-      '1. Disputes between the Company and users shall be resolved through mutual consultation in principle.\n2. If consultation cannot be reached, it shall be resolved in the competent court according to relevant laws.';
+      '1. 公司与用户之间发生的争议原则上通过相互协商解决。\\n2. 如无法达成协商，将根据相关法律在管辖法院解决。';
 
   @override
-  String get termsSupplementary => 'Supplementary Provisions';
+  String get termsSupplementary => '附则';
 
   @override
-  String get termsSupplementaryDate =>
-      'These terms are effective from February 21, 2025.';
+  String get termsSupplementaryDate => '本条款自2025年2月21日起生效。';
 
   @override
-  String get privacyTitle => 'Trader App Privacy Policy';
+  String get privacyTitle => '交易员应用隐私政策';
 
   @override
-  String get privacyEffectiveDate => 'Effective Date: February 21, 2025';
+  String get privacyEffectiveDate => '生效日期：2025年2月21日';
 
   @override
-  String get privacySection1Title =>
-      '1. Purpose of Collection and Use of Personal Information';
+  String get privacySection1Title => '1. 个人信息收集和使用目的';
 
   @override
   String get privacySection1Content =>
-      'Trader App collects personal information for the following purposes:\n• Member registration and management\n• Providing customized investment information\n• Service improvement and new service development\n• Customer inquiry response';
+      '交易员应用为以下目的收集个人信息：\\n• 会员注册和管理\\n• 提供个性化投资信息\\n• 服务改进和新服务开发\\n• 客户咨询响应';
 
   @override
-  String get privacySection2Title =>
-      '2. Items of Personal Information Collected';
+  String get privacySection2Title => '2. 收集的个人信息项目';
 
   @override
   String get privacySection2Content =>
-      '• Required items: Email, password\n• Optional items: Name, phone number, investment interests\n• Automatically collected items: Device information, app usage history, IP address';
+      '• 必需项目：邮箱、密码\\n• 可选项目：姓名、电话号码、投资兴趣\\n• 自动收集项目：设备信息、应用使用记录、IP地址';
 
   @override
-  String get privacySection3Title =>
-      '3. Retention and Use Period of Personal Information';
+  String get privacySection3Title => '3. 个人信息保留和使用期限';
 
   @override
   String get privacySection3Content =>
-      '• Until membership withdrawal\n• However, retained for the required period if preservation is necessary according to relevant laws\n• Contract or subscription withdrawal records under e-commerce law: 5 years\n• Consumer complaint or dispute handling records: 3 years';
+      '• 直到会员退出\\n• 但如相关法律要求保存，则在要求期间内保留\\n• 电子商务法下的合同或订阅取消记录：5年\\n• 消费者投诉或争议处理记录：3年';
 
   @override
-  String get privacySection4Title =>
-      '4. Provision of Personal Information to Third Parties';
+  String get privacySection4Title => '4. 向第三方提供个人信息';
 
   @override
   String get privacySection4Content =>
-      'Trader App does not provide users\' personal information to third parties in principle.\nHowever, exceptions are made in the following cases:\n• When user consent is obtained\n• When required by laws and regulations';
+      '交易员应用原则上不向第三方提供用户个人信息。\\n但在以下情况下例外：\\n• 获得用户同意时\\n• 法律法规要求时';
 
   @override
-  String get privacySection5Title =>
-      '5. Personal Information Protection Measures';
+  String get privacySection5Title => '5. 个人信息保护措施';
 
   @override
   String get privacySection5Content =>
-      '• Personal information encryption\n• Technical measures against hacking\n• Limiting access to personal information\n• Minimizing and training personnel handling personal information';
+      '• 个人信息加密\\n• 防黑客技术措施\\n• 限制个人信息访问权限\\n• 最小化和培训处理个人信息的人员';
 
   @override
-  String get privacySection6Title => '6. User Rights';
+  String get privacySection6Title => '6. 用户权利';
 
   @override
   String get privacySection6Content =>
-      'Users can exercise the following rights at any time:\n• Request to view personal information\n• Request to correct or delete personal information\n• Request to stop processing personal information\n• Request to transfer personal information';
+      '用户可随时行使以下权利：\\n• 要求查看个人信息\\n• 要求更正或删除个人信息\\n• 要求停止处理个人信息\\n• 要求转移个人信息';
 
   @override
-  String get privacySection7Title =>
-      '7. Personal Information Protection Officer';
+  String get privacySection7Title => '7. 个人信息保护负责人';
 
   @override
   String get privacySection7Content =>
-      'Personal Information Protection Officer: Hong Gil-dong\nEmail: privacy@traderapp.com\nPhone: 02-1234-5678';
+      '个人信息保护负责人：洪吉东\\n邮箱：privacy@traderapp.com\\n电话：02-1234-5678';
 
   @override
-  String get privacySection8Title => '8. Changes to Privacy Policy';
+  String get privacySection8Title => '8. 隐私政策变更';
 
   @override
-  String get privacySection8Content =>
-      'This privacy policy may be modified to reflect changes in laws and services.\nChanges will be announced through in-app notifications.';
+  String get privacySection8Content => '本隐私政策可能因法律和服务变更而修改。\\n变更将通过应用内通知公布。';
+
+  @override
+  String get totalPortfolioValue => '投资组合总价值';
+
+  @override
+  String get portfolioPerformance30Days => '投资组合表现（30天）';
+
+  @override
+  String get performanceStatistics => '表现统计';
+
+  @override
+  String get avgReturn => '平均回报';
+
+  @override
+  String get totalTrades => '总交易数';
+
+  @override
+  String get bestTrade => '最佳交易';
+
+  @override
+  String get recentTrades => '最近交易';
+
+  @override
+  String get monthlyReturns => '月度回报';
+
+  @override
+  String get jan => '1月';
+
+  @override
+  String get feb => '2月';
+
+  @override
+  String get mar => '3月';
+
+  @override
+  String get apr => '4月';
+
+  @override
+  String get may => '5月';
+
+  @override
+  String get jun => '6月';
+
+  @override
+  String get marketSummary => '市场摘要';
+
+  @override
+  String get addStock => '添加股票';
+
+  @override
+  String get stocks => '股票';
+
+  @override
+  String get searchStocks => '搜索股票...';
+
+  @override
+  String get nothingInWatchlist => '关注列表中没有股票';
+
+  @override
+  String get addStocksToWatchlist => '添加股票以追踪其表现';
+
+  @override
+  String get remove => '删除';
+
+  @override
+  String get addToWatchlist => '添加到关注列表';
+
+  @override
+  String get stockAddedToWatchlist => '股票已添加到关注列表';
+
+  @override
+  String get stockRemovedFromWatchlist => '股票已从关注列表移除';
 }

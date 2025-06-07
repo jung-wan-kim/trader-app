@@ -151,6 +151,45 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logout => 'Logout';
 
   @override
+  String get accountManagement => 'Account Management';
+
+  @override
+  String get cancelSubscription => 'Cancel Subscription';
+
+  @override
+  String get deleteAccount => 'Delete Account';
+
+  @override
+  String get cancelSubscriptionTitle => 'Cancel Subscription';
+
+  @override
+  String get cancelSubscriptionMessage =>
+      'Are you sure you want to cancel your subscription? You will continue to have access until your current billing period ends.';
+
+  @override
+  String get cancelSubscriptionConfirm => 'Yes, Cancel';
+
+  @override
+  String get deleteAccountTitle => 'Delete Account';
+
+  @override
+  String get deleteAccountMessage =>
+      'Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed.';
+
+  @override
+  String get deleteAccountConfirm => 'Yes, Delete Account';
+
+  @override
+  String get subscriptionCancelledSuccessfully =>
+      'Subscription cancelled successfully';
+
+  @override
+  String get accountDeletedSuccessfully => 'Account deleted successfully';
+
+  @override
+  String get languageSettings => 'Language Settings';
+
+  @override
   String get investmentWarningTitle => 'Investment Risk Warning';
 
   @override
@@ -643,4 +682,76 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get privacySection8Content =>
       'This privacy policy may be modified to reflect changes in laws and services.\nChanges will be announced through in-app notifications.';
+
+  @override
+  String get totalPortfolioValue => 'Total Portfolio Value';
+
+  @override
+  String get portfolioPerformance30Days => 'Portfolio Performance (30 Days)';
+
+  @override
+  String get performanceStatistics => 'Performance Statistics';
+
+  @override
+  String get avgReturn => 'Avg. Return';
+
+  @override
+  String get totalTrades => 'Total Trades';
+
+  @override
+  String get bestTrade => 'Best Trade';
+
+  @override
+  String get recentTrades => 'Recent Trades';
+
+  @override
+  String get monthlyReturns => 'Monthly Returns';
+
+  @override
+  String get jan => 'Jan';
+
+  @override
+  String get feb => 'Feb';
+
+  @override
+  String get mar => 'Mar';
+
+  @override
+  String get apr => 'Apr';
+
+  @override
+  String get may => 'May';
+
+  @override
+  String get jun => 'Jun';
+
+  @override
+  String get marketSummary => 'Market Summary';
+
+  @override
+  String get addStock => 'Add Stock';
+
+  @override
+  String get stocks => 'Stocks';
+
+  @override
+  String get searchStocks => 'Search stocks...';
+
+  @override
+  String get nothingInWatchlist => 'Nothing in your watchlist yet';
+
+  @override
+  String get addStocksToWatchlist => 'Add stocks to track their performance';
+
+  @override
+  String get remove => 'Remove';
+
+  @override
+  String get addToWatchlist => 'Add to Watchlist';
+
+  @override
+  String get stockAddedToWatchlist => 'Stock added to watchlist';
+
+  @override
+  String get stockRemovedFromWatchlist => 'Stock removed from watchlist';
 }

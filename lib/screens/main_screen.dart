@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'home_screen.dart';
 import 'position_screen.dart';
-import 'discover_screen.dart';
-import 'subscription_screen.dart';
+import 'investment_performance_screen.dart';
+import 'watchlist_screen.dart';
 import 'profile_screen.dart';
 import '../generated/l10n/app_localizations.dart';
 
@@ -20,8 +20,8 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const PositionScreen(),
-    const DiscoverScreen(),
-    const SubscriptionScreen(),
+    const InvestmentPerformanceScreen(),
+    const WatchlistScreen(),
     const ProfileScreen(),
   ];
   
@@ -79,32 +79,14 @@ class _MainScreenState extends State<MainScreen> {
               label: l10n?.portfolio ?? 'Portfolio',
             ),
             BottomNavigationBarItem(
-              icon: Container(
-                width: 45,
-                height: 30,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  gradient: const LinearGradient(
-                    colors: [
-                      Color(0xFF00D632),
-                      Color(0xFF00A025),
-                    ],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
-                ),
-                child: const Icon(
-                  Icons.explore_outlined,
-                  color: Colors.white,
-                  size: 20,
-                ),
-              ),
-              label: l10n?.discover ?? 'Discover',
+              icon: const Icon(Icons.analytics_outlined, size: 26),
+              activeIcon: const Icon(Icons.analytics, size: 26),
+              label: l10n?.investmentPerformance ?? 'Performance',
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.diamond_outlined, size: 26),
-              activeIcon: const Icon(Icons.diamond, size: 26),
-              label: l10n?.premium ?? 'Premium',
+              icon: const Icon(Icons.bookmark_outline, size: 26),
+              activeIcon: const Icon(Icons.bookmark, size: 26),
+              label: l10n?.watchlist ?? 'Watchlist',
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.person_outline, size: 26),

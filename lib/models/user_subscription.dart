@@ -178,3 +178,34 @@ class SubscriptionHistory {
     };
   }
 }
+
+enum SubscriptionDuration {
+  monthly,
+  yearly,
+}
+
+class SubscriptionPlan {
+  final String id;
+  final SubscriptionTier tier;
+  final String name;
+  final double price;
+  final String currency;
+  final SubscriptionDuration duration;
+  final List<String> features;
+  final DateTime startDate;
+  final DateTime endDate;
+  final bool isActive;
+
+  SubscriptionPlan({
+    required this.id,
+    required this.tier,
+    required this.name,
+    required this.price,
+    required this.currency,
+    required this.duration,
+    required this.features,
+    required this.startDate,
+    required this.endDate,
+    required this.isActive,
+  });
+}

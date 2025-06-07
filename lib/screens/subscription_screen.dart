@@ -1,14 +1,103 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:in_app_purchase/in_app_purchase.dart';
 import '../providers/subscription_provider.dart';
 import '../models/user_subscription.dart';
+import '../services/in_app_purchase_service.dart';
 import '../generated/l10n/app_localizations.dart';
 
-class SubscriptionScreen extends ConsumerWidget {
+class SubscriptionScreen extends ConsumerStatefulWidget {
   const SubscriptionScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SubscriptionScreen> createState() => _SubscriptionScreenState();
+}
+
+class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
+  late InAppPurchaseService _purchaseService;
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializePurchaseService();
+  }
+
+  void _initializePurchaseService() async {
+    _purchaseService = ref.read(inAppPurchaseServiceProvider);
+    
+    // Setup callbacks
+    _purchaseService.onPurchaseSuccess = _onPurchaseSuccess;
+    _purchaseService.onPurchaseError = _onPurchaseError;
+    _purchaseService.onPurchaseCanceled = _onPurchaseCanceled;
+    
+    // Initialize purchase service
+    await _purchaseService.initialize();
+    
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  void _onPurchaseSuccess(SubscriptionPlan plan) {
+    // 결제 성공 시 구독 업데이트
+    ref.read(subscriptionProvider.notifier).updateSubscription(plan);
+    
+    setState(() {
+      _isLoading = false;
+    });
+    
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            AppLocalizations.of(context)!.upgradeSuccessful(plan.name),
+            style: const TextStyle(color: Colors.white),
+          ),
+          backgroundColor: const Color(0xFF00D632),
+        ),
+      );
+    }
+  }
+
+  void _onPurchaseError(String error) {
+    setState(() {
+      _isLoading = false;
+    });
+    
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Purchase failed: $error',
+            style: const TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  void _onPurchaseCanceled() {
+    setState(() {
+      _isLoading = false;
+    });
+    
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Purchase canceled',
+            style: const TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.orange,
+        ),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final subscriptionAsync = ref.watch(subscriptionProvider);
     final availablePlans = ref.watch(availablePlansProvider);
     final currentPlan = ref.watch(currentPlanProvider);
@@ -23,34 +112,40 @@ class SubscriptionScreen extends ConsumerWidget {
           style: const TextStyle(color: Colors.white),
         ),
       ),
-      body: subscriptionAsync.when(
-        data: (subscription) => SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (subscription != null) _buildCurrentPlan(subscription, currentPlan, context),
-              _buildPlansSection(availablePlans, currentPlan, ref, context),
-              if (subscription != null) _buildBillingHistory(subscription, context),
-              const SizedBox(height: 100),
-            ],
+      body: _isLoading 
+        ? const Center(
+            child: CircularProgressIndicator(
+              color: Color(0xFF00D632),
+            ),
+          )
+        : subscriptionAsync.when(
+            data: (subscription) => SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (subscription != null) _buildCurrentPlan(subscription, currentPlan, context),
+                  _buildPlansSection(availablePlans, currentPlan, ref, context),
+                  if (subscription != null) _buildBillingHistory(subscription, context),
+                  const SizedBox(height: 100),
+                ],
+              ),
+            ),
+            loading: () => const Center(
+              child: CircularProgressIndicator(
+                color: Color(0xFF00D632),
+              ),
+            ),
+            error: (error, stack) => Center(
+              child: Text(
+                AppLocalizations.of(context)!.errorLoadingSubscription,
+                style: TextStyle(color: Colors.grey[400]),
+              ),
+            ),
           ),
-        ),
-        loading: () => const Center(
-          child: CircularProgressIndicator(
-            color: Color(0xFF00D632),
-          ),
-        ),
-        error: (error, stack) => Center(
-          child: Text(
-            AppLocalizations.of(context)!.errorLoadingSubscription,
-            style: TextStyle(color: Colors.grey[400]),
-          ),
-        ),
-      ),
     );
   }
 
-  Widget _buildCurrentPlan(UserSubscription subscription, SubscriptionPlan? currentPlan, BuildContext context) {
+  Widget _buildCurrentPlan(UserSubscription subscription, SubscriptionPlanInfo? currentPlan, BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(20),
@@ -212,8 +307,8 @@ class SubscriptionScreen extends ConsumerWidget {
   }
 
   Widget _buildPlansSection(
-    List<SubscriptionPlan> plans, 
-    SubscriptionPlan? currentPlan,
+    List<SubscriptionPlanInfo> plans, 
+    SubscriptionPlanInfo? currentPlan,
     WidgetRef ref,
     BuildContext context,
   ) {
@@ -246,11 +341,11 @@ class SubscriptionScreen extends ConsumerWidget {
   }
 
   Widget _buildPlanCard(
-    SubscriptionPlan plan, {
+    SubscriptionPlanInfo plan, {
     required bool isCurrentPlan,
     required WidgetRef ref,
     required BuildContext context,
-    SubscriptionPlan? currentPlan,
+    SubscriptionPlanInfo? currentPlan,
   }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -504,7 +599,7 @@ class SubscriptionScreen extends ConsumerWidget {
     );
   }
 
-  void _showUpgradeDialog(BuildContext context, WidgetRef ref, SubscriptionPlan plan) {
+  void _showUpgradeDialog(BuildContext context, WidgetRef ref, SubscriptionPlanInfo plan) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -556,15 +651,9 @@ class SubscriptionScreen extends ConsumerWidget {
             ),
           ),
           ElevatedButton(
-            onPressed: () {
-              ref.read(subscriptionProvider.notifier).upgradePlan(plan);
+            onPressed: () async {
               Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(AppLocalizations.of(context)!.upgradeSuccessful(plan.name)),
-                  backgroundColor: const Color(0xFF00D632),
-                ),
-              );
+              await _purchasePlan(plan);
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF00D632),
@@ -576,13 +665,67 @@ class SubscriptionScreen extends ConsumerWidget {
     );
   }
 
+  Future<void> _purchasePlan(SubscriptionPlanInfo plan) async {
+    if (!_purchaseService.isAvailable) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Store not available. Please try again later.',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      // 플랜에 맞는 상품 ID 찾기
+      final productId = _purchaseService.getProductIdForPlan(
+        plan.tier, 
+        plan.billingPeriod == 'YEARLY' ? SubscriptionDuration.yearly : SubscriptionDuration.monthly
+      );
+      
+      // 상품 정보 가져오기
+      final product = _purchaseService.getProductById(productId);
+      
+      if (product == null) {
+        throw Exception('Product not found: $productId');
+      }
+      
+      // 실제 구매 시작
+      await _purchaseService.buyProduct(product);
+      
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+      
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Failed to initiate purchase: $e',
+              style: const TextStyle(color: Colors.white),
+            ),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
   String _formatDate(DateTime date) {
     final months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return '${months[date.month - 1]} ${date.day}, ${date.year}';
   }
 
-  String _getBillingPeriod(SubscriptionPlan? plan) {
+  String _getBillingPeriod(SubscriptionPlanInfo? plan) {
     if (plan == null) return 'month';
     return plan.billingPeriod == 'YEARLY' ? 'year' : 'month';
   }
@@ -603,7 +746,7 @@ class SubscriptionScreen extends ConsumerWidget {
     }
   }
   
-  String _getFeatureText(String featureKey, SubscriptionPlan plan, BuildContext context) {
+  String _getFeatureText(String featureKey, SubscriptionPlanInfo plan, BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     
     switch (featureKey) {
@@ -657,7 +800,7 @@ class SubscriptionScreen extends ConsumerWidget {
     }
   }
   
-  bool _isUpgrade(SubscriptionPlan newPlan, SubscriptionPlan? currentPlan) {
+  bool _isUpgrade(SubscriptionPlanInfo newPlan, SubscriptionPlanInfo? currentPlan) {
     if (currentPlan == null) return true;
     
     // Compare tier values

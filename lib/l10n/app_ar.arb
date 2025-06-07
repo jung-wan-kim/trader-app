@@ -2,11 +2,9 @@
   "@@locale": "ar",
   "appTitle": "تطبيق المتداول",
   "appSubtitle": "توصيات الأسهم المدعومة بالذكاء الاصطناعي",
-  
   "chooseLanguage": "اختر لغتك",
   "selectLanguageDescription": "اختر لغتك المفضلة للتطبيق",
   "continueButton": "متابعة",
-  
   "onboardingTitle1": "استراتيجيات المتداولين الأسطوريين",
   "onboardingDesc1": "استخدم استراتيجيات الاستثمار المجربة لأنجح المتداولين في التاريخ مثل جيسي ليفرمور وويليام أونيل",
   "onboardingTitle2": "توصيات الأسهم بالذكاء الاصطناعي",
@@ -15,11 +13,9 @@
   "onboardingDesc3": "حقق استثمارات آمنة باستخدام حاسبة حجم المركز واستراتيجيات وقف الخسارة/جني الربح",
   "onboardingTitle4": "تحليل السوق في الوقت الفعلي",
   "onboardingDesc4": "افهم اتجاهات السوق والتقط التوقيت الأمثل باستخدام الرسوم البيانية في الوقت الفعلي والمؤشرات الفنية",
-  
   "getStarted": "ابدأ",
   "next": "التالي",
   "skip": "تخطي",
-  
   "email": "البريد الإلكتروني",
   "password": "كلمة المرور",
   "login": "تسجيل الدخول",
@@ -29,7 +25,6 @@
   "privacyPolicy": "سياسة الخصوصية",
   "termsOfService": "شروط الخدمة",
   "investmentWarning": "للمرجع فقط، ليس نصيحة استثمارية",
-  
   "profile": "الملف الشخصي",
   "trader": "متداول",
   "subscriptionManagement": "إدارة الاشتراك",
@@ -62,12 +57,10 @@
   "languageSettings": "إعدادات اللغة",
   "investmentWarningTitle": "تحذير مخاطر الاستثمار",
   "investmentWarningText": "جميع المعلومات المقدمة في هذا التطبيق هي للمرجع فقط ولا تشكل نصيحة استثمارية. يجب اتخاذ جميع قرارات الاستثمار تحت حكمكم ومسؤوليتكم الخاصة.",
-  
   "settings": "الإعدادات",
   "tradingSignals": "إشارات التداول",
   "realTimeRecommendations": "توصيات في الوقت الفعلي من كبار المتداولين",
   "investmentReferenceNotice": "للمرجع الاستثماري. قرارات الاستثمار على مسؤوليتكم.",
-  
   "currentPlan": "الخطة الحالية",
   "nextBilling": "الفاتورة التالية",
   "amount": "المبلغ",
@@ -75,11 +68,9 @@
   "subscriptionInfo": "معلومات الاشتراك",
   "subscriptionTerms": "شروط الاشتراك",
   "subscriptionTermsText": "• يتم تحصيل رسوم الاشتراكات من حساب iTunes الخاص بك عند تأكيد الشراء\\n• تتجدد الاشتراكات تلقائياً ما لم يتم إيقاف التجديد التلقائي قبل 24 ساعة على الأقل من انتهاء الفترة الحالية\\n• يتم تحصيل رسوم التجديد خلال 24 ساعة من انتهاء الفترة الحالية\\n• يمكن إدارة الاشتراكات في إعدادات حسابك بعد الشراء\\n• سيتم فقدان أي جزء غير مستخدم من فترة التجربة المجانية عند شراء اشتراك",
-  
   "dataDelayWarning": "قد تتأخر البيانات الفورية 15 دقيقة",
   "dataSource": "البيانات مقدمة من Finnhub",
   "poweredBy": "مدعوم بواسطة المتداولين الأسطوريين",
-  
   "errorLoadingRecommendations": "خطأ في تحميل التوصيات",
   "retry": "إعادة المحاولة",
   "allActions": "جميع الإجراءات",
@@ -90,7 +81,6 @@
   "confidence": "الثقة",
   "profitPotential": "إمكانية الربح",
   "noRecommendationsFound": "لم يتم العثور على توصيات",
-  
   "portfolio": "المحفظة",
   "errorLoadingPositions": "خطأ في تحميل المراكز",
   "today": "اليوم",
@@ -109,15 +99,18 @@
   "closePositionConfirm": "إغلاق {quantity} سهم من {stockCode}؟",
   "@closePositionConfirm": {
     "placeholders": {
-      "quantity": {"type": "int"},
-      "stockCode": {"type": "String"}
+      "quantity": {
+        "type": "int"
+      },
+      "stockCode": {
+        "type": "String"
+      }
     }
   },
   "cancel": "إلغاء",
   "positionClosedSuccessfully": "تم إغلاق المركز بنجاح",
   "sl": "وقف الخسارة",
   "tp": "جني الربح",
-  
   "upload": "رفع",
   "uploadVideo": "رفع فيديو",
   "uploadDescription": "اختر من المعرض أو التقط بالكاميرا",
@@ -133,7 +126,9 @@
   "hoursAgo": "منذ {hours} ساعات",
   "@hoursAgo": {
     "placeholders": {
-      "hours": {"type": "int"}
+      "hours": {
+        "type": "int"
+      }
     }
   },
   "messages": "الرسائل",
@@ -143,7 +138,6 @@
   "premium": "بريميوم",
   "upgrade": "ترقية",
   "downgrade": "خفض الخطة",
-  
   "subscription": "الاشتراك",
   "errorLoadingSubscription": "خطأ في تحميل الاشتراك",
   "active": "نشط",
@@ -151,7 +145,9 @@
   "autoRenewalOff": "التجديد التلقائي متوقف. ستنتهي خطتك في {date}",
   "@autoRenewalOff": {
     "placeholders": {
-      "date": {"type": "String"}
+      "date": {
+        "type": "String"
+      }
     }
   },
   "availablePlans": "الخطط المتاحة",
@@ -159,7 +155,9 @@
   "savePercent": "وفر {percent}%",
   "@savePercent": {
     "placeholders": {
-      "percent": {"type": "int"}
+      "percent": {
+        "type": "int"
+      }
     }
   },
   "billingHistory": "تاريخ الفواتير",
@@ -167,28 +165,32 @@
   "upgradePlanConfirm": "ترقية إلى {planName}؟",
   "@upgradePlanConfirm": {
     "placeholders": {
-      "planName": {"type": "String"}
+      "planName": {
+        "type": "String"
+      }
     }
   },
   "price": "السعر",
   "upgradeSuccessful": "تم الترقية بنجاح إلى {planName}",
   "@upgradeSuccessful": {
     "placeholders": {
-      "planName": {"type": "String"}
+      "planName": {
+        "type": "String"
+      }
     }
   },
-  
   "tierDescFree": "ابدأ بالميزات الأساسية",
   "tierDescBasic": "للمتداولين الأفراد",
   "tierDescPro": "أدوات متقدمة للمتداولين الجادين",
   "tierDescPremium": "كل ما تحتاجه للنجاح",
   "tierDescEnterprise": "حلول مخصصة للفرق",
-  
   "planFeatureBasicRecommendations": "توصيات أساسية",
   "planFeatureLimitedPositions": "محدود بـ {count} مراكز",
   "@planFeatureLimitedPositions": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "planFeatureCommunitySupport": "دعم المجتمع",
@@ -196,7 +198,9 @@
   "planFeatureUpToPositions": "حتى {count} مراكز",
   "@planFeatureUpToPositions": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "planFeatureEmailSupport": "دعم البريد الإلكتروني",
@@ -211,7 +215,9 @@
   "planFeatureMonthsFree": "{count} أشهر مجاناً",
   "@planFeatureMonthsFree": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "planFeatureAnnualReview": "مراجعة الأداء السنوية",
@@ -221,7 +227,6 @@
   "planFeatureDedicatedManager": "مدير حساب مخصص",
   "planFeatureCustomStrategies": "استراتيجيات مخصصة",
   "planFeatureWhiteLabelOptions": "خيارات العلامة البيضاء",
-  
   "termsTitle": "شروط خدمة تطبيق التاجر",
   "termsEffectiveDate": "تاريخ السريان: 21 فبراير 2025",
   "termsSection1Title": "المادة 1 (الغرض)",
@@ -247,7 +252,6 @@
   "termsSection10Content": "1. يجب حل النزاعات بين الشركة والمستخدمين من خلال التشاور المتبادل من حيث المبدأ.\n2. إذا لم يتم التوصل إلى تشاور، فسيتم حلها في المحكمة المختصة وفقاً للقوانين ذات الصلة.",
   "termsSupplementary": "الأحكام التكميلية",
   "termsSupplementaryDate": "هذه الشروط سارية المفعول من 21 فبراير 2025.",
-  
   "privacyTitle": "سياسة خصوصية تطبيق التاجر",
   "privacyEffectiveDate": "تاريخ السريان: 21 فبراير 2025",
   "privacySection1Title": "1. الغرض من جمع واستخدام المعلومات الشخصية",
@@ -265,5 +269,29 @@
   "privacySection7Title": "7. مسؤول حماية المعلومات الشخصية",
   "privacySection7Content": "مسؤول حماية المعلومات الشخصية: هونغ غيل دونغ\nالبريد الإلكتروني: privacy@traderapp.com\nالهاتف: 02-1234-5678",
   "privacySection8Title": "8. تغييرات سياسة الخصوصية",
-  "privacySection8Content": "قد يتم تعديل سياسة الخصوصية هذه لتعكس التغييرات في القوانين والخدمات.\nسيتم الإعلان عن التغييرات من خلال الإشعارات داخل التطبيق."
+  "privacySection8Content": "قد يتم تعديل سياسة الخصوصية هذه لتعكس التغييرات في القوانين والخدمات.\nسيتم الإعلان عن التغييرات من خلال الإشعارات داخل التطبيق.",
+  "totalPortfolioValue": "إجمالي قيمة المحفظة",
+  "portfolioPerformance30Days": "أداء المحفظة (30 يوم)",
+  "performanceStatistics": "إحصائيات الأداء",
+  "avgReturn": "متوسط العائد",
+  "totalTrades": "إجمالي الصفقات",
+  "bestTrade": "أفضل صفقة",
+  "recentTrades": "الصفقات الأخيرة",
+  "monthlyReturns": "العوائد الشهرية",
+  "jan": "يناير",
+  "feb": "فبراير",
+  "mar": "مارس",
+  "apr": "أبريل",
+  "may": "مايو",
+  "jun": "يونيو",
+  "marketSummary": "ملخص السوق",
+  "addStock": "إضافة سهم",
+  "stocks": "الأسهم",
+  "searchStocks": "البحث عن الأسهم...",
+  "nothingInWatchlist": "لا توجد أسهم في قائمة المراقبة",
+  "addStocksToWatchlist": "أضف أسهم لتتبع أدائها",
+  "remove": "إزالة",
+  "addToWatchlist": "إضافة إلى قائمة المراقبة",
+  "stockAddedToWatchlist": "تم إضافة السهم إلى قائمة المراقبة",
+  "stockRemovedFromWatchlist": "تم إزالة السهم من قائمة المراقبة"
 }

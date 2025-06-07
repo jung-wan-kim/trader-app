@@ -154,6 +154,45 @@ class AppLocalizationsFr extends AppLocalizations {
   String get logout => 'Se déconnecter';
 
   @override
+  String get accountManagement => 'Gestion de Compte';
+
+  @override
+  String get cancelSubscription => 'Annuler l\'Abonnement';
+
+  @override
+  String get deleteAccount => 'Supprimer le Compte';
+
+  @override
+  String get cancelSubscriptionTitle => 'Annuler l\'Abonnement';
+
+  @override
+  String get cancelSubscriptionMessage =>
+      'Êtes-vous sûr de vouloir annuler votre abonnement ? Vous continuerez à avoir accès jusqu\'à la fin de votre période de facturation actuelle.';
+
+  @override
+  String get cancelSubscriptionConfirm => 'Oui, Annuler';
+
+  @override
+  String get deleteAccountTitle => 'Supprimer le Compte';
+
+  @override
+  String get deleteAccountMessage =>
+      'Êtes-vous sûr de vouloir supprimer votre compte ? Cette action ne peut pas être annulée et toutes vos données seront définitivement supprimées.';
+
+  @override
+  String get deleteAccountConfirm => 'Oui, Supprimer le Compte';
+
+  @override
+  String get subscriptionCancelledSuccessfully =>
+      'Abonnement annulé avec succès';
+
+  @override
+  String get accountDeletedSuccessfully => 'Compte supprimé avec succès';
+
+  @override
+  String get languageSettings => 'Paramètres de Langue';
+
+  @override
   String get investmentWarningTitle =>
       'Avertissement de Risque d\'Investissement';
 
@@ -314,7 +353,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get today => 'aujourd\'hui';
 
   @override
-  String get winRate => 'Taux de réussite';
+  String get winRate => 'Taux de Réussite';
 
   @override
   String get positions => 'Positions';
@@ -502,158 +541,236 @@ class AppLocalizationsFr extends AppLocalizations {
   String get planFeatureWhiteLabelOptions => 'Options de marque blanche';
 
   @override
-  String get termsTitle => 'Trader App Terms of Service';
+  String get termsTitle => 'Conditions de Service de Trader App';
 
   @override
-  String get termsEffectiveDate => 'Effective Date: February 21, 2025';
+  String get termsEffectiveDate =>
+      'Date d\'entrée en vigueur : 21 février 2025';
 
   @override
-  String get termsSection1Title => 'Article 1 (Purpose)';
+  String get termsSection1Title => 'Article 1 (Objectif)';
 
   @override
   String get termsSection1Content =>
-      'These terms are intended to stipulate the rights, obligations, and responsibilities of the company and users regarding the use of mobile application services (hereinafter referred to as \"Services\") provided by Trader App (hereinafter referred to as \"Company\").';
+      'Ces conditions visent à stipuler les droits, obligations et responsabilités de l\'entreprise et des utilisateurs concernant l\'utilisation des services d\'applications mobiles (ci-après dénommés \"Services\") fournis par Trader App (ci-après dénommée \"Entreprise\").';
 
   @override
-  String get termsSection2Title => 'Article 2 (Definitions)';
+  String get termsSection2Title => 'Article 2 (Définitions)';
 
   @override
   String get termsSection2Content =>
-      '1. \"Service\" refers to the AI-based stock recommendation and investment information service provided by the Company.\n2. \"User\" refers to members and non-members who receive services provided by the Company under these terms.\n3. \"Member\" refers to a person who has registered as a member by providing personal information to the Company, continuously receives Company information, and can continuously use the Service.';
+      '1. \"Service\" se réfère au service de recommandations d\'actions basé sur l\'IA et d\'informations d\'investissement fourni par l\'Entreprise.\n2. \"Utilisateur\" se réfère aux membres et non-membres qui reçoivent des services fournis par l\'Entreprise sous ces conditions.\n3. \"Membre\" se réfère à une personne qui s\'est enregistrée comme membre en fournissant des informations personnelles à l\'Entreprise, reçoit continuellement des informations de l\'Entreprise et peut utiliser le Service continuellement.';
 
   @override
   String get termsSection3Title =>
-      'Article 3 (Effectiveness and Changes to Terms)';
+      'Article 3 (Effectivité et Modifications des Conditions)';
 
   @override
   String get termsSection3Content =>
-      '1. These terms become effective by posting them on the service screen or notifying users through other means.\n2. The Company may change these terms when deemed necessary, and changed terms will be announced 7 days before the application date.';
+      '1. Ces conditions entrent en vigueur en étant publiées sur l\'écran de service ou en notifiant les utilisateurs par d\'autres moyens.\n2. L\'Entreprise peut modifier ces conditions lorsque jugé nécessaire, et les conditions modifiées seront annoncées 7 jours avant la date d\'application.';
 
   @override
-  String get termsSection4Title => 'Article 4 (Provision of Services)';
+  String get termsSection4Title => 'Article 4 (Fourniture de Services)';
 
   @override
   String get termsSection4Content =>
-      '1. The Company provides the following services:\n   • AI-based stock recommendation service\n   • Legendary trader strategy information\n   • Real-time stock price information\n   • Portfolio management tools\n   • Risk calculator\n\n2. Services are provided 24 hours a day, 365 days a year in principle. However, they may be temporarily suspended due to system maintenance.';
+      '1. L\'Entreprise fournit les services suivants :\n   • Service de recommandations d\'actions basé sur l\'IA\n   • Informations sur les stratégies de traders légendaires\n   • Informations de prix d\'actions en temps réel\n   • Outils de gestion de portefeuille\n   • Calculateur de risque\n\n2. Les services sont fournis 24 heures sur 24, 365 jours par an en principe. Cependant, ils peuvent être temporairement suspendus en raison de la maintenance du système.';
 
   @override
   String get termsFinancialDisclaimer =>
-      'All information provided by this service is for reference only and does not constitute investment advice or investment recommendations.\n\n• All investment decisions must be made under the user\'s own judgment and responsibility.\n• Stock investment carries the risk of principal loss.\n• Past returns do not guarantee future profits.\n• The Company assumes no responsibility for investment results based on the information provided.';
+      'Toutes les informations fournies par ce service sont uniquement à des fins de référence et ne constituent pas des conseils d\'investissement ou des recommandations d\'investissement.\n\n• Toutes les décisions d\'investissement doivent être prises sous votre propre jugement et responsabilité.\n• L\'investissement en actions comporte le risque de perte de capital.\n• Les rendements passés ne garantissent pas les profits futurs.\n• L\'Entreprise n\'assume aucune responsabilité pour les résultats d\'investissement basés sur les informations fournies.';
 
   @override
-  String get termsSection5Title => 'Article 5 (Membership Registration)';
+  String get termsSection5Title => 'Article 5 (Enregistrement de Membre)';
 
   @override
   String get termsSection5Content =>
-      '1. Membership registration is concluded when the user agrees to the contents of the terms and applies for membership registration, and the Company approves such application.\n2. The Company may not approve or later terminate the usage contract for applications that fall under the following:\n   • Using a false name or another person\'s name\n   • Providing false information or not providing information requested by the Company\n   • Not meeting other application requirements';
+      '1. L\'enregistrement de membre est conclu lorsque l\'utilisateur accepte le contenu des conditions et fait une demande d\'enregistrement de membre, et l\'Entreprise approuve une telle demande.\n2. L\'Entreprise peut ne pas approuver ou ultérieurement résilier le contrat d\'utilisation pour les demandes qui tombent sous ce qui suit :\n   • Utiliser un faux nom ou le nom d\'une autre personne\n   • Fournir de fausses informations ou ne pas fournir les informations demandées par l\'Entreprise\n   • Ne pas répondre aux autres exigences de demande';
 
   @override
-  String get termsSection6Title => 'Article 6 (User Obligations)';
+  String get termsSection6Title => 'Article 6 (Obligations de l\'Utilisateur)';
 
   @override
   String get termsSection6Content =>
-      'Users must not engage in the following activities:\n1. Stealing others\' information\n2. Infringing on the Company\'s intellectual property rights\n3. Intentionally interfering with service operations\n4. Other activities that violate relevant laws and regulations';
+      'Les utilisateurs ne doivent pas s\'engager dans les activités suivantes :\n1. Voler les informations d\'autrui\n2. Enfreindre les droits de propriété intellectuelle de l\'Entreprise\n3. Interférer intentionnellement avec les opérations de service\n4. Autres activités qui violent les lois et réglementations pertinentes';
 
   @override
-  String get termsSection7Title => 'Article 7 (Service Usage Fees)';
+  String get termsSection7Title =>
+      'Article 7 (Frais d\'Utilisation du Service)';
 
   @override
   String get termsSection7Content =>
-      '1. Basic services are provided free of charge.\n2. Premium services require payment of separate usage fees.\n3. Usage fees for paid services follow the fee policy specified within the service.\n4. The Company may change paid service usage fees and will notify 30 days in advance of changes.';
+      '1. Les services de base sont fournis gratuitement.\n2. Les services premium nécessitent le paiement de frais d\'utilisation séparés.\n3. Les frais d\'utilisation pour les services payants suivent la politique de frais spécifiée dans le service.\n4. L\'Entreprise peut modifier les frais d\'utilisation des services payants et notifiera 30 jours avant les changements.';
 
   @override
-  String get termsSection8Title => 'Article 8 (Disclaimer)';
+  String get termsSection8Title => 'Article 8 (Clause de Non-Responsabilité)';
 
   @override
   String get termsSection8Content =>
-      '1. The Company is exempt from responsibility for providing services when unable to provide services due to natural disasters or force majeure equivalent thereto.\n2. The Company is not responsible for service usage obstacles due to user\'s fault.\n3. All investment information provided by the Company is for reference only, and the responsibility for investment decisions lies entirely with the user.';
+      '1. L\'Entreprise est exemptée de responsabilité pour la fourniture de services lorsqu\'elle ne peut pas fournir de services en raison de catastrophes naturelles ou de force majeure équivalente.\n2. L\'Entreprise n\'est pas responsable des obstacles d\'utilisation du service dus à la faute de l\'utilisateur.\n3. Toutes les informations d\'investissement fournies par l\'Entreprise sont uniquement à des fins de référence, et la responsabilité des décisions d\'investissement incombe entièrement à l\'utilisateur.';
 
   @override
-  String get termsSection9Title => 'Article 9 (Privacy Protection)';
+  String get termsSection9Title => 'Article 9 (Protection de la Vie Privée)';
 
   @override
   String get termsSection9Content =>
-      'The Company establishes and complies with a privacy policy to protect users\' personal information. For details, please refer to the Privacy Policy.';
+      'L\'Entreprise établit et respecte une politique de confidentialité pour protéger les informations personnelles des utilisateurs. Pour les détails, veuillez vous référer à la Politique de Confidentialité.';
 
   @override
-  String get termsSection10Title => 'Article 10 (Dispute Resolution)';
+  String get termsSection10Title => 'Article 10 (Résolution des Litiges)';
 
   @override
   String get termsSection10Content =>
-      '1. Disputes between the Company and users shall be resolved through mutual consultation in principle.\n2. If consultation cannot be reached, it shall be resolved in the competent court according to relevant laws.';
+      '1. Les litiges entre l\'Entreprise et les utilisateurs doivent être résolus par consultation mutuelle en principe.\n2. Si aucune consultation ne peut être atteinte, cela sera résolu devant le tribunal compétent selon les lois pertinentes.';
 
   @override
-  String get termsSupplementary => 'Supplementary Provisions';
+  String get termsSupplementary => 'Dispositions Supplémentaires';
 
   @override
   String get termsSupplementaryDate =>
-      'These terms are effective from February 21, 2025.';
+      'Ces conditions sont effectives à partir du 21 février 2025.';
 
   @override
-  String get privacyTitle => 'Trader App Privacy Policy';
+  String get privacyTitle => 'Politique de Confidentialité de Trader App';
 
   @override
-  String get privacyEffectiveDate => 'Effective Date: February 21, 2025';
+  String get privacyEffectiveDate =>
+      'Date d\'entrée en vigueur : 21 février 2025';
 
   @override
   String get privacySection1Title =>
-      '1. Purpose of Collection and Use of Personal Information';
+      '1. Objectif de Collecte et d\'Utilisation des Informations Personnelles';
 
   @override
   String get privacySection1Content =>
-      'Trader App collects personal information for the following purposes:\n• Member registration and management\n• Providing customized investment information\n• Service improvement and new service development\n• Customer inquiry response';
+      'Trader App collecte des informations personnelles pour les objectifs suivants :\n• Enregistrement et gestion des membres\n• Fourniture d\'informations d\'investissement personnalisées\n• Amélioration du service et développement de nouveaux services\n• Réponse aux demandes des clients';
 
   @override
   String get privacySection2Title =>
-      '2. Items of Personal Information Collected';
+      '2. Éléments d\'Informations Personnelles Collectées';
 
   @override
   String get privacySection2Content =>
-      '• Required items: Email, password\n• Optional items: Name, phone number, investment interests\n• Automatically collected items: Device information, app usage history, IP address';
+      '• Éléments requis : E-mail, mot de passe\n• Éléments optionnels : Nom, numéro de téléphone, intérêts d\'investissement\n• Éléments collectés automatiquement : Informations de l\'appareil, historique d\'utilisation de l\'application, adresse IP';
 
   @override
   String get privacySection3Title =>
-      '3. Retention and Use Period of Personal Information';
+      '3. Période de Rétention et d\'Utilisation des Informations Personnelles';
 
   @override
   String get privacySection3Content =>
-      '• Until membership withdrawal\n• However, retained for the required period if preservation is necessary according to relevant laws\n• Contract or subscription withdrawal records under e-commerce law: 5 years\n• Consumer complaint or dispute handling records: 3 years';
+      '• Jusqu\'au retrait de l\'adhésion\n• Cependant, conservées pendant la période requise si la préservation est nécessaire selon les lois pertinentes\n• Enregistrements de contrat ou de retrait d\'abonnement sous la loi de commerce électronique : 5 ans\n• Enregistrements de plaintes de consommateurs ou de traitement de litiges : 3 ans';
 
   @override
   String get privacySection4Title =>
-      '4. Provision of Personal Information to Third Parties';
+      '4. Fourniture d\'Informations Personnelles à des Tiers';
 
   @override
   String get privacySection4Content =>
-      'Trader App does not provide users\' personal information to third parties in principle.\nHowever, exceptions are made in the following cases:\n• When user consent is obtained\n• When required by laws and regulations';
+      'Trader App ne fournit pas les informations personnelles des utilisateurs à des tiers en principe.\nCependant, des exceptions sont faites dans les cas suivants :\n• Lorsque le consentement de l\'utilisateur est obtenu\n• Lorsque requis par les lois et réglementations';
 
   @override
   String get privacySection5Title =>
-      '5. Personal Information Protection Measures';
+      '5. Mesures de Protection des Informations Personnelles';
 
   @override
   String get privacySection5Content =>
-      '• Personal information encryption\n• Technical measures against hacking\n• Limiting access to personal information\n• Minimizing and training personnel handling personal information';
+      '• Chiffrement des informations personnelles\n• Mesures techniques contre le piratage\n• Limitation de l\'accès aux informations personnelles\n• Minimisation et formation du personnel manipulant les informations personnelles';
 
   @override
-  String get privacySection6Title => '6. User Rights';
+  String get privacySection6Title => '6. Droits de l\'Utilisateur';
 
   @override
   String get privacySection6Content =>
-      'Users can exercise the following rights at any time:\n• Request to view personal information\n• Request to correct or delete personal information\n• Request to stop processing personal information\n• Request to transfer personal information';
+      'Les utilisateurs peuvent exercer les droits suivants à tout moment :\n• Demander de voir les informations personnelles\n• Demander de corriger ou supprimer les informations personnelles\n• Demander d\'arrêter le traitement des informations personnelles\n• Demander de transférer les informations personnelles';
 
   @override
   String get privacySection7Title =>
-      '7. Personal Information Protection Officer';
+      '7. Responsable de la Protection des Informations Personnelles';
 
   @override
   String get privacySection7Content =>
-      'Personal Information Protection Officer: Hong Gil-dong\nEmail: privacy@traderapp.com\nPhone: 02-1234-5678';
+      'Responsable de la Protection des Informations Personnelles : Hong Gil-dong\nE-mail : privacy@traderapp.com\nTéléphone : 02-1234-5678';
 
   @override
-  String get privacySection8Title => '8. Changes to Privacy Policy';
+  String get privacySection8Title =>
+      '8. Modifications de la Politique de Confidentialité';
 
   @override
   String get privacySection8Content =>
-      'This privacy policy may be modified to reflect changes in laws and services.\nChanges will be announced through in-app notifications.';
+      'Cette politique de confidentialité peut être modifiée pour refléter les changements dans les lois et services.\nLes modifications seront annoncées par des notifications dans l\'application.';
+
+  @override
+  String get totalPortfolioValue => 'Valeur Totale du Portefeuille';
+
+  @override
+  String get portfolioPerformance30Days =>
+      'Performance du Portefeuille (30 jours)';
+
+  @override
+  String get performanceStatistics => 'Statistiques de Performance';
+
+  @override
+  String get avgReturn => 'Rendement Moyen';
+
+  @override
+  String get totalTrades => 'Total des Transactions';
+
+  @override
+  String get bestTrade => 'Meilleure Transaction';
+
+  @override
+  String get recentTrades => 'Transactions Récentes';
+
+  @override
+  String get monthlyReturns => 'Rendements Mensuels';
+
+  @override
+  String get jan => 'Jan';
+
+  @override
+  String get feb => 'Fév';
+
+  @override
+  String get mar => 'Mar';
+
+  @override
+  String get apr => 'Avr';
+
+  @override
+  String get may => 'Mai';
+
+  @override
+  String get jun => 'Jun';
+
+  @override
+  String get marketSummary => 'Résumé du Marché';
+
+  @override
+  String get addStock => 'Ajouter Action';
+
+  @override
+  String get stocks => 'Actions';
+
+  @override
+  String get searchStocks => 'Rechercher actions...';
+
+  @override
+  String get nothingInWatchlist => 'Aucune action dans votre liste';
+
+  @override
+  String get addStocksToWatchlist =>
+      'Ajoutez des actions pour suivre leur performance';
+
+  @override
+  String get remove => 'Supprimer';
+
+  @override
+  String get addToWatchlist => 'Ajouter à la Liste';
+
+  @override
+  String get stockAddedToWatchlist => 'Action ajoutée à la liste';
+
+  @override
+  String get stockRemovedFromWatchlist => 'Action supprimée de la liste';
 }

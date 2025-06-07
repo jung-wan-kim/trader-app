@@ -378,6 +378,78 @@ abstract class AppLocalizations {
   /// **'Logout'**
   String get logout;
 
+  /// No description provided for @accountManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'Account Management'**
+  String get accountManagement;
+
+  /// No description provided for @cancelSubscription.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel Subscription'**
+  String get cancelSubscription;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get deleteAccount;
+
+  /// No description provided for @cancelSubscriptionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel Subscription'**
+  String get cancelSubscriptionTitle;
+
+  /// No description provided for @cancelSubscriptionMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to cancel your subscription? You will continue to have access until your current billing period ends.'**
+  String get cancelSubscriptionMessage;
+
+  /// No description provided for @cancelSubscriptionConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, Cancel'**
+  String get cancelSubscriptionConfirm;
+
+  /// No description provided for @deleteAccountTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Account'**
+  String get deleteAccountTitle;
+
+  /// No description provided for @deleteAccountMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed.'**
+  String get deleteAccountMessage;
+
+  /// No description provided for @deleteAccountConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, Delete Account'**
+  String get deleteAccountConfirm;
+
+  /// No description provided for @subscriptionCancelledSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Subscription cancelled successfully'**
+  String get subscriptionCancelledSuccessfully;
+
+  /// No description provided for @accountDeletedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Account deleted successfully'**
+  String get accountDeletedSuccessfully;
+
+  /// No description provided for @languageSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Language Settings'**
+  String get languageSettings;
+
   /// No description provided for @investmentWarningTitle.
   ///
   /// In en, this message translates to:
@@ -1265,6 +1337,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This privacy policy may be modified to reflect changes in laws and services.\nChanges will be announced through in-app notifications.'**
   String get privacySection8Content;
+
+  /// No description provided for @totalPortfolioValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Portfolio Value'**
+  String get totalPortfolioValue;
+
+  /// No description provided for @portfolioPerformance30Days.
+  ///
+  /// In en, this message translates to:
+  /// **'Portfolio Performance (30 Days)'**
+  String get portfolioPerformance30Days;
+
+  /// No description provided for @performanceStatistics.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance Statistics'**
+  String get performanceStatistics;
+
+  /// No description provided for @avgReturn.
+  ///
+  /// In en, this message translates to:
+  /// **'Avg. Return'**
+  String get avgReturn;
+
+  /// No description provided for @totalTrades.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Trades'**
+  String get totalTrades;
+
+  /// No description provided for @bestTrade.
+  ///
+  /// In en, this message translates to:
+  /// **'Best Trade'**
+  String get bestTrade;
+
+  /// No description provided for @recentTrades.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Trades'**
+  String get recentTrades;
+
+  /// No description provided for @monthlyReturns.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly Returns'**
+  String get monthlyReturns;
+
+  /// No description provided for @jan.
+  ///
+  /// In en, this message translates to:
+  /// **'Jan'**
+  String get jan;
+
+  /// No description provided for @feb.
+  ///
+  /// In en, this message translates to:
+  /// **'Feb'**
+  String get feb;
+
+  /// No description provided for @mar.
+  ///
+  /// In en, this message translates to:
+  /// **'Mar'**
+  String get mar;
+
+  /// No description provided for @apr.
+  ///
+  /// In en, this message translates to:
+  /// **'Apr'**
+  String get apr;
+
+  /// No description provided for @may.
+  ///
+  /// In en, this message translates to:
+  /// **'May'**
+  String get may;
+
+  /// No description provided for @jun.
+  ///
+  /// In en, this message translates to:
+  /// **'Jun'**
+  String get jun;
+
+  /// No description provided for @marketSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Market Summary'**
+  String get marketSummary;
+
+  /// No description provided for @addStock.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Stock'**
+  String get addStock;
+
+  /// No description provided for @stocks.
+  ///
+  /// In en, this message translates to:
+  /// **'Stocks'**
+  String get stocks;
+
+  /// No description provided for @searchStocks.
+  ///
+  /// In en, this message translates to:
+  /// **'Search stocks...'**
+  String get searchStocks;
+
+  /// No description provided for @nothingInWatchlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing in your watchlist yet'**
+  String get nothingInWatchlist;
+
+  /// No description provided for @addStocksToWatchlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Add stocks to track their performance'**
+  String get addStocksToWatchlist;
+
+  /// No description provided for @remove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get remove;
+
+  /// No description provided for @addToWatchlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to Watchlist'**
+  String get addToWatchlist;
+
+  /// No description provided for @stockAddedToWatchlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock added to watchlist'**
+  String get stockAddedToWatchlist;
+
+  /// No description provided for @stockRemovedFromWatchlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Stock removed from watchlist'**
+  String get stockRemovedFromWatchlist;
 }
 
 class _AppLocalizationsDelegate

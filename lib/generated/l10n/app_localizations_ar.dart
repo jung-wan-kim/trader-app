@@ -149,6 +149,44 @@ class AppLocalizationsAr extends AppLocalizations {
   String get logout => 'تسجيل الخروج';
 
   @override
+  String get accountManagement => 'إدارة الحساب';
+
+  @override
+  String get cancelSubscription => 'إلغاء الاشتراك';
+
+  @override
+  String get deleteAccount => 'حذف الحساب';
+
+  @override
+  String get cancelSubscriptionTitle => 'إلغاء الاشتراك';
+
+  @override
+  String get cancelSubscriptionMessage =>
+      'هل أنت متأكد من أنك تريد إلغاء اشتراكك؟ ستستمر في الوصول حتى انتهاء فترة الفوترة الحالية.';
+
+  @override
+  String get cancelSubscriptionConfirm => 'نعم، إلغاء';
+
+  @override
+  String get deleteAccountTitle => 'حذف الحساب';
+
+  @override
+  String get deleteAccountMessage =>
+      'هل أنت متأكد من أنك تريد حذف حسابك؟ هذا الإجراء لا يمكن التراجع عنه وسيتم حذف جميع بياناتك نهائياً.';
+
+  @override
+  String get deleteAccountConfirm => 'نعم، حذف الحساب';
+
+  @override
+  String get subscriptionCancelledSuccessfully => 'تم إلغاء الاشتراك بنجاح';
+
+  @override
+  String get accountDeletedSuccessfully => 'تم حذف الحساب بنجاح';
+
+  @override
+  String get languageSettings => 'إعدادات اللغة';
+
+  @override
   String get investmentWarningTitle => 'تحذير مخاطر الاستثمار';
 
   @override
@@ -486,158 +524,225 @@ class AppLocalizationsAr extends AppLocalizations {
   String get planFeatureWhiteLabelOptions => 'خيارات العلامة البيضاء';
 
   @override
-  String get termsTitle => 'Trader App Terms of Service';
+  String get termsTitle => 'شروط خدمة تطبيق التاجر';
 
   @override
-  String get termsEffectiveDate => 'Effective Date: February 21, 2025';
+  String get termsEffectiveDate => 'تاريخ السريان: 21 فبراير 2025';
 
   @override
-  String get termsSection1Title => 'Article 1 (Purpose)';
+  String get termsSection1Title => 'المادة 1 (الغرض)';
 
   @override
   String get termsSection1Content =>
-      'These terms are intended to stipulate the rights, obligations, and responsibilities of the company and users regarding the use of mobile application services (hereinafter referred to as \"Services\") provided by Trader App (hereinafter referred to as \"Company\").';
+      'تهدف هذه الشروط إلى تحديد الحقوق والالتزامات والمسؤوليات بين الشركة والمستخدمين فيما يتعلق باستخدام خدمات التطبيق المحمول (المشار إليها فيما بعد باسم \"الخدمات\") المقدمة من تطبيق التاجر (المشار إليه فيما بعد باسم \"الشركة\").';
 
   @override
-  String get termsSection2Title => 'Article 2 (Definitions)';
+  String get termsSection2Title => 'المادة 2 (التعريفات)';
 
   @override
   String get termsSection2Content =>
-      '1. \"Service\" refers to the AI-based stock recommendation and investment information service provided by the Company.\n2. \"User\" refers to members and non-members who receive services provided by the Company under these terms.\n3. \"Member\" refers to a person who has registered as a member by providing personal information to the Company, continuously receives Company information, and can continuously use the Service.';
+      '1. \"الخدمة\" تشير إلى خدمة توصيات الأسهم القائمة على الذكاء الاصطناعي ومعلومات الاستثمار المقدمة من الشركة.\n2. \"المستخدم\" يشير إلى الأعضاء وغير الأعضاء الذين يتلقون الخدمات المقدمة من الشركة وفقاً لهذه الشروط.\n3. \"العضو\" يشير إلى شخص قام بالتسجيل كعضو من خلال تقديم المعلومات الشخصية للشركة، ويتلقى معلومات الشركة باستمرار، ويمكنه استخدام الخدمة بشكل مستمر.';
 
   @override
-  String get termsSection3Title =>
-      'Article 3 (Effectiveness and Changes to Terms)';
+  String get termsSection3Title => 'المادة 3 (فعالية الشروط وتغييرها)';
 
   @override
   String get termsSection3Content =>
-      '1. These terms become effective by posting them on the service screen or notifying users through other means.\n2. The Company may change these terms when deemed necessary, and changed terms will be announced 7 days before the application date.';
+      '1. تصبح هذه الشروط سارية المفعول عن طريق نشرها على شاشة الخدمة أو إشعار المستخدمين بوسائل أخرى.\n2. يجوز للشركة تغيير هذه الشروط عند الضرورة، وسيتم الإعلان عن الشروط المحدثة قبل 7 أيام من تاريخ التطبيق.';
 
   @override
-  String get termsSection4Title => 'Article 4 (Provision of Services)';
+  String get termsSection4Title => 'المادة 4 (تقديم الخدمات)';
 
   @override
   String get termsSection4Content =>
-      '1. The Company provides the following services:\n   • AI-based stock recommendation service\n   • Legendary trader strategy information\n   • Real-time stock price information\n   • Portfolio management tools\n   • Risk calculator\n\n2. Services are provided 24 hours a day, 365 days a year in principle. However, they may be temporarily suspended due to system maintenance.';
+      '1. تقدم الشركة الخدمات التالية:\n   • خدمة توصيات الأسهم القائمة على الذكاء الاصطناعي\n   • معلومات استراتيجيات التجار الأسطوريين\n   • معلومات أسعار الأسهم في الوقت الفعلي\n   • أدوات إدارة المحفظة\n   • حاسبة المخاطر\n\n2. يتم تقديم الخدمات على مدار 24 ساعة يومياً، 365 يوماً في السنة من حيث المبدأ. ومع ذلك، قد يتم تعليقها مؤقتاً بسبب صيانة النظام.';
 
   @override
   String get termsFinancialDisclaimer =>
-      'All information provided by this service is for reference only and does not constitute investment advice or investment recommendations.\n\n• All investment decisions must be made under the user\'s own judgment and responsibility.\n• Stock investment carries the risk of principal loss.\n• Past returns do not guarantee future profits.\n• The Company assumes no responsibility for investment results based on the information provided.';
+      'جميع المعلومات المقدمة من هذه الخدمة هي للمرجع فقط ولا تشكل نصائح استثمارية أو توصيات استثمارية.\n\n• يجب اتخاذ جميع القرارات الاستثمارية تحت حكمك ومسؤوليتك الخاصة.\n• يحمل الاستثمار في الأسهم مخاطر فقدان رأس المال.\n• العوائد السابقة لا تضمن الأرباح المستقبلية.\n• لا تتحمل الشركة أي مسؤولية عن نتائج الاستثمار بناءً على المعلومات المقدمة.';
 
   @override
-  String get termsSection5Title => 'Article 5 (Membership Registration)';
+  String get termsSection5Title => 'المادة 5 (تسجيل العضوية)';
 
   @override
   String get termsSection5Content =>
-      '1. Membership registration is concluded when the user agrees to the contents of the terms and applies for membership registration, and the Company approves such application.\n2. The Company may not approve or later terminate the usage contract for applications that fall under the following:\n   • Using a false name or another person\'s name\n   • Providing false information or not providing information requested by the Company\n   • Not meeting other application requirements';
+      '1. يتم إبرام تسجيل العضوية عندما يوافق المستخدم على محتويات الشروط ويتقدم بطلب تسجيل العضوية، وتوافق الشركة على هذا الطلب.\n2. قد لا توافق الشركة أو تنهي لاحقاً عقد الاستخدام للطلبات التي تندرج تحت ما يلي:\n   • استخدام اسم مزيف أو اسم شخص آخر\n   • تقديم معلومات خاطئة أو عدم تقديم المعلومات المطلوبة من الشركة\n   • عدم استيفاء متطلبات التطبيق الأخرى';
 
   @override
-  String get termsSection6Title => 'Article 6 (User Obligations)';
+  String get termsSection6Title => 'المادة 6 (التزامات المستخدم)';
 
   @override
   String get termsSection6Content =>
-      'Users must not engage in the following activities:\n1. Stealing others\' information\n2. Infringing on the Company\'s intellectual property rights\n3. Intentionally interfering with service operations\n4. Other activities that violate relevant laws and regulations';
+      'يجب على المستخدمين عدم الانخراط في الأنشطة التالية:\n1. سرقة معلومات الآخرين\n2. انتهاك حقوق الملكية الفكرية للشركة\n3. التدخل عمداً في عمليات الخدمة\n4. الأنشطة الأخرى التي تنتهك القوانين واللوائح ذات الصلة';
 
   @override
-  String get termsSection7Title => 'Article 7 (Service Usage Fees)';
+  String get termsSection7Title => 'المادة 7 (رسوم استخدام الخدمة)';
 
   @override
   String get termsSection7Content =>
-      '1. Basic services are provided free of charge.\n2. Premium services require payment of separate usage fees.\n3. Usage fees for paid services follow the fee policy specified within the service.\n4. The Company may change paid service usage fees and will notify 30 days in advance of changes.';
+      '1. يتم تقديم الخدمات الأساسية مجاناً.\n2. تتطلب الخدمات المميزة دفع رسوم استخدام منفصلة.\n3. تتبع رسوم الاستخدام للخدمات المدفوعة سياسة الرسوم المحددة داخل الخدمة.\n4. قد تقوم الشركة بتغيير رسوم استخدام الخدمات المدفوعة وستقوم بالإشعار قبل 30 يوماً من التغييرات.';
 
   @override
-  String get termsSection8Title => 'Article 8 (Disclaimer)';
+  String get termsSection8Title => 'المادة 8 (إخلاء المسؤولية)';
 
   @override
   String get termsSection8Content =>
-      '1. The Company is exempt from responsibility for providing services when unable to provide services due to natural disasters or force majeure equivalent thereto.\n2. The Company is not responsible for service usage obstacles due to user\'s fault.\n3. All investment information provided by the Company is for reference only, and the responsibility for investment decisions lies entirely with the user.';
+      '1. تُعفى الشركة من مسؤولية تقديم الخدمات عندما تكون غير قادرة على تقديم الخدمات بسبب الكوارث الطبيعية أو القوة القاهرة المعادلة لها.\n2. لا تتحمل الشركة مسؤولية عوائق استخدام الخدمة بسبب خطأ المستخدم.\n3. جميع المعلومات الاستثمارية المقدمة من الشركة هي للمرجع فقط، والمسؤولية عن القرارات الاستثمارية تقع بالكامل على المستخدم.';
 
   @override
-  String get termsSection9Title => 'Article 9 (Privacy Protection)';
+  String get termsSection9Title => 'المادة 9 (حماية الخصوصية)';
 
   @override
   String get termsSection9Content =>
-      'The Company establishes and complies with a privacy policy to protect users\' personal information. For details, please refer to the Privacy Policy.';
+      'تضع الشركة وتلتزم بسياسة الخصوصية لحماية المعلومات الشخصية للمستخدمين. للحصول على التفاصيل، يرجى الرجوع إلى سياسة الخصوصية.';
 
   @override
-  String get termsSection10Title => 'Article 10 (Dispute Resolution)';
+  String get termsSection10Title => 'المادة 10 (حل النزاعات)';
 
   @override
   String get termsSection10Content =>
-      '1. Disputes between the Company and users shall be resolved through mutual consultation in principle.\n2. If consultation cannot be reached, it shall be resolved in the competent court according to relevant laws.';
+      '1. يجب حل النزاعات بين الشركة والمستخدمين من خلال التشاور المتبادل من حيث المبدأ.\n2. إذا لم يتم التوصل إلى تشاور، فسيتم حلها في المحكمة المختصة وفقاً للقوانين ذات الصلة.';
 
   @override
-  String get termsSupplementary => 'Supplementary Provisions';
+  String get termsSupplementary => 'الأحكام التكميلية';
 
   @override
   String get termsSupplementaryDate =>
-      'These terms are effective from February 21, 2025.';
+      'هذه الشروط سارية المفعول من 21 فبراير 2025.';
 
   @override
-  String get privacyTitle => 'Trader App Privacy Policy';
+  String get privacyTitle => 'سياسة خصوصية تطبيق التاجر';
 
   @override
-  String get privacyEffectiveDate => 'Effective Date: February 21, 2025';
+  String get privacyEffectiveDate => 'تاريخ السريان: 21 فبراير 2025';
 
   @override
   String get privacySection1Title =>
-      '1. Purpose of Collection and Use of Personal Information';
+      '1. الغرض من جمع واستخدام المعلومات الشخصية';
 
   @override
   String get privacySection1Content =>
-      'Trader App collects personal information for the following purposes:\n• Member registration and management\n• Providing customized investment information\n• Service improvement and new service development\n• Customer inquiry response';
+      'يجمع تطبيق التاجر المعلومات الشخصية للأغراض التالية:\n• تسجيل وإدارة الأعضاء\n• تقديم معلومات استثمارية مخصصة\n• تحسين الخدمة وتطوير خدمات جديدة\n• الاستجابة لاستفسارات العملاء';
 
   @override
-  String get privacySection2Title =>
-      '2. Items of Personal Information Collected';
+  String get privacySection2Title => '2. عناصر المعلومات الشخصية المجمعة';
 
   @override
   String get privacySection2Content =>
-      '• Required items: Email, password\n• Optional items: Name, phone number, investment interests\n• Automatically collected items: Device information, app usage history, IP address';
+      '• العناصر المطلوبة: البريد الإلكتروني، كلمة المرور\n• العناصر الاختيارية: الاسم، رقم الهاتف، اهتمامات الاستثمار\n• العناصر المجمعة تلقائياً: معلومات الجهاز، تاريخ استخدام التطبيق، عنوان IP';
 
   @override
   String get privacySection3Title =>
-      '3. Retention and Use Period of Personal Information';
+      '3. فترة الاحتفاظ بالمعلومات الشخصية واستخدامها';
 
   @override
   String get privacySection3Content =>
-      '• Until membership withdrawal\n• However, retained for the required period if preservation is necessary according to relevant laws\n• Contract or subscription withdrawal records under e-commerce law: 5 years\n• Consumer complaint or dispute handling records: 3 years';
+      '• حتى انسحاب العضوية\n• ومع ذلك، يتم الاحتفاظ بها للفترة المطلوبة إذا كان الحفظ ضرورياً وفقاً للقوانين ذات الصلة\n• سجلات العقد أو انسحاب الاشتراك وفقاً لقانون التجارة الإلكترونية: 5 سنوات\n• سجلات شكاوى المستهلكين أو معالجة النزاعات: 3 سنوات';
 
   @override
-  String get privacySection4Title =>
-      '4. Provision of Personal Information to Third Parties';
+  String get privacySection4Title => '4. تقديم المعلومات الشخصية لأطراف ثالثة';
 
   @override
   String get privacySection4Content =>
-      'Trader App does not provide users\' personal information to third parties in principle.\nHowever, exceptions are made in the following cases:\n• When user consent is obtained\n• When required by laws and regulations';
+      'لا يقدم تطبيق التاجر المعلومات الشخصية للمستخدمين لأطراف ثالثة من حيث المبدأ.\nومع ذلك، يتم استثناء الحالات التالية:\n• عند الحصول على موافقة المستخدم\n• عند المطالبة بموجب القوانين واللوائح';
 
   @override
-  String get privacySection5Title =>
-      '5. Personal Information Protection Measures';
+  String get privacySection5Title => '5. تدابير حماية المعلومات الشخصية';
 
   @override
   String get privacySection5Content =>
-      '• Personal information encryption\n• Technical measures against hacking\n• Limiting access to personal information\n• Minimizing and training personnel handling personal information';
+      '• تشفير المعلومات الشخصية\n• التدابير التقنية ضد القرصنة\n• تقييد الوصول إلى المعلومات الشخصية\n• تقليل وتدريب الموظفين الذين يتعاملون مع المعلومات الشخصية';
 
   @override
-  String get privacySection6Title => '6. User Rights';
+  String get privacySection6Title => '6. حقوق المستخدم';
 
   @override
   String get privacySection6Content =>
-      'Users can exercise the following rights at any time:\n• Request to view personal information\n• Request to correct or delete personal information\n• Request to stop processing personal information\n• Request to transfer personal information';
+      'يمكن للمستخدمين ممارسة الحقوق التالية في أي وقت:\n• طلب عرض المعلومات الشخصية\n• طلب تصحيح أو حذف المعلومات الشخصية\n• طلب وقف معالجة المعلومات الشخصية\n• طلب نقل المعلومات الشخصية';
 
   @override
-  String get privacySection7Title =>
-      '7. Personal Information Protection Officer';
+  String get privacySection7Title => '7. مسؤول حماية المعلومات الشخصية';
 
   @override
   String get privacySection7Content =>
-      'Personal Information Protection Officer: Hong Gil-dong\nEmail: privacy@traderapp.com\nPhone: 02-1234-5678';
+      'مسؤول حماية المعلومات الشخصية: هونغ غيل دونغ\nالبريد الإلكتروني: privacy@traderapp.com\nالهاتف: 02-1234-5678';
 
   @override
-  String get privacySection8Title => '8. Changes to Privacy Policy';
+  String get privacySection8Title => '8. تغييرات سياسة الخصوصية';
 
   @override
   String get privacySection8Content =>
-      'This privacy policy may be modified to reflect changes in laws and services.\nChanges will be announced through in-app notifications.';
+      'قد يتم تعديل سياسة الخصوصية هذه لتعكس التغييرات في القوانين والخدمات.\nسيتم الإعلان عن التغييرات من خلال الإشعارات داخل التطبيق.';
+
+  @override
+  String get totalPortfolioValue => 'إجمالي قيمة المحفظة';
+
+  @override
+  String get portfolioPerformance30Days => 'أداء المحفظة (30 يوم)';
+
+  @override
+  String get performanceStatistics => 'إحصائيات الأداء';
+
+  @override
+  String get avgReturn => 'متوسط العائد';
+
+  @override
+  String get totalTrades => 'إجمالي الصفقات';
+
+  @override
+  String get bestTrade => 'أفضل صفقة';
+
+  @override
+  String get recentTrades => 'الصفقات الأخيرة';
+
+  @override
+  String get monthlyReturns => 'العوائد الشهرية';
+
+  @override
+  String get jan => 'يناير';
+
+  @override
+  String get feb => 'فبراير';
+
+  @override
+  String get mar => 'مارس';
+
+  @override
+  String get apr => 'أبريل';
+
+  @override
+  String get may => 'مايو';
+
+  @override
+  String get jun => 'يونيو';
+
+  @override
+  String get marketSummary => 'ملخص السوق';
+
+  @override
+  String get addStock => 'إضافة سهم';
+
+  @override
+  String get stocks => 'الأسهم';
+
+  @override
+  String get searchStocks => 'البحث عن الأسهم...';
+
+  @override
+  String get nothingInWatchlist => 'لا توجد أسهم في قائمة المراقبة';
+
+  @override
+  String get addStocksToWatchlist => 'أضف أسهم لتتبع أدائها';
+
+  @override
+  String get remove => 'إزالة';
+
+  @override
+  String get addToWatchlist => 'إضافة إلى قائمة المراقبة';
+
+  @override
+  String get stockAddedToWatchlist => 'تم إضافة السهم إلى قائمة المراقبة';
+
+  @override
+  String get stockRemovedFromWatchlist => 'تم إزالة السهم من قائمة المراقبة';
 }

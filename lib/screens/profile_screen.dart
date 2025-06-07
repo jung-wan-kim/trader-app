@@ -7,6 +7,8 @@ import 'subscription_screen.dart';
 import 'privacy_policy_screen.dart';
 import 'terms_of_service_screen.dart';
 import 'language_settings_screen.dart';
+import 'investment_performance_screen.dart';
+import 'watchlist_screen.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -114,7 +116,12 @@ class ProfileScreen extends ConsumerWidget {
               title: l10n?.investmentPerformance ?? 'Investment Performance',
               subtitle: l10n?.performanceDescription ?? 'Check returns and trading history',
               onTap: () {
-                // 투자 성과 화면으로 이동
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const InvestmentPerformanceScreen(),
+                  ),
+                );
               },
             ),
             _buildMenuItem(
@@ -123,7 +130,12 @@ class ProfileScreen extends ConsumerWidget {
               title: l10n?.watchlist ?? 'Watchlist',
               subtitle: l10n?.watchlistDescription ?? 'Manage saved stocks',
               onTap: () {
-                // 관심 종목 화면으로 이동
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const WatchlistScreen(),
+                  ),
+                );
               },
             ),
             _buildMenuItem(
@@ -148,6 +160,38 @@ class ProfileScreen extends ConsumerWidget {
                   ),
                 );
               },
+            ),
+            const Divider(),
+            // 계정 관리 섹션
+            _buildSectionTitle(l10n?.accountManagement ?? 'Account Management'),
+            _buildMenuItem(
+              context,
+              icon: Icons.language,
+              title: l10n?.languageSettings ?? 'Language Settings',
+              subtitle: _getLanguageName(currentLocale.languageCode),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LanguageSettingsScreen(),
+                  ),
+                );
+              },
+            ),
+            if (subscription?.isActive == true)
+              _buildMenuItem(
+                context,
+                icon: Icons.cancel_outlined,
+                title: l10n?.cancelSubscription ?? 'Cancel Subscription',
+                subtitle: 'Cancel your current subscription',
+                onTap: () => _showCancelSubscriptionDialog(context, ref),
+              ),
+            _buildMenuItem(
+              context,
+              icon: Icons.delete_forever,
+              title: l10n?.deleteAccount ?? 'Delete Account',
+              subtitle: 'Permanently delete your account',
+              onTap: () => _showDeleteAccountDialog(context, ref),
             ),
             const Divider(),
             // 법적 정보 섹션
@@ -251,6 +295,148 @@ class ProfileScreen extends ConsumerWidget {
             const SizedBox(height: 20),
           ],
         ),
+      ),
+    );
+  }
+
+  String _getLanguageName(String languageCode) {
+    switch (languageCode) {
+      case 'en':
+        return 'English';
+      case 'ko':
+        return '한국어';
+      case 'zh':
+        return '中文';
+      case 'ja':
+        return '日本語';
+      case 'es':
+        return 'Español';
+      case 'de':
+        return 'Deutsch';
+      case 'fr':
+        return 'Français';
+      case 'pt':
+        return 'Português';
+      case 'hi':
+        return 'हिन्दी';
+      case 'ar':
+        return 'العربية';
+      default:
+        return 'English';
+    }
+  }
+
+  void _showCancelSubscriptionDialog(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.grey[900],
+        title: Text(
+          l10n?.cancelSubscriptionTitle ?? 'Cancel Subscription',
+          style: const TextStyle(color: Colors.white),
+        ),
+        content: Text(
+          l10n?.cancelSubscriptionMessage ?? 'Are you sure you want to cancel your subscription? You will continue to have access until your current billing period ends.',
+          style: const TextStyle(color: Colors.white70),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              l10n?.cancel ?? 'Cancel',
+              style: TextStyle(color: Colors.grey[400]),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              // 구독 취소 로직
+              await ref.read(subscriptionProvider.notifier).cancelSubscription();
+              
+              if (context.mounted) {
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      l10n?.subscriptionCancelledSuccessfully ?? 'Subscription cancelled successfully',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    backgroundColor: const Color(0xFF00D632),
+                  ),
+                );
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+            ),
+            child: Text(
+              l10n?.cancelSubscriptionConfirm ?? 'Yes, Cancel',
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showDeleteAccountDialog(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.grey[900],
+        title: Text(
+          l10n?.deleteAccountTitle ?? 'Delete Account',
+          style: const TextStyle(color: Colors.white),
+        ),
+        content: Text(
+          l10n?.deleteAccountMessage ?? 'Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed.',
+          style: const TextStyle(color: Colors.white70),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              l10n?.cancel ?? 'Cancel',
+              style: TextStyle(color: Colors.grey[400]),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              // 계정 삭제 로직 (실제로는 서버 API 호출)
+              // 여기서는 간단히 앱을 종료하거나 로그인 화면으로 이동
+              
+              if (context.mounted) {
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      l10n?.accountDeletedSuccessfully ?? 'Account deleted successfully',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+                
+                // 실제로는 로그인 화면으로 이동하거나 앱 종료
+                // Navigator.pushAndRemoveUntil(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => LoginScreen()),
+                //   (route) => false,
+                // );
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+            ),
+            child: Text(
+              l10n?.deleteAccountConfirm ?? 'Yes, Delete Account',
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
       ),
     );
   }

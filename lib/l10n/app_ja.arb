@@ -2,11 +2,9 @@
   "@@locale": "ja",
   "appTitle": "トレーダーアプリ",
   "appSubtitle": "AI駆動の株式推奨",
-  
   "chooseLanguage": "言語を選択してください",
   "selectLanguageDescription": "アプリで使用する言語を選択してください",
   "continueButton": "続行",
-  
   "onboardingTitle1": "伝説のトレーダー戦略",
   "onboardingDesc1": "ジェシー・リバモア、ウィリアム・オニールなど\\n歴史上最も成功したトレーダーの\\n実証済み投資戦略を活用",
   "onboardingTitle2": "AI駆動の株式推奨",
@@ -15,11 +13,9 @@
   "onboardingDesc3": "ポジションサイズ計算機と\\n損切り/利確戦略で\\n安全な投資を実現",
   "onboardingTitle4": "リアルタイム市場分析",
   "onboardingDesc4": "リアルタイムチャートとテクニカル指標で\\n市場の流れを把握し\\n最適なタイミングを捉える",
-  
   "getStarted": "始める",
   "next": "次へ",
   "skip": "スキップ",
-  
   "email": "メールアドレス",
   "password": "パスワード",
   "login": "ログイン",
@@ -29,7 +25,6 @@
   "privacyPolicy": "プライバシーポリシー",
   "termsOfService": "利用規約",
   "investmentWarning": "参考情報のみ、投資助言ではありません",
-  
   "profile": "プロフィール",
   "trader": "トレーダー",
   "subscriptionManagement": "サブスクリプション管理",
@@ -62,12 +57,10 @@
   "languageSettings": "言語設定",
   "investmentWarningTitle": "投資リスク警告",
   "investmentWarningText": "このアプリで提供される全ての情報は参考用であり、投資助言には該当しません。全ての投資決定はご自身の判断と責任で行ってください。",
-  
   "settings": "設定",
   "tradingSignals": "取引シグナル",
   "realTimeRecommendations": "プロトレーダーからのリアルタイム推奨",
   "investmentReferenceNotice": "投資参考情報です。投資決定はご自身の責任です。",
-  
   "currentPlan": "現在のプラン",
   "nextBilling": "次回請求",
   "amount": "金額",
@@ -75,11 +68,9 @@
   "subscriptionInfo": "サブスクリプション情報",
   "subscriptionTerms": "サブスクリプション条項",
   "subscriptionTermsText": "• サブスクリプションは購入確認時にiTunesアカウントに請求されます\\n• 現在の期間終了の少なくとも24時間前に自動更新をオフにしない限り、サブスクリプションは自動的に更新されます\\n• 更新料金は現在の期間終了の24時間以内に請求されます\\n• サブスクリプションは購入後にアカウント設定で管理できます\\n• サブスクリプションを購入すると、無料試用期間の未使用部分は失効します",
-  
   "dataDelayWarning": "リアルタイムデータは15分遅延する場合があります",
   "dataSource": "データ提供：Finnhub",
   "poweredBy": "伝説のトレーダーによる",
-  
   "errorLoadingRecommendations": "推奨の読み込み中にエラーが発生しました",
   "retry": "再試行",
   "allActions": "すべてのアクション",
@@ -90,7 +81,6 @@
   "confidence": "信頼度",
   "profitPotential": "利益潜在力",
   "noRecommendationsFound": "推奨が見つかりません",
-  
   "portfolio": "ポートフォリオ",
   "errorLoadingPositions": "ポジションの読み込み中にエラーが発生しました",
   "today": "今日",
@@ -109,15 +99,18 @@
   "closePositionConfirm": "{stockCode} {quantity}株を決済しますか？",
   "@closePositionConfirm": {
     "placeholders": {
-      "quantity": {"type": "int"},
-      "stockCode": {"type": "String"}
+      "quantity": {
+        "type": "int"
+      },
+      "stockCode": {
+        "type": "String"
+      }
     }
   },
   "cancel": "キャンセル",
   "positionClosedSuccessfully": "ポジションが正常に決済されました",
   "sl": "損切り",
   "tp": "利確",
-  
   "upload": "アップロード",
   "uploadVideo": "動画をアップロード",
   "uploadDescription": "ギャラリーから選択またはカメラで撮影",
@@ -133,7 +126,9 @@
   "hoursAgo": "{hours}時間前",
   "@hoursAgo": {
     "placeholders": {
-      "hours": {"type": "int"}
+      "hours": {
+        "type": "int"
+      }
     }
   },
   "messages": "メッセージ",
@@ -143,7 +138,6 @@
   "premium": "プレミアム",
   "upgrade": "アップグレード",
   "downgrade": "ダウングレード",
-  
   "subscription": "サブスクリプション",
   "errorLoadingSubscription": "サブスクリプションの読み込み中にエラーが発生しました",
   "active": "アクティブ",
@@ -185,18 +179,18 @@
       }
     }
   },
-  
   "tierDescFree": "基本機能から始める",
   "tierDescBasic": "個人トレーダー向け",
   "tierDescPro": "真剣なトレーダー向けの高度なツール",
   "tierDescPremium": "成功に必要なすべてが揃っています",
   "tierDescEnterprise": "チーム向けのカスタムソリューション",
-  
   "planFeatureBasicRecommendations": "基本的な推奨",
   "planFeatureLimitedPositions": "{count}ポジションまで制限",
   "@planFeatureLimitedPositions": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "planFeatureCommunitySupport": "コミュニティサポート",
@@ -204,7 +198,9 @@
   "planFeatureUpToPositions": "最大{count}ポジション",
   "@planFeatureUpToPositions": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "planFeatureEmailSupport": "メールサポート",
@@ -219,7 +215,9 @@
   "planFeatureMonthsFree": "{count}ヶ月無料",
   "@planFeatureMonthsFree": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "planFeatureAnnualReview": "年次パフォーマンスレビュー",
@@ -229,7 +227,6 @@
   "planFeatureDedicatedManager": "専属アカウントマネージャー",
   "planFeatureCustomStrategies": "カスタム戦略",
   "planFeatureWhiteLabelOptions": "ホワイトラベルオプション",
-  
   "termsTitle": "トレーダーアプリ利用規約",
   "termsEffectiveDate": "施行日：2025年2月21日",
   "termsSection1Title": "第1条（目的）",
@@ -255,7 +252,6 @@
   "termsSection10Content": "1. 会社と利用者間に発生した紛争は相互協議により解決することを原則とします。\n2. 協議が行われない場合、関連法令による管轄裁判所で解決します。",
   "termsSupplementary": "附則",
   "termsSupplementaryDate": "本規約は2025年2月21日から施行します。",
-  
   "privacyTitle": "トレーダーアプリ個人情報処理方針",
   "privacyEffectiveDate": "施行日：2025年2月21日",
   "privacySection1Title": "1. 個人情報の収集及び利用目的",
@@ -273,5 +269,29 @@
   "privacySection7Title": "7. 個人情報保護責任者",
   "privacySection7Content": "個人情報保護責任者：洪吉東\nメールアドレス：privacy@traderapp.com\n電話：02-1234-5678",
   "privacySection8Title": "8. 個人情報処理方針の変更",
-  "privacySection8Content": "本個人情報処理方針は法令およびサービス変更事項を反映するために修正される場合があります。\n変更事項はアプリ内お知らせを通じて案内いたします。"
+  "privacySection8Content": "本個人情報処理方針は法令およびサービス変更事項を反映するために修正される場合があります。\n変更事項はアプリ内お知らせを通じて案内いたします。",
+  "totalPortfolioValue": "ポートフォリオ総額",
+  "portfolioPerformance30Days": "ポートフォリオパフォーマンス（30日）",
+  "performanceStatistics": "パフォーマンス統計",
+  "avgReturn": "平均リターン",
+  "totalTrades": "総取引数",
+  "bestTrade": "最高取引",
+  "recentTrades": "最近の取引",
+  "monthlyReturns": "月次リターン",
+  "jan": "1月",
+  "feb": "2月",
+  "mar": "3月",
+  "apr": "4月",
+  "may": "5月",
+  "jun": "6月",
+  "marketSummary": "マーケット概要",
+  "addStock": "銘柄追加",
+  "stocks": "銘柄",
+  "searchStocks": "銘柄検索...",
+  "nothingInWatchlist": "ウォッチリストに銘柄がありません",
+  "addStocksToWatchlist": "パフォーマンスを追跡する銘柄を追加",
+  "remove": "削除",
+  "addToWatchlist": "ウォッチリストに追加",
+  "stockAddedToWatchlist": "銘柄をウォッチリストに追加しました",
+  "stockRemovedFromWatchlist": "銘柄をウォッチリストから削除しました"
 }

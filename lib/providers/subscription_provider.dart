@@ -3,7 +3,7 @@ import '../models/user_subscription.dart';
 import '../services/mock_data_service.dart';
 import 'mock_data_provider.dart';
 
-class SubscriptionPlan {
+class SubscriptionPlanInfo {
   final String id;
   final String name;
   final SubscriptionTier tier;
@@ -15,7 +15,7 @@ class SubscriptionPlan {
   final double? discount; // Percentage discount for yearly plans
   final bool isPopular;
 
-  SubscriptionPlan({
+  SubscriptionPlanInfo({
     required this.id,
     required this.name,
     required this.tier,
@@ -109,15 +109,15 @@ class SubscriptionNotifier extends StateNotifier<AsyncValue<UserSubscription?>> 
           currency: newPlan.currency,
           startDate: DateTime.now(),
           endDate: DateTime.now().add(
-            Duration(days: newPlan.billingPeriod == 'YEARLY' ? 365 : 30),
+            Duration(days: newPlan.duration == SubscriptionDuration.yearly ? 365 : 30),
           ),
           nextBillingDate: DateTime.now().add(
-            Duration(days: newPlan.billingPeriod == 'YEARLY' ? 365 : 30),
+            Duration(days: newPlan.duration == SubscriptionDuration.yearly ? 365 : 30),
           ),
           isActive: true,
           autoRenew: subscription.autoRenew,
           features: newPlan.features,
-          limits: newPlan.limits,
+          limits: null, // SubscriptionPlan doesn't have limits
           paymentMethod: subscription.paymentMethod,
           history: [
             ...subscription.history,
@@ -167,6 +167,52 @@ class SubscriptionNotifier extends StateNotifier<AsyncValue<UserSubscription?>> 
         state = AsyncValue.data(cancelled);
       }
     });
+  }
+
+  Future<void> updateSubscription(dynamic purchasedPlan) async {
+    // purchasedPlan could be from in-app purchase service
+    final newSubscription = UserSubscription(
+      id: DateTime.now().millisecondsSinceEpoch.toString(),
+      userId: 'user123',
+      planId: purchasedPlan.id ?? 'pro_monthly',
+      planName: purchasedPlan.name ?? 'Pro Plan',
+      tier: purchasedPlan.tier ?? SubscriptionTier.pro,
+      price: purchasedPlan.price ?? 29.99,
+      currency: purchasedPlan.currency ?? 'USD',
+      startDate: purchasedPlan.startDate ?? DateTime.now(),
+      endDate: purchasedPlan.endDate ?? DateTime.now().add(const Duration(days: 30)),
+      nextBillingDate: purchasedPlan.endDate ?? DateTime.now().add(const Duration(days: 30)),
+      isActive: true,
+      autoRenew: true,
+      features: purchasedPlan.features ?? [
+        'Real-time recommendations',
+        'Advanced analytics',
+        'Priority support',
+      ],
+      limits: {
+        'maxPositions': 50,
+        'maxRecommendations': 100,
+        'maxAlerts': 20,
+      },
+      paymentMethod: PaymentMethod(
+        id: '1',
+        type: 'APPLE_PAY',
+        last4: '****',
+        brand: 'Apple',
+        expiryDate: DateTime(2025, 12),
+      ),
+      history: [
+        SubscriptionHistory(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          action: 'PURCHASED',
+          timestamp: DateTime.now(),
+          description: 'Purchased ${purchasedPlan.name ?? "subscription"}',
+          amount: purchasedPlan.price ?? 29.99,
+        ),
+      ],
+    );
+    
+    state = AsyncValue.data(newSubscription);
   }
 
   Future<void> updatePaymentMethod(PaymentMethod newPaymentMethod) async {
@@ -229,9 +275,9 @@ class PlanFeatureKeys {
   static const whiteLabelOptions = 'planFeatureWhiteLabelOptions';
 }
 
-final availablePlansProvider = Provider<List<SubscriptionPlan>>((ref) {
+final availablePlansProvider = Provider<List<SubscriptionPlanInfo>>((ref) {
   return [
-    SubscriptionPlan(
+    SubscriptionPlanInfo(
       id: 'free',
       name: 'Free Plan',
       tier: SubscriptionTier.free,
@@ -249,7 +295,7 @@ final availablePlansProvider = Provider<List<SubscriptionPlan>>((ref) {
         'maxAlerts': 0,
       },
     ),
-    SubscriptionPlan(
+    SubscriptionPlanInfo(
       id: 'basic_monthly',
       name: 'Basic Plan',
       tier: SubscriptionTier.basic,
@@ -268,7 +314,7 @@ final availablePlansProvider = Provider<List<SubscriptionPlan>>((ref) {
         'maxAlerts': 5,
       },
     ),
-    SubscriptionPlan(
+    SubscriptionPlanInfo(
       id: 'pro_monthly',
       name: 'Pro Plan',
       tier: SubscriptionTier.pro,
@@ -291,7 +337,7 @@ final availablePlansProvider = Provider<List<SubscriptionPlan>>((ref) {
       },
       isPopular: true,
     ),
-    SubscriptionPlan(
+    SubscriptionPlanInfo(
       id: 'pro_yearly',
       name: 'Pro Plan (Yearly)',
       tier: SubscriptionTier.pro,
@@ -310,7 +356,7 @@ final availablePlansProvider = Provider<List<SubscriptionPlan>>((ref) {
       },
       discount: 16.7, // 2 months free
     ),
-    SubscriptionPlan(
+    SubscriptionPlanInfo(
       id: 'premium_monthly',
       name: 'Premium Plan',
       tier: SubscriptionTier.premium,
@@ -334,7 +380,7 @@ final availablePlansProvider = Provider<List<SubscriptionPlan>>((ref) {
   ];
 });
 
-final currentPlanProvider = Provider<SubscriptionPlan?>((ref) {
+final currentPlanProvider = Provider<SubscriptionPlanInfo?>((ref) {
   final subscription = ref.watch(subscriptionProvider).valueOrNull;
   final plans = ref.watch(availablePlansProvider);
   

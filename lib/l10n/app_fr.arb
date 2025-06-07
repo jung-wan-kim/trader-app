@@ -2,11 +2,9 @@
   "@@locale": "fr",
   "appTitle": "Trader App",
   "appSubtitle": "Recommandations d'Actions Alimentées par l'IA",
-  
   "chooseLanguage": "Choisissez votre langue",
   "selectLanguageDescription": "Sélectionnez votre langue préférée pour l'application",
   "continueButton": "Continuer",
-  
   "onboardingTitle1": "Stratégies de Traders Légendaires",
   "onboardingDesc1": "Utilisez des stratégies d'investissement éprouvées des traders les plus réussis de l'histoire comme Jesse Livermore et William O'Neil",
   "onboardingTitle2": "Recommandations d'Actions par IA",
@@ -15,11 +13,9 @@
   "onboardingDesc3": "Réalisez des investissements sûrs avec un calculateur de taille de position et des stratégies de stop-loss/take-profit",
   "onboardingTitle4": "Analyse de Marché en Temps Réel",
   "onboardingDesc4": "Comprenez les tendances du marché et capturez le moment optimal avec des graphiques en temps réel et des indicateurs techniques",
-  
   "getStarted": "Commencer",
   "next": "Suivant",
   "skip": "Passer",
-  
   "email": "E-mail",
   "password": "Mot de passe",
   "login": "Se connecter",
@@ -29,7 +25,6 @@
   "privacyPolicy": "Politique de Confidentialité",
   "termsOfService": "Conditions de Service",
   "investmentWarning": "Pour référence seulement, pas un conseil d'investissement",
-  
   "profile": "Profil",
   "trader": "Trader",
   "subscriptionManagement": "Gestion d'Abonnement",
@@ -62,12 +57,10 @@
   "languageSettings": "Paramètres de Langue",
   "investmentWarningTitle": "Avertissement de Risque d'Investissement",
   "investmentWarningText": "Toutes les informations fournies dans cette application sont uniquement à des fins de référence et ne constituent pas des conseils d'investissement. Toutes les décisions d'investissement doivent être prises sous votre propre jugement et responsabilité.",
-  
   "settings": "Paramètres",
   "tradingSignals": "Signaux de Trading",
   "realTimeRecommendations": "Recommandations en temps réel des meilleurs traders",
   "investmentReferenceNotice": "Pour référence d'investissement. Les décisions d'investissement sont de votre responsabilité.",
-  
   "currentPlan": "Plan Actuel",
   "nextBilling": "Prochaine Facturation",
   "amount": "Montant",
@@ -75,11 +68,9 @@
   "subscriptionInfo": "Informations d'Abonnement",
   "subscriptionTerms": "Conditions d'Abonnement",
   "subscriptionTermsText": "• Les abonnements sont facturés à votre compte iTunes lors de la confirmation d'achat\\n• Les abonnements se renouvellent automatiquement sauf si le renouvellement automatique est désactivé au moins 24 heures avant la fin de la période actuelle\\n• Les frais de renouvellement sont prélevés dans les 24 heures précédant la fin de la période actuelle\\n• Les abonnements peuvent être gérés dans les paramètres de votre compte après achat\\n• Toute partie inutilisée de la période d'essai gratuite sera perdue lors de l'achat d'un abonnement",
-  
   "dataDelayWarning": "Les données en temps réel peuvent être retardées de 15 minutes",
   "dataSource": "Données fournies par Finnhub",
   "poweredBy": "Alimenté par des Traders Légendaires",
-  
   "errorLoadingRecommendations": "Erreur lors du chargement des recommandations",
   "retry": "Réessayer",
   "allActions": "Toutes les actions",
@@ -90,11 +81,10 @@
   "confidence": "Confiance",
   "profitPotential": "Potentiel de profit",
   "noRecommendationsFound": "Aucune recommandation trouvée",
-  
   "portfolio": "Portefeuille",
   "errorLoadingPositions": "Erreur lors du chargement des positions",
   "today": "aujourd'hui",
-  "winRate": "Taux de réussite",
+  "winRate": "Taux de Réussite",
   "positions": "Positions",
   "dayPL": "P&P du jour",
   "noOpenPositions": "Aucune position ouverte",
@@ -109,15 +99,18 @@
   "closePositionConfirm": "Fermer {quantity} actions de {stockCode} ?",
   "@closePositionConfirm": {
     "placeholders": {
-      "quantity": {"type": "int"},
-      "stockCode": {"type": "String"}
+      "quantity": {
+        "type": "int"
+      },
+      "stockCode": {
+        "type": "String"
+      }
     }
   },
   "cancel": "Annuler",
   "positionClosedSuccessfully": "Position fermée avec succès",
   "sl": "SL",
   "tp": "TP",
-  
   "upload": "Télécharger",
   "uploadVideo": "Télécharger une vidéo",
   "uploadDescription": "Sélectionner dans la galerie ou filmer avec la caméra",
@@ -133,7 +126,9 @@
   "hoursAgo": "il y a {hours} heures",
   "@hoursAgo": {
     "placeholders": {
-      "hours": {"type": "int"}
+      "hours": {
+        "type": "int"
+      }
     }
   },
   "messages": "Messages",
@@ -143,7 +138,6 @@
   "premium": "Premium",
   "upgrade": "Mettre à niveau",
   "downgrade": "Rétrograder",
-  
   "subscription": "Abonnement",
   "errorLoadingSubscription": "Erreur lors du chargement de l'abonnement",
   "active": "Actif",
@@ -185,18 +179,18 @@
       }
     }
   },
-  
   "tierDescFree": "Commencez avec les fonctionnalités de base",
   "tierDescBasic": "Pour les traders individuels",
   "tierDescPro": "Outils avancés pour les traders sérieux",
   "tierDescPremium": "Tout ce dont vous avez besoin pour réussir",
   "tierDescEnterprise": "Solutions personnalisées pour les équipes",
-  
   "planFeatureBasicRecommendations": "Recommandations de base",
   "planFeatureLimitedPositions": "Limité à {count} positions",
   "@planFeatureLimitedPositions": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "planFeatureCommunitySupport": "Support communautaire",
@@ -204,7 +198,9 @@
   "planFeatureUpToPositions": "Jusqu'à {count} positions",
   "@planFeatureUpToPositions": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "planFeatureEmailSupport": "Support par e-mail",
@@ -219,7 +215,9 @@
   "planFeatureMonthsFree": "{count} mois gratuits",
   "@planFeatureMonthsFree": {
     "placeholders": {
-      "count": {"type": "int"}
+      "count": {
+        "type": "int"
+      }
     }
   },
   "planFeatureAnnualReview": "Révision annuelle des performances",
@@ -229,7 +227,6 @@
   "planFeatureDedicatedManager": "Gestionnaire de compte dédié",
   "planFeatureCustomStrategies": "Stratégies personnalisées",
   "planFeatureWhiteLabelOptions": "Options de marque blanche",
-  
   "termsTitle": "Conditions de Service de Trader App",
   "termsEffectiveDate": "Date d'entrée en vigueur : 21 février 2025",
   "termsSection1Title": "Article 1 (Objectif)",
@@ -255,7 +252,6 @@
   "termsSection10Content": "1. Les litiges entre l'Entreprise et les utilisateurs doivent être résolus par consultation mutuelle en principe.\n2. Si aucune consultation ne peut être atteinte, cela sera résolu devant le tribunal compétent selon les lois pertinentes.",
   "termsSupplementary": "Dispositions Supplémentaires",
   "termsSupplementaryDate": "Ces conditions sont effectives à partir du 21 février 2025.",
-  
   "privacyTitle": "Politique de Confidentialité de Trader App",
   "privacyEffectiveDate": "Date d'entrée en vigueur : 21 février 2025",
   "privacySection1Title": "1. Objectif de Collecte et d'Utilisation des Informations Personnelles",
@@ -273,5 +269,29 @@
   "privacySection7Title": "7. Responsable de la Protection des Informations Personnelles",
   "privacySection7Content": "Responsable de la Protection des Informations Personnelles : Hong Gil-dong\nE-mail : privacy@traderapp.com\nTéléphone : 02-1234-5678",
   "privacySection8Title": "8. Modifications de la Politique de Confidentialité",
-  "privacySection8Content": "Cette politique de confidentialité peut être modifiée pour refléter les changements dans les lois et services.\nLes modifications seront annoncées par des notifications dans l'application."
+  "privacySection8Content": "Cette politique de confidentialité peut être modifiée pour refléter les changements dans les lois et services.\nLes modifications seront annoncées par des notifications dans l'application.",
+  "totalPortfolioValue": "Valeur Totale du Portefeuille",
+  "portfolioPerformance30Days": "Performance du Portefeuille (30 jours)",
+  "performanceStatistics": "Statistiques de Performance",
+  "avgReturn": "Rendement Moyen",
+  "totalTrades": "Total des Transactions",
+  "bestTrade": "Meilleure Transaction",
+  "recentTrades": "Transactions Récentes",
+  "monthlyReturns": "Rendements Mensuels",
+  "jan": "Jan",
+  "feb": "Fév",
+  "mar": "Mar",
+  "apr": "Avr",
+  "may": "Mai",
+  "jun": "Jun",
+  "marketSummary": "Résumé du Marché",
+  "addStock": "Ajouter Action",
+  "stocks": "Actions",
+  "searchStocks": "Rechercher actions...",
+  "nothingInWatchlist": "Aucune action dans votre liste",
+  "addStocksToWatchlist": "Ajoutez des actions pour suivre leur performance",
+  "remove": "Supprimer",
+  "addToWatchlist": "Ajouter à la Liste",
+  "stockAddedToWatchlist": "Action ajoutée à la liste",
+  "stockRemovedFromWatchlist": "Action supprimée de la liste"
 }

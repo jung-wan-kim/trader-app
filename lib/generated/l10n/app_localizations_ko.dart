@@ -148,6 +148,44 @@ class AppLocalizationsKo extends AppLocalizations {
   String get logout => '로그아웃';
 
   @override
+  String get accountManagement => '계정 관리';
+
+  @override
+  String get cancelSubscription => '구독 취소';
+
+  @override
+  String get deleteAccount => '계정 삭제';
+
+  @override
+  String get cancelSubscriptionTitle => '구독 취소';
+
+  @override
+  String get cancelSubscriptionMessage =>
+      '정말로 구독을 취소하시겠습니까? 현재 결제 기간이 끝날 때까지 계속 이용하실 수 있습니다.';
+
+  @override
+  String get cancelSubscriptionConfirm => '네, 취소합니다';
+
+  @override
+  String get deleteAccountTitle => '계정 삭제';
+
+  @override
+  String get deleteAccountMessage =>
+      '정말로 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없으며 모든 데이터가 영구적으로 삭제됩니다.';
+
+  @override
+  String get deleteAccountConfirm => '네, 계정을 삭제합니다';
+
+  @override
+  String get subscriptionCancelledSuccessfully => '구독이 성공적으로 취소되었습니다';
+
+  @override
+  String get accountDeletedSuccessfully => '계정이 성공적으로 삭제되었습니다';
+
+  @override
+  String get languageSettings => '언어 설정';
+
+  @override
   String get investmentWarningTitle => '투자 위험 경고';
 
   @override
@@ -629,4 +667,76 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get privacySection8Content =>
       '이 개인정보처리방침은 법령 및 서비스 변경사항을 반영하기 위해 수정될 수 있습니다.\n변경사항은 앱 내 공지사항을 통해 안내드립니다.';
+
+  @override
+  String get totalPortfolioValue => '총 포트폴리오 가치';
+
+  @override
+  String get portfolioPerformance30Days => '포트폴리오 성과 (30일)';
+
+  @override
+  String get performanceStatistics => '성과 통계';
+
+  @override
+  String get avgReturn => '평균 수익률';
+
+  @override
+  String get totalTrades => '총 거래 수';
+
+  @override
+  String get bestTrade => '최고 거래';
+
+  @override
+  String get recentTrades => '최근 거래';
+
+  @override
+  String get monthlyReturns => '월별 수익률';
+
+  @override
+  String get jan => '1월';
+
+  @override
+  String get feb => '2월';
+
+  @override
+  String get mar => '3월';
+
+  @override
+  String get apr => '4월';
+
+  @override
+  String get may => '5월';
+
+  @override
+  String get jun => '6월';
+
+  @override
+  String get marketSummary => '시장 요약';
+
+  @override
+  String get addStock => '종목 추가';
+
+  @override
+  String get stocks => '종목';
+
+  @override
+  String get searchStocks => '종목 검색...';
+
+  @override
+  String get nothingInWatchlist => '관심 종목이 없습니다';
+
+  @override
+  String get addStocksToWatchlist => '성과를 추적할 종목을 추가하세요';
+
+  @override
+  String get remove => '삭제';
+
+  @override
+  String get addToWatchlist => '관심 종목에 추가';
+
+  @override
+  String get stockAddedToWatchlist => '관심 종목에 추가되었습니다';
+
+  @override
+  String get stockRemovedFromWatchlist => '관심 종목에서 삭제되었습니다';
 }
