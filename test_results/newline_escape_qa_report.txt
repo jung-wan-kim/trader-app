@@ -1,0 +1,81 @@
+=== 줄바꿈 이스케이프 QA 테스트 보고서 ===
+
+[ko 언어]
+  - onboardingDesc1: 2개의 줄바꿈
+  - onboardingDesc2: 2개의 줄바꿈
+  - onboardingDesc3: 2개의 줄바꿈
+  - onboardingDesc4: 2개의 줄바꿈
+  - subscriptionTermsText: 4개의 줄바꿈
+  총 줄바꿈 수: 12
+  줄바꿈이 있는 키: 5/22
+
+[en 언어]
+  - subscriptionTermsText: 4개의 줄바꿈
+  총 줄바꿈 수: 4
+  줄바꿈이 있는 키: 1/22
+
+[ja 언어]
+  - onboardingDesc1: 2개의 줄바꿈
+  - onboardingDesc2: 2개의 줄바꿈
+  - onboardingDesc3: 2개의 줄바꿈
+  - onboardingDesc4: 2개의 줄바꿈
+  - subscriptionTermsText: 4개의 줄바꿈
+  총 줄바꿈 수: 12
+  줄바꿈이 있는 키: 5/22
+
+[zh 언어]
+  - onboardingDesc1: 2개의 줄바꿈
+  - onboardingDesc2: 2개의 줄바꿈
+  - onboardingDesc3: 2개의 줄바꿈
+  - onboardingDesc4: 2개의 줄바꿈
+  - subscriptionTermsText: 4개의 줄바꿈
+  - termsSection2Content: 2개의 줄바꿈
+  - termsSection3Content: 1개의 줄바꿈
+  - termsSection4Content: 7개의 줄바꿈
+  - termsFinancialDisclaimer: 5개의 줄바꿈
+  - termsSection5Content: 4개의 줄바꿈
+  - termsSection6Content: 4개의 줄바꿈
+  - termsSection7Content: 3개의 줄바꿈
+  - termsSection8Content: 2개의 줄바꿈
+  - termsSection10Content: 1개의 줄바꿈
+  - privacySection1Content: 4개의 줄바꿈
+  - privacySection2Content: 2개의 줄바꿈
+  - privacySection3Content: 3개의 줄바꿈
+  - privacySection4Content: 3개의 줄바꿈
+  - privacySection5Content: 3개의 줄바꿈
+  - privacySection6Content: 4개의 줄바꿈
+  - privacySection7Content: 2개의 줄바꿈
+  - privacySection8Content: 1개의 줄바꿈
+  총 줄바꿈 수: 63
+  줄바꿈이 있는 키: 22/22
+
+[es 언어]
+  - subscriptionTermsText: 4개의 줄바꿈
+  총 줄바꿈 수: 4
+  줄바꿈이 있는 키: 1/22
+
+[fr 언어]
+  - subscriptionTermsText: 4개의 줄바꿈
+  총 줄바꿈 수: 4
+  줄바꿈이 있는 키: 1/22
+
+[de 언어]
+  - subscriptionTermsText: 4개의 줄바꿈
+  총 줄바꿈 수: 4
+  줄바꿈이 있는 키: 1/22
+
+[ar 언어]
+  - subscriptionTermsText: 4개의 줄바꿈
+  총 줄바꿈 수: 4
+  줄바꿈이 있는 키: 1/22
+
+[hi 언어]
+  - subscriptionTermsText: 4개의 줄바꿈
+  총 줄바꿈 수: 4
+  줄바꿈이 있는 키: 1/22
+
+[pt 언어]
+  - subscriptionTermsText: 4개의 줄바꿈
+  총 줄바꿈 수: 4
+  줄바꿈이 있는 키: 1/22
+

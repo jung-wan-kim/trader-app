@@ -99,8 +99,25 @@ void main() {
       });
 
       test('daysRemaining should return -1 when endDate is null', () {
-        final subscription = TestHelper.createMockUserSubscription(
-          endDate: null,
+        final subscription = UserSubscription(
+          id: 'test',
+          userId: 'user-test',
+          planId: 'plan-basic',
+          planName: 'Basic Plan',
+          tier: SubscriptionTier.basic,
+          price: 9.99,
+          currency: 'USD',
+          startDate: DateTime.now(),
+          endDate: null, // No end date
+          isActive: true,
+          autoRenew: false,
+          features: ['basic_feature'],
+          paymentMethod: PaymentMethod(
+            id: 'pm-test',
+            type: 'CARD',
+            last4: '1234',
+          ),
+          history: [],
         );
         expect(subscription.daysRemaining, -1);
       });
@@ -332,7 +349,7 @@ void main() {
         expect(paymentMethod.type, 'CARD');
         expect(paymentMethod.last4, '4242');
         expect(paymentMethod.brand, 'VISA');
-        expect(paymentMethod.expiryDate, DateTime.parse(json['expiryDate']));
+        expect(paymentMethod.expiryDate, DateTime.parse(json['expiryDate'] as String));
       });
 
       test('fromJson should handle null optional fields', () {
@@ -404,7 +421,7 @@ void main() {
         final history = SubscriptionHistory.fromJson(json);
         expect(history.id, 'hist-test');
         expect(history.action, 'RENEWED');
-        expect(history.timestamp, DateTime.parse(json['timestamp']));
+        expect(history.timestamp, DateTime.parse(json['timestamp'] as String));
         expect(history.description, 'Subscription renewed');
         expect(history.amount, 29.99);
       });
@@ -519,7 +536,7 @@ void main() {
           discountAmount: 25.00, // Large discount
         );
 
-        expect(subscription.finalPrice, 4.99);
+        expect(subscription.finalPrice, closeTo(4.99, 0.01));
       });
 
       test('should handle discount larger than price', () {

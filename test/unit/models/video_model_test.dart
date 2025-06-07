@@ -400,7 +400,7 @@ void main() {
           thumbnailUrl: 'https://example.com/thumb.jpg',
           username: 'user_with_émojis',
           userAvatar: 'https://example.com/avatar.jpg',
-          description: 'Special chars: éñ中文🎵@#$%^&*()',
+          description: 'Special chars: éñ中文🎵@#\$%^&*()',
           musicName: 'Müsic Ñame - Àrtist',
           likes: 100,
           comments: 10,

@@ -55,7 +55,7 @@ class UserSubscription {
         (t) => t.name == json['tier'],
         orElse: () => SubscriptionTier.basic,
       ),
-      price: json['price'].toDouble(),
+      price: (json['price'] as num).toDouble(),
       currency: json['currency'],
       startDate: DateTime.parse(json['startDate']),
       endDate: json['endDate'] != null ? DateTime.parse(json['endDate']) : null,
@@ -67,7 +67,7 @@ class UserSubscription {
       limits: json['limits'],
       paymentMethod: PaymentMethod.fromJson(json['paymentMethod']),
       discountCode: json['discountCode'],
-      discountAmount: json['discountAmount']?.toDouble(),
+      discountAmount: json['discountAmount'] != null ? (json['discountAmount'] as num).toDouble() : null,
       history: (json['history'] as List)
           .map((h) => SubscriptionHistory.fromJson(h))
           .toList(),
@@ -164,7 +164,7 @@ class SubscriptionHistory {
       action: json['action'],
       timestamp: DateTime.parse(json['timestamp']),
       description: json['description'],
-      amount: json['amount']?.toDouble(),
+      amount: json['amount'] != null ? (json['amount'] as num).toDouble() : null,
     );
   }
 
