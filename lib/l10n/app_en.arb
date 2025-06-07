@@ -313,5 +313,12 @@
   "remove": "Remove",
   "addToWatchlist": "Add to Watchlist",
   "stockAddedToWatchlist": "Stock added to watchlist",
-  "stockRemovedFromWatchlist": "Stock removed from watchlist"
+  "stockRemovedFromWatchlist": "Stock removed from watchlist",
+  
+  "chooseTrader": "Choose Your Trading Master",
+  "performance": "Performance",
+  "keyStrategy": "Key Strategy",
+  "bestTrade": "Best Trade",
+  "selected": "Selected",
+  "continueWithSelection": "Continue with Selection"
 }

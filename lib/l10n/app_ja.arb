@@ -293,5 +293,12 @@
   "remove": "削除",
   "addToWatchlist": "ウォッチリストに追加",
   "stockAddedToWatchlist": "銘柄をウォッチリストに追加しました",
-  "stockRemovedFromWatchlist": "銘柄をウォッチリストから削除しました"
+  "stockRemovedFromWatchlist": "銘柄をウォッチリストから削除しました",
+  
+  "chooseTrader": "あなたのトレーディングマスターを選択",
+  "performance": "パフォーマンス",
+  "keyStrategy": "主要戦略",
+  "bestTrade": "最高の取引",
+  "selected": "選択済み",
+  "continueWithSelection": "選択を続行"
 }

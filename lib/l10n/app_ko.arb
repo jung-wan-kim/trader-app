@@ -255,5 +255,12 @@
   "remove": "삭제",
   "addToWatchlist": "관심 종목에 추가",
   "stockAddedToWatchlist": "관심 종목에 추가되었습니다",
-  "stockRemovedFromWatchlist": "관심 종목에서 삭제되었습니다"
+  "stockRemovedFromWatchlist": "관심 종목에서 삭제되었습니다",
+  
+  "chooseTrader": "당신의 트레이딩 마스터를 선택하세요",
+  "performance": "성과",
+  "keyStrategy": "핵심 전략",
+  "bestTrade": "최고의 거래",
+  "selected": "선택됨",
+  "continueWithSelection": "선택 항목으로 계속하기"
 }

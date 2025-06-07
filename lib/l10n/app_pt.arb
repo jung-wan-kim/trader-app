@@ -293,5 +293,12 @@
   "remove": "Remover",
   "addToWatchlist": "Adicionar à Lista",
   "stockAddedToWatchlist": "Ação adicionada à lista",
-  "stockRemovedFromWatchlist": "Ação removida da lista"
+  "stockRemovedFromWatchlist": "Ação removida da lista",
+  
+  "chooseTrader": "Escolha Seu Mestre do Trading",
+  "performance": "Desempenho",
+  "keyStrategy": "Estratégia Principal",
+  "bestTrade": "Melhor Negociação",
+  "selected": "Selecionado",
+  "continueWithSelection": "Continuar com a Seleção"
 }

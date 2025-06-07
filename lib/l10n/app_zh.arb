@@ -293,5 +293,12 @@
   "remove": "删除",
   "addToWatchlist": "添加到关注列表",
   "stockAddedToWatchlist": "股票已添加到关注列表",
-  "stockRemovedFromWatchlist": "股票已从关注列表移除"
+  "stockRemovedFromWatchlist": "股票已从关注列表移除",
+  
+  "chooseTrader": "选择您的交易大师",
+  "performance": "业绩表现",
+  "keyStrategy": "核心策略",
+  "bestTrade": "最佳交易",
+  "selected": "已选择",
+  "continueWithSelection": "继续选择"
 }

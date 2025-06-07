@@ -293,5 +293,12 @@
   "remove": "हटाएं",
   "addToWatchlist": "वॉचलिस्ट में जोड़ें",
   "stockAddedToWatchlist": "स्टॉक वॉचलिस्ट में जोड़ा गया",
-  "stockRemovedFromWatchlist": "स्टॉक वॉचलिस्ट से हटाया गया"
+  "stockRemovedFromWatchlist": "स्टॉक वॉचलिस्ट से हटाया गया",
+  
+  "chooseTrader": "अपने ट्रेडिंग गुरु को चुनें",
+  "performance": "प्रदर्शन",
+  "keyStrategy": "मुख्य रणनीति",
+  "bestTrade": "सर्वश्रेष्ठ ट्रेड",
+  "selected": "चयनित",
+  "continueWithSelection": "चयन के साथ जारी रखें"
 }

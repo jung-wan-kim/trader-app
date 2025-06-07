@@ -293,5 +293,12 @@
   "remove": "إزالة",
   "addToWatchlist": "إضافة إلى قائمة المراقبة",
   "stockAddedToWatchlist": "تم إضافة السهم إلى قائمة المراقبة",
-  "stockRemovedFromWatchlist": "تم إزالة السهم من قائمة المراقبة"
+  "stockRemovedFromWatchlist": "تم إزالة السهم من قائمة المراقبة",
+  
+  "chooseTrader": "اختر معلم التداول الخاص بك",
+  "performance": "الأداء",
+  "keyStrategy": "الاستراتيجية الرئيسية",
+  "bestTrade": "أفضل صفقة",
+  "selected": "محدد",
+  "continueWithSelection": "المتابعة مع التحديد"
 }
