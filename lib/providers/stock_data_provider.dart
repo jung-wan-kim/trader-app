@@ -2,6 +2,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/candle_data.dart';
 import '../services/finnhub_service.dart';
 import '../services/mock_data_service.dart';
+import '../services/market_service.dart';
+import '../services/trading_service.dart';
+import '../services/portfolio_service.dart';
+import '../main.dart';
 import 'mock_data_provider.dart';
 
 // Finnhub 서비스 프로바이더
@@ -45,3 +49,38 @@ final currentPriceProvider = FutureProvider.family<double, String>(
     return price ?? 100.0;
   },
 );
+
+// Supabase 서비스 프로바이더
+final marketServiceProvider = Provider<MarketService>((ref) {
+  return MarketService(supabase);
+});
+
+final tradingServiceProvider = Provider<TradingService>((ref) {
+  return TradingService(supabase);
+});
+
+final portfolioServiceProvider = Provider<PortfolioService>((ref) {
+  return PortfolioService(supabase);
+});
+
+// 선택된 트레이딩 전략 프로바이더
+final selectedTradingStrategyProvider = StateProvider<TradingStrategy>((ref) {
+  return TradingStrategy.jesseLivermore; // 기본값
+});
+
+// 실시간 주가 프로바이더 (Supabase)
+final stockQuoteProvider = FutureProvider.family<StockQuote, String>((ref, symbol) async {
+  final marketService = ref.watch(marketServiceProvider);
+  return await marketService.getQuote(symbol);
+});
+
+// 트레이딩 신호 프로바이더
+final tradingSignalProvider = FutureProvider.family<TradingSignal, String>((ref, symbol) async {
+  final tradingService = ref.watch(tradingServiceProvider);
+  final strategy = ref.watch(selectedTradingStrategyProvider);
+  
+  return await tradingService.getSignal(
+    symbol: symbol,
+    strategy: strategy,
+  );
+});

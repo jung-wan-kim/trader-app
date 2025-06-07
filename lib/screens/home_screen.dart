@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/recommendations_provider.dart';
+import '../providers/stock_data_provider.dart';
 import '../models/stock_recommendation.dart';
 import '../widgets/recommendation_card.dart';
+import '../services/trading_service.dart';
 import 'strategy_detail_screen.dart';
+import 'trader_selection_screen.dart';
 import '../generated/l10n/app_localizations.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -77,6 +80,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Widget _buildHeader(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final selectedStrategy = ref.watch(selectedTradingStrategyProvider);
+    
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -93,14 +98,45 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              IconButton(
-                onPressed: () {
-                  ref.read(recommendationsProvider.notifier).refresh();
-                },
-                icon: const Icon(
-                  Icons.refresh,
-                  color: Colors.white,
-                ),
+              Row(
+                children: [
+                  // 트레이더 선택 버튼
+                  TextButton.icon(
+                    onPressed: () async {
+                      final result = await Navigator.push<TradingStrategy>(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const TraderSelectionScreen(),
+                        ),
+                      );
+                      if (result != null) {
+                        ref.read(selectedTradingStrategyProvider.notifier).state = result;
+                      }
+                    },
+                    icon: const Icon(
+                      Icons.person_outline,
+                      color: Color(0xFF00D632),
+                      size: 20,
+                    ),
+                    label: Text(
+                      selectedStrategy.displayName,
+                      style: const TextStyle(
+                        color: Color(0xFF00D632),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      ref.read(recommendationsProvider.notifier).refresh();
+                    },
+                    icon: const Icon(
+                      Icons.refresh,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

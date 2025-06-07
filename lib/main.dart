@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'generated/l10n/app_localizations.dart';
 import 'screens/splash_screen.dart';
 import 'config/app_config.dart';
 import 'providers/language_provider.dart';
+import 'services/market_service.dart';
+import 'services/trading_service.dart';
+import 'services/portfolio_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // TODO: 백엔드 연동 시 초기화 코드 추가
-  // 현재는 목업 데이터로 개발 진행
+  // Supabase 초기화
+  await Supabase.initialize(
+    url: 'https://lgebgddeerpxdjvtqvoi.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxnZWJnZGRlZXJweGRqdnRxdm9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkxOTc2MDksImV4cCI6MjA2NDc3MzYwOX0.NZxHOwzgRc-Vjw60XktU7L_hKiIMAW_5b_DHis6qKBE',
+  );
   
   runApp(
     const ProviderScope(
@@ -18,6 +25,9 @@ void main() async {
     ),
   );
 }
+
+// 전역 Supabase 클라이언트
+final supabase = Supabase.instance.client;
 
 class TraderApp extends ConsumerWidget {
   const TraderApp({super.key});
