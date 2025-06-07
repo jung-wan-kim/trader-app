@@ -9,6 +9,8 @@ import 'terms_of_service_screen.dart';
 import 'language_settings_screen.dart';
 import 'investment_performance_screen.dart';
 import 'watchlist_screen.dart';
+import '../providers/supabase_auth_provider.dart';
+import 'login_screen.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -246,8 +248,18 @@ class ProfileScreen extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   // 로그아웃 처리
+                  final authService = ref.read(supabaseAuthServiceProvider);
+                  await authService.signOut();
+                  
+                  if (context.mounted) {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => const LoginScreen()),
+                      (route) => false,
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,

@@ -44,14 +44,20 @@ post_install do |installer|
     # Fix for GoogleUtilities version conflicts
     target.build_configurations.each do |config|
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+      
+      # Skip privacy bundle targets
+      if target.name.end_with?('_privacy')
+        config.build_settings.delete('INFOPLIST_FILE')
+      end
     end
   end
   
-  # Fix for duplicate Info.plist
-  installer.generated_projects.each do |project|
-    project.targets.each do |target|
+  # Fix for privacy manifest
+  installer.pods_project.targets.each do |target|
+    if target.name.end_with?('_privacy')
       target.build_configurations.each do |config|
-        config.build_settings['INFOPLIST_FILE'] = "$(SRCROOT)/Target Support Files/#{target.name}/#{target.name}-Info.plist"
+        config.build_settings['SKIP_INSTALL'] = 'YES'
+        config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
       end
     end
   end

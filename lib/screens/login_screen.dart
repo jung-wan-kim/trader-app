@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../config/app_config.dart';
-// import '../providers/auth_provider.dart';
 import 'main_screen.dart';
 import 'privacy_policy_screen.dart';
 import 'terms_of_service_screen.dart';
 import '../generated/l10n/app_localizations.dart';
+import '../services/supabase_auth_service.dart';
+import '../providers/supabase_auth_provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -35,22 +37,53 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     super.dispose();
   }
 
-  void _signInWithEmail() {
-    // 데모 모드에서는 바로 로그인
-    if (AppConfig.isDemoMode) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const MainScreen()),
-      );
+  void _signInWithEmail() async {
+    if (_emailController.text.isNotEmpty && 
+        _passwordController.text.isNotEmpty) {
+      final authService = ref.read(supabaseAuthServiceProvider);
+      
+      try {
+        final response = await authService.signInWithEmail(
+          _emailController.text,
+          _passwordController.text,
+        );
+        
+        if (response != null && mounted) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const MainScreen()),
+          );
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('로그인 실패: $e')),
+          );
+        }
+      }
     }
   }
 
   void _signInWithGoogle() async {
-    // Google 로그인 (임시로 바로 메인 화면으로 이동)
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const MainScreen()),
-    );
+    final authService = ref.read(supabaseAuthServiceProvider);
+    
+    try {
+      final response = await authService.signInWithGoogle();
+      
+      if (response != null && mounted) {
+        // 로그인 성공 시 메인 화면으로 이동
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const MainScreen()),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Google 로그인 실패: $e')),
+        );
+      }
+    }
   }
 
   @override
