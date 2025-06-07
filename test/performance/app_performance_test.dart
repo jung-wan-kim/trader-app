@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tiktok_clone_flutter/main.dart';
+import 'package:trader_app/main.dart';
 
 void main() {
   group('App Performance Tests', () {
