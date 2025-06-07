@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tiktok_clone_flutter/main.dart';
-import 'package:tiktok_clone_flutter/providers/recommendations_provider.dart';
-import 'package:tiktok_clone_flutter/providers/portfolio_provider.dart';
-import 'package:tiktok_clone_flutter/providers/subscription_provider.dart';
-import 'package:tiktok_clone_flutter/models/stock_recommendation.dart';
-import 'package:tiktok_clone_flutter/models/trader_strategy.dart';
+import 'package:trader_app/main.dart';
+import 'package:trader_app/providers/recommendations_provider.dart';
+import 'package:trader_app/providers/portfolio_provider.dart';
+import 'package:trader_app/providers/subscription_provider.dart';
+import 'package:trader_app/models/stock_recommendation.dart';
+import 'package:trader_app/models/trader_strategy.dart';
 
 void main() {
   group('Data Flow Integration Tests', () {

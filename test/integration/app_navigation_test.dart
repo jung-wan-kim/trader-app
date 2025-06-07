@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tiktok_clone_flutter/main.dart';
-import 'package:tiktok_clone_flutter/screens/main_screen.dart';
-import 'package:tiktok_clone_flutter/screens/home_screen.dart';
-import 'package:tiktok_clone_flutter/screens/discover_screen.dart';
-import 'package:tiktok_clone_flutter/screens/position_screen.dart';
-import 'package:tiktok_clone_flutter/screens/profile_screen.dart';
+import 'package:trader_app/main.dart';
+import 'package:trader_app/screens/main_screen.dart';
+import 'package:trader_app/screens/home_screen.dart';
+import 'package:trader_app/screens/discover_screen.dart';
+import 'package:trader_app/screens/position_screen.dart';
+import 'package:trader_app/screens/profile_screen.dart';
 
 void main() {
   group('App Navigation Integration Tests', () {
