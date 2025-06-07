@@ -100,7 +100,7 @@ class AppTheme {
       ),
       
       // 카드 테마
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: AppColors.surfaceLight,
         elevation: elevationLow,
         margin: EdgeInsets.all(8),
@@ -245,7 +245,7 @@ class AppTheme {
       ),
       
       // 카드 테마
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: AppColors.surfaceDark,
         elevation: elevationLow,
         margin: EdgeInsets.all(8),

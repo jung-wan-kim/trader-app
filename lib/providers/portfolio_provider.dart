@@ -35,7 +35,7 @@ class Position {
   double get marketValue => quantity * currentPrice;
   double get costBasis => quantity * entryPrice;
   double get unrealizedPnL => marketValue - costBasis;
-  double get unrealizedPnLPercent => ((marketValue - costBasis) / costBasis) * 100;
+  double get unrealizedPnLPercent => costBasis == 0 ? 0 : ((marketValue - costBasis) / costBasis) * 100;
   bool get isProfit => unrealizedPnL > 0;
 }
 
@@ -260,7 +260,7 @@ final portfolioStatsProvider = Provider<PortfolioStats>((ref) {
   final totalValue = positions.fold(0.0, (sum, p) => sum + p.marketValue);
   final totalCost = positions.fold(0.0, (sum, p) => sum + p.costBasis);
   final totalPnL = totalValue - totalCost;
-  final totalPnLPercent = (totalPnL / totalCost) * 100;
+  final totalPnLPercent = totalCost == 0 ? 0.0 : (totalPnL / totalCost) * 100;
   
   final winningPositions = positions.where((p) => p.isProfit).length;
   final losingPositions = positions.where((p) => !p.isProfit).length;
@@ -268,7 +268,7 @@ final portfolioStatsProvider = Provider<PortfolioStats>((ref) {
 
   // Mock day P&L (실제로는 일일 가격 변동 데이터가 필요)
   final dayPnL = totalPnL * 0.1; // 임시 값
-  final dayPnLPercent = (dayPnL / totalCost) * 100;
+  final dayPnLPercent = totalCost == 0 ? 0.0 : (dayPnL / totalCost) * 100;
 
   return PortfolioStats(
     totalValue: totalValue,
