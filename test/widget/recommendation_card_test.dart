@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tiktok_clone_flutter/models/stock_recommendation.dart';
-import 'package:tiktok_clone_flutter/widgets/recommendation_card.dart';
+import 'package:trader_app/models/stock_recommendation.dart';
+import 'package:trader_app/widgets/recommendation_card.dart';
 
 void main() {
   group('RecommendationCard Widget Tests', () {

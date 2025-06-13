@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tiktok_clone_flutter/models/user_subscription.dart';
-import 'package:tiktok_clone_flutter/services/mock_data_service.dart';
+import 'package:trader_app/models/user_subscription.dart';
+import 'package:trader_app/services/mock_data_service.dart';
 
 // Security test utilities
 class SecurityTestUtils {
@@ -239,7 +239,7 @@ void main() {
         // Strong passwords
         final strongPasswords = [
           'P@ssw0rd123',
-          'Tr@d3r$2024',
+          'Tr@d3r\$2024',
           'MyStr0ng!Pass',
           'C0mpl3x#P@ss',
         ];

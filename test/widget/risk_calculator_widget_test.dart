@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:tiktok_clone_flutter/widgets/risk_calculator.dart';
+import 'package:trader_app/widgets/risk_calculator.dart';
 
 void main() {
   group('RiskCalculator Widget Tests', () {
@@ -65,11 +65,27 @@ void main() {
       // Potential loss: $200
       // Risk/Reward ratio: 2.0
 
-      expect(find.text('\$200.00'), findsOneWidget); // Risk amount
+      // Risk amount appears once
+      final riskAmountText = find.text('\$200.00').evaluate().where((element) {
+        final widget = element.widget;
+        if (widget is Text && widget.style?.color == Colors.orange) {
+          return true;
+        }
+        return false;
+      });
+      expect(riskAmountText.length, equals(1));
       expect(find.text('40 shares'), findsOneWidget); // Position size
       expect(find.text('\$4000.00'), findsOneWidget); // Total investment
       expect(find.text('\$400.00'), findsOneWidget); // Potential profit
-      expect(find.text('\$200.00'), findsNWidgets(2)); // Potential loss (same as risk amount)
+      // Potential loss appears once  
+      final lossText = find.text('\$200.00').evaluate().where((element) {
+        final widget = element.widget;
+        if (widget is Text && widget.style?.color == const Color(0xFFFF3B30)) {
+          return true;
+        }
+        return false;
+      });
+      expect(lossText.length, equals(1));
       expect(find.text('1:2.00'), findsOneWidget); // Risk/Reward ratio
     });
 
@@ -80,27 +96,20 @@ void main() {
         takeProfit: 110.0,
       ));
 
-      // Find account size input field
-      final accountSizeField = find.ancestor(
-        of: find.text('10000'),
-        matching: find.byType(TextField),
-      );
+      // Find account size input field by finding all TextFields
+      final textFields = find.byType(TextField);
+      expect(textFields, findsNWidgets(2));
+      
+      // First TextField should be account size
+      final accountSizeField = textFields.at(0);
 
       // Clear and enter new value
-      await tester.tap(accountSizeField);
-      await tester.pumpAndSettle();
-      
-      // Clear existing text
-      await tester.enterText(accountSizeField, '');
-      await tester.pumpAndSettle();
-      
-      // Enter new value
       await tester.enterText(accountSizeField, '20000');
       await tester.pumpAndSettle();
 
       // New calculations with $20,000 account
-      // Risk amount: $400
-      expect(find.text('\$400.00'), findsOneWidget);
+      // Risk amount: $400 (appears twice - as risk amount and potential loss)
+      expect(find.text('\$400.00'), findsNWidgets(2));
     });
 
     testWidgets('should update calculations when risk percent changes', (WidgetTester tester) async {
@@ -111,24 +120,19 @@ void main() {
       ));
 
       // Find risk percent input field
-      final riskPercentField = find.ancestor(
-        of: find.text('2'),
-        matching: find.byType(TextField),
-      );
+      final textFields = find.byType(TextField);
+      expect(textFields, findsNWidgets(2));
+      
+      // Second TextField should be risk percent
+      final riskPercentField = textFields.at(1);
 
       // Clear and enter new value
-      await tester.tap(riskPercentField);
-      await tester.pumpAndSettle();
-      
-      await tester.enterText(riskPercentField, '');
-      await tester.pumpAndSettle();
-      
       await tester.enterText(riskPercentField, '1');
       await tester.pumpAndSettle();
 
       // New calculations with 1% risk
-      // Risk amount: $100
-      expect(find.text('\$100.00'), findsOneWidget);
+      // Risk amount: $100 (appears twice - as risk amount and potential loss)
+      expect(find.text('\$100.00'), findsNWidgets(2));
     });
 
     testWidgets('should show warning when risk/reward ratio is below 1:1', (WidgetTester tester) async {
@@ -183,14 +187,10 @@ void main() {
         takeProfit: 110.0,
       ));
 
-      final accountSizeField = find.ancestor(
-        of: find.text('10000'),
-        matching: find.byType(TextField),
-      );
+      final textFields = find.byType(TextField);
+      final accountSizeField = textFields.at(0);
 
       // Try to enter more than 2 decimal places
-      await tester.tap(accountSizeField);
-      await tester.pumpAndSettle();
       await tester.enterText(accountSizeField, '10000.999');
       await tester.pumpAndSettle();
 
