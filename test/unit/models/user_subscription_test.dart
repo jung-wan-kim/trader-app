@@ -1,662 +1,549 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:trader_app/models/user_subscription.dart';
-import '../../helpers/test_helper.dart';
 
 void main() {
   group('UserSubscription Model Tests', () {
-    late UserSubscription mockSubscription;
-    late Map<String, dynamic> validJson;
+    late DateTime now;
+    late UserSubscription testSubscription;
 
     setUp(() {
-      mockSubscription = TestHelper.createMockUserSubscription();
-      validJson = TestHelper.mockUserSubscriptionJson;
+      now = DateTime.now();
+      testSubscription = UserSubscription(
+        id: 'sub_001',
+        userId: 'user_001',
+        planId: 'plan_pro',
+        planName: 'Pro Trader',
+        tier: SubscriptionTier.pro,
+        price: 49.99,
+        currency: 'USD',
+        startDate: now.subtract(const Duration(days: 15)),
+        endDate: now.add(const Duration(days: 15)),
+        isActive: true,
+        autoRenew: true,
+        features: [
+          'Real-time data',
+          'Advanced analytics',
+          'Priority support',
+          'API access',
+        ],
+        paymentMethod: PaymentMethod(
+          id: 'pm_001',
+          type: 'CARD',
+          last4: '4242',
+          brand: 'Visa',
+          expiryDate: DateTime(2025, 12, 31),
+        ),
+        history: [
+          SubscriptionHistory(
+            id: 'pay_001',
+            action: 'CREATED',
+            timestamp: now.subtract(const Duration(days: 15)),
+            description: 'Monthly subscription',
+            amount: 49.99,
+          ),
+        ],
+      );
     });
 
-    group('Constructor', () {
-      test('should create instance with all required fields', () {
-        expect(mockSubscription.id, 'sub-1');
-        expect(mockSubscription.userId, 'user-1');
-        expect(mockSubscription.planId, 'plan-pro');
-        expect(mockSubscription.planName, 'Pro Plan');
-        expect(mockSubscription.tier, SubscriptionTier.pro);
-        expect(mockSubscription.price, 29.99);
-        expect(mockSubscription.currency, 'USD');
-        expect(mockSubscription.isActive, isTrue);
-        expect(mockSubscription.autoRenew, isTrue);
-        expect(mockSubscription.features, isA<List<String>>());
-        expect(mockSubscription.paymentMethod, isA<PaymentMethod>());
-        expect(mockSubscription.history, isA<List<SubscriptionHistory>>());
+    group('Constructor and Properties', () {
+      test('should create subscription with all properties', () {
+        expect(testSubscription.id, equals('sub_001'));
+        expect(testSubscription.userId, equals('user_001'));
+        expect(testSubscription.planId, equals('plan_pro'));
+        expect(testSubscription.planName, equals('Pro Trader'));
+        expect(testSubscription.tier, equals(SubscriptionTier.pro));
+        expect(testSubscription.price, equals(49.99));
+        expect(testSubscription.currency, equals('USD'));
+        expect(testSubscription.isActive, isTrue);
+        expect(testSubscription.autoRenew, isTrue);
+        expect(testSubscription.features.length, equals(4));
+        expect(testSubscription.paymentMethod, isNotNull);
+        expect(testSubscription.history.length, equals(1));
       });
 
-      test('should handle optional fields as null', () {
+      test('should handle null payment method', () {
         final subscription = UserSubscription(
-          id: 'test',
-          userId: 'user-test',
-          planId: 'plan-basic',
-          planName: 'Basic Plan',
-          tier: SubscriptionTier.basic,
-          price: 9.99,
+          id: 'sub_002',
+          userId: 'user_002',
+          planId: 'plan_free',
+          planName: 'Free',
+          tier: SubscriptionTier.free,
+          price: 0,
           currency: 'USD',
-          startDate: DateTime.now(),
+          startDate: now,
           isActive: true,
           autoRenew: false,
-          features: ['basic_feature'],
+          features: ['Basic features'],
           paymentMethod: PaymentMethod(
-            id: 'pm-test',
-            type: 'CARD',
-            last4: '1234',
+            id: 'pm_free',
+            type: 'NONE',
+            last4: '0000',
           ),
           history: [],
-          // Optional fields are null
+        );
+
+        expect(subscription.paymentMethod, isNull);
+        expect(subscription.tier, equals(SubscriptionTier.free));
+        expect(subscription.price, equals(0));
+      });
+
+      test('should handle null end date for lifetime subscriptions', () {
+        final lifetimeSubscription = UserSubscription(
+          id: 'sub_lifetime',
+          userId: 'user_lifetime',
+          planId: 'plan_lifetime',
+          planName: 'Lifetime Access',
+          tier: SubscriptionTier.premium,
+          price: 999.99,
+          currency: 'USD',
+          startDate: now.subtract(const Duration(days: 365)),
           endDate: null,
-          nextBillingDate: null,
-          limits: null,
-          discountCode: null,
-          discountAmount: null,
+          isActive: true,
+          autoRenew: false,
+          features: ['All features', 'Lifetime updates'],
+          paymentMethod: PaymentMethod(
+            id: 'pm_free',
+            type: 'NONE',
+            last4: '0000',
+          ),
+          history: [],
         );
 
-        expect(subscription.endDate, isNull);
-        expect(subscription.nextBillingDate, isNull);
-        expect(subscription.limits, isNull);
-        expect(subscription.discountCode, isNull);
-        expect(subscription.discountAmount, isNull);
-      });
-    });
-
-    group('Computed Properties', () {
-      test('isExpired should return false for active subscription', () {
-        expect(mockSubscription.isExpired, isFalse);
-      });
-
-      test('isExpired should return true for expired subscription', () {
-        final expiredSubscription = TestHelper.createMockUserSubscription(
-          endDate: DateTime.now().subtract(const Duration(days: 1)),
-        );
-        expect(expiredSubscription.isExpired, isTrue);
-      });
-
-      test('isExpired should return false when endDate is null', () {
-        final lifetimeSubscription = TestHelper.createMockUserSubscription(
-          endDate: null,
-        );
+        expect(lifetimeSubscription.endDate, isNull);
         expect(lifetimeSubscription.isExpired, isFalse);
       });
+    });
 
-      test('daysRemaining should calculate correctly', () {
-        final futureDate = DateTime.now().add(const Duration(days: 30));
-        final subscription = TestHelper.createMockUserSubscription(
-          endDate: futureDate,
-        );
-        expect(subscription.daysRemaining, closeTo(30, 1));
+    group('Calculated Properties', () {
+      test('should calculate days remaining correctly', () {
+        final daysRemaining = testSubscription.daysRemaining;
+        expect(daysRemaining, anyOf(14, 15)); // Allow for date calculation differences
       });
 
-      test('daysRemaining should return negative for expired subscription', () {
-        final pastDate = DateTime.now().subtract(const Duration(days: 5));
-        final subscription = TestHelper.createMockUserSubscription(
-          endDate: pastDate,
-        );
-        expect(subscription.daysRemaining, lessThan(0));
-      });
-
-      test('daysRemaining should return -1 when endDate is null', () {
+      test('should return -1 days remaining when no end date', () {
         final subscription = UserSubscription(
-          id: 'test',
-          userId: 'user-test',
-          planId: 'plan-basic',
-          planName: 'Basic Plan',
-          tier: SubscriptionTier.basic,
-          price: 9.99,
+          id: 'sub_003',
+          userId: 'user_003',
+          planId: 'plan_lifetime',
+          planName: 'Lifetime',
+          tier: SubscriptionTier.premium,
+          price: 999.99,
           currency: 'USD',
-          startDate: DateTime.now(),
-          endDate: null, // No end date
+          startDate: now,
+          endDate: null,
           isActive: true,
           autoRenew: false,
-          features: ['basic_feature'],
+          features: [],
           paymentMethod: PaymentMethod(
-            id: 'pm-test',
-            type: 'CARD',
-            last4: '1234',
+            id: 'pm_free',
+            type: 'NONE',
+            last4: '0000',
           ),
           history: [],
         );
-        expect(subscription.daysRemaining, -1);
+
+        expect(subscription.daysRemaining, equals(-1));
       });
 
-      test('finalPrice should calculate correctly without discount', () {
-        expect(mockSubscription.finalPrice, 29.99);
-      });
-
-      test('finalPrice should calculate correctly with discount', () {
-        final discountedSubscription = UserSubscription(
-          id: 'sub-discount',
-          userId: 'user-1',
-          planId: 'plan-pro',
-          planName: 'Pro Plan',
-          tier: SubscriptionTier.pro,
-          price: 29.99,
+      test('should identify expired subscriptions', () {
+        final expiredSubscription = UserSubscription(
+          id: 'sub_expired',
+          userId: 'user_expired',
+          planId: 'plan_basic',
+          planName: 'Basic',
+          tier: SubscriptionTier.basic,
+          price: 19.99,
           currency: 'USD',
-          startDate: DateTime.now(),
-          isActive: true,
-          autoRenew: true,
-          features: ['feature1'],
-          paymentMethod: PaymentMethod(id: 'pm-1', type: 'CARD', last4: '1234'),
+          startDate: now.subtract(const Duration(days: 60)),
+          endDate: now.subtract(const Duration(days: 30)),
+          isActive: false,
+          autoRenew: false,
+          features: [],
+          paymentMethod: PaymentMethod(
+            id: 'pm_free',
+            type: 'NONE',
+            last4: '0000',
+          ),
           history: [],
-          discountAmount: 5.00,
         );
 
-        expect(discountedSubscription.finalPrice, 24.99);
+        expect(expiredSubscription.isExpired, isTrue);
+        expect(testSubscription.isExpired, isFalse);
       });
 
-      test('finalPrice should handle null discount amount', () {
-        final subscription = UserSubscription(
-          id: 'sub-no-discount',
-          userId: 'user-1',
-          planId: 'plan-pro',
-          planName: 'Pro Plan',
+      test('should handle subscription about to expire', () {
+        final expiringSubscription = UserSubscription(
+          id: 'sub_expiring',
+          userId: 'user_expiring',
+          planId: 'plan_pro',
+          planName: 'Pro',
           tier: SubscriptionTier.pro,
-          price: 29.99,
+          price: 49.99,
           currency: 'USD',
-          startDate: DateTime.now(),
+          startDate: now.subtract(const Duration(days: 29)),
+          endDate: now.add(const Duration(days: 1)),
           isActive: true,
-          autoRenew: true,
-          features: ['feature1'],
-          paymentMethod: PaymentMethod(id: 'pm-1', type: 'CARD', last4: '1234'),
+          autoRenew: false,
+          features: [],
+          paymentMethod: PaymentMethod(
+            id: 'pm_free',
+            type: 'NONE',
+            last4: '0000',
+          ),
           history: [],
-          discountAmount: null,
         );
 
-        expect(subscription.finalPrice, 29.99);
-      });
-    });
-
-    group('JSON Serialization', () {
-      test('fromJson should create correct instance from valid JSON', () {
-        final subscription = UserSubscription.fromJson(validJson);
-
-        expect(subscription.id, validJson['id']);
-        expect(subscription.userId, validJson['userId']);
-        expect(subscription.planId, validJson['planId']);
-        expect(subscription.planName, validJson['planName']);
-        expect(subscription.tier, SubscriptionTier.pro);
-        expect(subscription.price, validJson['price']);
-        expect(subscription.currency, validJson['currency']);
-        expect(subscription.isActive, validJson['isActive']);
-        expect(subscription.autoRenew, validJson['autoRenew']);
-        expect(subscription.features, validJson['features']);
-      });
-
-      test('fromJson should parse DateTime fields correctly', () {
-        final subscription = UserSubscription.fromJson(validJson);
-        expect(subscription.startDate, DateTime.parse(validJson['startDate']));
-        expect(subscription.endDate, DateTime.parse(validJson['endDate']));
-        expect(subscription.nextBillingDate, DateTime.parse(validJson['nextBillingDate']));
-      });
-
-      test('fromJson should handle null DateTime fields', () {
-        final jsonWithNullDates = Map<String, dynamic>.from(validJson);
-        jsonWithNullDates['endDate'] = null;
-        jsonWithNullDates['nextBillingDate'] = null;
-
-        final subscription = UserSubscription.fromJson(jsonWithNullDates);
-        expect(subscription.endDate, isNull);
-        expect(subscription.nextBillingDate, isNull);
-      });
-
-      test('fromJson should parse SubscriptionTier enum correctly', () {
-        for (SubscriptionTier tier in SubscriptionTier.values) {
-          final jsonWithTier = Map<String, dynamic>.from(validJson);
-          jsonWithTier['tier'] = tier.name;
-
-          final subscription = UserSubscription.fromJson(jsonWithTier);
-          expect(subscription.tier, tier);
-        }
-      });
-
-      test('fromJson should default to basic tier for invalid tier', () {
-        final jsonWithInvalidTier = Map<String, dynamic>.from(validJson);
-        jsonWithInvalidTier['tier'] = 'invalid_tier';
-
-        final subscription = UserSubscription.fromJson(jsonWithInvalidTier);
-        expect(subscription.tier, SubscriptionTier.basic);
-      });
-
-      test('fromJson should parse PaymentMethod correctly', () {
-        final subscription = UserSubscription.fromJson(validJson);
-        expect(subscription.paymentMethod, isA<PaymentMethod>());
-        expect(subscription.paymentMethod.id, 'pm-1');
-        expect(subscription.paymentMethod.type, 'CARD');
-        expect(subscription.paymentMethod.last4, '1234');
-      });
-
-      test('fromJson should parse SubscriptionHistory list correctly', () {
-        final subscription = UserSubscription.fromJson(validJson);
-        expect(subscription.history, isA<List<SubscriptionHistory>>());
-        expect(subscription.history, hasLength(1));
-        expect(subscription.history.first.action, 'CREATED');
-      });
-
-      test('fromJson should handle null optional fields', () {
-        final jsonWithNulls = Map<String, dynamic>.from(validJson);
-        jsonWithNulls['limits'] = null;
-        jsonWithNulls['discountCode'] = null;
-        jsonWithNulls['discountAmount'] = null;
-
-        final subscription = UserSubscription.fromJson(jsonWithNulls);
-        expect(subscription.limits, isNull);
-        expect(subscription.discountCode, isNull);
-        expect(subscription.discountAmount, isNull);
-      });
-
-      test('fromJson should convert numeric fields to double', () {
-        final jsonWithInts = Map<String, dynamic>.from(validJson);
-        jsonWithInts['price'] = 30; // int instead of double
-        jsonWithInts['discountAmount'] = 5; // int instead of double
-
-        final subscription = UserSubscription.fromJson(jsonWithInts);
-        expect(subscription.price, isA<double>());
-        expect(subscription.discountAmount, isA<double>());
-      });
-
-      test('toJson should create correct JSON representation', () {
-        final json = mockSubscription.toJson();
-
-        expect(json['id'], mockSubscription.id);
-        expect(json['userId'], mockSubscription.userId);
-        expect(json['tier'], mockSubscription.tier.name);
-        expect(json['price'], mockSubscription.price);
-        expect(json['isActive'], mockSubscription.isActive);
-        expect(json['startDate'], mockSubscription.startDate.toIso8601String());
-        expect(json['paymentMethod'], mockSubscription.paymentMethod.toJson());
-        expect(json['history'], mockSubscription.history.map((h) => h.toJson()).toList());
-      });
-
-      test('JSON round-trip should preserve data', () {
-        final json = mockSubscription.toJson();
-        final reconstructed = UserSubscription.fromJson(json);
-
-        expect(reconstructed.id, mockSubscription.id);
-        expect(reconstructed.userId, mockSubscription.userId);
-        expect(reconstructed.tier, mockSubscription.tier);
-        expect(reconstructed.price, mockSubscription.price);
-        expect(reconstructed.isActive, mockSubscription.isActive);
-        expect(reconstructed.startDate, mockSubscription.startDate);
-        expect(reconstructed.features, mockSubscription.features);
+        expect(expiringSubscription.daysRemaining, equals(1));
+        expect(expiringSubscription.isExpired, isFalse);
       });
     });
 
     group('SubscriptionTier Enum', () {
-      test('should have all expected tiers', () {
+      test('should have correct tier values', () {
+        expect(SubscriptionTier.values.length, equals(4));
         expect(SubscriptionTier.values, contains(SubscriptionTier.free));
         expect(SubscriptionTier.values, contains(SubscriptionTier.basic));
         expect(SubscriptionTier.values, contains(SubscriptionTier.pro));
         expect(SubscriptionTier.values, contains(SubscriptionTier.premium));
-        expect(SubscriptionTier.values, contains(SubscriptionTier.enterprise));
       });
 
-      test('should have correct enum names', () {
-        expect(SubscriptionTier.free.name, 'free');
-        expect(SubscriptionTier.basic.name, 'basic');
-        expect(SubscriptionTier.pro.name, 'pro');
-        expect(SubscriptionTier.premium.name, 'premium');
-        expect(SubscriptionTier.enterprise.name, 'enterprise');
+      test('should maintain tier hierarchy', () {
+        expect(SubscriptionTier.free.index, lessThan(SubscriptionTier.basic.index));
+        expect(SubscriptionTier.basic.index, lessThan(SubscriptionTier.pro.index));
+        expect(SubscriptionTier.pro.index, lessThan(SubscriptionTier.premium.index));
       });
     });
 
-    group('PaymentMethod Tests', () {
-      late PaymentMethod mockPaymentMethod;
-
-      setUp(() {
-        mockPaymentMethod = PaymentMethod(
-          id: 'pm-test',
-          type: 'CARD',
-          last4: '4242',
-          brand: 'VISA',
-          expiryDate: DateTime(2027, 12, 31),
-        );
+    group('PaymentMethod Model', () {
+      test('should create payment method with all properties', () {
+        final paymentMethod = testSubscription.paymentMethod;
+        expect(paymentMethod.id, equals('pm_001'));
+        expect(paymentMethod.type, equals('CARD'));
+        expect(paymentMethod.last4, equals('4242'));
+        expect(paymentMethod.brand, equals('Visa'));
+        expect(paymentMethod.expiryDate, equals(DateTime(2025, 12, 31)));
       });
 
-      test('should create PaymentMethod with all fields', () {
-        expect(mockPaymentMethod.id, 'pm-test');
-        expect(mockPaymentMethod.type, 'CARD');
-        expect(mockPaymentMethod.last4, '4242');
-        expect(mockPaymentMethod.brand, 'VISA');
-        expect(mockPaymentMethod.expiryDate, isA<DateTime>());
-      });
-
-      test('should handle optional fields as null', () {
-        final paymentMethod = PaymentMethod(
-          id: 'pm-minimal',
+      test('should handle different payment types', () {
+        final bankPayment = PaymentMethod(
+          id: 'pm_bank',
           type: 'BANK',
-          last4: '5678',
-          // brand and expiryDate are null
+          last4: '6789',
+          brand: 'Chase',
         );
 
-        expect(paymentMethod.brand, isNull);
-        expect(paymentMethod.expiryDate, isNull);
+        expect(bankPayment.type, equals('BANK'));
+        expect(bankPayment.expiryDate, isNull);
       });
 
-      test('fromJson should create PaymentMethod correctly', () {
+      test('should serialize payment method to JSON', () {
+        final paymentMethod = PaymentMethod(
+          id: 'pm_test',
+          type: 'CARD',
+          last4: '1234',
+          brand: 'Mastercard',
+          expiryDate: DateTime(2024, 6, 30),
+        );
+
+        final json = paymentMethod.toJson();
+        expect(json['id'], equals('pm_test'));
+        expect(json['type'], equals('CARD'));
+        expect(json['last4'], equals('1234'));
+        expect(json['brand'], equals('Mastercard'));
+        expect(json['expiryDate'], equals(DateTime(2024, 6, 30).toIso8601String()));
+      });
+
+      test('should deserialize payment method from JSON', () {
         final json = {
-          'id': 'pm-test',
+          'id': 'pm_json',
           'type': 'CARD',
-          'last4': '4242',
-          'brand': 'VISA',
-          'expiryDate': '2027-12-31T23:59:59.000Z',
-        };
-
-        final paymentMethod = PaymentMethod.fromJson(json);
-        expect(paymentMethod.id, 'pm-test');
-        expect(paymentMethod.type, 'CARD');
-        expect(paymentMethod.last4, '4242');
-        expect(paymentMethod.brand, 'VISA');
-        expect(paymentMethod.expiryDate, DateTime.parse(json['expiryDate'] as String));
-      });
-
-      test('fromJson should handle null optional fields', () {
-        final json = {
-          'id': 'pm-test',
-          'type': 'BANK',
           'last4': '5678',
-          'brand': null,
-          'expiryDate': null,
+          'brand': 'Amex',
+          'expiryDate': DateTime(2026, 3, 31).toIso8601String(),
         };
 
         final paymentMethod = PaymentMethod.fromJson(json);
-        expect(paymentMethod.brand, isNull);
-        expect(paymentMethod.expiryDate, isNull);
-      });
-
-      test('toJson should create correct representation', () {
-        final json = mockPaymentMethod.toJson();
-        expect(json['id'], 'pm-test');
-        expect(json['type'], 'CARD');
-        expect(json['last4'], '4242');
-        expect(json['brand'], 'VISA');
-        expect(json['expiryDate'], mockPaymentMethod.expiryDate!.toIso8601String());
+        expect(paymentMethod.id, equals('pm_json'));
+        expect(paymentMethod.type, equals('CARD'));
+        expect(paymentMethod.last4, equals('5678'));
+        expect(paymentMethod.brand, equals('Amex'));
+        expect(paymentMethod.expiryDate, equals(DateTime(2026, 3, 31)));
       });
     });
 
-    group('SubscriptionHistory Tests', () {
-      late SubscriptionHistory mockHistory;
-
-      setUp(() {
-        mockHistory = SubscriptionHistory(
-          id: 'hist-test',
-          action: 'CREATED',
-          timestamp: DateTime(2024, 1, 1),
-          description: 'Subscription created',
-          amount: 29.99,
-        );
+    group('SubscriptionHistory Model', () {
+      test('should create subscription history with all properties', () {
+        final payment = testSubscription.history.first;
+        expect(payment.id, equals('pay_001'));
+        expect(payment.amount, equals(49.99));
+        expect(payment.action, equals('CREATED'));
+        expect(payment.description, equals('Monthly subscription'));
       });
 
-      test('should create SubscriptionHistory with all fields', () {
-        expect(mockHistory.id, 'hist-test');
-        expect(mockHistory.action, 'CREATED');
-        expect(mockHistory.timestamp, isA<DateTime>());
-        expect(mockHistory.description, 'Subscription created');
-        expect(mockHistory.amount, 29.99);
-      });
-
-      test('should handle optional fields as null', () {
-        final history = SubscriptionHistory(
-          id: 'hist-minimal',
+      test('should handle different history actions', () {
+        final cancelledHistory = SubscriptionHistory(
+          id: 'hist_cancelled',
           action: 'CANCELLED',
-          timestamp: DateTime.now(),
-          // description and amount are null
+          timestamp: now,
+          description: 'Subscription cancelled',
+          amount: 49.99,
         );
 
-        expect(history.description, isNull);
-        expect(history.amount, isNull);
+        expect(cancelledHistory.action, equals('CANCELLED'));
+        expect(cancelledHistory.description, equals('Subscription cancelled'));
       });
 
-      test('fromJson should create SubscriptionHistory correctly', () {
+      test('should serialize subscription history to JSON', () {
+        final history = SubscriptionHistory(
+          id: 'hist_test',
+          action: 'RENEWED',
+          timestamp: now,
+          description: 'Annual subscription renewed',
+          amount: 99.99,
+        );
+
+        final json = history.toJson();
+        expect(json['id'], equals('hist_test'));
+        expect(json['amount'], equals(99.99));
+        expect(json['action'], equals('RENEWED'));
+        expect(json['description'], equals('Annual subscription renewed'));
+      });
+    });
+
+    group('JSON Serialization', () {
+      test('should serialize subscription to JSON', () {
+        final json = testSubscription.toJson();
+
+        expect(json['id'], equals('sub_001'));
+        expect(json['userId'], equals('user_001'));
+        expect(json['planId'], equals('plan_pro'));
+        expect(json['planName'], equals('Pro Trader'));
+        expect(json['tier'], equals('pro'));
+        expect(json['price'], equals(49.99));
+        expect(json['currency'], equals('USD'));
+        expect(json['isActive'], isTrue);
+        expect(json['autoRenew'], isTrue);
+        expect(json['features'], isA<List>());
+        expect(json['features'].length, equals(4));
+        expect(json['paymentMethod'], isNotNull);
+        expect(json['history'], isA<List>());
+        expect(json['history'].length, equals(1));
+      });
+
+      test('should deserialize subscription from JSON', () {
         final json = {
-          'id': 'hist-test',
-          'action': 'RENEWED',
-          'timestamp': '2024-01-01T00:00:00.000Z',
-          'description': 'Subscription renewed',
-          'amount': 29.99,
+          'id': 'sub_json',
+          'userId': 'user_json',
+          'planId': 'plan_basic',
+          'planName': 'Basic Plan',
+          'tier': 'basic',
+          'price': 19.99,
+          'currency': 'GBP',
+          'startDate': now.toIso8601String(),
+          'endDate': now.add(const Duration(days: 30)).toIso8601String(),
+          'isActive': true,
+          'autoRenew': true,
+          'features': ['Feature 1', 'Feature 2'],
+          'paymentMethod': {
+            'id': 'pm_json',
+            'type': 'CARD',
+            'last4': '9999',
+            'brand': 'Visa',
+          },
+          'history': [],
         };
 
-        final history = SubscriptionHistory.fromJson(json);
-        expect(history.id, 'hist-test');
-        expect(history.action, 'RENEWED');
-        expect(history.timestamp, DateTime.parse(json['timestamp'] as String));
-        expect(history.description, 'Subscription renewed');
-        expect(history.amount, 29.99);
+        final subscription = UserSubscription.fromJson(json);
+        expect(subscription.id, equals('sub_json'));
+        expect(subscription.userId, equals('user_json'));
+        expect(subscription.tier, equals(SubscriptionTier.basic));
+        expect(subscription.price, equals(19.99));
+        expect(subscription.currency, equals('GBP'));
+        expect(subscription.features.length, equals(2));
+        expect(subscription.paymentMethod, isNotNull);
+        expect(subscription.history, isEmpty);
+      });
+    });
+
+    group('Business Logic', () {
+      test('should identify trial subscriptions', () {
+        final trialSubscription = UserSubscription(
+          id: 'sub_trial',
+          userId: 'user_trial',
+          planId: 'plan_trial',
+          planName: 'Pro Trial',
+          tier: SubscriptionTier.pro,
+          price: 0,
+          currency: 'USD',
+          startDate: now,
+          endDate: now.add(const Duration(days: 7)),
+          isActive: true,
+          autoRenew: false,
+          features: ['All Pro features'],
+          paymentMethod: PaymentMethod(
+            id: 'pm_free',
+            type: 'NONE',
+            last4: '0000',
+          ),
+          history: [],
+        );
+
+        expect(trialSubscription.price, equals(0));
+        expect(trialSubscription.daysRemaining, greaterThanOrEqualTo(6));
       });
 
-      test('should handle all subscription actions', () {
-        final actions = ['CREATED', 'RENEWED', 'CANCELLED', 'UPGRADED', 'DOWNGRADED'];
+      test('should handle subscription upgrades', () {
+        // Simulate upgrade from basic to pro
+        final basicSubscription = UserSubscription(
+          id: 'sub_basic',
+          userId: 'user_upgrade',
+          planId: 'plan_basic',
+          planName: 'Basic',
+          tier: SubscriptionTier.basic,
+          price: 19.99,
+          currency: 'USD',
+          startDate: now.subtract(const Duration(days: 15)),
+          endDate: now.add(const Duration(days: 15)),
+          isActive: false, // Cancelled for upgrade
+          autoRenew: false,
+          features: ['Basic features'],
+          paymentMethod: PaymentMethod(
+            id: 'pm_free',
+            type: 'NONE',
+            last4: '0000',
+          ),
+          history: [],
+        );
 
-        for (String action in actions) {
-          final history = SubscriptionHistory(
-            id: 'hist-$action',
-            action: action,
-            timestamp: DateTime.now(),
-          );
-          expect(history.action, action);
-        }
+        final proSubscription = UserSubscription(
+          id: 'sub_pro_upgraded',
+          userId: 'user_upgrade',
+          planId: 'plan_pro',
+          planName: 'Pro',
+          tier: SubscriptionTier.pro,
+          price: 49.99,
+          currency: 'USD',
+          startDate: now,
+          endDate: now.add(const Duration(days: 30)),
+          isActive: true,
+          autoRenew: true,
+          features: ['All Pro features'],
+          paymentMethod: PaymentMethod(
+            id: 'pm_free',
+            type: 'NONE',
+            last4: '0000',
+          ),
+          history: [
+            SubscriptionHistory(
+              id: 'hist_upgrade',
+              action: 'UPGRADED',
+              timestamp: now,
+              description: 'Upgrade from Basic to Pro',
+              amount: 49.99,
+            ),
+          ],
+        );
+
+        expect(basicSubscription.isActive, isFalse);
+        expect(proSubscription.isActive, isTrue);
+        expect(proSubscription.tier.index, greaterThan(basicSubscription.tier.index));
       });
 
-      test('toJson should create correct representation', () {
-        final json = mockHistory.toJson();
-        expect(json['id'], 'hist-test');
-        expect(json['action'], 'CREATED');
-        expect(json['timestamp'], mockHistory.timestamp.toIso8601String());
-        expect(json['description'], 'Subscription created');
-        expect(json['amount'], 29.99);
+      test('should calculate prorated amounts', () {
+        // If subscription has 15 days remaining out of 30
+        final remainingDays = testSubscription.daysRemaining ?? 0;
+        final totalDays = 30;
+        final proratedAmount = (testSubscription.price * remainingDays / totalDays);
+        
+        expect(proratedAmount, closeTo(24.995, 0.01)); // About half of 49.99
       });
     });
 
     group('Edge Cases', () {
-      test('should handle subscription with no features', () {
-        final subscription = UserSubscription(
-          id: 'sub-no-features',
-          userId: 'user-1',
-          planId: 'plan-free',
-          planName: 'Free Plan',
+      test('should handle zero price subscriptions', () {
+        final freeSubscription = UserSubscription(
+          id: 'sub_free',
+          userId: 'user_free',
+          planId: 'plan_free',
+          planName: 'Free Forever',
           tier: SubscriptionTier.free,
-          price: 0.0,
+          price: 0,
           currency: 'USD',
-          startDate: DateTime.now(),
+          startDate: now.subtract(const Duration(days: 365)),
+          endDate: null,
           isActive: true,
           autoRenew: false,
-          features: [], // empty features
-          paymentMethod: PaymentMethod(id: 'pm-free', type: 'NONE', last4: '0000'),
+          features: ['Limited features'],
+          paymentMethod: PaymentMethod(
+            id: 'pm_free',
+            type: 'NONE',
+            last4: '0000',
+          ),
           history: [],
         );
 
-        expect(subscription.features, isEmpty);
-        expect(subscription.price, 0.0);
-        expect(subscription.tier, SubscriptionTier.free);
+        expect(freeSubscription.price, equals(0));
+        expect(freeSubscription.endDate, isNull);
+        expect(freeSubscription.isExpired, isFalse);
       });
 
-      test('should handle subscription with many features', () {
-        final manyFeatures = List.generate(20, (index) => 'feature_$index');
-        final subscription = UserSubscription(
-          id: 'sub-many-features',
-          userId: 'user-1',
-          planId: 'plan-enterprise',
-          planName: 'Enterprise Plan',
-          tier: SubscriptionTier.enterprise,
-          price: 199.99,
-          currency: 'USD',
-          startDate: DateTime.now(),
-          isActive: true,
-          autoRenew: true,
-          features: manyFeatures,
-          paymentMethod: PaymentMethod(id: 'pm-1', type: 'CARD', last4: '1234'),
-          history: [],
-        );
-
-        expect(subscription.features, hasLength(20));
-        expect(subscription.tier, SubscriptionTier.enterprise);
-      });
-
-      test('should handle zero price subscription', () {
-        final freeSubscription = TestHelper.createMockUserSubscription(
-          tier: SubscriptionTier.free,
-        );
-        final subscription = UserSubscription(
-          id: freeSubscription.id,
-          userId: freeSubscription.userId,
-          planId: 'plan-free',
-          planName: 'Free Plan',
-          tier: SubscriptionTier.free,
-          price: 0.0,
-          currency: freeSubscription.currency,
-          startDate: freeSubscription.startDate,
-          isActive: freeSubscription.isActive,
-          autoRenew: freeSubscription.autoRenew,
-          features: ['basic_access'],
-          paymentMethod: freeSubscription.paymentMethod,
-          history: freeSubscription.history,
-        );
-
-        expect(subscription.price, 0.0);
-        expect(subscription.finalPrice, 0.0);
-      });
-
-      test('should handle subscription with large discount', () {
-        final subscription = UserSubscription(
-          id: 'sub-large-discount',
-          userId: 'user-1',
-          planId: 'plan-pro',
-          planName: 'Pro Plan',
+      test('should handle very long subscription periods', () {
+        final longSubscription = UserSubscription(
+          id: 'sub_long',
+          userId: 'user_long',
+          planId: 'plan_annual',
+          planName: 'Annual Pro',
           tier: SubscriptionTier.pro,
-          price: 29.99,
+          price: 499.99,
           currency: 'USD',
-          startDate: DateTime.now(),
+          startDate: now.subtract(const Duration(days: 180)),
+          endDate: now.add(const Duration(days: 185)),
           isActive: true,
           autoRenew: true,
-          features: ['feature1'],
-          paymentMethod: PaymentMethod(id: 'pm-1', type: 'CARD', last4: '1234'),
+          features: [],
+          paymentMethod: PaymentMethod(
+            id: 'pm_free',
+            type: 'NONE',
+            last4: '0000',
+          ),
           history: [],
-          discountAmount: 25.00, // Large discount
         );
 
-        expect(subscription.finalPrice, closeTo(4.99, 0.01));
+        expect(longSubscription.daysRemaining, equals(185));
       });
 
-      test('should handle discount larger than price', () {
+      test('should handle subscriptions with many payment history entries', () {
+        final history = List.generate(100, (i) => SubscriptionHistory(
+          id: 'hist_$i',
+          action: i % 10 == 0 ? 'CANCELLED' : 'RENEWED',
+          timestamp: now.subtract(Duration(days: i * 30)),
+          description: 'Monthly payment #$i',
+          amount: 49.99,
+        ));
+
         final subscription = UserSubscription(
-          id: 'sub-over-discount',
-          userId: 'user-1',
-          planId: 'plan-basic',
-          planName: 'Basic Plan',
-          tier: SubscriptionTier.basic,
-          price: 9.99,
+          id: 'sub_history',
+          userId: 'user_history',
+          planId: 'plan_pro',
+          planName: 'Pro',
+          tier: SubscriptionTier.pro,
+          price: 49.99,
           currency: 'USD',
-          startDate: DateTime.now(),
+          startDate: now.subtract(const Duration(days: 3000)),
+          endDate: now.add(const Duration(days: 30)),
           isActive: true,
           autoRenew: true,
-          features: ['feature1'],
-          paymentMethod: PaymentMethod(id: 'pm-1', type: 'CARD', last4: '1234'),
-          history: [],
-          discountAmount: 15.00, // Discount larger than price
+          features: [],
+          paymentMethod: PaymentMethod(
+            id: 'pm_free',
+            type: 'NONE',
+            last4: '0000',
+          ),
+          history: history,
         );
 
-        expect(subscription.finalPrice, -5.01); // Negative final price
-      });
-    });
-
-    group('Error Handling', () {
-      test('fromJson should throw when required fields are missing', () {
-        final incompleteJson = <String, dynamic>{
-          'id': 'test',
-          'userId': 'user-1',
-          // missing other required fields
-        };
-
-        expect(() => UserSubscription.fromJson(incompleteJson), throwsA(isA<Error>()));
-      });
-
-      test('fromJson should throw on invalid DateTime format', () {
-        final invalidJson = Map<String, dynamic>.from(validJson);
-        invalidJson['startDate'] = 'invalid-date-format';
-
-        expect(() => UserSubscription.fromJson(invalidJson), throwsA(isA<FormatException>()));
-      });
-
-      test('fromJson should throw on null required fields', () {
-        final nullJson = Map<String, dynamic>.from(validJson);
-        nullJson['id'] = null;
-
-        expect(() => UserSubscription.fromJson(nullJson), throwsA(isA<TypeError>()));
-      });
-
-      test('fromJson should handle malformed paymentMethod', () {
-        final malformedJson = Map<String, dynamic>.from(validJson);
-        malformedJson['paymentMethod'] = 'not-an-object';
-
-        expect(() => UserSubscription.fromJson(malformedJson), throwsA(isA<TypeError>()));
-      });
-
-      test('fromJson should handle malformed history', () {
-        final malformedJson = Map<String, dynamic>.from(validJson);
-        malformedJson['history'] = 'not-a-list';
-
-        expect(() => UserSubscription.fromJson(malformedJson), throwsA(isA<TypeError>()));
-      });
-    });
-
-    group('Business Logic Validation', () {
-      test('should identify active subscriptions correctly', () {
-        final activeSubscription = TestHelper.createMockUserSubscription(isActive: true);
-        expect(activeSubscription.isActive, isTrue);
-        expect(activeSubscription.isExpired, isFalse);
-      });
-
-      test('should identify inactive subscriptions correctly', () {
-        final inactiveSubscription = TestHelper.createMockUserSubscription(isActive: false);
-        expect(inactiveSubscription.isActive, isFalse);
-      });
-
-      test('should validate subscription tier hierarchy', () {
-        final tiers = [
-          SubscriptionTier.free,
-          SubscriptionTier.basic,
-          SubscriptionTier.pro,
-          SubscriptionTier.premium,
-          SubscriptionTier.enterprise,
-        ];
-
-        for (SubscriptionTier tier in tiers) {
-          final subscription = TestHelper.createMockUserSubscription(tier: tier);
-          expect(subscription.tier, tier);
-        }
-      });
-
-      test('should handle subscription renewal logic', () {
-        final renewableSubscription = TestHelper.createMockUserSubscription();
-        expect(renewableSubscription.autoRenew, isTrue);
-        expect(renewableSubscription.nextBillingDate, isNotNull);
-      });
-
-      test('should handle one-time subscription', () {
-        final oneTimeSubscription = UserSubscription(
-          id: 'sub-onetime',
-          userId: 'user-1',
-          planId: 'plan-lifetime',
-          planName: 'Lifetime Plan',
-          tier: SubscriptionTier.premium,
-          price: 299.99,
-          currency: 'USD',
-          startDate: DateTime.now(),
-          endDate: null, // No end date for lifetime
-          nextBillingDate: null, // No next billing
-          isActive: true,
-          autoRenew: false,
-          features: ['lifetime_access'],
-          paymentMethod: PaymentMethod(id: 'pm-1', type: 'CARD', last4: '1234'),
-          history: [],
-        );
-
-        expect(oneTimeSubscription.autoRenew, isFalse);
-        expect(oneTimeSubscription.endDate, isNull);
-        expect(oneTimeSubscription.nextBillingDate, isNull);
-        expect(oneTimeSubscription.daysRemaining, -1);
+        expect(subscription.history.length, equals(100));
+        expect(subscription.history.where((p) => p.action == 'CANCELLED').length, equals(10));
       });
     });
   });

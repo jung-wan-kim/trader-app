@@ -197,11 +197,10 @@ void main() {
         traderName: 'Jesse Livermore',
         riskLevel: 'MEDIUM',
         timeframe: 'SHORT_TERM',
-        potentialProfit: 20.0,
-        potentialLoss: 6.67,
         recommendedAt: DateTime.now(),
-        validUntil: DateTime.now().add(const Duration(days: 30)),
-        notes: 'Test note',
+        takeProfit: 190.00,
+        technicalIndicators: null,
+        expectedReturn: null,
       );
 
       final testContainer = ProviderContainer(

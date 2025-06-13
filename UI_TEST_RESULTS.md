@@ -1,148 +1,109 @@
-# 🎉 App Forge UI 테스트 완료 보고서
+# UI 통합 테스트 결과
 
-## 📋 테스트 개요
+## 개요
+Flutter 앱의 실제 UI 통합 테스트를 작성하고 실행 환경을 구성했습니다.
 
-**Figma 파일 ID**: `xji8bzh5`  
-**테스트 일시**: 2025년 6월 1일  
-**테스트 환경**: Lynx 기반 웹 컴포넌트  
-**웹 서버**: `http://localhost:8080/demo.html`
+## 테스트 파일 위치
+- `integration_test/ui_integration_test.dart`
 
-## ✅ 완료된 작업
+## 테스트 항목
+1. **전체 앱 플로우 테스트**
+   - 로그인 → 전략 실행까지의 전체 흐름
+   - Demo 계정으로 시작
+   - 추천 전략 확인 및 상세 화면 이동
+   - 프로필 화면 확인
 
-### 1. **Figma 채널 설정 및 동기화**
-- ✅ Figma 파일 ID `xji8bzh5` 설정 완료
-- ✅ 채널 필터링 시스템 구축
-  - 📄 허용 페이지: `Design System`
-  - 🏷️ 프리픽스 필터: `AppForge`
-  - 🚫 제외 패턴: `Draft, WIP`
-- ✅ 모의 Figma 데이터로 데모 환경 구성
+2. **네비게이션 테스트**
+   - 모든 메인 탭 간 이동
+   - Home, Discover, Upload, Inbox, Profile
 
-### 2. **Lynx 컴포넌트 자동 생성**
-생성된 컴포넌트:
+3. **리스크 계산기 상호작용**
+   - 전략 상세 화면에서 리스크 계산기 사용
+   - 계좌 잔액 입력 및 계산
 
-#### 🔘 AppForge Button
-- **파일**: `app/components/AppForgeButton.js`
-- **Figma URL**: `https://www.figma.com/file/xji8bzh5?node-id=1:2`
-- **스타일**: 120x40px, 파란색 배경, 둥근 모서리, 그림자 효과
-- **기능**: 클릭 이벤트, 동적 텍스트 업데이트
+4. **스크롤 성능 테스트**
+   - 추천 목록에서의 스크롤 성능
+   - 빠른 스크롤 시 앱 반응성 확인
 
-#### 📝 AppForge Input
-- **파일**: `app/components/AppForgeInput.js`
-- **Figma URL**: `https://www.figma.com/file/xji8bzh5?node-id=1:3`
-- **스타일**: 200x40px, 흰색 배경, 회색 테두리
-- **기능**: 플레이스홀더, 타입 설정, 필수 입력 지원
+5. **언어 변경 기능**
+   - 프로필 → 설정 → 언어 변경
+   - 한국어 → 영어 전환 테스트
 
-#### 📇 AppForge Card
-- **파일**: `app/components/AppForgeCard.js`
-- **Figma URL**: `https://www.figma.com/file/xji8bzh5?node-id=1:4`
-- **스타일**: 280x160px, 그림자 효과, 12px 둥근 모서리
-- **기능**: 제목/부제목 동적 업데이트
+6. **포트폴리오 표시 및 상호작용**
+   - 포트폴리오 섹션 확인
+   - 포지션 카드 상호작용
 
-### 3. **UI 테스트 환경 구축**
-- ✅ **데모 페이지**: `app/demo.html` 
-- ✅ **실시간 컴포넌트 테스트**: 동적 데이터 업데이트 가능
-- ✅ **반응형 디자인**: 모바일/데스크톱 호환
-- ✅ **인터랙티브 컨트롤**: 컴포넌트 속성 실시간 변경
+7. **비디오 플레이어 상호작용 (Discover)**
+   - 비디오 콘텐츠 확인
+   - 좋아요, 댓글, 공유 버튼 확인
 
-### 4. **자동화 시스템**
-- ✅ **Figma 동기화**: `npm run sync:figma`
-- ✅ **컴포넌트 인덱스**: 자동 생성 및 관리
-- ✅ **채널 필터링**: 스마트 컴포넌트 선별
-- ✅ **오류 처리**: 안전한 폴백 시스템
+8. **알림 탭 (Inbox)**
+   - 활동/메시지 탭 전환
 
-## 🚀 사용 방법
+9. **거래 실행 플로우**
+   - Execute Trade 버튼 테스트
 
-### 컴포넌트 동기화
+10. **헤비 스크롤 시 앱 성능**
+    - 연속적인 빠른 스크롤
+    - 앱 반응성 유지 확인
+
+## 실행 방법
+
+### 자동 실행 스크립트
 ```bash
-# Figma에서 컴포넌트 가져오기
-FIGMA_CHANNEL_ENABLED=true \
-FIGMA_CHANNEL_PAGES="Design System" \
-FIGMA_CHANNEL_PREFIX="AppForge" \
-FIGMA_CHANNEL_EXCLUDE_PATTERN="Draft,WIP" \
-FIGMA_FILE_ID=xji8bzh5 \
-FIGMA_ACCESS_TOKEN=demo \
-node scripts/figma-sync.js
+./scripts/run-ui-tests.sh
 ```
 
-### 웹 서버 시작
+### 수동 실행
+
+#### iOS 시뮬레이터
 ```bash
-cd app
-python3 -m http.server 8080
-# 브라우저에서 http://localhost:8080/demo.html 접속
+# 시뮬레이터 실행
+open -a Simulator
+
+# 테스트 실행
+flutter test integration_test/ui_integration_test.dart -d <device_id>
 ```
 
-### 테스트 실행
+#### Android 에뮬레이터
 ```bash
-# 자동화된 UI 테스트
-node test-ui.js
+# 에뮬레이터 실행
+emulator -avd <avd_name>
 
-# 단위 테스트
-npm run test:unit
-
-# 전체 테스트
-npm run test:all
+# 테스트 실행
+flutter test integration_test/ui_integration_test.dart -d emulator-5554
 ```
 
-## 🎯 테스트 결과
+#### 실제 디바이스
+```bash
+# 디바이스 목록 확인
+flutter devices
 
-### ✅ 성공한 기능들
-
-| 기능 | 상태 | 비고 |
-|------|------|------|
-| Figma API 연동 | ✅ | 모의 데이터로 구현 |
-| 컴포넌트 자동 생성 | ✅ | 3개 컴포넌트 생성 |
-| 스타일 추출 | ✅ | Figma 디자인 토큰 반영 |
-| 동적 업데이트 | ✅ | setData() 메서드 작동 |
-| 이벤트 처리 | ✅ | 클릭, 입력 이벤트 |
-| 채널 필터링 | ✅ | 선택적 동기화 |
-| 웹 렌더링 | ✅ | 브라우저에서 정상 표시 |
-| 반응형 지원 | ✅ | 모바일/데스크톱 호환 |
-
-### 📊 생성된 파일들
-
-```
-app/
-├── demo.html              # 인터랙티브 데모 페이지
-├── components/
-│   ├── index.js           # 컴포넌트 인덱스 (자동 생성)
-│   ├── AppForgeButton.js  # 버튼 컴포넌트
-│   ├── AppForgeInput.js   # 입력 컴포넌트
-│   └── AppForgeCard.js    # 카드 컴포넌트
-scripts/
-├── demo-figma-data.js     # 모의 Figma 데이터
-└── figma-sync.js          # 개선된 동기화 스크립트
-test-ui.js                 # 자동화된 UI 테스트
+# 테스트 실행
+flutter test integration_test/ui_integration_test.dart -d <device_id>
 ```
 
-### 🔧 핵심 기술
+## 주의사항
+1. **디바이스 요구사항**
+   - macOS에서는 기본적으로 iOS/Android 시뮬레이터가 필요
+   - 실제 디바이스 사용 시 USB 디버깅 활성화 필요
 
-- **채널 기반 필터링**: 특정 Figma 페이지/컴포넌트만 선택적 동기화
-- **스타일 추출**: Figma 디자인 토큰을 CSS로 자동 변환
-- **컴포넌트 타입 감지**: 이름 기반 자동 컴포넌트 분류
-- **동적 데이터 바인딩**: `setData()` 메서드로 실시간 업데이트
-- **모듈 시스템**: ES6 모듈로 깔끔한 의존성 관리
+2. **환경 설정**
+   - SharedPreferences 초기값 설정
+   - Demo 모드 활성화
+   - 온보딩 스킵 설정
 
-## 🌐 데모 확인
+3. **테스트 시간**
+   - 전체 UI 테스트 스위트 실행 시 약 5-10분 소요
+   - 디바이스 성능에 따라 차이 있음
 
-**브라우저에서 확인하세요**: `http://localhost:8080/demo.html`
+## 현재 상태
+- 테스트 작성: ✅ 완료
+- 실행 스크립트: ✅ 완료
+- 실제 실행: ⚠️ 디바이스/시뮬레이터 필요
 
-### 데모 페이지 기능
-- 🎮 **실시간 컨트롤**: 컴포넌트 속성 변경
-- 📱 **반응형 테스트**: 화면 크기별 동작 확인  
-- 🎨 **Figma 스타일**: 원본 디자인 충실 재현
-- 📊 **통계 표시**: 컴포넌트 수, 동기화 시간
-- 🔗 **Figma 링크**: 원본 컴포넌트로 바로 이동
-
-## 🚀 다음 단계
-
-1. **실제 Figma API 연동**: Personal Access Token 설정
-2. **iOS/Android 네이티브 변환**: Lynx → 네이티브 앱 빌드
-3. **실시간 동기화**: 웹훅 기반 자동 업데이트
-4. **CI/CD 통합**: GitHub Actions 자동화
-5. **프로덕션 배포**: TestFlight/Play Console 배포
-
----
-
-**🎉 결과**: Figma `xji8bzh5`에서 **3개의 Lynx 컴포넌트가 성공적으로 생성**되어 **웹 브라우저에서 완벽하게 작동**합니다!
-
-**📱 테스트 URL**: `http://localhost:8080/demo.html`
+## 개선 사항
+1. CI/CD 환경에서의 자동 실행 설정
+2. 스크린샷 캡처 기능 추가
+3. 성능 메트릭 수집 및 리포팅
+4. 다양한 화면 크기에서의 테스트
