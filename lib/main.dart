@@ -16,7 +16,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   // Load environment variables
-  await dotenv.load(fileName: ".env");
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (e) {
+    // .env file not found, continue with defaults
+    print('Warning: .env file not found, using default values');
+  }
   
   
   // Supabase 초기화
