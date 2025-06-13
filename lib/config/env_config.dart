@@ -31,6 +31,10 @@ class EnvConfig {
   static String get firebaseMessagingSenderId =>
       dotenv.env['FIREBASE_MESSAGING_SENDER_ID'] ?? '';
 
+  // Finnhub Configuration
+  static String get finnhubApiKey =>
+      dotenv.env['FINNHUB_API_KEY'] ?? 'cs2m9k9r01qt4r9kq970cs2m9k9r01qt4r9kq97g'; // Free test key as fallback
+
   // Sentry Configuration
   static String get sentryDsn =>
       dotenv.env['SENTRY_DSN'] ?? '';

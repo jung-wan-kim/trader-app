@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/candle_data.dart';
+import '../config/env_config.dart';
 
 class FinnhubService {
   static const String _baseUrl = 'https://finnhub.io/api/v1';
-  static const String _apiKey = 'cs2m9k9r01qt4r9kq970cs2m9k9r01qt4r9kq97g'; // 무료 테스트 키
+  static String get _apiKey => EnvConfig.finnhubApiKey;
   
   Future<List<CandleData>> getStockCandles({
     required String symbol,

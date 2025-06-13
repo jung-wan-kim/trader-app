@@ -1,35 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'finnhub_service.dart';
+import 'trading_strategies.dart';
+import '../models/candle_data.dart';
 
 class TradingService {
   final SupabaseClient _client;
+  final FinnhubService _finnhubService = FinnhubService();
   
   TradingService(this._client);
   
-  /// 트레이딩 신호 조회
+  /// 트레이딩 신호 조회 - 로컬 전략 분석 사용
   Future<TradingSignal> getSignal({
     required String symbol,
     required TradingStrategy strategy,
     String timeframe = 'D',
   }) async {
     try {
-      final response = await _client.functions.invoke(
-        'trading-signals',
-        body: {
-          'symbol': symbol.toUpperCase(),
-          'strategy': strategy.value,
-          'timeframe': timeframe,
-        },
+      // 1. 주식 캔들 데이터 가져오기
+      final to = DateTime.now();
+      final from = to.subtract(const Duration(days: 200)); // 전략 분석을 위해 충분한 데이터
+      
+      final candles = await _finnhubService.getStockCandles(
+        symbol: symbol,
+        from: from,
+        to: to,
+        resolution: timeframe,
       );
       
-      if (response.data == null) {
-        throw Exception('No signal received');
+      // 2. 데이터가 부족한 경우 처리
+      if (candles.isEmpty) {
+        return TradingSignal(
+          symbol: symbol,
+          action: SignalAction.hold,
+          confidence: 0.0,
+          reasoning: '데이터를 가져올 수 없습니다',
+          indicators: {},
+        );
       }
       
-      final signalData = response.data['signal'];
-      return TradingSignal.fromJson(signalData);
+      // 3. 전략 분석기 생성 및 분석
+      final analyzer = TradingStrategyFactory.create(strategy);
+      final signal = analyzer.analyze(
+        candles: candles,
+        symbol: symbol,
+      );
+      
+      // 4. 심볼 설정 및 반환
+      signal.symbol = symbol;
+      return signal;
+      
     } catch (e) {
-      throw Exception('Failed to fetch signal: $e');
+      // 에러 발생 시 기본 신호 반환
+      return TradingSignal(
+        symbol: symbol,
+        action: SignalAction.hold,
+        confidence: 0.0,
+        reasoning: '분석 중 오류 발생: $e',
+        indicators: {},
+      );
     }
   }
   

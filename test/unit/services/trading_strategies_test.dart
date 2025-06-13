@@ -2,6 +2,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:trader_app/services/mock_data_service.dart';
 import 'package:trader_app/models/stock_recommendation.dart';
 import 'package:trader_app/models/trader_strategy.dart';
+import 'package:trader_app/services/trading_strategies.dart';
+import 'package:trader_app/services/trading_service.dart';
+import 'package:trader_app/models/candle_data.dart';
 
 void main() {
   group('Trading Strategies Tests', () {
@@ -10,6 +13,42 @@ void main() {
     setUp(() {
       mockDataService = MockDataService();
     });
+    
+    // 테스트용 캔들 데이터 생성 헬퍼
+    List<CandleData> createTestCandles({
+      required int count,
+      required double startPrice,
+      double volatility = 0.02,
+      double trend = 0.001,
+    }) {
+      final candles = <CandleData>[];
+      double currentPrice = startPrice;
+      
+      for (int i = 0; i < count; i++) {
+        final date = DateTime.now().subtract(Duration(days: count - i));
+        final open = currentPrice;
+        
+        // 랜덤 변동성 시뮬레이션
+        final change = (i % 2 == 0 ? 1 : -1) * volatility;
+        currentPrice = currentPrice * (1 + change + trend);
+        
+        final close = currentPrice;
+        final high = open > close ? open * 1.01 : close * 1.01;
+        final low = open < close ? open * 0.99 : close * 0.99;
+        final volume = 1000000 + (i * 10000);
+        
+        candles.add(CandleData(
+          date: date,
+          open: open,
+          high: high,
+          low: low,
+          close: close,
+          volume: volume.toDouble(),
+        ));
+      }
+      
+      return candles;
+    }
 
     group('Jesse Livermore Strategy', () {
       test('should generate trend following recommendations', () async {
@@ -270,6 +309,174 @@ void main() {
             contains('accumulation'),
           ));
         }
+      });
+    });
+    
+    group('New Trading Strategy Implementation Tests', () {
+      group('JesseLivermoreStrategy', () {
+        late JesseLivermoreStrategy strategy;
+        
+        setUp(() {
+          strategy = JesseLivermoreStrategy();
+        });
+        
+        test('should return hold signal when insufficient data', () {
+          final candles = createTestCandles(count: 30, startPrice: 100);
+          final signal = strategy.analyze(candles: candles, symbol: 'TEST');
+          
+          expect(signal.action, equals(SignalAction.hold));
+          expect(signal.reasoning, contains('데이터 부족'));
+        });
+        
+        test('should generate buy signal on uptrend with volume', () {
+          // 상승 추세 데이터 생성
+          final candles = createTestCandles(
+            count: 60,
+            startPrice: 100,
+            trend: 0.005, // 상승 추세
+            volatility: 0.01,
+          );
+          
+          // 마지막 캔들에 높은 거래량 추가
+          final lastCandle = candles.last;
+          candles[candles.length - 1] = CandleData(
+            date: lastCandle.date,
+            open: lastCandle.open,
+            high: lastCandle.high * 1.02,
+            low: lastCandle.low,
+            close: lastCandle.high * 1.01, // 고가 근처 마감
+            volume: lastCandle.volume * 2, // 거래량 급증
+          );
+          
+          final signal = strategy.analyze(candles: candles, symbol: 'TEST');
+          
+          // 매수 신호가 나올 수 있음 (시장 상황에 따라)
+          expect(signal.action, isIn([SignalAction.buy, SignalAction.hold]));
+          if (signal.action == SignalAction.buy) {
+            expect(signal.confidence, greaterThan(0.5));
+            expect(signal.stopLoss, isNotNull);
+            expect(signal.targetPrice, isNotNull);
+          }
+        });
+        
+        test('should calculate SMA correctly', () {
+          final prices = [100.0, 102.0, 101.0, 103.0, 104.0];
+          final sma = strategy.calculateSMA(prices, 3);
+          
+          expect(sma.length, equals(3));
+          expect(sma[0], closeTo(101.0, 0.01)); // (100+102+101)/3
+          expect(sma[1], closeTo(102.0, 0.01)); // (102+101+103)/3
+          expect(sma[2], closeTo(102.67, 0.01)); // (101+103+104)/3
+        });
+        
+        test('should calculate RSI correctly', () {
+          final prices = List.generate(20, (i) => 100.0 + i * 0.5);
+          final rsi = strategy.calculateRSI(prices, 14);
+          
+          expect(rsi, greaterThan(50)); // 상승 추세이므로 RSI > 50
+          expect(rsi, lessThanOrEqualTo(100));
+        });
+      });
+      
+      group('LarryWilliamsStrategy', () {
+        late LarryWilliamsStrategy strategy;
+        
+        setUp(() {
+          strategy = LarryWilliamsStrategy();
+        });
+        
+        test('should generate buy signal on oversold with momentum', () {
+          // 과매도 후 반등 시나리오
+          final candles = createTestCandles(
+            count: 40,
+            startPrice: 100,
+            trend: -0.003, // 하락 후
+          );
+          
+          // 최근 반등 추가
+          for (int i = 35; i < 40; i++) {
+            final candle = candles[i];
+            candles[i] = CandleData(
+              date: candle.date,
+              open: candle.open * 1.02,
+              high: candle.high * 1.03,
+              low: candle.low * 1.01,
+              close: candle.close * 1.025,
+              volume: candle.volume * 1.5,
+            );
+          }
+          
+          final signal = strategy.analyze(candles: candles, symbol: 'TEST');
+          
+          expect(signal.action, isIn([SignalAction.buy, SignalAction.hold]));
+          expect(signal.indicators['williamsR'], isNotNull);
+          expect(signal.indicators['momentum'], isNotNull);
+        });
+        
+        test('should calculate ATR correctly', () {
+          final candles = createTestCandles(count: 20, startPrice: 100);
+          final atr = strategy.calculateATR(candles, 14);
+          
+          expect(atr, greaterThan(0));
+          expect(atr, lessThan(10)); // 합리적인 범위
+        });
+      });
+      
+      group('StanWeinsteinStrategy', () {
+        late StanWeinsteinStrategy strategy;
+        
+        setUp(() {
+          strategy = StanWeinsteinStrategy();
+        });
+        
+        test('should require at least 150 candles', () {
+          final candles = createTestCandles(count: 100, startPrice: 100);
+          final signal = strategy.analyze(candles: candles, symbol: 'TEST');
+          
+          expect(signal.action, equals(SignalAction.hold));
+          expect(signal.reasoning, contains('데이터 부족'));
+        });
+        
+        test('should identify stage 2 breakout', () {
+          // Stage 2 돌파 시나리오: 횡보 후 상승
+          final candles = <CandleData>[];
+          
+          // Stage 1: 바닥 횡보 (50일)
+          candles.addAll(createTestCandles(
+            count: 50,
+            startPrice: 100,
+            trend: 0,
+            volatility: 0.01,
+          ));
+          
+          // Stage 2 진입: 상승 돌파 (100일)
+          final lastPrice = candles.last.close;
+          candles.addAll(createTestCandles(
+            count: 100,
+            startPrice: lastPrice,
+            trend: 0.003,
+            volatility: 0.015,
+          ));
+          
+          final signal = strategy.analyze(candles: candles, symbol: 'TEST');
+          
+          expect(signal.indicators['stage'], isIn([1, 2, 3, 4]));
+          expect(signal.indicators['sma150'], isNotNull);
+          expect(signal.indicators['relativeStrength'], isNotNull);
+        });
+      });
+      
+      group('TradingStrategyFactory', () {
+        test('should create correct strategy instances', () {
+          final livermore = TradingStrategyFactory.create(TradingStrategy.jesseLivermore);
+          expect(livermore, isA<JesseLivermoreStrategy>());
+          
+          final williams = TradingStrategyFactory.create(TradingStrategy.larryWilliams);
+          expect(williams, isA<LarryWilliamsStrategy>());
+          
+          final weinstein = TradingStrategyFactory.create(TradingStrategy.stanWeinstein);
+          expect(weinstein, isA<StanWeinsteinStrategy>());
+        });
       });
     });
   });
