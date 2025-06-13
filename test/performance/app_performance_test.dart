@@ -17,7 +17,7 @@ void main() {
       // Launch app
       await tester.pumpWidget(
         const ProviderScope(
-          child: TraderApp(),
+          child: MyApp(),
         ),
       );
       
@@ -39,7 +39,7 @@ void main() {
     testWidgets('screen transition performance test', (WidgetTester tester) async {
       await tester.pumpWidget(
         const ProviderScope(
-          child: TraderApp(),
+          child: MyApp(),
         ),
       );
       await tester.pumpAndSettle();
@@ -88,7 +88,7 @@ void main() {
     testWidgets('list scrolling performance test', (WidgetTester tester) async {
       await tester.pumpWidget(
         const ProviderScope(
-          child: TraderApp(),
+          child: MyApp(),
         ),
       );
       await tester.pumpAndSettle();
@@ -120,7 +120,7 @@ void main() {
     testWidgets('widget rebuild performance test', (WidgetTester tester) async {
       await tester.pumpWidget(
         const ProviderScope(
-          child: TraderApp(),
+          child: MyApp(),
         ),
       );
       await tester.pumpAndSettle();
@@ -158,7 +158,7 @@ void main() {
     testWidgets('memory usage simulation test', (WidgetTester tester) async {
       await tester.pumpWidget(
         const ProviderScope(
-          child: TraderApp(),
+          child: MyApp(),
         ),
       );
       await tester.pumpAndSettle();
@@ -202,7 +202,7 @@ void main() {
       
       await tester.pumpWidget(
         const ProviderScope(
-          child: TraderApp(),
+          child: MyApp(),
         ),
       );
       
@@ -222,7 +222,7 @@ void main() {
     testWidgets('animation performance test', (WidgetTester tester) async {
       await tester.pumpWidget(
         const ProviderScope(
-          child: TraderApp(),
+          child: MyApp(),
         ),
       );
       // Wait for initial setup with fixed timeout

@@ -12,7 +12,7 @@ void main() {
   group('App Navigation Integration Tests', () {
     Widget createTestApp() {
       return const ProviderScope(
-        child: TraderApp(),
+        child: MyApp(),
       );
     }
 

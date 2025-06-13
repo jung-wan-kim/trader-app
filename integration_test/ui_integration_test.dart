@@ -25,7 +25,7 @@ void main() {
 
     testWidgets('Full app flow - Login to Strategy Execution', (tester) async {
       // Launch the app
-      await app.main();
+      app.main();
       await tester.pumpAndSettle();
 
       // Verify login screen is shown
@@ -75,7 +75,7 @@ void main() {
 
     testWidgets('Navigation between main screens', (tester) async {
       // Launch the app
-      await app.main();
+      app.main();
       await tester.pumpAndSettle();
 
       // Login with demo account
@@ -118,7 +118,7 @@ void main() {
 
     testWidgets('Risk Calculator interaction', (tester) async {
       // Launch the app
-      await app.main();
+      app.main();
       await tester.pumpAndSettle();
 
       // Login
@@ -155,7 +155,7 @@ void main() {
 
     testWidgets('Scroll performance in recommendations list', (tester) async {
       // Launch the app
-      await app.main();
+      app.main();
       await tester.pumpAndSettle();
 
       // Login
@@ -179,7 +179,7 @@ void main() {
 
     testWidgets('Language change functionality', (tester) async {
       // Launch the app
-      await app.main();
+      app.main();
       await tester.pumpAndSettle();
 
       // Login
@@ -217,7 +217,7 @@ void main() {
 
     testWidgets('Portfolio display and interaction', (tester) async {
       // Launch the app
-      await app.main();
+      app.main();
       await tester.pumpAndSettle();
 
       // Login
@@ -245,7 +245,7 @@ void main() {
 
     testWidgets('Video player interaction in Discover', (tester) async {
       // Launch the app
-      await app.main();
+      app.main();
       await tester.pumpAndSettle();
 
       // Login
@@ -276,7 +276,7 @@ void main() {
 
     testWidgets('Notification tabs in Inbox', (tester) async {
       // Launch the app
-      await app.main();
+      app.main();
       await tester.pumpAndSettle();
 
       // Login
@@ -302,7 +302,7 @@ void main() {
 
     testWidgets('Execute trade flow', (tester) async {
       // Launch the app
-      await app.main();
+      app.main();
       await tester.pumpAndSettle();
 
       // Login
@@ -329,7 +329,7 @@ void main() {
 
     testWidgets('App performance during heavy scrolling', (tester) async {
       // Launch the app
-      await app.main();
+      app.main();
       await tester.pumpAndSettle();
 
       // Login

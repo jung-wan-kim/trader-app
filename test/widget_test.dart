@@ -11,12 +11,12 @@ void main() {
     SharedPreferences.setMockInitialValues({});
   });
 
-  group('TraderApp Main Screen Tests', () {
+  group('MyApp Main Screen Tests', () {
     testWidgets('should display splash screen on launch', (WidgetTester tester) async {
       await tester.runAsync(() async {
         await tester.pumpWidget(
           const ProviderScope(
-            child: TraderApp(),
+            child: MyApp(),
           ),
         );
 
@@ -32,7 +32,7 @@ void main() {
       await tester.runAsync(() async {
         await tester.pumpWidget(
           const ProviderScope(
-            child: TraderApp(),
+            child: MyApp(),
           ),
         );
 
@@ -46,7 +46,7 @@ void main() {
       await tester.runAsync(() async {
         await tester.pumpWidget(
           const ProviderScope(
-            child: TraderApp(),
+            child: MyApp(),
           ),
         );
 
@@ -63,7 +63,7 @@ void main() {
       await tester.runAsync(() async {
         await tester.pumpWidget(
           const ProviderScope(
-            child: TraderApp(),
+            child: MyApp(),
           ),
         );
 

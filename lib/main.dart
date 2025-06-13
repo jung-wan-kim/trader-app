@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'generated/l10n/app_localizations.dart';
 import 'screens/splash_screen.dart';
 import 'config/app_config.dart';
@@ -9,9 +10,13 @@ import 'providers/language_provider.dart';
 import 'services/market_service.dart';
 import 'services/trading_service.dart';
 import 'services/portfolio_service.dart';
+import 'services/notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // Load environment variables
+  await dotenv.load(fileName: ".env");
   
   
   // Supabase 초기화
@@ -22,7 +27,7 @@ void main() async {
   
   runApp(
     const ProviderScope(
-      child: TraderApp(),
+      child: MyApp(),
     ),
   );
 }
@@ -30,8 +35,8 @@ void main() async {
 // 전역 Supabase 클라이언트
 final supabase = Supabase.instance.client;
 
-class TraderApp extends ConsumerWidget {
-  const TraderApp({super.key});
+class MyApp extends ConsumerWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

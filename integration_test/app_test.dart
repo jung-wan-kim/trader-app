@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tiktok_clone_flutter/main.dart';
+import 'package:trader_app/main.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +12,7 @@ void main() {
       // Launch the app
       await tester.pumpWidget(
         const ProviderScope(
-          child: TraderApp(),
+          child: MyApp(),
         ),
       );
       await tester.pumpAndSettle();
@@ -88,7 +88,7 @@ void main() {
     testWidgets('subscription flow test', (WidgetTester tester) async {
       await tester.pumpWidget(
         const ProviderScope(
-          child: TraderApp(),
+          child: MyApp(),
         ),
       );
       await tester.pumpAndSettle();
@@ -114,7 +114,7 @@ void main() {
     testWidgets('strategy subscription test', (WidgetTester tester) async {
       await tester.pumpWidget(
         const ProviderScope(
-          child: TraderApp(),
+          child: MyApp(),
         ),
       );
       await tester.pumpAndSettle();
@@ -141,7 +141,7 @@ void main() {
     testWidgets('recommendation action test', (WidgetTester tester) async {
       await tester.pumpWidget(
         const ProviderScope(
-          child: TraderApp(),
+          child: MyApp(),
         ),
       );
       await tester.pumpAndSettle();
@@ -161,7 +161,7 @@ void main() {
     testWidgets('performance test - screen transitions', (WidgetTester tester) async {
       await tester.pumpWidget(
         const ProviderScope(
-          child: TraderApp(),
+          child: MyApp(),
         ),
       );
       await tester.pumpAndSettle();
@@ -190,7 +190,7 @@ void main() {
     testWidgets('scroll performance test', (WidgetTester tester) async {
       await tester.pumpWidget(
         const ProviderScope(
-          child: TraderApp(),
+          child: MyApp(),
         ),
       );
       await tester.pumpAndSettle();

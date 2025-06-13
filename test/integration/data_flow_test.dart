@@ -83,7 +83,7 @@ void main() {
     testWidgets('data should flow correctly to UI components', (WidgetTester tester) async {
       await tester.pumpWidget(
         ProviderScope(
-          child: const TraderApp(),
+          child: const MyApp(),
         ),
       );
       await tester.pumpAndSettle();
@@ -101,7 +101,7 @@ void main() {
     testWidgets('provider state updates should reflect in UI', (WidgetTester tester) async {
       await tester.pumpWidget(
         ProviderScope(
-          child: const TraderApp(),
+          child: const MyApp(),
         ),
       );
       await tester.pumpAndSettle();
@@ -167,7 +167,7 @@ void main() {
               return RecommendationsNotifier(mockDataService)..simulateError();
             }),
           ],
-          child: const TraderApp(),
+          child: const MyApp(),
         ),
       );
       await tester.pumpAndSettle();
