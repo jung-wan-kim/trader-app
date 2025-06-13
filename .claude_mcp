@@ -1,0 +1,29 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ]
+    },
+    "mcp-taskmanager": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@smithery/cli@latest",
+        "run",
+        "@kazuph/mcp-taskmanager",
+        "--key",
+        "3e7735c8-b9d5-45ec-a2da-4d5ca70dfc17"
+      ]
+    },
+    "server-sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    }
+  }
+}
