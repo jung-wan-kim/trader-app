@@ -197,6 +197,24 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 16),
+              // 데모 모드 버튼
+              ElevatedButton.icon(
+                onPressed: () {
+                  // Demo 모드로 바로 로그인
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MainScreen()),
+                  );
+                },
+                icon: const Icon(Icons.play_arrow),
+                label: const Text('Continue with Demo'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white,
+                  minimumSize: const Size(double.infinity, 48),
+                ),
+              ),
+              const SizedBox(height: 8),
               // 데모 모드 안내
               if (AppConfig.isDemoMode)
                 Container(
