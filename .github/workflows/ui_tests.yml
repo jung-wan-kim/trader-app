@@ -1,0 +1,158 @@
+name: UI Test Suite
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # 매일 새벽 2시 실행 (KST 기준)
+    - cron: '0 17 * * *'
+
+jobs:
+  ui-tests:
+    name: UI Tests on ${{ matrix.platform }}
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: ios
+            os: macos-latest
+            device: "iPhone 14 Pro"
+            os-version: "17.0"
+          - platform: android
+            os: ubuntu-latest
+            device: "Pixel 6"
+            api-level: 33
+          - platform: web
+            os: ubuntu-latest
+            browser: chrome
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v3
+      
+      - name: 📱 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.16.0'
+          channel: 'stable'
+      
+      - name: 📦 Install dependencies
+        run: |
+          flutter pub get
+          flutter pub run build_runner build --delete-conflicting-outputs
+      
+      # iOS 설정
+      - name: 🍎 Setup iOS Simulator
+        if: matrix.platform == 'ios'
+        run: |
+          xcrun simctl create "${{ matrix.device }}" \
+            "com.apple.CoreSimulator.SimDeviceType.iPhone-14-Pro" \
+            "com.apple.CoreSimulator.SimRuntime.iOS-${{ matrix.os-version }}"
+          xcrun simctl boot "${{ matrix.device }}"
+      
+      # Android 설정
+      - name: 🤖 Setup Android Emulator
+        if: matrix.platform == 'android'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          target: google_apis
+          arch: x86_64
+          profile: ${{ matrix.device }}
+          script: echo "Android emulator started"
+      
+      # Chrome 설정
+      - name: 🌐 Setup Chrome
+        if: matrix.platform == 'web'
+        uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: stable
+      
+      - name: 🧪 Run UI Tests
+        run: |
+          if [ "${{ matrix.platform }}" = "web" ]; then
+            flutter test integration_test/run_all_ui_tests.dart \
+              -d chrome \
+              --platform chrome \
+              --dart-define=TEST_ENV=ci
+          else
+            flutter test integration_test/run_all_ui_tests.dart \
+              -d "${{ matrix.device }}" \
+              --dart-define=TEST_ENV=ci
+          fi
+      
+      - name: 📊 Generate Test Report
+        if: always()
+        run: |
+          flutter pub run test_report \
+            --input test-results.json \
+            --output test-report.html
+      
+      - name: 📸 Upload Screenshots on Failure
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: failed-screenshots-${{ matrix.platform }}
+          path: |
+            test_results/screenshots/
+            test/ui_automation/goldens/failures/
+      
+      - name: 📈 Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results-${{ matrix.platform }}
+          path: |
+            test-report.html
+            coverage/lcov.info
+      
+      - name: 💬 Comment PR with Results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const platform = '${{ matrix.platform }}';
+            const passed = '${{ job.status }}' === 'success';
+            const emoji = passed ? '✅' : '❌';
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `${emoji} UI Tests on ${platform}: ${passed ? 'Passed' : 'Failed'}`
+            });
+  
+  coverage-report:
+    name: UI Test Coverage Report
+    needs: ui-tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Download Coverage Reports
+        uses: actions/download-artifact@v3
+        with:
+          path: coverage-reports
+      
+      - name: 📊 Merge Coverage Data
+        run: |
+          npm install -g lcov-result-merger
+          lcov-result-merger 'coverage-reports/**/lcov.info' merged-lcov.info
+      
+      - name: 📈 Upload to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./merged-lcov.info
+          flags: uitests
+          name: ui-coverage
+      
+      - name: 📋 Generate Coverage Summary
+        run: |
+          echo "# UI Test Coverage Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Platform | Coverage |" >> $GITHUB_STEP_SUMMARY
+          echo "|----------|----------|" >> $GITHUB_STEP_SUMMARY
+          # Parse and display coverage percentages
