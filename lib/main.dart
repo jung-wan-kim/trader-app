@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -15,12 +16,19 @@ import 'services/notification_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Load environment variables
-  try {
-    await dotenv.load(fileName: ".env");
-  } catch (e) {
-    // .env file not found, continue with defaults
-    print('Warning: .env file not found, using default values');
+  // Enable semantics for testing only in debug mode
+  if (const bool.fromEnvironment('dart.vm.product') == false) {
+    WidgetsBinding.instance.ensureSemantics();
+  }
+  
+  // Load environment variables only in non-test environment
+  if (!const bool.fromEnvironment('flutter.test')) {
+    try {
+      await dotenv.load(fileName: ".env");
+    } catch (e) {
+      // .env file not found, continue with defaults
+      print('Warning: .env file not found, using default values');
+    }
   }
   
   
@@ -68,6 +76,7 @@ class MyApp extends ConsumerWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
+      showSemanticsDebugger: false, // 디버깅용, 필요시 true로 변경
       home: const SplashScreen(),
     );
   }

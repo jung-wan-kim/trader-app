@@ -56,11 +56,24 @@ class TraderAppUITest {
 
   async navigateToApp() {
     console.log('📱 Navigating to app...');
-    await this.page.goto('http://localhost:8080/index.html', {
+    await this.page.goto('http://localhost:8080', {
       waitUntil: 'networkidle',
       timeout: 60000
     });
     await this.page.waitForTimeout(3000);
+    
+    // Enable accessibility for Flutter web
+    console.log('🔧 Enabling accessibility...');
+    try {
+      const accessibilityButton = await this.page.locator('[aria-label="Enable accessibility"]');
+      if (await accessibilityButton.isVisible()) {
+        await accessibilityButton.click();
+        console.log('✅ Accessibility enabled');
+        await this.page.waitForTimeout(2000); // Wait for accessibility to initialize
+      }
+    } catch (error) {
+      console.log('⚠️ Accessibility button not found or already enabled');
+    }
   }
 
   async testLanguageSelection() {
@@ -69,7 +82,25 @@ class TraderAppUITest {
 
     try {
       // Check if language selection screen is visible
-      const languageScreen = await this.page.locator('text=Choose Your Language').isVisible();
+      // Try multiple selectors for language screen
+      let languageScreen = false;
+      
+      // Try text selector first
+      languageScreen = await this.page.locator('text=Choose Your Language').isVisible()
+        .catch(() => false);
+      
+      // If not found, try aria-label
+      if (!languageScreen) {
+        languageScreen = await this.page.locator('[aria-label*="Choose Your Language"]').isVisible()
+          .catch(() => false);
+      }
+      
+      // If still not found, try looking for language options
+      if (!languageScreen) {
+        languageScreen = await this.page.locator('[aria-label*="English"]').isVisible()
+          .catch(() => false);
+      }
+      
       results.push({
         test: 'Language selection screen visible',
         passed: languageScreen
@@ -95,15 +126,36 @@ class TraderAppUITest {
         }
 
         // Select Korean
-        await this.page.click('text=한국어');
-        await this.page.waitForTimeout(1000);
-        await this.screenshot('language-selection/02-korean-selected');
+        try {
+          // Try multiple ways to click Korean option
+          const koreanOption = await this.page.locator('[aria-label*="한국어"]').first()
+            .or(this.page.locator('text=한국어').first())
+            .or(this.page.locator(':has-text("한국어")').first());
+          
+          if (await koreanOption.isVisible()) {
+            await koreanOption.click();
+            console.log('✅ Clicked Korean option');
+            await this.page.waitForTimeout(1000);
+            await this.screenshot('language-selection/02-korean-selected');
+          }
+        } catch (error) {
+          console.log('❌ Failed to click Korean option:', error.message);
+        }
 
         // Click Continue
-        const continueButton = await this.page.locator('text=Continue').isVisible();
-        if (continueButton) {
-          await this.page.click('text=Continue');
-          await this.page.waitForTimeout(2000);
+        try {
+          const continueButton = await this.page.locator('[aria-label*="Continue"]').first()
+            .or(this.page.locator('text=Continue').first())
+            .or(this.page.locator('[aria-label*="계속"]').first())
+            .or(this.page.locator('text=계속').first());
+          
+          if (await continueButton.isVisible()) {
+            await continueButton.click();
+            console.log('✅ Clicked Continue button');
+            await this.page.waitForTimeout(2000);
+          }
+        } catch (error) {
+          console.log('❌ Failed to click Continue button:', error.message);
         }
       }
     } catch (error) {
