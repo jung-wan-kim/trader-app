@@ -2,8 +2,9 @@ import 'dart:math';
 import 'package:faker/faker.dart';
 import 'package:trader_app/models/stock_recommendation.dart';
 import 'package:trader_app/models/trader_strategy.dart';
-import 'package:trader_app/models/position.dart';
-import 'package:trader_app/models/stock_info.dart';
+// Position과 StockInfo 모델은 더 이상 사용하지 않음
+// import 'package:trader_app/models/position.dart';
+// import 'package:trader_app/models/stock_info.dart';
 
 class TestDataFactory {
   static final faker = Faker();
@@ -12,43 +13,54 @@ class TestDataFactory {
   // Stock Recommendation Factory
   static StockRecommendation createRecommendation({
     String? id,
-    String? symbol,
+    String? stockCode,
     double? currentPrice,
     double? targetPrice,
-    TraderStrategy? strategy,
-    RecommendationType? type,
-    DateTime? createdAt,
+    String? action,
+    DateTime? recommendedAt,
   }) {
     final basePrice = currentPrice ?? random.nextDouble() * 1000 + 10;
-    final isLong = type ?? (random.nextBool() ? RecommendationType.buy : RecommendationType.sell);
+    final isBuy = action ?? (random.nextBool() ? 'BUY' : 'SELL');
     
     return StockRecommendation(
       id: id ?? faker.guid.guid(),
-      symbol: symbol ?? _generateStockSymbol(),
-      companyName: faker.company.name(),
+      stockCode: stockCode ?? _generateStockSymbol(),
+      stockName: faker.company.name(),
+      traderName: faker.person.name(),
+      traderId: faker.guid.guid(),
+      action: isBuy,
       currentPrice: basePrice,
-      targetPrice: targetPrice ?? (isLong == RecommendationType.buy 
+      targetPrice: targetPrice ?? (isBuy == 'BUY' 
           ? basePrice * (1 + random.nextDouble() * 0.3)
           : basePrice * (1 - random.nextDouble() * 0.3)),
-      stopLossPrice: isLong == RecommendationType.buy
+      stopLoss: isBuy == 'BUY'
           ? basePrice * (1 - random.nextDouble() * 0.1)
           : basePrice * (1 + random.nextDouble() * 0.1),
-      recommendationType: isLong,
-      confidence: random.nextDouble() * 0.3 + 0.7, // 70-100%
-      strategy: strategy ?? createTraderStrategy(),
-      analysis: _generateAnalysis(),
-      createdAt: createdAt ?? DateTime.now(),
-      expiresAt: DateTime.now().add(Duration(days: random.nextInt(30) + 1)),
+      takeProfit: isBuy == 'BUY'
+          ? basePrice * (1 + random.nextDouble() * 0.4)
+          : basePrice * (1 - random.nextDouble() * 0.4),
+      reasoning: _generateAnalysis(),
+      recommendedAt: recommendedAt ?? DateTime.now(),
+      timeframe: ['SHORT', 'MEDIUM', 'LONG'][random.nextInt(3)],
+      confidence: random.nextDouble() * 30 + 70, // 70-100
+      riskLevel: ['LOW', 'MEDIUM', 'HIGH'][random.nextInt(3)],
+      technicalIndicators: {
+        'RSI': random.nextInt(70) + 30,
+        'MACD': random.nextBool() ? 'BULLISH' : 'BEARISH',
+        'MA50': basePrice * (1 + (random.nextDouble() - 0.5) * 0.1),
+      },
+      expectedReturn: random.nextDouble() * 30,
+      likes: random.nextInt(1000),
+      followers: random.nextInt(10000),
     );
   }
   
   static List<StockRecommendation> createRecommendationList({
     required int count,
-    TraderStrategy? strategy,
   }) {
     return List.generate(
       count,
-      (index) => createRecommendation(strategy: strategy),
+      (index) => createRecommendation(),
     );
   }
   
@@ -78,48 +90,48 @@ class TestDataFactory {
     return List.generate(count, (index) => createTraderStrategy());
   }
   
-  // Position Factory
-  static Position createPosition({
-    String? id,
-    String? symbol,
-    PositionType? type,
-    double? entryPrice,
-    int? quantity,
-    PositionStatus? status,
-  }) {
-    final basePrice = entryPrice ?? random.nextDouble() * 1000 + 10;
-    final currentPrice = basePrice * (1 + (random.nextDouble() - 0.5) * 0.2);
-    final qty = quantity ?? random.nextInt(100) + 1;
-    
-    return Position(
-      id: id ?? faker.guid.guid(),
-      symbol: symbol ?? _generateStockSymbol(),
-      companyName: faker.company.name(),
-      type: type ?? (random.nextBool() ? PositionType.long : PositionType.short),
-      entryPrice: basePrice,
-      currentPrice: currentPrice,
-      quantity: qty,
-      profitLoss: (currentPrice - basePrice) * qty,
-      profitLossPercent: ((currentPrice - basePrice) / basePrice) * 100,
-      status: status ?? PositionStatus.open,
-      openedAt: DateTime.now().subtract(Duration(days: random.nextInt(30))),
-      closedAt: status == PositionStatus.closed 
-          ? DateTime.now().subtract(Duration(hours: random.nextInt(24)))
-          : null,
-      recommendationId: faker.guid.guid(),
-      traderId: faker.guid.guid(),
-    );
-  }
-  
-  static List<Position> createPositionList({
-    required int count,
-    PositionStatus? status,
-  }) {
-    return List.generate(
-      count,
-      (index) => createPosition(status: status),
-    );
-  }
+  // Position Factory - 더 이상 사용하지 않음
+  // static Position createPosition({
+  //   String? id,
+  //   String? symbol,
+  //   PositionType? type,
+  //   double? entryPrice,
+  //   int? quantity,
+  //   PositionStatus? status,
+  // }) {
+  //   final basePrice = entryPrice ?? random.nextDouble() * 1000 + 10;
+  //   final currentPrice = basePrice * (1 + (random.nextDouble() - 0.5) * 0.2);
+  //   final qty = quantity ?? random.nextInt(100) + 1;
+  //   
+  //   return Position(
+  //     id: id ?? faker.guid.guid(),
+  //     symbol: symbol ?? _generateStockSymbol(),
+  //     companyName: faker.company.name(),
+  //     type: type ?? (random.nextBool() ? PositionType.long : PositionType.short),
+  //     entryPrice: basePrice,
+  //     currentPrice: currentPrice,
+  //     quantity: qty,
+  //     profitLoss: (currentPrice - basePrice) * qty,
+  //     profitLossPercent: ((currentPrice - basePrice) / basePrice) * 100,
+  //     status: status ?? PositionStatus.open,
+  //     openedAt: DateTime.now().subtract(Duration(days: random.nextInt(30))),
+  //     closedAt: status == PositionStatus.closed 
+  //         ? DateTime.now().subtract(Duration(hours: random.nextInt(24)))
+  //         : null,
+  //     recommendationId: faker.guid.guid(),
+  //     traderId: faker.guid.guid(),
+  //   );
+  // }
+  // 
+  // static List<Position> createPositionList({
+  //   required int count,
+  //   PositionStatus? status,
+  // }) {
+  //   return List.generate(
+  //     count,
+  //     (index) => createPosition(status: status),
+  //   );
+  // }
   
   // Edge Case Data Generators
   static StockRecommendation createEdgeCaseRecommendation(EdgeCaseType type) {
@@ -136,17 +148,37 @@ class TestDataFactory {
         );
       case EdgeCaseType.longSymbol:
         return createRecommendation(
-          symbol: 'VERYLONGSTOCKSYMBOL',
+          stockCode: 'VERYLONGSTOCKSYMBOL',
         );
       case EdgeCaseType.longCompanyName:
-        return createRecommendation()
-          ..companyName = 'Very Long Company Name That Should Be Truncated In The UI Display';
+        var rec = createRecommendation();
+        // stockName은 final이므로 새로운 인스턴스를 생성해야 함
+        return StockRecommendation(
+          id: rec.id,
+          stockCode: rec.stockCode,
+          stockName: 'Very Long Company Name That Should Be Truncated In The UI Display',
+          traderName: rec.traderName,
+          traderId: rec.traderId,
+          action: rec.action,
+          currentPrice: rec.currentPrice,
+          targetPrice: rec.targetPrice,
+          stopLoss: rec.stopLoss,
+          takeProfit: rec.takeProfit,
+          reasoning: rec.reasoning,
+          recommendedAt: rec.recommendedAt,
+          timeframe: rec.timeframe,
+          confidence: rec.confidence,
+          riskLevel: rec.riskLevel,
+          technicalIndicators: rec.technicalIndicators,
+          expectedReturn: rec.expectedReturn,
+          likes: rec.likes,
+          followers: rec.followers,
+        );
       case EdgeCaseType.highVolatility:
         final price = 100.0;
         return createRecommendation(
           currentPrice: price,
           targetPrice: price * 2,
-          stopLossPrice: price * 0.5,
         );
     }
   }
