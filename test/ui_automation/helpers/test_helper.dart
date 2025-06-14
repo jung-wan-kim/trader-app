@@ -12,17 +12,23 @@ class TestHelper {
     bool isFirstLaunch = false,
     bool isAuthenticated = false,
   }) async {
-    SharedPreferences.setMockInitialValues({
+    final Map<String, Object> mockData = {
       'is_first_launch': isFirstLaunch,
       'selected_language': locale,
-      'auth_token': isAuthenticated ? 'test_token' : null,
-      'user_id': isAuthenticated ? 'test_user_123' : null,
-    });
+    };
+    
+    if (isAuthenticated) {
+      mockData['auth_token'] = 'test_token';
+      mockData['user_id'] = 'test_user_123';
+    }
+    
+    SharedPreferences.setMockInitialValues(mockData);
   }
   
   void verifyCurrentRoute(String expectedRoute) {
-    final NavigatorState navigator = tester.state(find.byType(Navigator));
-    expect(navigator.widget.pages.last.name, expectedRoute);
+    // Navigator 위젯의 현재 라우트를 확인
+    final modalRoute = ModalRoute.of(tester.element(find.byType(Navigator)));
+    expect(modalRoute?.settings.name, expectedRoute);
   }
   
   Future<void> setDeviceSize(Size size) async {

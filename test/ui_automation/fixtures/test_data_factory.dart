@@ -67,22 +67,45 @@ class TestDataFactory {
   // Trader Strategy Factory
   static TraderStrategy createTraderStrategy({
     String? id,
-    String? name,
-    StrategyType? type,
+    String? traderId,
+    String? traderName,
+    String? strategyName,
+    String? tradingStyle,
+    double? winRate,
     double? performance,
   }) {
+    final now = DateTime.now();
+    final tradingStyles = ['SCALPING', 'DAY_TRADING', 'SWING_TRADING', 'POSITION_TRADING'];
+    
     return TraderStrategy(
       id: id ?? faker.guid.guid(),
-      name: name ?? '${faker.person.firstName()} ${faker.lorem.word()}',
-      type: type ?? StrategyType.values[random.nextInt(StrategyType.values.length)],
+      traderId: traderId ?? faker.guid.guid(),
+      traderName: traderName ?? faker.person.name(),
+      strategyName: strategyName ?? '${faker.company.name()} Strategy',
       description: faker.lorem.sentences(3).join(' '),
-      performance: performance ?? (random.nextDouble() * 100 - 20), // -20% to 80%
-      winRate: random.nextDouble() * 0.4 + 0.5, // 50-90%
-      averageReturn: random.nextDouble() * 0.3 - 0.05, // -5% to 25%
+      tradingStyle: tradingStyle ?? tradingStyles[random.nextInt(tradingStyles.length)],
+      winRate: winRate ?? (random.nextDouble() * 40 + 50), // 50-90%
+      averageReturn: performance ?? (random.nextDouble() * 0.3 - 0.05), // -5% to 25%
+      maxDrawdown: random.nextDouble() * 0.3, // 0-30%
+      sharpeRatio: random.nextDouble() * 3, // 0-3
       totalTrades: random.nextInt(1000) + 100,
+      winningTrades: random.nextInt(700) + 50,
+      losingTrades: random.nextInt(300) + 50,
+      createdAt: now.subtract(Duration(days: random.nextInt(365))),
+      lastUpdated: now.subtract(Duration(hours: random.nextInt(24))),
+      preferredAssets: ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA'].take(random.nextInt(3) + 1).toList(),
+      performanceMetrics: {
+        'monthlyReturn': random.nextDouble() * 20 - 5,
+        'yearlyReturn': random.nextDouble() * 100 - 20,
+        'bestTrade': random.nextDouble() * 50,
+        'worstTrade': -random.nextDouble() * 30,
+      },
+      riskManagement: 'Stop loss at ${random.nextInt(5) + 2}%, Take profit at ${random.nextInt(10) + 5}%',
+      minimumCapital: (random.nextInt(10) + 1) * 1000.0,
       followers: random.nextInt(10000) + 100,
       rating: random.nextDouble() * 2 + 3, // 3-5 stars
-      riskLevel: RiskLevel.values[random.nextInt(RiskLevel.values.length)],
+      isActive: true,
+      profileImageUrl: null,
     );
   }
   

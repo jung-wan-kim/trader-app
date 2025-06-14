@@ -1,61 +1,73 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:trader_app/providers/supabase_auth_provider.dart';
 import 'package:trader_app/providers/recommendations_provider.dart';
 import 'package:trader_app/providers/subscription_provider.dart';
 import 'package:trader_app/models/stock_recommendation.dart';
 import 'package:trader_app/models/trader_strategy.dart';
 import 'package:trader_app/models/user_subscription.dart';
+import 'package:trader_app/services/mock_data_service.dart';
 import '../fixtures/test_data_factory.dart';
 
 class MockProviders {
   static List<Override> getDefaultOverrides() {
     return [
-      authStateProvider.overrideWith((ref) => _mockAuthState()),
-      recommendationsProvider.overrideWith((ref) => _mockRecommendations()),
-      // tradersProvider.overrideWith((ref) => _mockTraders()),
-      // positionsProvider.overrideWith((ref) => _mockPositions()),
-      subscriptionProvider.overrideWith((ref) => _mockSubscription()),
+      authStateProvider.overrideWith((ref) => Stream.value(_mockAuthState())),
+      recommendationsProvider.overrideWith((ref) => _mockRecommendationsNotifier()),
+      subscriptionProvider.overrideWith((ref) => _mockSubscriptionNotifier()),
     ];
   }
   
   static List<Override> getEmptyDataOverrides() {
     return [
-      authStateProvider.overrideWith((ref) => _mockAuthState()),
-      recommendationsProvider.overrideWith((ref) async => []),
-      // tradersProvider.overrideWith((ref) async => []),
-      // positionsProvider.overrideWith((ref) async => []),
-      subscriptionProvider.overrideWith((ref) => _mockSubscription()),
+      authStateProvider.overrideWith((ref) => Stream.value(_mockAuthState())),
+      recommendationsProvider.overrideWith((ref) => _mockEmptyRecommendationsNotifier()),
+      subscriptionProvider.overrideWith((ref) => _mockSubscriptionNotifier()),
     ];
   }
   
   static List<Override> getErrorOverrides() {
     return [
-      authStateProvider.overrideWith((ref) => _mockAuthState()),
-      recommendationsProvider.overrideWith((ref) => throw Exception('Network error')),
-      // tradersProvider.overrideWith((ref) => throw Exception('Network error')),
-      // positionsProvider.overrideWith((ref) => throw Exception('Network error')),
-      subscriptionProvider.overrideWith((ref) => _mockSubscription()),
+      authStateProvider.overrideWith((ref) => Stream.value(_mockAuthState())),
+      recommendationsProvider.overrideWith((ref) => _mockErrorRecommendationsNotifier()),
+      subscriptionProvider.overrideWith((ref) => _mockSubscriptionNotifier()),
     ];
   }
   
   static List<Override> getUnauthenticatedOverrides() {
     return [
-      authStateProvider.overrideWith((ref) => null),
-      recommendationsProvider.overrideWith((ref) async => []),
-      // tradersProvider.overrideWith((ref) async => []),
-      // positionsProvider.overrideWith((ref) async => []),
-      subscriptionProvider.overrideWith((ref) => null),
+      authStateProvider.overrideWith((ref) => Stream.value(const AuthState(AuthChangeEvent.signedOut, null))),
+      recommendationsProvider.overrideWith((ref) => _mockEmptyRecommendationsNotifier()),
+      subscriptionProvider.overrideWith((ref) => _mockEmptySubscriptionNotifier()),
     ];
   }
   
-  static dynamic _mockAuthState() {
-    // Supabase User 객체 mock
-    return null; // 실제 테스트에서는 적절한 mock User 객체를 반환해야 함
+  static AuthState _mockAuthState() {
+    // Mock session for authenticated state
+    final mockSession = Session(
+      accessToken: 'mock_access_token',
+      tokenType: 'bearer',
+      user: User(
+        id: 'test_user_123',
+        appMetadata: {},
+        userMetadata: {},
+        aud: 'authenticated',
+        createdAt: DateTime.now().toIso8601String(),
+      ),
+    );
+    return AuthState(AuthChangeEvent.signedIn, mockSession);
   }
   
-  static Future<List<StockRecommendation>> _mockRecommendations() async {
-    await Future.delayed(const Duration(milliseconds: 100));
-    return TestDataFactory.createRecommendationList(count: 10);
+  static RecommendationsNotifier _mockRecommendationsNotifier() {
+    return MockRecommendationsNotifier(TestDataFactory.createRecommendationList(count: 10));
+  }
+  
+  static RecommendationsNotifier _mockEmptyRecommendationsNotifier() {
+    return MockRecommendationsNotifier([]);
+  }
+  
+  static RecommendationsNotifier _mockErrorRecommendationsNotifier() {
+    return MockRecommendationsNotifier([], shouldError: true);
   }
   
   // TraderStrategy provider는 더 이상 사용하지 않음
@@ -69,6 +81,14 @@ class MockProviders {
   //   await Future.delayed(const Duration(milliseconds: 100));
   //   return TestDataFactory.createPositionList(count: 3);
   // }
+  
+  static SubscriptionNotifier _mockSubscriptionNotifier() {
+    return MockSubscriptionNotifier(_mockSubscription());
+  }
+  
+  static SubscriptionNotifier _mockEmptySubscriptionNotifier() {
+    return MockSubscriptionNotifier(null);
+  }
   
   static UserSubscription? _mockSubscription() {
     return UserSubscription(
@@ -101,9 +121,11 @@ class MockProviders {
   
   // Custom override builders for specific test scenarios
   static Override recommendationsWithDelay(Duration delay) {
-    return recommendationsProvider.overrideWith((ref) async {
-      await Future.delayed(delay);
-      return TestDataFactory.createRecommendationList(count: 10);
+    return recommendationsProvider.overrideWith((ref) {
+      return MockRecommendationsNotifier(
+        TestDataFactory.createRecommendationList(count: 10),
+        delay: delay,
+      );
     });
   }
   
@@ -116,7 +138,7 @@ class MockProviders {
   
   static Override subscriptionWithTier(SubscriptionTier tier) {
     return subscriptionProvider.overrideWith((ref) {
-      return UserSubscription(
+      final subscription = UserSubscription(
         id: 'test_sub_123',
         userId: 'test_user_123',
         planId: '${tier.name}_plan',
@@ -144,6 +166,46 @@ class MockProviders {
         discountAmount: null,
         history: [],
       );
+      return MockSubscriptionNotifier(subscription);
     });
+  }
+}
+
+// Mock Subscription Notifier
+class MockSubscriptionNotifier extends SubscriptionNotifier {
+  final UserSubscription? _mockData;
+  
+  MockSubscriptionNotifier(this._mockData) : super(MockDataService());
+  
+  @override
+  Future<void> loadSubscription() async {
+    await Future.delayed(const Duration(milliseconds: 100));
+    state = AsyncValue.data(_mockData);
+  }
+}
+
+// Mock Notifier class for recommendations
+class MockRecommendationsNotifier extends RecommendationsNotifier {
+  final List<StockRecommendation> _mockData;
+  final bool shouldError;
+  final Duration? delay;
+  
+  MockRecommendationsNotifier(
+    this._mockData, {
+    this.shouldError = false,
+    this.delay,
+  }) : super(MockDataService());
+  
+  @override
+  Future<void> loadRecommendations() async {
+    if (delay != null) {
+      await Future.delayed(delay!);
+    }
+    
+    if (shouldError) {
+      state = AsyncValue.error(Exception('Network error'), StackTrace.current);
+    } else {
+      state = AsyncValue.data(_mockData);
+    }
   }
 }

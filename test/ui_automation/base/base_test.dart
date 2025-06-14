@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:trader_app/main.dart';
 import '../helpers/test_helper.dart';
@@ -35,7 +36,7 @@ abstract class BaseUITest {
     await tester.pumpWidget(
       UncontrolledProviderScope(
         container: container,
-        child: const TraderApp(),
+        child: const MyApp(),
       ),
     );
     
