@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:trader_app/providers/recommendations_provider.dart';
 import 'dart:io';
 import '../base/base_test.dart';
 import '../pages/home_page.dart';
@@ -65,8 +67,10 @@ void main() {
       baseTest.container = ProviderContainer(
         overrides: [
           ...MockProviders.getDefaultOverrides(),
-          recommendationsProvider.overrideWith((ref) async {
-            return TestDataFactory.createRecommendationList(count: 1000);
+          recommendationsProvider.overrideWith((ref) {
+            return MockRecommendationsNotifier(
+              TestDataFactory.createRecommendationList(count: 1000),
+            );
           }),
         ],
       );
@@ -139,8 +143,10 @@ void main() {
       baseTest.container = ProviderContainer(
         overrides: [
           ...MockProviders.getDefaultOverrides(),
-          recommendationsProvider.overrideWith((ref) async {
-            return TestDataFactory.createRecommendationList(count: 1000);
+          recommendationsProvider.overrideWith((ref) {
+            return MockRecommendationsNotifier(
+              TestDataFactory.createRecommendationList(count: 1000),
+            );
           }),
         ],
       );
@@ -197,8 +203,10 @@ void main() {
       baseTest.container = ProviderContainer(
         overrides: [
           ...MockProviders.getDefaultOverrides(),
-          recommendationsProvider.overrideWith((ref) async {
-            return TestDataFactory.createRecommendationList(count: 50);
+          recommendationsProvider.overrideWith((ref) {
+            return MockRecommendationsNotifier(
+              TestDataFactory.createRecommendationList(count: 50),
+            );
           }),
         ],
       );
@@ -300,8 +308,10 @@ void main() {
       baseTest.container = ProviderContainer(
         overrides: [
           ...MockProviders.getDefaultOverrides(),
-          recommendationsProvider.overrideWith((ref) async {
-            return TestDataFactory.createRecommendationList(count: 1000);
+          recommendationsProvider.overrideWith((ref) {
+            return MockRecommendationsNotifier(
+              TestDataFactory.createRecommendationList(count: 1000),
+            );
           }),
         ],
       );

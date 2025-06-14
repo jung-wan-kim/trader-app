@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'dart:io';
 import '../base/base_test.dart';
@@ -47,12 +48,8 @@ void main() {
         await home.selectRecommendation(0);
         
         // 시스템 백 버튼 시뮬레이션
-        await tester.binding.handlePointerEvent(
-          const PointerDownEvent(
-            position: Offset(50, 50),
-            buttons: kSecondaryButton,
-          ),
-        );
+        final TestGesture gesture = await tester.startGesture(const Offset(50, 50));
+        await gesture.up();
         await tester.pumpAndSettle();
         
         // Material 디자인 AppBar

@@ -69,6 +69,7 @@ dev_dependencies:
   faker: ^2.1.0  # faker 패키지 추가 완료
   integration_test:
     sdk: flutter
+  golden_toolkit: ^0.15.0  # 골든 테스트를 위한 패키지 추가
   
   # Coverage
   coverage: ^1.7.2

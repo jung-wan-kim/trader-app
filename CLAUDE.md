@@ -2,10 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## 텔레그램 메시지 처리
-
-### 메시지 폴링 전략
-- 5초마다 텔레그램 `get_updates`를 호출해서 새 메시지를 확인하고 새 메시지가 있으면 그 메시지대로 실행해
+모든 RP를 활용해서 프로젝트 진행해.
 
 ## 빌드 및 테스트 명령어
 

@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:flutter/material.dart';
 import '../base/base_test.dart';
 import '../pages/onboarding_page.dart';
 import '../pages/login_page.dart';

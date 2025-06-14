@@ -1,12 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:io';
 import '../base/base_test.dart';
 import '../pages/home_page.dart';
 import '../pages/login_page.dart';
 import '../pages/onboarding_page.dart';
 import '../pages/position_page.dart';
+import '../helpers/mock_providers.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -224,7 +227,7 @@ void main() {
           case 'disabled':
             // 비활성화된 버튼 찾기
             final disabledButton = find.byWidgetPredicate(
-              (widget) => widget is ElevatedButton && !widget.enabled,
+              (widget) => widget is ElevatedButton && widget.onPressed == null,
             );
             if (disabledButton.evaluate().isNotEmpty) {
               await tester.ensureVisible(disabledButton);
