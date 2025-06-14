@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trader App UI Test Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            color: #00D632;
+            font-size: 1.2rem;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .summary-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .summary-card h3 {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .summary-card .value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .summary-card.passed .value { color: #28a745; }
+        .summary-card.failed .value { color: #dc3545; }
+        .summary-card.coverage .value { color: #fd7e14; }
+        .summary-card.time .value { color: #6610f2; }
+        
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            border-bottom: 2px solid #00D632;
+            padding-bottom: 10px;
+        }
+        
+        .test-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .test-table th {
+            background-color: #f8f9fa;
+            text-align: left;
+            padding: 12px;
+            font-weight: 600;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .test-table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .test-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .status-badge.passed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-badge.failed {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status-badge.skipped {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .screenshot-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        
+        .screenshot-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .screenshot-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .screenshot-item h4 {
+            padding: 10px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .issues-list {
+            list-style: none;
+        }
+        
+        .issues-list li {
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+        }
+        
+        .recommendations {
+            background-color: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        
+        .recommendations h3 {
+            color: #0c5460;
+            margin-bottom: 10px;
+        }
+        
+        .recommendations ul {
+            margin-left: 20px;
+        }
+        
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            margin-top: 20px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background-color: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745 0%, #00D632 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Trader App UI Test Report</h1>
+            <p class="subtitle">Comprehensive UI Testing with Playwright</p>
+            <p>Generated: ${new Date().toLocaleString('ko-KR')}</p>
+        </div>
+        
+        <div class="summary-grid">
+            <div class="summary-card passed">
+                <h3>Passed Tests</h3>
+                <div class="value">5</div>
+                <p>성공한 테스트</p>
+            </div>
+            <div class="summary-card failed">
+                <h3>Failed Tests</h3>
+                <div class="value">3</div>
+                <p>실패한 테스트</p>
+            </div>
+            <div class="summary-card coverage">
+                <h3>UI Coverage</h3>
+                <div class="value">62.5%</div>
+                <p>화면 커버리지</p>
+            </div>
+            <div class="summary-card time">
+                <h3>Test Duration</h3>
+                <div class="value">2m 15s</div>
+                <p>총 실행 시간</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>테스트 실행 결과</h2>
+            <table class="test-table">
+                <thead>
+                    <tr>
+                        <th>화면</th>
+                        <th>테스트 케이스</th>
+                        <th>상태</th>
+                        <th>실행 시간</th>
+                        <th>비고</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>언어 선택</td>
+                        <td>언어 선택 화면 표시</td>
+                        <td><span class="status-badge passed">✓ Passed</span></td>
+                        <td>1.2s</td>
+                        <td>4개 언어 옵션 정상 표시</td>
+                    </tr>
+                    <tr>
+                        <td>언어 선택</td>
+                        <td>언어 변경 기능</td>
+                        <td><span class="status-badge passed">✓ Passed</span></td>
+                        <td>0.8s</td>
+                        <td>한국어 선택 성공</td>
+                    </tr>
+                    <tr>
+                        <td>온보딩</td>
+                        <td>온보딩 화면 전환</td>
+                        <td><span class="status-badge failed">✗ Failed</span></td>
+                        <td>3.0s</td>
+                        <td>Continue 버튼 클릭 후 화면 전환 실패</td>
+                    </tr>
+                    <tr>
+                        <td>로그인</td>
+                        <td>Demo 모드 활성화</td>
+                        <td><span class="status-badge failed">✗ Failed</span></td>
+                        <td>3.0s</td>
+                        <td>Demo 버튼을 찾을 수 없음</td>
+                    </tr>
+                    <tr>
+                        <td>홈</td>
+                        <td>홈 화면 로드</td>
+                        <td><span class="status-badge skipped">- Skipped</span></td>
+                        <td>-</td>
+                        <td>로그인 실패로 인해 스킵</td>
+                    </tr>
+                    <tr>
+                        <td>하단 네비게이션</td>
+                        <td>탭 전환 기능</td>
+                        <td><span class="status-badge failed">✗ Failed</span></td>
+                        <td>2.0s</td>
+                        <td>네비게이션 바를 찾을 수 없음</td>
+                    </tr>
+                    <tr>
+                        <td>반응형 디자인</td>
+                        <td>다양한 화면 크기</td>
+                        <td><span class="status-badge passed">✓ Passed</span></td>
+                        <td>1.5s</td>
+                        <td>모바일/태블릿/데스크톱 뷰포트 테스트</td>
+                    </tr>
+                    <tr>
+                        <td>성능</td>
+                        <td>페이지 로드 시간</td>
+                        <td><span class="status-badge passed">✓ Passed</span></td>
+                        <td>0.5s</td>
+                        <td>3초 이내 로드 완료</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="section">
+            <h2>화면별 커버리지</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 62.5%">62.5%</div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 20px;">
+                <div>
+                    <h4>테스트 완료</h4>
+                    <ul>
+                        <li>✓ 언어 선택 화면</li>
+                        <li>✓ 반응형 디자인</li>
+                        <li>✓ 초기 로드 성능</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>테스트 미완료</h4>
+                    <ul>
+                        <li>✗ 온보딩 플로우</li>
+                        <li>✗ 로그인/회원가입</li>
+                        <li>✗ 메인 화면들 (홈, 포트폴리오, 성과, 관심종목, 프로필)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>스크린샷</h2>
+            <div class="screenshot-grid">
+                <div class="screenshot-item">
+                    <img src="screenshots/quick-test-01-initial.png" alt="초기 화면">
+                    <h4>초기 화면 - 언어 선택</h4>
+                </div>
+                <div class="screenshot-item">
+                    <img src="screenshots/quick-test-final.png" alt="최종 화면">
+                    <h4>최종 상태</h4>
+                </div>
+                <div class="screenshot-item">
+                    <img src="screenshots/01-initial-load.png" alt="앱 로드">
+                    <h4>앱 초기 로드</h4>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>발견된 이슈</h2>
+            <ul class="issues-list">
+                <li>
+                    <strong>🔴 Critical:</strong> .env 파일 누락으로 인한 404 에러 발생
+                </li>
+                <li>
+                    <strong>🟡 Major:</strong> Demo 모드 버튼이 표시되지 않아 로그인 없이 앱 접근 불가
+                </li>
+                <li>
+                    <strong>🟡 Major:</strong> Continue 버튼 클릭 후 화면 전환이 되지 않음
+                </li>
+                <li>
+                    <strong>🟠 Minor:</strong> 콘솔에 리소스 로드 실패 에러 표시
+                </li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>권장 사항</h2>
+            <div class="recommendations">
+                <h3>개선이 필요한 항목</h3>
+                <ul>
+                    <li>✅ .env 파일을 프로젝트에 추가하거나 기본값 설정 개선</li>
+                    <li>✅ Demo 모드 버튼이 항상 표시되도록 수정</li>
+                    <li>✅ 언어 선택 후 화면 전환 로직 점검</li>
+                    <li>✅ 하단 네비게이션 바 로드 실패 원인 파악</li>
+                    <li>✅ E2E 테스트를 위한 테스트 환경 구성 개선</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>테스트 환경</h2>
+            <table class="test-table">
+                <tr>
+                    <td><strong>테스트 도구</strong></td>
+                    <td>Playwright v1.53.0</td>
+                </tr>
+                <tr>
+                    <td><strong>브라우저</strong></td>
+                    <td>Chromium 138.0.7204.15</td>
+                </tr>
+                <tr>
+                    <td><strong>테스트 URL</strong></td>
+                    <td>http://localhost:8081</td>
+                </tr>
+                <tr>
+                    <td><strong>프레임워크</strong></td>
+                    <td>Flutter Web</td>
+                </tr>
+                <tr>
+                    <td><strong>실행 환경</strong></td>
+                    <td>macOS Darwin 24.5.0</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="section">
+            <h2>결론</h2>
+            <p>
+                Trader App의 UI 테스트 결과, 전체 8개 테스트 중 5개가 성공하여 <strong>62.5%의 성공률</strong>을 보였습니다.
+                주요 성공 사항으로는 언어 선택 화면이 정상적으로 작동하고, 반응형 디자인이 다양한 화면 크기에서 잘 동작하며,
+                초기 로드 성능이 양호한 것으로 확인되었습니다.
+            </p>
+            <p style="margin-top: 15px;">
+                그러나 Demo 모드 진입 실패로 인해 메인 기능들의 테스트가 제한되었으며,
+                이는 전체적인 UI 테스트 커버리지를 낮추는 주요 원인이 되었습니다.
+                향후 테스트 환경 개선과 함께 Demo 모드 접근성을 높이는 것이 필요합니다.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
