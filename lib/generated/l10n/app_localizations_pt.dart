@@ -565,6 +565,36 @@ class AppLocalizationsPt extends AppLocalizations {
   String get planFeatureWhiteLabelOptions => 'Opções de marca branca';
 
   @override
+  String get jesseKeyStrategy => 'Trend Following, Pyramiding';
+
+  @override
+  String get jesseBestTrade => 'Predicted the 1929 Market Crash';
+
+  @override
+  String get jesseDescription =>
+      'The greatest speculator in history. Strategy to read market trends and capture big moves';
+
+  @override
+  String get larryKeyStrategy => 'Short-term Momentum, Volatility';
+
+  @override
+  String get larryBestTrade => '1987 World Trading Championship Winner';
+
+  @override
+  String get larryDescription =>
+      'Aggressive trading using short-term price momentum and market volatility';
+
+  @override
+  String get stanKeyStrategy => 'Stage Analysis, Long-term Investment';
+
+  @override
+  String get stanBestTrade => '30 Years of Consistent Returns';
+
+  @override
+  String get stanDescription =>
+      'Systematic investment strategy combining technical analysis and market stages';
+
+  @override
   String get termsTitle => 'Termos de Serviço do Trader App';
 
   @override

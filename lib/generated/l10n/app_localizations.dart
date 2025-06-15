@@ -1134,6 +1134,60 @@ abstract class AppLocalizations {
   /// **'White-label options'**
   String get planFeatureWhiteLabelOptions;
 
+  /// No description provided for @jesseKeyStrategy.
+  ///
+  /// In en, this message translates to:
+  /// **'Trend Following, Pyramiding'**
+  String get jesseKeyStrategy;
+
+  /// No description provided for @jesseBestTrade.
+  ///
+  /// In en, this message translates to:
+  /// **'Predicted the 1929 Market Crash'**
+  String get jesseBestTrade;
+
+  /// No description provided for @jesseDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'The greatest speculator in history. Strategy to read market trends and capture big moves'**
+  String get jesseDescription;
+
+  /// No description provided for @larryKeyStrategy.
+  ///
+  /// In en, this message translates to:
+  /// **'Short-term Momentum, Volatility'**
+  String get larryKeyStrategy;
+
+  /// No description provided for @larryBestTrade.
+  ///
+  /// In en, this message translates to:
+  /// **'1987 World Trading Championship Winner'**
+  String get larryBestTrade;
+
+  /// No description provided for @larryDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Aggressive trading using short-term price momentum and market volatility'**
+  String get larryDescription;
+
+  /// No description provided for @stanKeyStrategy.
+  ///
+  /// In en, this message translates to:
+  /// **'Stage Analysis, Long-term Investment'**
+  String get stanKeyStrategy;
+
+  /// No description provided for @stanBestTrade.
+  ///
+  /// In en, this message translates to:
+  /// **'30 Years of Consistent Returns'**
+  String get stanBestTrade;
+
+  /// No description provided for @stanDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Systematic investment strategy combining technical analysis and market stages'**
+  String get stanDescription;
+
   /// No description provided for @termsTitle.
   ///
   /// In en, this message translates to:

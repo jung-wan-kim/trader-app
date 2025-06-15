@@ -552,6 +552,33 @@ class AppLocalizationsKo extends AppLocalizations {
   String get planFeatureWhiteLabelOptions => '화이트 라벨 옵션';
 
   @override
+  String get jesseKeyStrategy => '추세 추종, 피라미딩';
+
+  @override
+  String get jesseBestTrade => '1929년 대공황 예측';
+
+  @override
+  String get jesseDescription => '역사상 가장 위대한 투기꾼. 시장의 추세를 읽고 큰 움직임을 포착하는 전략';
+
+  @override
+  String get larryKeyStrategy => '단기 모멘텀, 변동성 활용';
+
+  @override
+  String get larryBestTrade => '1987년 세계 트레이딩 챔피언십 우승';
+
+  @override
+  String get larryDescription => '단기 가격 모멘텀과 시장 변동성을 활용한 공격적 트레이딩';
+
+  @override
+  String get stanKeyStrategy => '스테이지 분석, 장기 투자';
+
+  @override
+  String get stanBestTrade => '30년간 일관된 수익';
+
+  @override
+  String get stanDescription => '기술적 분석과 시장 단계를 결합한 체계적 투자 전략';
+
+  @override
   String get termsTitle => 'Trader App 이용약관';
 
   @override

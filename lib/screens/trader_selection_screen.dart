@@ -16,32 +16,34 @@ class _TraderSelectionScreenState extends ConsumerState<TraderSelectionScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  final List<TraderInfo> traders = [
-    TraderInfo(
-      strategy: TradingStrategy.jesseLivermore,
-      imageAsset: 'assets/images/jesse_livermore.jpg',
-      performance: '+3,000%',
-      keyStrategy: '추세 추종, 피라미딩',
-      bestTrade: '1929년 대공황 예측',
-      description: '역사상 가장 위대한 투기꾼. 시장의 추세를 읽고 큰 움직임을 포착하는 전략',
-    ),
-    TraderInfo(
-      strategy: TradingStrategy.larryWilliams,
-      imageAsset: 'assets/images/larry_williams.jpg',
-      performance: '+11,376%',
-      keyStrategy: '단기 모멘텀, 변동성 활용',
-      bestTrade: '1987년 세계 트레이딩 챔피언십 우승',
-      description: '단기 가격 모멘텀과 시장 변동성을 활용한 공격적 트레이딩',
-    ),
-    TraderInfo(
-      strategy: TradingStrategy.stanWeinstein,
-      imageAsset: 'assets/images/stan_weinstein.jpg',
-      performance: '연평균 +25%',
-      keyStrategy: '스테이지 분석, 장기 투자',
-      bestTrade: '30년간 일관된 수익',
-      description: '기술적 분석과 시장 단계를 결합한 체계적 투자 전략',
-    ),
-  ];
+  List<TraderInfo> _getTraders(AppLocalizations? l10n) {
+    return [
+      TraderInfo(
+        strategy: TradingStrategy.jesseLivermore,
+        imageAsset: 'assets/images/jesse_livermore.jpg',
+        performance: '+3,000%',
+        keyStrategy: l10n?.jesseKeyStrategy ?? 'Trend Following, Pyramiding',
+        bestTrade: l10n?.jesseBestTrade ?? 'Predicted the 1929 Market Crash',
+        description: l10n?.jesseDescription ?? 'The greatest speculator in history. Strategy to read market trends and capture big moves',
+      ),
+      TraderInfo(
+        strategy: TradingStrategy.larryWilliams,
+        imageAsset: 'assets/images/larry_williams.jpg',
+        performance: '+11,376%',
+        keyStrategy: l10n?.larryKeyStrategy ?? 'Short-term Momentum, Volatility',
+        bestTrade: l10n?.larryBestTrade ?? '1987 World Trading Championship Winner',
+        description: l10n?.larryDescription ?? 'Aggressive trading using short-term price momentum and market volatility',
+      ),
+      TraderInfo(
+        strategy: TradingStrategy.stanWeinstein,
+        imageAsset: 'assets/images/stan_weinstein.jpg',
+        performance: l10n != null && l10n.localeName == 'ko' ? '연평균 +25%' : 'Annual +25%',
+        keyStrategy: l10n?.stanKeyStrategy ?? 'Stage Analysis, Long-term Investment',
+        bestTrade: l10n?.stanBestTrade ?? '30 Years of Consistent Returns',
+        description: l10n?.stanDescription ?? 'Systematic investment strategy combining technical analysis and market stages',
+      ),
+    ];
+  }
 
   @override
   void dispose() {
@@ -52,6 +54,7 @@ class _TraderSelectionScreenState extends ConsumerState<TraderSelectionScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final traders = _getTraders(l10n);
     
     return Scaffold(
       backgroundColor: Colors.black,
@@ -79,7 +82,7 @@ class _TraderSelectionScreenState extends ConsumerState<TraderSelectionScreen> {
               },
             ),
           ),
-          _buildPageIndicator(),
+          _buildPageIndicator(traders.length),
           _buildSelectionButton(l10n),
         ],
       ),
@@ -270,13 +273,13 @@ class _TraderSelectionScreenState extends ConsumerState<TraderSelectionScreen> {
     );
   }
 
-  Widget _buildPageIndicator() {
+  Widget _buildPageIndicator(int tradersCount) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
-          traders.length,
+          tradersCount,
           (index) => Container(
             margin: const EdgeInsets.symmetric(horizontal: 4),
             width: 8,
