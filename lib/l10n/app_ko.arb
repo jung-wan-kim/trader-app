@@ -92,6 +92,38 @@
   "profitPotential": "수익 잠재력",
   "noRecommendationsFound": "추천 종목이 없습니다",
   
+  "current": "현재가",
+  "target": "목표가",
+  "potential": "수익률",
+  "low": "낮음",
+  "medium": "보통",
+  "high": "높음",
+  "justNow": "방금",
+  "minutesAgo": "{minutes}분 전",
+  "@minutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "hoursAgo": "{hours}시간 전",
+  "@hoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "daysAgo": "{days}일 전",
+  "@daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  
   "portfolio": "포트폴리오",
   "errorLoadingPositions": "포지션을 불러오는 중 오류가 발생했습니다",
   "today": "오늘",

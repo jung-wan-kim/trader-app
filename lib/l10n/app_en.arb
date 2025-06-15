@@ -156,6 +156,38 @@
   "profitPotential": "Profit Potential",
   "noRecommendationsFound": "No recommendations found",
   
+  "current": "Current",
+  "target": "Target",
+  "potential": "Potential",
+  "low": "Low",
+  "medium": "Medium",
+  "high": "High",
+  "justNow": "Just now",
+  "minutesAgo": "{minutes}m ago",
+  "@minutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "hoursAgo": "{hours}h ago",
+  "@hoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "daysAgo": "{days}d ago",
+  "@daysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  
   "portfolio": "Portfolio",
   "errorLoadingPositions": "Error loading positions",
   "today": "today",

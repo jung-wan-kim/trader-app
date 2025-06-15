@@ -342,6 +342,42 @@ class AppLocalizationsDe extends AppLocalizations {
   String get noRecommendationsFound => 'Keine Empfehlungen gefunden';
 
   @override
+  String get current => 'Aktuell';
+
+  @override
+  String get target => 'Target';
+
+  @override
+  String get potential => 'Potential';
+
+  @override
+  String get low => 'Low';
+
+  @override
+  String get medium => 'Medium';
+
+  @override
+  String get high => 'High';
+
+  @override
+  String get justNow => 'Just now';
+
+  @override
+  String minutesAgo(int minutes) {
+    return '${minutes}m ago';
+  }
+
+  @override
+  String hoursAgo(int hours) {
+    return 'vor $hours Stunden';
+  }
+
+  @override
+  String daysAgo(int days) {
+    return '${days}d ago';
+  }
+
+  @override
   String get portfolio => 'Portfolio';
 
   @override
@@ -371,9 +407,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get avgCost => 'Durchschnittliche Kosten';
-
-  @override
-  String get current => 'Aktuell';
 
   @override
   String get pl => 'G&V';
@@ -440,11 +473,6 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get newComments => 'Neue Kommentare';
-
-  @override
-  String hoursAgo(int hours) {
-    return 'vor $hours Stunden';
-  }
 
   @override
   String get messages => 'Nachrichten';

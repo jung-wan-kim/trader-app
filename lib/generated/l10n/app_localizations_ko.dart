@@ -334,6 +334,42 @@ class AppLocalizationsKo extends AppLocalizations {
   String get noRecommendationsFound => '추천 종목이 없습니다';
 
   @override
+  String get current => '현재가';
+
+  @override
+  String get target => '목표가';
+
+  @override
+  String get potential => '수익률';
+
+  @override
+  String get low => '낮음';
+
+  @override
+  String get medium => '보통';
+
+  @override
+  String get high => '높음';
+
+  @override
+  String get justNow => '방금';
+
+  @override
+  String minutesAgo(int minutes) {
+    return '$minutes분 전';
+  }
+
+  @override
+  String hoursAgo(int hours) {
+    return '$hours시간 전';
+  }
+
+  @override
+  String daysAgo(int days) {
+    return '$days일 전';
+  }
+
+  @override
   String get portfolio => '포트폴리오';
 
   @override
@@ -362,9 +398,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get avgCost => '평균 단가';
-
-  @override
-  String get current => '현재가';
 
   @override
   String get pl => '손익';
@@ -430,11 +463,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get newComments => '새로운 댓글';
-
-  @override
-  String hoursAgo(int hours) {
-    return '$hours시간 전';
-  }
 
   @override
   String get messages => '메시지';

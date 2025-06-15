@@ -339,6 +339,42 @@ class AppLocalizationsHi extends AppLocalizations {
   String get noRecommendationsFound => 'कोई सिफारिश नहीं मिली';
 
   @override
+  String get current => 'वर्तमान';
+
+  @override
+  String get target => 'Target';
+
+  @override
+  String get potential => 'Potential';
+
+  @override
+  String get low => 'Low';
+
+  @override
+  String get medium => 'Medium';
+
+  @override
+  String get high => 'High';
+
+  @override
+  String get justNow => 'Just now';
+
+  @override
+  String minutesAgo(int minutes) {
+    return '${minutes}m ago';
+  }
+
+  @override
+  String hoursAgo(int hours) {
+    return '$hours घंटे पहले';
+  }
+
+  @override
+  String daysAgo(int days) {
+    return '${days}d ago';
+  }
+
+  @override
   String get portfolio => 'पोर्टफोलियो';
 
   @override
@@ -368,9 +404,6 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get avgCost => 'औसत लागत';
-
-  @override
-  String get current => 'वर्तमान';
 
   @override
   String get pl => 'लाभ हानि';
@@ -436,11 +469,6 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get newComments => 'नई टिप्पणियाँ';
-
-  @override
-  String hoursAgo(int hours) {
-    return '$hours घंटे पहले';
-  }
 
   @override
   String get messages => 'संदेश';

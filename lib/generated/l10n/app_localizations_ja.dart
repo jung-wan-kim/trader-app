@@ -334,6 +334,42 @@ class AppLocalizationsJa extends AppLocalizations {
   String get noRecommendationsFound => '推奨が見つかりません';
 
   @override
+  String get current => '現在値';
+
+  @override
+  String get target => 'Target';
+
+  @override
+  String get potential => 'Potential';
+
+  @override
+  String get low => 'Low';
+
+  @override
+  String get medium => 'Medium';
+
+  @override
+  String get high => 'High';
+
+  @override
+  String get justNow => 'Just now';
+
+  @override
+  String minutesAgo(int minutes) {
+    return '${minutes}m ago';
+  }
+
+  @override
+  String hoursAgo(int hours) {
+    return '$hours時間前';
+  }
+
+  @override
+  String daysAgo(int days) {
+    return '${days}d ago';
+  }
+
+  @override
   String get portfolio => 'ポートフォリオ';
 
   @override
@@ -362,9 +398,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get avgCost => '平均コスト';
-
-  @override
-  String get current => '現在値';
 
   @override
   String get pl => '損益';
@@ -430,11 +463,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get newComments => '新しいコメント';
-
-  @override
-  String hoursAgo(int hours) {
-    return '$hours時間前';
-  }
 
   @override
   String get messages => 'メッセージ';

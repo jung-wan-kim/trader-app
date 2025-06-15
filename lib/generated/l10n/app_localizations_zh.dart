@@ -330,6 +330,42 @@ class AppLocalizationsZh extends AppLocalizations {
   String get noRecommendationsFound => '未找到推荐';
 
   @override
+  String get current => '当前价';
+
+  @override
+  String get target => 'Target';
+
+  @override
+  String get potential => 'Potential';
+
+  @override
+  String get low => 'Low';
+
+  @override
+  String get medium => 'Medium';
+
+  @override
+  String get high => 'High';
+
+  @override
+  String get justNow => 'Just now';
+
+  @override
+  String minutesAgo(int minutes) {
+    return '${minutes}m ago';
+  }
+
+  @override
+  String hoursAgo(int hours) {
+    return '$hours小时前';
+  }
+
+  @override
+  String daysAgo(int days) {
+    return '${days}d ago';
+  }
+
+  @override
   String get portfolio => '投资组合';
 
   @override
@@ -358,9 +394,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get avgCost => '平均成本';
-
-  @override
-  String get current => '当前价';
 
   @override
   String get pl => '盈亏';
@@ -426,11 +459,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get newComments => '新的评论';
-
-  @override
-  String hoursAgo(int hours) {
-    return '$hours小时前';
-  }
 
   @override
   String get messages => '消息';

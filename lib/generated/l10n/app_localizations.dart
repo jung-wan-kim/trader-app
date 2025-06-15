@@ -726,6 +726,66 @@ abstract class AppLocalizations {
   /// **'No recommendations found'**
   String get noRecommendationsFound;
 
+  /// No description provided for @current.
+  ///
+  /// In en, this message translates to:
+  /// **'Current'**
+  String get current;
+
+  /// No description provided for @target.
+  ///
+  /// In en, this message translates to:
+  /// **'Target'**
+  String get target;
+
+  /// No description provided for @potential.
+  ///
+  /// In en, this message translates to:
+  /// **'Potential'**
+  String get potential;
+
+  /// No description provided for @low.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get low;
+
+  /// No description provided for @medium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get medium;
+
+  /// No description provided for @high.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get high;
+
+  /// No description provided for @justNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Just now'**
+  String get justNow;
+
+  /// No description provided for @minutesAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes}m ago'**
+  String minutesAgo(int minutes);
+
+  /// No description provided for @hoursAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours} hours ago'**
+  String hoursAgo(int hours);
+
+  /// No description provided for @daysAgo.
+  ///
+  /// In en, this message translates to:
+  /// **'{days}d ago'**
+  String daysAgo(int days);
+
   /// No description provided for @portfolio.
   ///
   /// In en, this message translates to:
@@ -785,12 +845,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Avg Cost'**
   String get avgCost;
-
-  /// No description provided for @current.
-  ///
-  /// In en, this message translates to:
-  /// **'Current'**
-  String get current;
 
   /// No description provided for @pl.
   ///
@@ -917,12 +971,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'New Comments'**
   String get newComments;
-
-  /// No description provided for @hoursAgo.
-  ///
-  /// In en, this message translates to:
-  /// **'{hours} hours ago'**
-  String hoursAgo(int hours);
 
   /// No description provided for @messages.
   ///

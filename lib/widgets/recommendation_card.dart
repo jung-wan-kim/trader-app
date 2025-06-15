@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/stock_recommendation.dart';
+import '../generated/l10n/app_localizations.dart';
 
 class RecommendationCard extends StatelessWidget {
   final StockRecommendation recommendation;
@@ -13,6 +14,7 @@ class RecommendationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final actionColor = _getActionColor(recommendation.action);
     final riskColor = _getRiskColor(recommendation.riskLevel);
 
@@ -44,7 +46,7 @@ class RecommendationCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(
-                        recommendation.action,
+                        _getLocalizedAction(recommendation.action, l10n),
                         style: TextStyle(
                           color: actionColor,
                           fontSize: 12,
@@ -74,7 +76,7 @@ class RecommendationCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
-                        recommendation.riskLevel,
+                        _getLocalizedRiskLevel(recommendation.riskLevel, l10n),
                         style: TextStyle(
                           color: riskColor,
                           fontSize: 10,
@@ -117,7 +119,7 @@ class RecommendationCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Current',
+                      l10n?.current ?? 'Current',
                       style: TextStyle(
                         color: Colors.grey[600],
                         fontSize: 11,
@@ -138,7 +140,7 @@ class RecommendationCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Target',
+                      l10n?.target ?? 'Target',
                       style: TextStyle(
                         color: Colors.grey[600],
                         fontSize: 11,
@@ -159,7 +161,7 @@ class RecommendationCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      'Potential',
+                      l10n?.potential ?? 'Potential',
                       style: TextStyle(
                         color: Colors.grey[600],
                         fontSize: 11,
@@ -237,7 +239,7 @@ class RecommendationCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      _getTimeAgo(recommendation.recommendedAt),
+                      _getTimeAgo(recommendation.recommendedAt, l10n),
                       style: TextStyle(
                         color: Colors.grey[600],
                         fontSize: 11,
@@ -279,18 +281,44 @@ class RecommendationCard extends StatelessWidget {
     }
   }
 
-  String _getTimeAgo(DateTime dateTime) {
+  String _getTimeAgo(DateTime dateTime, AppLocalizations? l10n) {
     final now = DateTime.now();
     final difference = now.difference(dateTime);
 
     if (difference.inDays > 0) {
-      return '${difference.inDays}d ago';
+      return l10n?.daysAgo(difference.inDays) ?? '${difference.inDays}d ago';
     } else if (difference.inHours > 0) {
-      return '${difference.inHours}h ago';
+      return l10n?.hoursAgo(difference.inHours) ?? '${difference.inHours}h ago';
     } else if (difference.inMinutes > 0) {
-      return '${difference.inMinutes}m ago';
+      return l10n?.minutesAgo(difference.inMinutes) ?? '${difference.inMinutes}m ago';
     } else {
-      return 'Just now';
+      return l10n?.justNow ?? 'Just now';
+    }
+  }
+
+  String _getLocalizedAction(String action, AppLocalizations? l10n) {
+    switch (action) {
+      case 'BUY':
+        return l10n?.buy ?? 'Buy';
+      case 'SELL':
+        return l10n?.sell ?? 'Sell';
+      case 'HOLD':
+        return l10n?.hold ?? 'Hold';
+      default:
+        return action;
+    }
+  }
+
+  String _getLocalizedRiskLevel(String riskLevel, AppLocalizations? l10n) {
+    switch (riskLevel) {
+      case 'LOW':
+        return l10n?.low ?? 'Low';
+      case 'MEDIUM':
+        return l10n?.medium ?? 'Medium';
+      case 'HIGH':
+        return l10n?.high ?? 'High';
+      default:
+        return riskLevel;
     }
   }
 }

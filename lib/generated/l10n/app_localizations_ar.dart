@@ -337,6 +337,42 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noRecommendationsFound => 'لم يتم العثور على توصيات';
 
   @override
+  String get current => 'الحالي';
+
+  @override
+  String get target => 'Target';
+
+  @override
+  String get potential => 'Potential';
+
+  @override
+  String get low => 'Low';
+
+  @override
+  String get medium => 'Medium';
+
+  @override
+  String get high => 'High';
+
+  @override
+  String get justNow => 'Just now';
+
+  @override
+  String minutesAgo(int minutes) {
+    return '${minutes}m ago';
+  }
+
+  @override
+  String hoursAgo(int hours) {
+    return 'منذ $hours ساعات';
+  }
+
+  @override
+  String daysAgo(int days) {
+    return '${days}d ago';
+  }
+
+  @override
   String get portfolio => 'المحفظة';
 
   @override
@@ -365,9 +401,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get avgCost => 'متوسط التكلفة';
-
-  @override
-  String get current => 'الحالي';
 
   @override
   String get pl => 'الربح/الخسارة';
@@ -433,11 +466,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get newComments => 'تعليقات جديدة';
-
-  @override
-  String hoursAgo(int hours) {
-    return 'منذ $hours ساعات';
-  }
 
   @override
   String get messages => 'الرسائل';
