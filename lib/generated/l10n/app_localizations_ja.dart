@@ -552,34 +552,31 @@ class AppLocalizationsJa extends AppLocalizations {
   String get planFeatureWhiteLabelOptions => 'ホワイトラベルオプション';
 
   @override
-  String get jesseKeyStrategy => 'Trend Following, Pyramiding';
+  String get jesseKeyStrategy => 'トレンドフォロー、ピラミッディング';
 
   @override
-  String get jesseBestTrade => 'Predicted the 1929 Market Crash';
+  String get jesseBestTrade => '1929年の大恐晃を予測';
 
   @override
-  String get jesseDescription =>
-      'The greatest speculator in history. Strategy to read market trends and capture big moves';
+  String get jesseDescription => '歴史上最も伝説的な投機家。市場のトレンドを読み、大きな動きを捕らえる戦略';
 
   @override
-  String get larryKeyStrategy => 'Short-term Momentum, Volatility';
+  String get larryKeyStrategy => '短期モメンタム、ボラティリティ';
 
   @override
-  String get larryBestTrade => '1987 World Trading Championship Winner';
+  String get larryBestTrade => '1987年世界トレーディング選手権優勝';
 
   @override
-  String get larryDescription =>
-      'Aggressive trading using short-term price momentum and market volatility';
+  String get larryDescription => '短期の価格モメンタムと市場のボラティリティを活用したアグレッシブなトレーディング';
 
   @override
-  String get stanKeyStrategy => 'Stage Analysis, Long-term Investment';
+  String get stanKeyStrategy => 'ステージ分析、長期投資';
 
   @override
-  String get stanBestTrade => '30 Years of Consistent Returns';
+  String get stanBestTrade => '30年間の一貫したリターン';
 
   @override
-  String get stanDescription =>
-      'Systematic investment strategy combining technical analysis and market stages';
+  String get stanDescription => 'テクニカル分析と市場ステージを組み合わせたシステマティックな投資戦略';
 
   @override
   String get termsTitle => 'トレーダーアプリ利用規約';

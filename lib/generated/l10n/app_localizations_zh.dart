@@ -548,34 +548,31 @@ class AppLocalizationsZh extends AppLocalizations {
   String get planFeatureWhiteLabelOptions => '白牌选项';
 
   @override
-  String get jesseKeyStrategy => 'Trend Following, Pyramiding';
+  String get jesseKeyStrategy => '趋势跟踪，金字塔式加仓';
 
   @override
-  String get jesseBestTrade => 'Predicted the 1929 Market Crash';
+  String get jesseBestTrade => '预测1929年股灣崩盘';
 
   @override
-  String get jesseDescription =>
-      'The greatest speculator in history. Strategy to read market trends and capture big moves';
+  String get jesseDescription => '历史上最伟大的投机者。解读市场趋势并捕捉大动作的策略';
 
   @override
-  String get larryKeyStrategy => 'Short-term Momentum, Volatility';
+  String get larryKeyStrategy => '短期动量，波动性';
 
   @override
-  String get larryBestTrade => '1987 World Trading Championship Winner';
+  String get larryBestTrade => '1987年世界交易冠军赛冠军';
 
   @override
-  String get larryDescription =>
-      'Aggressive trading using short-term price momentum and market volatility';
+  String get larryDescription => '利用短期价格动量和市场波动性的积极交易';
 
   @override
-  String get stanKeyStrategy => 'Stage Analysis, Long-term Investment';
+  String get stanKeyStrategy => '阶段分析，长期投资';
 
   @override
-  String get stanBestTrade => '30 Years of Consistent Returns';
+  String get stanBestTrade => '30年持续回报';
 
   @override
-  String get stanDescription =>
-      'Systematic investment strategy combining technical analysis and market stages';
+  String get stanDescription => '结合技术分析和市场阶段的系统投资策略';
 
   @override
   String get termsTitle => '交易员应用服务条款';

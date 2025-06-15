@@ -301,5 +301,17 @@
   "keyStrategy": "Estrategia Clave",
   "bestTrade": "Mejor Operación",
   "selected": "Seleccionado",
-  "continueWithSelection": "Continuar con la Selección"
+  "continueWithSelection": "Continuar con la Selección",
+  
+  "jesseKeyStrategy": "Trend Following, Pyramiding",
+  "jesseBestTrade": "Predicted the 1929 Market Crash",
+  "jesseDescription": "The greatest speculator in history. Strategy to read market trends and capture big moves",
+  
+  "larryKeyStrategy": "Short-term Momentum, Volatility",
+  "larryBestTrade": "1987 World Trading Championship Winner",
+  "larryDescription": "Aggressive trading using short-term price momentum and market volatility",
+  
+  "stanKeyStrategy": "Stage Analysis, Long-term Investment",
+  "stanBestTrade": "30 Years of Consistent Returns",
+  "stanDescription": "Systematic investment strategy combining technical analysis and market stages"
 }

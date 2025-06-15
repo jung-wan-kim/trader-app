@@ -301,5 +301,17 @@
   "keyStrategy": "核心策略",
   "bestTrade": "最佳交易",
   "selected": "已选择",
-  "continueWithSelection": "继续选择"
+  "continueWithSelection": "继续选择",
+  
+  "jesseKeyStrategy": "趋势跟踪，金字塔式加仓",
+  "jesseBestTrade": "预测1929年股灣崩盘",
+  "jesseDescription": "历史上最伟大的投机者。解读市场趋势并捕捉大动作的策略",
+  
+  "larryKeyStrategy": "短期动量，波动性",
+  "larryBestTrade": "1987年世界交易冠军赛冠军",
+  "larryDescription": "利用短期价格动量和市场波动性的积极交易",
+  
+  "stanKeyStrategy": "阶段分析，长期投资",
+  "stanBestTrade": "30年持续回报",
+  "stanDescription": "结合技术分析和市场阶段的系统投资策略"
 }

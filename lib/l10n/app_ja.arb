@@ -301,5 +301,17 @@
   "keyStrategy": "主要戦略",
   "bestTrade": "最高の取引",
   "selected": "選択済み",
-  "continueWithSelection": "選択を続行"
+  "continueWithSelection": "選択を続行",
+  
+  "jesseKeyStrategy": "トレンドフォロー、ピラミッディング",
+  "jesseBestTrade": "1929年の大恐晃を予測",
+  "jesseDescription": "歴史上最も伝説的な投機家。市場のトレンドを読み、大きな動きを捕らえる戦略",
+  
+  "larryKeyStrategy": "短期モメンタム、ボラティリティ",
+  "larryBestTrade": "1987年世界トレーディング選手権優勝",
+  "larryDescription": "短期の価格モメンタムと市場のボラティリティを活用したアグレッシブなトレーディング",
+  
+  "stanKeyStrategy": "ステージ分析、長期投資",
+  "stanBestTrade": "30年間の一貫したリターン",
+  "stanDescription": "テクニカル分析と市場ステージを組み合わせたシステマティックな投資戦略"
 }
