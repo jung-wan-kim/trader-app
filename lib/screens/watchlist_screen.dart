@@ -253,27 +253,28 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
         trailing: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               '\$${stock['price'].toStringAsFixed(2)}',
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: 15,
               ),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 2),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(
                   isPositive ? Icons.trending_up : Icons.trending_down,
                   color: isPositive ? const Color(0xFF00D632) : Colors.red,
-                  size: 16,
+                  size: 14,
                 ),
-                const SizedBox(width: 4),
+                const SizedBox(width: 2),
                 Text(
-                  '${isPositive ? '+' : ''}${stock['change'].toStringAsFixed(2)}',
+                  '${isPositive ? '+' : ''}${stock['changePercent'].toStringAsFixed(2)}%',
                   style: TextStyle(
                     color: isPositive ? const Color(0xFF00D632) : Colors.red,
                     fontWeight: FontWeight.w600,
@@ -281,14 +282,6 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
                   ),
                 ),
               ],
-            ),
-            Text(
-              '${isPositive ? '+' : ''}${stock['changePercent'].toStringAsFixed(2)}%',
-              style: TextStyle(
-                color: isPositive ? const Color(0xFF00D632) : Colors.red,
-                fontWeight: FontWeight.w600,
-                fontSize: 11,
-              ),
             ),
           ],
         ),
