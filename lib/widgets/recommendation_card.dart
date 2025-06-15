@@ -34,9 +34,10 @@ class RecommendationCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    Container(
+                Expanded(
+                  child: Row(
+                    children: [
+                      Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
                         color: actionColor.withOpacity(0.2),
@@ -60,9 +61,11 @@ class RecommendationCard extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ],
+                    ],
+                  ),
                 ),
                 Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
@@ -198,9 +201,10 @@ class RecommendationCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    CircleAvatar(
+                Expanded(
+                  child: Row(
+                    children: [
+                      CircleAvatar(
                       radius: 12,
                       backgroundColor: const Color(0xFF00D632),
                       child: Text(
@@ -220,9 +224,11 @@ class RecommendationCard extends StatelessWidget {
                         fontSize: 12,
                       ),
                     ),
-                  ],
+                    ],
+                  ),
                 ),
                 Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
                       Icons.access_time_outlined,

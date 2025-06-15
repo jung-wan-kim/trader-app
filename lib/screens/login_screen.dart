@@ -100,9 +100,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         MediaQuery.of(context).padding.bottom - 48,
             ),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-              const Spacer(),
+              const SizedBox(height: 60),
               // 로고
               const Icon(
                 Icons.trending_up,
@@ -239,7 +240,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ],
                   ),
                 ),
-              const Spacer(),
+              const SizedBox(height: 60),
               // 법적 링크
               Wrap(
                 alignment: WrapAlignment.center,

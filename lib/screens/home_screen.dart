@@ -90,18 +90,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                l10n?.tradingSignals ?? 'Trading Signals',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
+              Expanded(
+                child: Text(
+                  l10n?.tradingSignals ?? 'Trading Signals',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              Row(
-                children: [
-                  // 트레이더 선택 버튼
-                  TextButton.icon(
+              Flexible(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // 트레이더 선택 버튼
+                    Flexible(
+                      child: TextButton.icon(
                     onPressed: () async {
                       final result = await Navigator.push<TradingStrategy>(
                         context,
@@ -125,18 +130,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
                       ),
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      ref.read(recommendationsProvider.notifier).refresh();
-                    },
-                    icon: const Icon(
-                      Icons.refresh,
-                      color: Colors.white,
                     ),
-                  ),
-                ],
+                    IconButton(
+                      onPressed: () {
+                        ref.read(recommendationsProvider.notifier).refresh();
+                      },
+                      icon: const Icon(
+                        Icons.refresh,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
