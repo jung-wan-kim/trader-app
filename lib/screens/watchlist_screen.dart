@@ -109,11 +109,6 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _showAddStockDialog(),
-        backgroundColor: const Color(0xFF00D632),
-        child: const Icon(Icons.add, color: Colors.black),
-      ),
     );
   }
 
