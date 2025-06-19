@@ -1,21 +1,46 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/stock_recommendation.dart';
 import '../services/mock_data_service.dart';
+import '../services/tradingview_webhook_service.dart';
 import 'mock_data_provider.dart';
+import 'tradingview_provider.dart';
 
 class RecommendationsNotifier extends StateNotifier<AsyncValue<List<StockRecommendation>>> {
   final MockDataService _mockDataService;
+  final TradingViewWebhookService _tradingViewService;
+  final bool useMockData;
   
-  RecommendationsNotifier(this._mockDataService) : super(const AsyncValue.loading()) {
+  RecommendationsNotifier(
+    this._mockDataService, 
+    this._tradingViewService, 
+    {this.useMockData = false}
+  ) : super(const AsyncValue.loading()) {
     loadRecommendations();
   }
 
   Future<void> loadRecommendations() async {
     try {
       state = const AsyncValue.loading();
-      final recommendations = await _mockDataService.getRecommendations();
+      
+      List<StockRecommendation> recommendations;
+      
+      if (useMockData) {
+        // Mock 데이터 사용 (개발/테스트용)
+        recommendations = await _mockDataService.getRecommendations();
+      } else {
+        // 실제 TradingView 웹훅 데이터 사용
+        recommendations = await _tradingViewService.getRecommendations();
+        
+        // 데이터가 없으면 Mock 데이터로 폴백
+        if (recommendations.isEmpty) {
+          print('No TradingView webhook data found, falling back to mock data');
+          recommendations = await _mockDataService.getRecommendations();
+        }
+      }
+      
       state = AsyncValue.data(recommendations);
     } catch (e, stack) {
+      print('Error loading recommendations: $e');
       state = AsyncValue.error(e, stack);
     }
   }
@@ -86,7 +111,16 @@ class RecommendationsNotifier extends StateNotifier<AsyncValue<List<StockRecomme
 final recommendationsProvider = 
     StateNotifierProvider<RecommendationsNotifier, AsyncValue<List<StockRecommendation>>>((ref) {
   final mockDataService = ref.watch(mockDataServiceProvider);
-  return RecommendationsNotifier(mockDataService);
+  final tradingViewService = ref.watch(tradingViewWebhookServiceProvider);
+  
+  // 환경 변수나 설정에 따라 Mock 데이터 사용 여부 결정
+  const useMockData = false; // 실제 TradingView 데이터 사용
+  
+  return RecommendationsNotifier(
+    mockDataService,
+    tradingViewService,
+    useMockData: useMockData,
+  );
 });
 
 // Filtered providers
