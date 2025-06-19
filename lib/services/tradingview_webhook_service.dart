@@ -6,10 +6,16 @@ class TradingViewWebhookService {
   late final SupabaseClient _supabase;
   
   TradingViewWebhookService() {
-    _supabase = SupabaseClient(
-      'https://lgebgddeerpxdjvtqvoi.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxnZWJnZGRlZXJweGRqdnRxdm9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzMzODcyMDksImV4cCI6MjA0ODk2MzIwOX0.2lw4P_8CQJd0Pb7iLBEqwBcQJxNAgfx3uSyQROQw-1A',
-    );
+    // 환경 변수에서 Supabase 설정 가져오기
+    final supabaseUrl = EnvConfig.supabaseUrl.isNotEmpty 
+        ? EnvConfig.supabaseUrl 
+        : 'https://lgebgddeerpxdjvtqvoi.supabase.co';
+    
+    final supabaseAnonKey = EnvConfig.supabaseAnonKey.isNotEmpty 
+        ? EnvConfig.supabaseAnonKey 
+        : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxnZWJnZGRlZXJweGRqdnRxdm9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzMzODcyMDksImV4cCI6MjA0ODk2MzIwOX0.2lw4P_8CQJd0Pb7iLBEqwBcQJxNAgfx3uSyQROQw-1A';
+    
+    _supabase = SupabaseClient(supabaseUrl, supabaseAnonKey);
   }
 
   Future<List<StockRecommendation>> getRecommendations() async {
@@ -25,50 +31,57 @@ class TradingViewWebhookService {
       final List<StockRecommendation> recommendations = [];
       
       for (final webhook in response as List<dynamic>) {
-        final payload = webhook['payload'] as Map<String, dynamic>;
-        final eventType = webhook['event_type'] as String;
-        
-        // event_type이 buy 또는 sell인 경우만 처리
-        if (eventType == 'buy' || eventType == 'sell') {
-          recommendations.add(
-            StockRecommendation(
-              id: webhook['id'].toString(),
-              stockCode: payload['ticker'] ?? '',
-              stockName: payload['ticker'] ?? '', // 실제로는 별도 API로 회사명 조회 필요
-              traderName: payload['strategy'] ?? 'WR Signal',
-              traderId: 'tradingview_webhook',
-              action: eventType.toUpperCase(),
-              currentPrice: (payload['price'] ?? 0).toDouble(),
-              targetPrice: _calculateTargetPrice(
-                (payload['price'] ?? 0).toDouble(), 
-                eventType
+        try {
+          // Null 체크 및 안전한 타입 변환
+          if (webhook == null || webhook['payload'] == null || webhook['event_type'] == null) {
+            continue;
+          }
+          
+          final payload = webhook['payload'] as Map<String, dynamic>? ?? {};
+          final eventType = webhook['event_type']?.toString() ?? '';
+          
+          // event_type이 buy 또는 sell인 경우만 처리
+          if (eventType == 'buy' || eventType == 'sell') {
+            // 가격 안전한 변환
+            final price = _parseDouble(payload['price']) ?? 0.0;
+            
+            // 필수 필드 검증
+            if (price <= 0 || payload['ticker'] == null) {
+              print('Invalid webhook data: missing price or ticker');
+              continue;
+            }
+            
+            recommendations.add(
+              StockRecommendation(
+                id: webhook['id'].toString(),
+                stockCode: payload['ticker'].toString(),
+                stockName: payload['ticker'].toString(), // 실제로는 별도 API로 회사명 조회 필요
+                traderName: payload['strategy']?.toString() ?? 'WR Signal',
+                traderId: 'tradingview_webhook',
+                action: eventType.toUpperCase(),
+                currentPrice: price,
+                targetPrice: _calculateTargetPrice(price, eventType),
+                stopLoss: _calculateStopLoss(price, eventType),
+                takeProfit: _calculateTargetPrice(price, eventType),
+                reasoning: _generateReasoning(
+                  eventType,
+                  payload['ticker'].toString(),
+                  payload['indicators'] as Map<String, dynamic>? ?? {},
+                ),
+                recommendedAt: _parseDateTime(webhook['created_at']) ?? DateTime.now(),
+                timeframe: _mapTimeframe(payload['timeframe']?.toString() ?? '1D'),
+                confidence: _calculateConfidence(payload['indicators'] as Map<String, dynamic>? ?? {}),
+                riskLevel: _calculateRiskLevel(eventType),
+                technicalIndicators: _mapIndicators(payload['indicators'] as Map<String, dynamic>? ?? {}),
+                expectedReturn: _calculateExpectedReturn(price, eventType),
+                likes: 0,
+                followers: 0,
               ),
-              stopLoss: _calculateStopLoss(
-                (payload['price'] ?? 0).toDouble(), 
-                eventType
-              ),
-              takeProfit: _calculateTargetPrice(
-                (payload['price'] ?? 0).toDouble(), 
-                eventType
-              ),
-              reasoning: _generateReasoning(
-                eventType,
-                payload['ticker'] ?? '',
-                payload['indicators'] ?? {},
-              ),
-              recommendedAt: DateTime.parse(webhook['created_at']),
-              timeframe: _mapTimeframe(payload['timeframe'] ?? '1D'),
-              confidence: _calculateConfidence(payload['indicators'] ?? {}),
-              riskLevel: _calculateRiskLevel(eventType),
-              technicalIndicators: _mapIndicators(payload['indicators'] ?? {}),
-              expectedReturn: _calculateExpectedReturn(
-                (payload['price'] ?? 0).toDouble(),
-                eventType
-              ),
-              likes: 0,
-              followers: 0,
-            ),
-          );
+            );
+          }
+        } catch (e) {
+          print('Error processing webhook item: $e');
+          continue;
         }
       }
       
@@ -214,5 +227,34 @@ class TradingViewWebhookService {
           
           return recommendations;
         });
+  }
+
+  // 안전한 double 파싱
+  double? _parseDouble(dynamic value) {
+    if (value == null) return null;
+    if (value is double) return value;
+    if (value is int) return value.toDouble();
+    if (value is String) {
+      try {
+        return double.parse(value);
+      } catch (e) {
+        return null;
+      }
+    }
+    return null;
+  }
+
+  // 안전한 DateTime 파싱
+  DateTime? _parseDateTime(dynamic value) {
+    if (value == null) return null;
+    if (value is DateTime) return value;
+    if (value is String) {
+      try {
+        return DateTime.parse(value);
+      } catch (e) {
+        return null;
+      }
+    }
+    return null;
   }
 }

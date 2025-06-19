@@ -24,18 +24,23 @@ void main() async {
   // Load environment variables only in non-test environment
   if (!const bool.fromEnvironment('flutter.test')) {
     try {
-      await dotenv.load(fileName: ".env");
+      await dotenv.load(fileName: "config/development.env");
     } catch (e) {
       // .env file not found, continue with defaults
       print('Warning: .env file not found, using default values');
     }
   }
   
+  // 환경 변수에서 Supabase 설정 가져오기
+  final supabaseUrl = dotenv.env['SUPABASE_URL'] ?? 
+      'https://lgebgddeerpxdjvtqvoi.supabase.co';
+  final supabaseAnonKey = dotenv.env['SUPABASE_ANON_KEY'] ?? 
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxnZWJnZGRlZXJweGRqdnRxdm9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzMzODcyMDksImV4cCI6MjA0ODk2MzIwOX0.2lw4P_8CQJd0Pb7iLBEqwBcQJxNAgfx3uSyQROQw-1A';
   
   // Supabase 초기화
   await Supabase.initialize(
-    url: 'https://lgebgddeerpxdjvtqvoi.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxnZWJnZGRlZXJweGRqdnRxdm9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkxOTc2MDksImV4cCI6MjA2NDc3MzYwOX0.NZxHOwzgRc-Vjw60XktU7L_hKiIMAW_5b_DHis6qKBE',
+    url: supabaseUrl,
+    anonKey: supabaseAnonKey,
   );
   
   runApp(
