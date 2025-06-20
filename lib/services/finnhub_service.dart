@@ -74,4 +74,72 @@ class FinnhubService {
     
     return null;
   }
+
+  // 주식 상세 정보 가져오기
+  Future<Map<String, dynamic>> getStockQuote(String symbol) async {
+    try {
+      final url = Uri.parse(
+        '$_baseUrl/quote?symbol=$symbol&token=$_apiKey'
+      );
+      
+      final response = await http.get(url);
+      
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return {
+          'c': data['c']?.toDouble() ?? 0.0,  // 현재가
+          'd': data['d']?.toDouble() ?? 0.0,  // 변동액
+          'dp': data['dp']?.toDouble() ?? 0.0, // 변동률
+          'h': data['h']?.toDouble() ?? 0.0,  // 고가
+          'l': data['l']?.toDouble() ?? 0.0,  // 저가
+          'o': data['o']?.toDouble() ?? 0.0,  // 시가
+          'pc': data['pc']?.toDouble() ?? 0.0, // 전일 종가
+          't': data['t'] ?? 0,  // 타임스탬프
+          'volume': data['v'] ?? 0,  // 거래량
+        };
+      }
+    } catch (e) {
+      print('Error fetching stock quote: $e');
+    }
+    
+    // 에러 시 기본값 반환
+    return {
+      'c': 0.0,
+      'd': 0.0,
+      'dp': 0.0,
+      'h': 0.0,
+      'l': 0.0,
+      'o': 0.0,
+      'pc': 0.0,
+      't': 0,
+      'volume': 0,
+    };
+  }
+
+  // 주식 심볼 검색
+  Future<List<Map<String, dynamic>>> searchSymbol(String query) async {
+    try {
+      final url = Uri.parse(
+        '$_baseUrl/search?q=$query&token=$_apiKey'
+      );
+      
+      final response = await http.get(url);
+      
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final results = data['result'] as List<dynamic>? ?? [];
+        
+        return results.map((item) => {
+          'symbol': item['symbol'] ?? '',
+          'description': item['description'] ?? '',
+          'displaySymbol': item['displaySymbol'] ?? item['symbol'] ?? '',
+          'type': item['type'] ?? '',
+        }).toList();
+      }
+    } catch (e) {
+      print('Error searching symbols: $e');
+    }
+    
+    return [];
+  }
 }

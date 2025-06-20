@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../generated/l10n/app_localizations.dart';
+import '../providers/watchlist_provider.dart';
+import '../models/watchlist_item.dart';
 
 class WatchlistScreen extends ConsumerStatefulWidget {
   const WatchlistScreen({super.key});
@@ -10,60 +12,11 @@ class WatchlistScreen extends ConsumerStatefulWidget {
 }
 
 class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
-  final List<Map<String, dynamic>> _watchlistStocks = [
-    {
-      'symbol': 'AAPL',
-      'name': 'Apple Inc.',
-      'price': 182.55,
-      'change': 2.35,
-      'changePercent': 1.31,
-      'volume': '45.2M',
-    },
-    {
-      'symbol': 'GOOGL',
-      'name': 'Alphabet Inc.',
-      'price': 138.72,
-      'change': -1.28,
-      'changePercent': -0.91,
-      'volume': '28.7M',
-    },
-    {
-      'symbol': 'MSFT',
-      'name': 'Microsoft Corporation',
-      'price': 418.23,
-      'change': 5.67,
-      'changePercent': 1.37,
-      'volume': '32.1M',
-    },
-    {
-      'symbol': 'TSLA',
-      'name': 'Tesla, Inc.',
-      'price': 248.50,
-      'change': -8.32,
-      'changePercent': -3.24,
-      'volume': '89.3M',
-    },
-    {
-      'symbol': 'NVDA',
-      'name': 'NVIDIA Corporation',
-      'price': 875.28,
-      'change': 12.45,
-      'changePercent': 1.44,
-      'volume': '51.8M',
-    },
-    {
-      'symbol': 'AMZN',
-      'name': 'Amazon.com Inc.',
-      'price': 186.43,
-      'change': 0.87,
-      'changePercent': 0.47,
-      'volume': '41.2M',
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final watchlistAsync = ref.watch(watchlistNotifierProvider);
+    final marketIndicesAsync = ref.watch(marketIndicesProvider);
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -84,36 +37,75 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
             onPressed: () => _showAddStockDialog(),
           ),
           IconButton(
-            icon: const Icon(Icons.search, color: Colors.white),
-            onPressed: () => _showSearchDialog(),
+            icon: const Icon(Icons.refresh, color: Colors.white),
+            onPressed: () => ref.read(watchlistNotifierProvider.notifier).refresh(),
           ),
         ],
       ),
       body: Column(
         children: [
           // 시장 요약 정보
-          _buildMarketSummary(),
+          marketIndicesAsync.when(
+            data: (indices) => _buildMarketSummary(indices),
+            loading: () => const SizedBox(
+              height: 100,
+              child: Center(child: CircularProgressIndicator()),
+            ),
+            error: (_, __) => _buildMarketSummary(null),
+          ),
           
           // 관심 종목 리스트
           Expanded(
-            child: _watchlistStocks.isEmpty
-                ? _buildEmptyState()
-                : ListView.builder(
-                    padding: const EdgeInsets.all(16),
-                    itemCount: _watchlistStocks.length,
-                    itemBuilder: (context, index) {
-                      final stock = _watchlistStocks[index];
-                      return _buildStockCard(stock, index);
-                    },
-                  ),
+            child: watchlistAsync.when(
+              data: (items) => items.isEmpty
+                  ? _buildEmptyState()
+                  : RefreshIndicator(
+                      onRefresh: () async {
+                        ref.read(watchlistNotifierProvider.notifier).refresh();
+                      },
+                      child: ListView.builder(
+                        padding: const EdgeInsets.all(16),
+                        itemCount: items.length,
+                        itemBuilder: (context, index) {
+                          final item = items[index];
+                          return _buildStockCard(item);
+                        },
+                      ),
+                    ),
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, _) => Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.error_outline, color: Colors.red, size: 60),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Failed to load watchlist',
+                      style: TextStyle(color: Colors.grey[400]),
+                    ),
+                    const SizedBox(height: 8),
+                    ElevatedButton(
+                      onPressed: () => ref.read(watchlistNotifierProvider.notifier).refresh(),
+                      child: const Text('Retry'),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildMarketSummary() {
+  Widget _buildMarketSummary(Map<String, dynamic>? indices) {
     final l10n = AppLocalizations.of(context);
+    
+    // 기본값 설정
+    final sp500 = indices?['sp500'] ?? {'value': 4567.23, 'changePercent': 0.85};
+    final nasdaq = indices?['nasdaq'] ?? {'value': 14234.56, 'changePercent': 1.23};
+    final dow = indices?['dow'] ?? {'value': 33987.45, 'changePercent': -0.34};
+    
     return Container(
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(16),
@@ -127,7 +119,7 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
         children: [
           Text(
             l10n?.marketSummary ?? 'Market Summary',
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -137,15 +129,30 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
           Row(
             children: [
               Expanded(
-                child: _buildMarketIndexCard('S&P 500', '4,567.23', '+0.85%', true),
+                child: _buildMarketIndexCard(
+                  'S&P 500', 
+                  sp500['value'].toStringAsFixed(2), 
+                  '${sp500['changePercent'] > 0 ? '+' : ''}${sp500['changePercent'].toStringAsFixed(2)}%', 
+                  sp500['changePercent'] > 0
+                ),
               ),
               const SizedBox(width: 12),
               Expanded(
-                child: _buildMarketIndexCard('NASDAQ', '14,234.56', '+1.23%', true),
+                child: _buildMarketIndexCard(
+                  'NASDAQ', 
+                  nasdaq['value'].toStringAsFixed(2), 
+                  '${nasdaq['changePercent'] > 0 ? '+' : ''}${nasdaq['changePercent'].toStringAsFixed(2)}%', 
+                  nasdaq['changePercent'] > 0
+                ),
               ),
               const SizedBox(width: 12),
               Expanded(
-                child: _buildMarketIndexCard('DOW', '33,987.45', '-0.34%', false),
+                child: _buildMarketIndexCard(
+                  'DOW', 
+                  dow['value'].toStringAsFixed(2), 
+                  '${dow['changePercent'] > 0 ? '+' : ''}${dow['changePercent'].toStringAsFixed(2)}%', 
+                  dow['changePercent'] > 0
+                ),
               ),
             ],
           ),
@@ -193,8 +200,8 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
     );
   }
 
-  Widget _buildStockCard(Map<String, dynamic> stock, int index) {
-    final isPositive = stock['change'] > 0;
+  Widget _buildStockCard(WatchlistItem item) {
+    final isPositive = item.priceChange > 0;
     
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -208,7 +215,7 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
         leading: CircleAvatar(
           backgroundColor: Colors.grey[800],
           child: Text(
-            stock['symbol'][0],
+            item.symbol[0],
             style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -219,7 +226,7 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              stock['symbol'],
+              item.symbol,
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -227,7 +234,7 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
               ),
             ),
             Text(
-              stock['name'],
+              item.name,
               style: TextStyle(
                 color: Colors.grey[400],
                 fontSize: 12,
@@ -238,7 +245,7 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
         subtitle: Padding(
           padding: const EdgeInsets.only(top: 8),
           child: Text(
-            'Vol: ${stock['volume']}',
+            'Vol: ${item.volume}',
             style: TextStyle(
               color: Colors.grey[500],
               fontSize: 11,
@@ -251,7 +258,7 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              '\$${stock['price'].toStringAsFixed(2)}',
+              '\$${item.currentPrice.toStringAsFixed(2)}',
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -269,7 +276,7 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
                 ),
                 const SizedBox(width: 2),
                 Text(
-                  '${isPositive ? '+' : ''}${stock['changePercent'].toStringAsFixed(2)}%',
+                  '${isPositive ? '+' : ''}${item.changePercent.toStringAsFixed(2)}%',
                   style: TextStyle(
                     color: isPositive ? const Color(0xFF00D632) : Colors.red,
                     fontWeight: FontWeight.w600,
@@ -280,8 +287,8 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
             ),
           ],
         ),
-        onTap: () => _showStockDetails(stock),
-        onLongPress: () => _showRemoveStockDialog(stock, index),
+        onTap: () => _showStockDetails(item),
+        onLongPress: () => _showRemoveStockDialog(item),
       ),
     );
   }
@@ -322,7 +329,7 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
             icon: const Icon(Icons.add, color: Colors.black),
             label: Text(
               l10n?.addStock ?? 'Add Stock',
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF00D632),
@@ -337,89 +344,129 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
   void _showAddStockDialog() {
     final controller = TextEditingController();
     final l10n = AppLocalizations.of(context);
+    List<Map<String, dynamic>> searchResults = [];
+    bool isSearching = false;
     
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey[900],
-        title: Text(
-          l10n?.addToWatchlist ?? 'Add to Watchlist',
-          style: TextStyle(color: Colors.white),
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          backgroundColor: Colors.grey[900],
+          title: Text(
+            l10n?.addToWatchlist ?? 'Add to Watchlist',
+            style: const TextStyle(color: Colors.white),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: controller,
+                style: const TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  hintText: l10n?.searchStocks ?? 'Search stocks...',
+                  hintStyle: TextStyle(color: Colors.grey[400]),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey[600]!),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey[600]!),
+                  ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFF00D632)),
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.search, color: Colors.grey[400]),
+                    onPressed: () async {
+                      if (controller.text.isNotEmpty) {
+                        setState(() => isSearching = true);
+                        final results = await ref.read(watchlistNotifierProvider.notifier)
+                            .searchStocks(controller.text);
+                        setState(() {
+                          searchResults = results;
+                          isSearching = false;
+                        });
+                      }
+                    },
+                  ),
+                ),
+                onSubmitted: (value) async {
+                  if (value.isNotEmpty) {
+                    setState(() => isSearching = true);
+                    final results = await ref.read(watchlistNotifierProvider.notifier)
+                        .searchStocks(value);
+                    setState(() {
+                      searchResults = results;
+                      isSearching = false;
+                    });
+                  }
+                },
+              ),
+              if (isSearching)
+                const Padding(
+                  padding: EdgeInsets.only(top: 16),
+                  child: CircularProgressIndicator(),
+                ),
+              if (searchResults.isNotEmpty)
+                Container(
+                  margin: const EdgeInsets.only(top: 16),
+                  height: 200,
+                  width: double.maxFinite,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: searchResults.length,
+                    itemBuilder: (context, index) {
+                      final result = searchResults[index];
+                      return ListTile(
+                        title: Text(
+                          result['symbol'] ?? '',
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                        subtitle: Text(
+                          result['description'] ?? '',
+                          style: TextStyle(color: Colors.grey[400]),
+                        ),
+                        onTap: () async {
+                          final success = await ref.read(watchlistNotifierProvider.notifier)
+                              .addToWatchlist(
+                            result['symbol'] ?? '',
+                            result['description'] ?? '',
+                          );
+                          
+                          if (mounted) {
+                            Navigator.pop(context);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  success 
+                                      ? (l10n?.stockAddedToWatchlist ?? 'Stock added to watchlist')
+                                      : 'Stock already in watchlist',
+                                ),
+                                backgroundColor: success ? const Color(0xFF00D632) : Colors.orange,
+                              ),
+                            );
+                          }
+                        },
+                      );
+                    },
+                  ),
+                ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(
+                l10n?.cancel ?? 'Cancel',
+                style: TextStyle(color: Colors.grey[400]),
+              ),
+            ),
+          ],
         ),
-        content: TextField(
-          controller: controller,
-          style: const TextStyle(color: Colors.white),
-          decoration: InputDecoration(
-            hintText: l10n?.searchStocks ?? 'Search stocks...',
-            hintStyle: TextStyle(color: Colors.grey[400]),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey[600]!),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey[600]!),
-            ),
-            focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFF00D632)),
-            ),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              l10n?.cancel ?? 'Cancel',
-              style: TextStyle(color: Colors.grey[400]),
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              if (controller.text.isNotEmpty) {
-                _addStock(controller.text.toUpperCase());
-                Navigator.pop(context);
-              }
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF00D632),
-            ),
-            child: Text(
-              l10n?.addStock ?? 'Add',
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
-        ],
       ),
     );
   }
 
-  void _showSearchDialog() {
-    final l10n = AppLocalizations.of(context);
-    // 검색 기능 구현
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey[900],
-        title: Text(
-          l10n?.searchStocks ?? 'Search Stocks',
-          style: TextStyle(color: Colors.white),
-        ),
-        content: Text(
-          'Search functionality will be implemented with real stock data API.',
-          style: TextStyle(color: Colors.white70),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              'OK',
-              style: TextStyle(color: Color(0xFF00D632)),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _showStockDetails(Map<String, dynamic> stock) {
+  void _showStockDetails(WatchlistItem item) {
     final l10n = AppLocalizations.of(context);
     showModalBottomSheet(
       context: context,
@@ -434,7 +481,7 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              '${stock['symbol']} - ${stock['name']}',
+              '${item.symbol} - ${item.name}',
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 18,
@@ -443,19 +490,24 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Current Price: \$${stock['price'].toStringAsFixed(2)}',
+              'Current Price: \$${item.currentPrice.toStringAsFixed(2)}',
               style: const TextStyle(color: Colors.white),
             ),
             Text(
-              'Change: ${stock['change'] > 0 ? '+' : ''}${stock['change'].toStringAsFixed(2)} (${stock['change'] > 0 ? '+' : ''}${stock['changePercent'].toStringAsFixed(2)}%)',
+              'Change: ${item.priceChange > 0 ? '+' : ''}${item.priceChange.toStringAsFixed(2)} (${item.priceChange > 0 ? '+' : ''}${item.changePercent.toStringAsFixed(2)}%)',
               style: TextStyle(
-                color: stock['change'] > 0 ? const Color(0xFF00D632) : Colors.red,
+                color: item.priceChange > 0 ? const Color(0xFF00D632) : Colors.red,
               ),
             ),
             Text(
-              'Volume: ${stock['volume']}',
+              'Volume: ${item.volume}',
               style: const TextStyle(color: Colors.white70),
             ),
+            if (item.lastUpdated != null)
+              Text(
+                'Last Updated: ${item.lastUpdated!.toLocal().toString().split('.')[0]}',
+                style: TextStyle(color: Colors.grey[500], fontSize: 12),
+              ),
             const SizedBox(height: 20),
             Row(
               children: [
@@ -470,7 +522,7 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
                     ),
                     child: Text(
                       l10n?.buy ?? 'Buy',
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                     ),
                   ),
                 ),
@@ -486,7 +538,7 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
                     ),
                     child: Text(
                       l10n?.sell ?? 'Sell',
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
@@ -498,7 +550,7 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
     );
   }
 
-  void _showRemoveStockDialog(Map<String, dynamic> stock, int index) {
+  void _showRemoveStockDialog(WatchlistItem item) {
     final l10n = AppLocalizations.of(context);
     showDialog(
       context: context,
@@ -506,10 +558,10 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
         backgroundColor: Colors.grey[900],
         title: Text(
           l10n?.remove ?? 'Remove',
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
         content: Text(
-          'Remove ${stock['symbol']} from your watchlist?',
+          'Remove ${item.symbol} from your watchlist?',
           style: const TextStyle(color: Colors.white70),
         ),
         actions: [
@@ -521,51 +573,31 @@ class _WatchlistScreenState extends ConsumerState<WatchlistScreen> {
             ),
           ),
           ElevatedButton(
-            onPressed: () {
-              setState(() {
-                _watchlistStocks.removeAt(index);
-              });
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(l10n?.stockRemovedFromWatchlist ?? 'Stock removed from watchlist'),
-                  backgroundColor: Colors.red,
-                ),
-              );
+            onPressed: () async {
+              final success = await ref.read(watchlistNotifierProvider.notifier)
+                  .removeFromWatchlist(item.symbol);
+              
+              if (mounted) {
+                Navigator.pop(context);
+                if (success) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(l10n?.stockRemovedFromWatchlist ?? 'Stock removed from watchlist'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                }
+              }
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,
             ),
             child: Text(
               l10n?.remove ?? 'Remove',
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  void _addStock(String symbol) {
-    final l10n = AppLocalizations.of(context);
-    // 실제로는 API에서 주식 정보를 가져옴
-    final newStock = {
-      'symbol': symbol,
-      'name': '$symbol Inc.',
-      'price': 100.0 + (DateTime.now().millisecond % 100),
-      'change': (DateTime.now().millisecond % 10) - 5.0,
-      'changePercent': ((DateTime.now().millisecond % 10) - 5.0) / 100 * 100,
-      'volume': '${(DateTime.now().millisecond % 100)}M',
-    };
-    
-    setState(() {
-      _watchlistStocks.add(newStock);
-    });
-    
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(l10n?.stockAddedToWatchlist ?? 'Stock added to watchlist'),
-        backgroundColor: const Color(0xFF00D632),
       ),
     );
   }
