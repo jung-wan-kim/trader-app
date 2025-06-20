@@ -22,6 +22,9 @@ dependencies:
   # State Management
   flutter_riverpod: ^2.4.9
   
+  # Utilities
+  collection: ^1.18.0
+  
   # Backend & Database (백엔드 개발 완료 후 연동 예정)
   # supabase_flutter: ^2.3.2
   

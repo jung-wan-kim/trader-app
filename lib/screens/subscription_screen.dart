@@ -759,7 +759,7 @@ class _SubscriptionScreenState extends ConsumerState<SubscriptionScreen> {
       case PlanFeatureKeys.allFreeFeatures:
         return l10n.planFeatureAllFreeFeatures;
       case PlanFeatureKeys.upToPositions:
-        final maxPositions = plan.limits['maxPositions'] as int;
+        final maxPositions = plan.limits?['maxPositions'] as int? ?? 10;
         return l10n.planFeatureUpToPositions(maxPositions);
       case PlanFeatureKeys.emailSupport:
         return l10n.planFeatureEmailSupport;

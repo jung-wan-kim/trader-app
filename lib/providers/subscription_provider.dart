@@ -1,49 +1,63 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:collection/collection.dart';
 import '../models/user_subscription.dart';
+import '../services/subscription_service.dart';
 import '../services/mock_data_service.dart';
 import 'mock_data_provider.dart';
+import 'supabase_auth_provider.dart';
 
 class SubscriptionPlanInfo {
-  final String id;
-  final String name;
   final SubscriptionTier tier;
-  final double price;
-  final String currency;
-  final String billingPeriod; // MONTHLY, YEARLY
+  final String name;
+  final double monthlyPrice;
+  final double yearlyPrice;
   final List<String> features;
-  final Map<String, dynamic> limits;
-  final double? discount; // Percentage discount for yearly plans
-  final bool isPopular;
+  final bool isMostPopular;
+  final Map<String, dynamic>? limits;
 
   SubscriptionPlanInfo({
-    required this.id,
-    required this.name,
     required this.tier,
-    required this.price,
-    required this.currency,
-    required this.billingPeriod,
+    required this.name,
+    required this.monthlyPrice,
+    required this.yearlyPrice,
     required this.features,
-    required this.limits,
-    this.discount,
-    this.isPopular = false,
+    required this.isMostPopular,
+    this.limits,
   });
-
-  double get finalPrice => price * (1 - (discount ?? 0) / 100);
-  double get monthlyPrice => billingPeriod == 'YEARLY' ? finalPrice / 12 : finalPrice;
+  
+  // 편의 메서드들
+  String get id => '${tier.toString().split('.').last}_monthly';
+  
+  double get finalPrice => monthlyPrice;
+  
+  String get billingPeriod => 'MONTHLY';
+  
+  double? get discount => null;
+  
+  bool get isPopular => isMostPopular;
 }
 
 class SubscriptionNotifier extends StateNotifier<AsyncValue<UserSubscription?>> {
-  final MockDataService _mockDataService;
+  final SubscriptionService _subscriptionService;
+  final Ref _ref;
   
-  SubscriptionNotifier(this._mockDataService) : super(const AsyncValue.loading()) {
+  SubscriptionNotifier(this._subscriptionService, this._ref) : super(const AsyncValue.loading()) {
     loadSubscription();
   }
 
   Future<void> loadSubscription() async {
     try {
       state = const AsyncValue.loading();
-      // Mock subscription data
-      final subscription = _generateMockSubscription();
+      
+      final auth = _ref.read(supabaseAuthProvider);
+      final user = auth.currentUser;
+      
+      if (user == null) {
+        state = const AsyncValue.data(null);
+        return;
+      }
+      
+      final subscription = await _subscriptionService.getCurrentSubscription(user.id);
       state = AsyncValue.data(subscription);
     } catch (e, stack) {
       state = AsyncValue.error(e, stack);
@@ -242,11 +256,14 @@ class SubscriptionNotifier extends StateNotifier<AsyncValue<UserSubscription?>> 
   }
 }
 
+// Service provider
+final subscriptionServiceProvider = Provider((ref) => SubscriptionService());
+
 // Provider definitions
 final subscriptionProvider = 
     StateNotifierProvider<SubscriptionNotifier, AsyncValue<UserSubscription?>>((ref) {
-  final mockDataService = ref.watch(mockDataServiceProvider);
-  return SubscriptionNotifier(mockDataService);
+  final subscriptionService = ref.watch(subscriptionServiceProvider);
+  return SubscriptionNotifier(subscriptionService, ref);
 });
 
 // Plan feature keys for localization
@@ -276,108 +293,8 @@ class PlanFeatureKeys {
 }
 
 final availablePlansProvider = Provider<List<SubscriptionPlanInfo>>((ref) {
-  return [
-    SubscriptionPlanInfo(
-      id: 'free',
-      name: 'Free Plan',
-      tier: SubscriptionTier.free,
-      price: 0,
-      currency: 'USD',
-      billingPeriod: 'MONTHLY',
-      features: [
-        PlanFeatureKeys.basicRecommendations,
-        PlanFeatureKeys.limitedPositions,
-        PlanFeatureKeys.communitySupport,
-      ],
-      limits: {
-        'maxPositions': 5,
-        'maxRecommendations': 10,
-        'maxAlerts': 0,
-      },
-    ),
-    SubscriptionPlanInfo(
-      id: 'basic_monthly',
-      name: 'Basic Plan',
-      tier: SubscriptionTier.basic,
-      price: 9.99,
-      currency: 'USD',
-      billingPeriod: 'MONTHLY',
-      features: [
-        PlanFeatureKeys.allFreeFeatures,
-        PlanFeatureKeys.upToPositions,
-        PlanFeatureKeys.emailSupport,
-        PlanFeatureKeys.basicAnalytics,
-      ],
-      limits: {
-        'maxPositions': 20,
-        'maxRecommendations': 50,
-        'maxAlerts': 5,
-      },
-    ),
-    SubscriptionPlanInfo(
-      id: 'pro_monthly',
-      name: 'Pro Plan',
-      tier: SubscriptionTier.pro,
-      price: 29.99,
-      currency: 'USD',
-      billingPeriod: 'MONTHLY',
-      features: [
-        PlanFeatureKeys.allBasicFeatures,
-        PlanFeatureKeys.realtimeRecommendations,
-        PlanFeatureKeys.advancedAnalytics,
-        PlanFeatureKeys.prioritySupport,
-        PlanFeatureKeys.upToPositions,
-        PlanFeatureKeys.riskManagementTools,
-        PlanFeatureKeys.customAlerts,
-      ],
-      limits: {
-        'maxPositions': 50,
-        'maxRecommendations': 100,
-        'maxAlerts': 20,
-      },
-      isPopular: true,
-    ),
-    SubscriptionPlanInfo(
-      id: 'pro_yearly',
-      name: 'Pro Plan (Yearly)',
-      tier: SubscriptionTier.pro,
-      price: 299.99,
-      currency: 'USD',
-      billingPeriod: 'YEARLY',
-      features: [
-        PlanFeatureKeys.allProFeatures,
-        PlanFeatureKeys.monthsFree,
-        PlanFeatureKeys.annualReview,
-      ],
-      limits: {
-        'maxPositions': 50,
-        'maxRecommendations': 100,
-        'maxAlerts': 20,
-      },
-      discount: 16.7, // 2 months free
-    ),
-    SubscriptionPlanInfo(
-      id: 'premium_monthly',
-      name: 'Premium Plan',
-      tier: SubscriptionTier.premium,
-      price: 99.99,
-      currency: 'USD',
-      billingPeriod: 'MONTHLY',
-      features: [
-        PlanFeatureKeys.allProFeaturesUnlimited,
-        PlanFeatureKeys.unlimitedPositions,
-        PlanFeatureKeys.apiAccess,
-        PlanFeatureKeys.dedicatedManager,
-        PlanFeatureKeys.customStrategies,
-        PlanFeatureKeys.whiteLabelOptions,
-      ],
-      limits: {
-        'maxPositions': -1, // Unlimited
-        'maxRecommendations': -1,
-        'maxAlerts': -1,
-      },
-    ),
-  ];
+  final subscriptionService = ref.watch(subscriptionServiceProvider);
+  return subscriptionService.getAvailablePlans();
 });
 
 final currentPlanProvider = Provider<SubscriptionPlanInfo?>((ref) {
@@ -386,8 +303,8 @@ final currentPlanProvider = Provider<SubscriptionPlanInfo?>((ref) {
   
   if (subscription == null) return null;
   
-  return plans.firstWhere(
-    (plan) => plan.id == subscription.planId,
-    orElse: () => plans.first,
+  // UserSubscription의 tier를 기반으로 현재 플랜 찾기
+  return plans.firstWhereOrNull(
+    (plan) => plan.tier == subscription.tier,
   );
 });
