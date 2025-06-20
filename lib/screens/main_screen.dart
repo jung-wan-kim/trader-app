@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'home_screen.dart';
 import 'position_screen.dart';
 import 'investment_performance_screen.dart';
 import 'watchlist_screen.dart';
 import 'profile_screen.dart';
 import '../generated/l10n/app_localizations.dart';
+import '../services/real_time_price_service.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({super.key});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  ConsumerState<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends ConsumerState<MainScreen> {
   int _selectedIndex = 0;
   
   final List<Widget> _screens = [
@@ -24,6 +26,15 @@ class _MainScreenState extends State<MainScreen> {
     const WatchlistScreen(),
     const ProfileScreen(),
   ];
+  
+  @override
+  void initState() {
+    super.initState();
+    // 실시간 가격 업데이트 서비스 시작
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(realTimePriceProvider);
+    });
+  }
   
   void _onItemTapped(int index) {
     setState(() {

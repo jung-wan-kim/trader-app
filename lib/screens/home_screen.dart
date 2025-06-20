@@ -4,6 +4,7 @@ import '../providers/recommendations_provider.dart';
 import '../providers/stock_data_provider.dart';
 import '../models/stock_recommendation.dart';
 import '../widgets/recommendation_card.dart';
+import '../widgets/real_time_price_indicator.dart';
 import '../services/trading_service.dart';
 import 'strategy_detail_screen.dart';
 import 'trader_selection_screen.dart';
@@ -32,6 +33,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       body: SafeArea(
         child: Column(
           children: [
+            const RealTimePriceIndicator(),
             _buildHeader(context),
             _buildDisclaimer(context),
             _buildFilters(context),

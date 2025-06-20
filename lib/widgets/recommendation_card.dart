@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/stock_recommendation.dart';
 import '../generated/l10n/app_localizations.dart';
+import '../services/real_time_price_service.dart';
 
-class RecommendationCard extends StatelessWidget {
+class RecommendationCard extends ConsumerWidget {
   final StockRecommendation recommendation;
   final VoidCallback onTap;
 
@@ -13,10 +15,18 @@ class RecommendationCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final actionColor = _getActionColor(recommendation.action);
     final riskColor = _getRiskColor(recommendation.riskLevel);
+    
+    // 실시간 가격 스트림 구독
+    final priceStreamAsync = ref.watch(priceStreamProvider);
+    final currentPrice = priceStreamAsync.when(
+      data: (prices) => prices[recommendation.stockCode] ?? recommendation.currentPrice,
+      loading: () => recommendation.currentPrice,
+      error: (_, __) => recommendation.currentPrice,
+    );
 
     return GestureDetector(
       onTap: onTap,
@@ -126,13 +136,29 @@ class RecommendationCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 2),
-                    Text(
-                      '\$${recommendation.currentPrice.toStringAsFixed(2)}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          '\$${currentPrice.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        if (currentPrice != recommendation.currentPrice) ...[
+                          const SizedBox(width: 4),
+                          Icon(
+                            currentPrice > recommendation.currentPrice
+                                ? Icons.arrow_upward
+                                : Icons.arrow_downward,
+                            size: 12,
+                            color: currentPrice > recommendation.currentPrice
+                                ? const Color(0xFF00D632)
+                                : Colors.red,
+                          ),
+                        ],
+                      ],
                     ),
                   ],
                 ),
