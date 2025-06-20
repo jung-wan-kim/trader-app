@@ -117,6 +117,8 @@ class _EditPositionDialogState extends ConsumerState<EditPositionDialog> {
         takeProfit: _takeProfitController.text.isEmpty 
             ? null 
             : double.parse(_takeProfitController.text),
+        clearStopLoss: _stopLossController.text.isEmpty,
+        clearTakeProfit: _takeProfitController.text.isEmpty,
       );
 
       await ref.read(portfolioProvider.notifier).updatePosition(updatedPosition);

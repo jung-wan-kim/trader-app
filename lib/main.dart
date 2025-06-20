@@ -32,10 +32,19 @@ void main() async {
   }
   
   // 환경 변수에서 Supabase 설정 가져오기
-  final supabaseUrl = dotenv.env['SUPABASE_URL'] ?? 
-      'https://lgebgddeerpxdjvtqvoi.supabase.co';
-  final supabaseAnonKey = dotenv.env['SUPABASE_ANON_KEY'] ?? 
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxnZWJnZGRlZXJweGRqdnRxdm9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzMzODcyMDksImV4cCI6MjA0ODk2MzIwOX0.2lw4P_8CQJd0Pb7iLBEqwBcQJxNAgfx3uSyQROQw-1A';
+  final supabaseUrl = dotenv.env['SUPABASE_URL'];
+  final supabaseAnonKey = dotenv.env['SUPABASE_ANON_KEY'];
+  
+  // 환경 변수 필수 체크
+  if (supabaseUrl == null || supabaseUrl.isEmpty) {
+    throw Exception('SUPABASE_URL is not set in environment variables. '
+        'Please check your config/development.env file.');
+  }
+  
+  if (supabaseAnonKey == null || supabaseAnonKey.isEmpty) {
+    throw Exception('SUPABASE_ANON_KEY is not set in environment variables. '
+        'Please check your config/development.env file.');
+  }
   
   // Supabase 초기화
   await Supabase.initialize(

@@ -8,6 +8,7 @@ import 'terms_of_service_screen.dart';
 import '../generated/l10n/app_localizations.dart';
 import '../services/supabase_auth_service.dart';
 import '../providers/supabase_auth_provider.dart';
+import '../providers/demo_mode_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -202,6 +203,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               // 데모 모드 버튼
               ElevatedButton.icon(
                 onPressed: () {
+                  // Demo 모드 활성화
+                  ref.read(demoModeProvider.notifier).state = true;
+                  
                   // Demo 모드로 바로 로그인
                   Navigator.pushReplacement(
                     context,

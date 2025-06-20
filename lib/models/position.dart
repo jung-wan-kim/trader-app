@@ -46,6 +46,8 @@ class Position {
     double? takeProfit,
     String? recommendationId,
     String? status,
+    bool clearStopLoss = false,
+    bool clearTakeProfit = false,
   }) {
     return Position(
       id: id ?? this.id,
@@ -56,8 +58,8 @@ class Position {
       quantity: quantity ?? this.quantity,
       side: side ?? this.side,
       openedAt: openedAt ?? this.openedAt,
-      stopLoss: stopLoss,
-      takeProfit: takeProfit,
+      stopLoss: clearStopLoss ? null : (stopLoss ?? this.stopLoss),
+      takeProfit: clearTakeProfit ? null : (takeProfit ?? this.takeProfit),
       recommendationId: recommendationId ?? this.recommendationId,
       status: status ?? this.status,
     );

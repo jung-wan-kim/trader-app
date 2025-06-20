@@ -18,14 +18,31 @@ class PortfolioNotifier extends StateNotifier<AsyncValue<List<Position>>> {
     try {
       state = const AsyncValue.loading();
       
-      // 실제 포트폴리오 서비스가 있으면 사용, 없으면 Mock 데이터 사용
+      // 실제 포트폴리오 서비스가 있으면 사용
       if (_portfolioService != null) {
-        // TODO: 실제 포지션 데이터 가져오기 구현
-        // 현재는 Mock 데이터 사용
-        final positions = _generateMockPositions();
-        state = AsyncValue.data(positions);
+        try {
+          // Supabase에서 positions 테이블 조회
+          final response = await Supabase.instance.client
+              .from('positions')
+              .select()
+              .eq('user_id', Supabase.instance.client.auth.currentUser!.id)
+              .eq('status', 'OPEN')
+              .order('opened_at', ascending: false);
+          
+          final positions = (response as List)
+              .map((json) => Position.fromJson(json))
+              .toList();
+          
+          state = AsyncValue.data(positions);
+        } catch (e) {
+          // 실제 데이터 조회 실패 시 Mock 데이터 사용
+          print('Failed to load positions from Supabase: $e');
+          print('Using mock data as fallback');
+          final positions = _generateMockPositions();
+          state = AsyncValue.data(positions);
+        }
       } else {
-        // Mock positions data
+        // 인증되지 않은 경우 Mock 데이터 사용
         final positions = _generateMockPositions();
         state = AsyncValue.data(positions);
       }
@@ -105,7 +122,7 @@ class PortfolioNotifier extends StateNotifier<AsyncValue<List<Position>>> {
   }
 
   Future<void> openPosition(StockRecommendation recommendation, int quantity) async {
-    state.whenData((positions) {
+    try {
       final newPosition = Position(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         stockCode: recommendation.stockCode,
@@ -120,33 +137,84 @@ class PortfolioNotifier extends StateNotifier<AsyncValue<List<Position>>> {
         recommendationId: recommendation.id,
         status: 'OPEN',
       );
-      state = AsyncValue.data([...positions, newPosition]);
-    });
+      
+      // 실제 데이터베이스에 저장
+      if (_portfolioService != null) {
+        try {
+          final response = await Supabase.instance.client
+              .from('positions')
+              .insert({
+                'user_id': Supabase.instance.client.auth.currentUser!.id,
+                'stock_code': newPosition.stockCode,
+                'stock_name': newPosition.stockName,
+                'entry_price': newPosition.entryPrice,
+                'current_price': newPosition.currentPrice,
+                'quantity': newPosition.quantity,
+                'side': newPosition.side,
+                'opened_at': newPosition.openedAt.toIso8601String(),
+                'stop_loss': newPosition.stopLoss,
+                'take_profit': newPosition.takeProfit,
+                'recommendation_id': newPosition.recommendationId,
+                'status': newPosition.status,
+              })
+              .select()
+              .single();
+          
+          // DB에서 반환된 ID로 업데이트
+          final savedPosition = Position.fromJson(response);
+          
+          state.whenData((positions) {
+            state = AsyncValue.data([...positions, savedPosition]);
+          });
+        } catch (e) {
+          print('Failed to save position to database: $e');
+          // DB 저장 실패 시에도 로컬 상태에는 추가
+          state.whenData((positions) {
+            state = AsyncValue.data([...positions, newPosition]);
+          });
+        }
+      } else {
+        // 인증되지 않은 경우 로컬 상태에만 추가
+        state.whenData((positions) {
+          state = AsyncValue.data([...positions, newPosition]);
+        });
+      }
+    } catch (e) {
+      print('Error opening position: $e');
+    }
   }
 
   Future<void> closePosition(String positionId) async {
-    state.whenData((positions) {
-      final updatedPositions = positions.map((p) {
-        if (p.id == positionId) {
-          return Position(
-            id: p.id,
-            stockCode: p.stockCode,
-            stockName: p.stockName,
-            entryPrice: p.entryPrice,
-            currentPrice: p.currentPrice,
-            quantity: p.quantity,
-            side: p.side,
-            openedAt: p.openedAt,
-            stopLoss: p.stopLoss,
-            takeProfit: p.takeProfit,
-            recommendationId: p.recommendationId,
-            status: 'CLOSED',
-          );
+    try {
+      // 실제 데이터베이스에서 업데이트
+      if (_portfolioService != null) {
+        try {
+          await Supabase.instance.client
+              .from('positions')
+              .update({
+                'status': 'CLOSED',
+                'closed_at': DateTime.now().toIso8601String(),
+              })
+              .eq('id', positionId)
+              .eq('user_id', Supabase.instance.client.auth.currentUser!.id);
+        } catch (e) {
+          print('Failed to close position in database: $e');
         }
-        return p;
-      }).toList();
-      state = AsyncValue.data(updatedPositions);
-    });
+      }
+      
+      // 로컬 상태 업데이트
+      state.whenData((positions) {
+        final updatedPositions = positions.map((p) {
+          if (p.id == positionId) {
+            return p.copyWith(status: 'CLOSED');
+          }
+          return p;
+        }).toList();
+        state = AsyncValue.data(updatedPositions);
+      });
+    } catch (e) {
+      print('Error closing position: $e');
+    }
   }
 
   Future<void> updatePositionPrice(String stockCode, double newPrice) async {
@@ -175,15 +243,38 @@ class PortfolioNotifier extends StateNotifier<AsyncValue<List<Position>>> {
   }
 
   Future<void> updatePosition(Position updatedPosition) async {
-    state.whenData((positions) {
-      final updatedPositions = positions.map((p) {
-        if (p.id == updatedPosition.id) {
-          return updatedPosition;
+    try {
+      // 실제 데이터베이스에 업데이트
+      if (_portfolioService != null) {
+        try {
+          await Supabase.instance.client
+              .from('positions')
+              .update({
+                'quantity': updatedPosition.quantity,
+                'stop_loss': updatedPosition.stopLoss,
+                'take_profit': updatedPosition.takeProfit,
+                'updated_at': DateTime.now().toIso8601String(),
+              })
+              .eq('id', updatedPosition.id)
+              .eq('user_id', Supabase.instance.client.auth.currentUser!.id);
+        } catch (e) {
+          print('Failed to update position in database: $e');
         }
-        return p;
-      }).toList();
-      state = AsyncValue.data(updatedPositions);
-    });
+      }
+      
+      // 로컬 상태 업데이트
+      state.whenData((positions) {
+        final updatedPositions = positions.map((p) {
+          if (p.id == updatedPosition.id) {
+            return updatedPosition;
+          }
+          return p;
+        }).toList();
+        state = AsyncValue.data(updatedPositions);
+      });
+    } catch (e) {
+      print('Error updating position: $e');
+    }
   }
 }
 
