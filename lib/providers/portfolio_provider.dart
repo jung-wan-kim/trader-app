@@ -37,6 +37,36 @@ class Position {
   double get unrealizedPnL => marketValue - costBasis;
   double get unrealizedPnLPercent => costBasis == 0 ? 0 : ((marketValue - costBasis) / costBasis) * 100;
   bool get isProfit => unrealizedPnL > 0;
+
+  Position copyWith({
+    String? id,
+    String? stockCode,
+    String? stockName,
+    double? entryPrice,
+    double? currentPrice,
+    int? quantity,
+    String? side,
+    DateTime? openedAt,
+    double? stopLoss,
+    double? takeProfit,
+    String? recommendationId,
+    String? status,
+  }) {
+    return Position(
+      id: id ?? this.id,
+      stockCode: stockCode ?? this.stockCode,
+      stockName: stockName ?? this.stockName,
+      entryPrice: entryPrice ?? this.entryPrice,
+      currentPrice: currentPrice ?? this.currentPrice,
+      quantity: quantity ?? this.quantity,
+      side: side ?? this.side,
+      openedAt: openedAt ?? this.openedAt,
+      stopLoss: stopLoss,
+      takeProfit: takeProfit,
+      recommendationId: recommendationId ?? this.recommendationId,
+      status: status ?? this.status,
+    );
+  }
 }
 
 class PortfolioStats {
@@ -216,6 +246,18 @@ class PortfolioNotifier extends StateNotifier<AsyncValue<List<Position>>> {
             recommendationId: p.recommendationId,
             status: p.status,
           );
+        }
+        return p;
+      }).toList();
+      state = AsyncValue.data(updatedPositions);
+    });
+  }
+
+  Future<void> updatePosition(Position updatedPosition) async {
+    state.whenData((positions) {
+      final updatedPositions = positions.map((p) {
+        if (p.id == updatedPosition.id) {
+          return updatedPosition;
         }
         return p;
       }).toList();

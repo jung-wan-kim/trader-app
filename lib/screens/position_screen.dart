@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/portfolio_provider.dart';
 import '../generated/l10n/app_localizations.dart';
+import '../widgets/edit_position_dialog.dart';
 
 class PositionScreen extends ConsumerWidget {
   const PositionScreen({super.key});
@@ -437,7 +438,10 @@ class PositionScreen extends ConsumerWidget {
               Expanded(
                 child: OutlinedButton(
                   onPressed: () {
-                    // TODO: Implement edit position
+                    showDialog(
+                      context: context,
+                      builder: (context) => EditPositionDialog(position: position),
+                    );
                   },
                   style: OutlinedButton.styleFrom(
                     foregroundColor: const Color(0xFF00D632),
