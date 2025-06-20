@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fl_chart/fl_chart.dart';
 import '../generated/l10n/app_localizations.dart';
+import '../providers/performance_provider.dart';
+import '../services/performance_service.dart';
+import 'package:intl/intl.dart';
 
 class InvestmentPerformanceScreen extends ConsumerWidget {
   const InvestmentPerformanceScreen({super.key});
@@ -9,6 +12,11 @@ class InvestmentPerformanceScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final performanceAsync = ref.watch(portfolioPerformanceProvider);
+    final recentTradesAsync = ref.watch(recentTradesProvider);
+    
+    // Auto-refresh 활성화
+    ref.watch(performanceRefreshProvider);
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -24,36 +32,75 @@ class InvestmentPerformanceScreen extends ConsumerWidget {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // 전체 수익률 카드
-            _buildPerformanceCard(
-              title: l10n?.totalPortfolioValue ?? 'Total Portfolio Value',
-              value: '\$12,450.30',
-              change: '+\$1,245.30',
-              changePercent: '+11.14%',
-              isPositive: true,
-            ),
-            const SizedBox(height: 16),
-            
-            // 수익률 차트
-            _buildPerformanceChart(l10n),
-            const SizedBox(height: 24),
-            
-            // 성과 통계
-            _buildPerformanceStats(l10n),
-            const SizedBox(height: 24),
-            
-            // 거래 히스토리
-            _buildTradingHistory(l10n),
-            const SizedBox(height: 24),
-            
-            // 월별 수익률
-            _buildMonthlyReturns(l10n),
-          ],
+      body: performanceAsync.when(
+        data: (performance) => SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // 전체 수익률 카드
+              _buildPerformanceCard(
+                title: l10n?.totalPortfolioValue ?? 'Total Portfolio Value',
+                value: '\$${performance.totalValue.toStringAsFixed(2)}',
+                change: '${performance.totalGainLoss >= 0 ? '+' : ''}\$${performance.totalGainLoss.toStringAsFixed(2)}',
+                changePercent: '${performance.gainLossPercent >= 0 ? '+' : ''}${performance.gainLossPercent.toStringAsFixed(2)}%',
+                isPositive: performance.totalGainLoss >= 0,
+              ),
+              const SizedBox(height: 16),
+              
+              // 수익률 차트
+              _buildPerformanceChart(l10n, performance.chartData),
+              const SizedBox(height: 24),
+              
+              // 성과 통계
+              _buildPerformanceStats(l10n, performance),
+              const SizedBox(height: 24),
+              
+              // 거래 히스토리
+              _buildTradingHistory(l10n, recentTradesAsync),
+              const SizedBox(height: 24),
+              
+              // 월별 수익률
+              _buildMonthlyReturns(l10n, performance.monthlyReturns),
+            ],
+          ),
+        ),
+        loading: () => const Center(
+          child: CircularProgressIndicator(
+            color: Color(0xFF00D632),
+          ),
+        ),
+        error: (error, stack) => Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.error_outline,
+                color: Colors.grey[600],
+                size: 48,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                l10n?.errorLoadingData ?? 'Error loading data',
+                style: TextStyle(
+                  color: Colors.grey[600],
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 8),
+              TextButton(
+                onPressed: () {
+                  ref.invalidate(portfolioPerformanceProvider);
+                },
+                child: Text(
+                  l10n?.retry ?? 'Retry',
+                  style: const TextStyle(
+                    color: Color(0xFF00D632),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -115,7 +162,7 @@ class InvestmentPerformanceScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildPerformanceChart(AppLocalizations? l10n) {
+  Widget _buildPerformanceChart(AppLocalizations? l10n, List<ChartDataPoint> chartData) {
     return Container(
       height: 250,
       padding: const EdgeInsets.all(20),
@@ -143,20 +190,18 @@ class InvestmentPerformanceScreen extends ConsumerWidget {
                 titlesData: const FlTitlesData(show: false),
                 borderData: FlBorderData(show: false),
                 minX: 0,
-                maxX: 30,
-                minY: 0,
-                maxY: 15000,
+                maxX: chartData.length.toDouble() - 1,
+                minY: chartData.isNotEmpty 
+                    ? chartData.map((p) => p.value).reduce((a, b) => a < b ? a : b) * 0.95
+                    : 0,
+                maxY: chartData.isNotEmpty
+                    ? chartData.map((p) => p.value).reduce((a, b) => a > b ? a : b) * 1.05
+                    : 15000,
                 lineBarsData: [
                   LineChartBarData(
-                    spots: [
-                      const FlSpot(0, 10000),
-                      const FlSpot(5, 10500),
-                      const FlSpot(10, 11200),
-                      const FlSpot(15, 10800),
-                      const FlSpot(20, 11800),
-                      const FlSpot(25, 12100),
-                      const FlSpot(30, 12450),
-                    ],
+                    spots: chartData.asMap().entries.map((entry) {
+                      return FlSpot(entry.key.toDouble(), entry.value.value);
+                    }).toList(),
                     isCurved: true,
                     gradient: const LinearGradient(
                       colors: [Color(0xFF00D632), Color(0xFF00A028)],
@@ -185,7 +230,7 @@ class InvestmentPerformanceScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildPerformanceStats(AppLocalizations? l10n) {
+  Widget _buildPerformanceStats(AppLocalizations? l10n, PortfolioPerformance performance) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -201,11 +246,19 @@ class InvestmentPerformanceScreen extends ConsumerWidget {
         Row(
           children: [
             Expanded(
-              child: _buildStatCard(l10n?.winRate ?? 'Win Rate', '68.5%', const Color(0xFF00D632)),
+              child: _buildStatCard(
+                l10n?.winRate ?? 'Win Rate', 
+                '${performance.winRate.toStringAsFixed(1)}%', 
+                const Color(0xFF00D632)
+              ),
             ),
             const SizedBox(width: 12),
             Expanded(
-              child: _buildStatCard(l10n?.avgReturn ?? 'Avg. Return', '+8.2%', const Color(0xFF00D632)),
+              child: _buildStatCard(
+                l10n?.avgReturn ?? 'Avg. Return', 
+                '${performance.avgReturn >= 0 ? '+' : ''}${performance.avgReturn.toStringAsFixed(1)}%', 
+                performance.avgReturn >= 0 ? const Color(0xFF00D632) : Colors.red
+              ),
             ),
           ],
         ),
@@ -213,11 +266,19 @@ class InvestmentPerformanceScreen extends ConsumerWidget {
         Row(
           children: [
             Expanded(
-              child: _buildStatCard(l10n?.totalTrades ?? 'Total Trades', '47', Colors.blue),
+              child: _buildStatCard(
+                l10n?.totalTrades ?? 'Total Trades', 
+                '${performance.totalTrades}', 
+                Colors.blue
+              ),
             ),
             const SizedBox(width: 12),
             Expanded(
-              child: _buildStatCard(l10n?.bestTrade ?? 'Best Trade', '+24.8%', const Color(0xFF00D632)),
+              child: _buildStatCard(
+                l10n?.bestTrade ?? 'Best Trade', 
+                '+${performance.bestTradeReturn.toStringAsFixed(1)}%', 
+                const Color(0xFF00D632)
+              ),
             ),
           ],
         ),
@@ -257,7 +318,7 @@ class InvestmentPerformanceScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildTradingHistory(AppLocalizations? l10n) {
+  Widget _buildTradingHistory(AppLocalizations? l10n, AsyncValue<List<TradeHistory>> recentTradesAsync) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -270,21 +331,14 @@ class InvestmentPerformanceScreen extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: 16),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: 5,
-          itemBuilder: (context, index) {
-            final trades = [
-              {'symbol': 'AAPL', 'action': 'SELL', 'return': '+12.3%', 'date': '2025-06-07'},
-              {'symbol': 'GOOGL', 'action': 'BUY', 'return': '+8.7%', 'date': '2025-06-06'},
-              {'symbol': 'MSFT', 'action': 'SELL', 'return': '+15.2%', 'date': '2025-06-05'},
-              {'symbol': 'TSLA', 'action': 'BUY', 'return': '-3.1%', 'date': '2025-06-04'},
-              {'symbol': 'NVDA', 'action': 'SELL', 'return': '+22.8%', 'date': '2025-06-03'},
-            ];
-            
-            final trade = trades[index];
-            final isPositive = trade['return']!.startsWith('+');
+        recentTradesAsync.when(
+          data: (trades) => ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: trades.length,
+            itemBuilder: (context, index) {
+              final trade = trades[index];
+              final isPositive = trade.returnPercent >= 0;
             
             return Container(
               margin: const EdgeInsets.only(bottom: 8),
@@ -299,15 +353,15 @@ class InvestmentPerformanceScreen extends ConsumerWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     decoration: BoxDecoration(
-                      color: trade['action'] == 'BUY' 
+                      color: trade.action == 'BUY' 
                           ? Colors.blue.withOpacity(0.2)
                           : Colors.orange.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Text(
-                      trade['action']!,
+                      trade.action,
                       style: TextStyle(
-                        color: trade['action'] == 'BUY' ? Colors.blue : Colors.orange,
+                        color: trade.action == 'BUY' ? Colors.blue : Colors.orange,
                         fontSize: 12,
                         fontWeight: FontWeight.bold,
                       ),
@@ -319,14 +373,14 @@ class InvestmentPerformanceScreen extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          trade['symbol']!,
+                          trade.symbol,
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
-                          trade['date']!,
+                          DateFormat('yyyy-MM-dd').format(trade.executedAt),
                           style: TextStyle(
                             color: Colors.grey[400],
                             fontSize: 12,
@@ -336,7 +390,7 @@ class InvestmentPerformanceScreen extends ConsumerWidget {
                     ),
                   ),
                   Text(
-                    trade['return']!,
+                    '${isPositive ? '+' : ''}${trade.returnPercent.toStringAsFixed(1)}%',
                     style: TextStyle(
                       color: isPositive ? const Color(0xFF00D632) : Colors.red,
                       fontWeight: FontWeight.bold,
@@ -346,12 +400,25 @@ class InvestmentPerformanceScreen extends ConsumerWidget {
               ),
             );
           },
+          ),
+          loading: () => const Center(
+            child: CircularProgressIndicator(
+              color: Color(0xFF00D632),
+            ),
+          ),
+          error: (_, __) => Container(
+            padding: const EdgeInsets.all(16),
+            child: Text(
+              l10n?.noRecentTrades ?? 'No recent trades',
+              style: TextStyle(color: Colors.grey[600]),
+            ),
+          ),
         ),
       ],
     );
   }
 
-  Widget _buildMonthlyReturns(AppLocalizations? l10n) {
+  Widget _buildMonthlyReturns(AppLocalizations? l10n, List<MonthlyReturn> monthlyReturns) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -383,17 +450,10 @@ class InvestmentPerformanceScreen extends ConsumerWidget {
                   sideTitles: SideTitles(
                     showTitles: true,
                     getTitlesWidget: (value, meta) {
-                      final months = [
-                        l10n?.jan ?? 'Jan',
-                        l10n?.feb ?? 'Feb',
-                        l10n?.mar ?? 'Mar',
-                        l10n?.apr ?? 'Apr',
-                        l10n?.may ?? 'May',
-                        l10n?.jun ?? 'Jun'
-                      ];
-                      if (value.toInt() < months.length) {
+                      if (value.toInt() < monthlyReturns.length) {
+                        final month = monthlyReturns[value.toInt()].month;
                         return Text(
-                          months[value.toInt()],
+                          DateFormat('MMM').format(month),
                           style: TextStyle(color: Colors.grey[400], fontSize: 12),
                         );
                       }
@@ -407,14 +467,19 @@ class InvestmentPerformanceScreen extends ConsumerWidget {
               ),
               borderData: FlBorderData(show: false),
               gridData: const FlGridData(show: false),
-              barGroups: [
-                BarChartGroupData(x: 0, barRods: [BarChartRodData(toY: 8.5, color: const Color(0xFF00D632))]),
-                BarChartGroupData(x: 1, barRods: [BarChartRodData(toY: 12.3, color: const Color(0xFF00D632))]),
-                BarChartGroupData(x: 2, barRods: [BarChartRodData(toY: -2.1, color: Colors.red)]),
-                BarChartGroupData(x: 3, barRods: [BarChartRodData(toY: 15.7, color: const Color(0xFF00D632))]),
-                BarChartGroupData(x: 4, barRods: [BarChartRodData(toY: 9.2, color: const Color(0xFF00D632))]),
-                BarChartGroupData(x: 5, barRods: [BarChartRodData(toY: 11.4, color: const Color(0xFF00D632))]),
-              ],
+              barGroups: monthlyReturns.asMap().entries.map((entry) {
+                final index = entry.key;
+                final returnPercent = entry.value.returnPercent;
+                return BarChartGroupData(
+                  x: index,
+                  barRods: [
+                    BarChartRodData(
+                      toY: returnPercent,
+                      color: returnPercent >= 0 ? const Color(0xFF00D632) : Colors.red,
+                    ),
+                  ],
+                );
+              }).toList(),
             ),
           ),
         ),
