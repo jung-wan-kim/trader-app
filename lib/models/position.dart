@@ -68,10 +68,10 @@ class Position {
   factory Position.fromJson(Map<String, dynamic> json) {
     return Position(
       id: json['id'],
-      stockCode: json['stock_code'],
-      stockName: json['stock_name'],
+      stockCode: json['symbol'] ?? json['stock_code'], // symbol 컬럼을 stock_code로 사용
+      stockName: json['stock_name'] ?? json['symbol'] ?? '', // stock_name이 없으면 symbol 사용
       entryPrice: (json['entry_price'] ?? 0).toDouble(),
-      currentPrice: (json['current_price'] ?? 0).toDouble(),
+      currentPrice: (json['current_price'] ?? json['entry_price'] ?? 0).toDouble(), // current_price가 없으면 entry_price 사용
       quantity: json['quantity'] ?? 0,
       side: json['side'] ?? 'LONG',
       openedAt: DateTime.parse(json['opened_at']),
@@ -85,7 +85,7 @@ class Position {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'stock_code': stockCode,
+      'symbol': stockCode, // DB에서는 symbol 컬럼 사용
       'stock_name': stockName,
       'entry_price': entryPrice,
       'current_price': currentPrice,

@@ -21,19 +21,34 @@ class PortfolioNotifier extends StateNotifier<AsyncValue<List<Position>>> {
       // 실제 포트폴리오 서비스가 있으면 사용
       if (_portfolioService != null) {
         try {
-          // Supabase에서 positions 테이블 조회
-          final response = await Supabase.instance.client
-              .from('positions')
-              .select()
+          // 먼저 사용자의 활성 포트폴리오 ID 가져오기
+          final portfolioResponse = await Supabase.instance.client
+              .from('portfolios')
+              .select('id')
               .eq('user_id', Supabase.instance.client.auth.currentUser!.id)
-              .eq('status', 'OPEN')
-              .order('opened_at', ascending: false);
+              .eq('is_active', true)
+              .maybeSingle();
           
-          final positions = (response as List)
-              .map((json) => Position.fromJson(json))
-              .toList();
+          if (portfolioResponse != null) {
+            final portfolioId = portfolioResponse['id'];
+            
+            // 해당 포트폴리오의 positions 조회
+            final response = await Supabase.instance.client
+                .from('positions')
+                .select()
+                .eq('portfolio_id', portfolioId)
+                .eq('status', 'OPEN')
+                .order('opened_at', ascending: false);
           
-          state = AsyncValue.data(positions);
+            final positions = (response as List)
+                .map((json) => Position.fromJson(json))
+                .toList();
+            
+            state = AsyncValue.data(positions);
+          } else {
+            // 활성 포트폴리오가 없으면 빈 리스트 반환
+            state = AsyncValue.data([]);
+          }
         } catch (e) {
           // 실제 데이터 조회 실패 시 Mock 데이터 사용
           print('Failed to load positions from Supabase: $e');
@@ -141,31 +156,45 @@ class PortfolioNotifier extends StateNotifier<AsyncValue<List<Position>>> {
       // 실제 데이터베이스에 저장
       if (_portfolioService != null) {
         try {
-          final response = await Supabase.instance.client
-              .from('positions')
-              .insert({
-                'user_id': Supabase.instance.client.auth.currentUser!.id,
-                'stock_code': newPosition.stockCode,
-                'stock_name': newPosition.stockName,
-                'entry_price': newPosition.entryPrice,
-                'current_price': newPosition.currentPrice,
-                'quantity': newPosition.quantity,
-                'side': newPosition.side,
-                'opened_at': newPosition.openedAt.toIso8601String(),
-                'stop_loss': newPosition.stopLoss,
-                'take_profit': newPosition.takeProfit,
-                'recommendation_id': newPosition.recommendationId,
-                'status': newPosition.status,
-              })
-              .select()
-              .single();
+          // 먼저 사용자의 활성 포트폴리오 ID 가져오기
+          final portfolioResponse = await Supabase.instance.client
+              .from('portfolios')
+              .select('id')
+              .eq('user_id', Supabase.instance.client.auth.currentUser!.id)
+              .eq('is_active', true)
+              .maybeSingle();
           
-          // DB에서 반환된 ID로 업데이트
-          final savedPosition = Position.fromJson(response);
+          if (portfolioResponse != null) {
+            final portfolioId = portfolioResponse['id'];
+            
+            final response = await Supabase.instance.client
+                .from('positions')
+                .insert({
+                  'portfolio_id': portfolioId,
+                  'symbol': newPosition.stockCode,
+                  'stock_name': newPosition.stockName,
+                  'entry_price': newPosition.entryPrice,
+                  'current_price': newPosition.currentPrice,
+                  'quantity': newPosition.quantity,
+                  'side': newPosition.side,
+                  'opened_at': newPosition.openedAt.toIso8601String(),
+                  'stop_loss': newPosition.stopLoss,
+                  'take_profit': newPosition.takeProfit,
+                  'recommendation_id': newPosition.recommendationId,
+                  'status': newPosition.status,
+                })
+                .select()
+                .single();
           
-          state.whenData((positions) {
-            state = AsyncValue.data([...positions, savedPosition]);
-          });
+            // DB에서 반환된 ID로 업데이트
+            final savedPosition = Position.fromJson(response);
+            
+            state.whenData((positions) {
+              state = AsyncValue.data([...positions, savedPosition]);
+            });
+          } else {
+            throw Exception('No active portfolio found for user');
+          }
         } catch (e) {
           print('Failed to save position to database: $e');
           // DB 저장 실패 시에도 로컬 상태에는 추가
@@ -195,8 +224,7 @@ class PortfolioNotifier extends StateNotifier<AsyncValue<List<Position>>> {
                 'status': 'CLOSED',
                 'closed_at': DateTime.now().toIso8601String(),
               })
-              .eq('id', positionId)
-              .eq('user_id', Supabase.instance.client.auth.currentUser!.id);
+              .eq('id', positionId);
         } catch (e) {
           print('Failed to close position in database: $e');
         }
@@ -218,28 +246,48 @@ class PortfolioNotifier extends StateNotifier<AsyncValue<List<Position>>> {
   }
 
   Future<void> updatePositionPrice(String stockCode, double newPrice) async {
-    state.whenData((positions) {
-      final updatedPositions = positions.map((p) {
-        if (p.stockCode == stockCode && p.status == 'OPEN') {
-          return Position(
-            id: p.id,
-            stockCode: p.stockCode,
-            stockName: p.stockName,
-            entryPrice: p.entryPrice,
-            currentPrice: newPrice,
-            quantity: p.quantity,
-            side: p.side,
-            openedAt: p.openedAt,
-            stopLoss: p.stopLoss,
-            takeProfit: p.takeProfit,
-            recommendationId: p.recommendationId,
-            status: p.status,
-          );
+    try {
+      // 실제 데이터베이스에 가격 업데이트
+      if (_portfolioService != null) {
+        try {
+          await Supabase.instance.client
+              .from('positions')
+              .update({
+                'current_price': newPrice,
+              })
+              .eq('symbol', stockCode)
+              .eq('status', 'OPEN');
+        } catch (e) {
+          print('Failed to update price in database: $e');
         }
-        return p;
-      }).toList();
-      state = AsyncValue.data(updatedPositions);
-    });
+      }
+      
+      // 로컬 상태 업데이트
+      state.whenData((positions) {
+        final updatedPositions = positions.map((p) {
+          if (p.stockCode == stockCode && p.status == 'OPEN') {
+            return Position(
+              id: p.id,
+              stockCode: p.stockCode,
+              stockName: p.stockName,
+              entryPrice: p.entryPrice,
+              currentPrice: newPrice,
+              quantity: p.quantity,
+              side: p.side,
+              openedAt: p.openedAt,
+              stopLoss: p.stopLoss,
+              takeProfit: p.takeProfit,
+              recommendationId: p.recommendationId,
+              status: p.status,
+            );
+          }
+          return p;
+        }).toList();
+        state = AsyncValue.data(updatedPositions);
+      });
+    } catch (e) {
+      print('Error updating position price: $e');
+    }
   }
 
   Future<void> updatePosition(Position updatedPosition) async {
@@ -253,10 +301,9 @@ class PortfolioNotifier extends StateNotifier<AsyncValue<List<Position>>> {
                 'quantity': updatedPosition.quantity,
                 'stop_loss': updatedPosition.stopLoss,
                 'take_profit': updatedPosition.takeProfit,
-                'updated_at': DateTime.now().toIso8601String(),
+                'current_price': updatedPosition.currentPrice,
               })
-              .eq('id', updatedPosition.id)
-              .eq('user_id', Supabase.instance.client.auth.currentUser!.id);
+              .eq('id', updatedPosition.id);
         } catch (e) {
           print('Failed to update position in database: $e');
         }
