@@ -5,15 +5,11 @@ class PerformanceService {
   late final SupabaseClient _supabase;
   
   PerformanceService() {
-    final supabaseUrl = EnvConfig.supabaseUrl.isNotEmpty 
-        ? EnvConfig.supabaseUrl 
-        : 'https://lgebgddeerpxdjvtqvoi.supabase.co';
+    if (EnvConfig.supabaseUrl.isEmpty || EnvConfig.supabaseAnonKey.isEmpty) {
+      throw Exception('Supabase configuration not found. Please check your environment variables.');
+    }
     
-    final supabaseAnonKey = EnvConfig.supabaseAnonKey.isNotEmpty 
-        ? EnvConfig.supabaseAnonKey 
-        : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxnZWJnZGRlZXJweGRqdnRxdm9pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzMzODcyMDksImV4cCI6MjA0ODk2MzIwOX0.2lw4P_8CQJd0Pb7iLBEqwBcQJxNAgfx3uSyQROQw-1A';
-    
-    _supabase = SupabaseClient(supabaseUrl, supabaseAnonKey);
+    _supabase = SupabaseClient(EnvConfig.supabaseUrl, EnvConfig.supabaseAnonKey);
   }
 
   // 포트폴리오 성과 데이터 가져오기

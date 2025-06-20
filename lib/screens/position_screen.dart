@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/portfolio_provider.dart';
+import '../models/position.dart';
 import '../generated/l10n/app_localizations.dart';
 import '../widgets/edit_position_dialog.dart';
 
@@ -28,9 +29,32 @@ class PositionScreen extends ConsumerWidget {
                   ),
                 ),
                 error: (error, stack) => Center(
-                  child: Text(
-                    AppLocalizations.of(context)!.errorLoadingPositions,
-                    style: TextStyle(color: Colors.grey[400]),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.error_outline,
+                        size: 48,
+                        color: Colors.grey[600],
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        AppLocalizations.of(context)!.errorLoadingPositions,
+                        style: TextStyle(color: Colors.grey[400]),
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          ref.refresh(portfolioProvider);
+                        },
+                        icon: const Icon(Icons.refresh),
+                        label: Text(AppLocalizations.of(context)!.retry),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF00D632),
+                          foregroundColor: Colors.black,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

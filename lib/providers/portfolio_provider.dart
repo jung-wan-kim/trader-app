@@ -1,113 +1,34 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/stock_recommendation.dart';
+import '../models/position.dart';
+import '../services/portfolio_service.dart';
 import '../services/mock_data_service.dart';
 import 'mock_data_provider.dart';
-
-class Position {
-  final String id;
-  final String stockCode;
-  final String stockName;
-  final double entryPrice;
-  final double currentPrice;
-  final int quantity;
-  final String side; // LONG, SHORT
-  final DateTime openedAt;
-  final double? stopLoss;
-  final double? takeProfit;
-  final String? recommendationId;
-  final String status; // OPEN, CLOSED
-
-  Position({
-    required this.id,
-    required this.stockCode,
-    required this.stockName,
-    required this.entryPrice,
-    required this.currentPrice,
-    required this.quantity,
-    required this.side,
-    required this.openedAt,
-    this.stopLoss,
-    this.takeProfit,
-    this.recommendationId,
-    required this.status,
-  });
-
-  double get marketValue => quantity * currentPrice;
-  double get costBasis => quantity * entryPrice;
-  double get unrealizedPnL => marketValue - costBasis;
-  double get unrealizedPnLPercent => costBasis == 0 ? 0 : ((marketValue - costBasis) / costBasis) * 100;
-  bool get isProfit => unrealizedPnL > 0;
-
-  Position copyWith({
-    String? id,
-    String? stockCode,
-    String? stockName,
-    double? entryPrice,
-    double? currentPrice,
-    int? quantity,
-    String? side,
-    DateTime? openedAt,
-    double? stopLoss,
-    double? takeProfit,
-    String? recommendationId,
-    String? status,
-  }) {
-    return Position(
-      id: id ?? this.id,
-      stockCode: stockCode ?? this.stockCode,
-      stockName: stockName ?? this.stockName,
-      entryPrice: entryPrice ?? this.entryPrice,
-      currentPrice: currentPrice ?? this.currentPrice,
-      quantity: quantity ?? this.quantity,
-      side: side ?? this.side,
-      openedAt: openedAt ?? this.openedAt,
-      stopLoss: stopLoss,
-      takeProfit: takeProfit,
-      recommendationId: recommendationId ?? this.recommendationId,
-      status: status ?? this.status,
-    );
-  }
-}
-
-class PortfolioStats {
-  final double totalValue;
-  final double totalCost;
-  final double totalPnL;
-  final double totalPnLPercent;
-  final double dayPnL;
-  final double dayPnLPercent;
-  final int openPositions;
-  final int winningPositions;
-  final int losingPositions;
-  final double winRate;
-
-  PortfolioStats({
-    required this.totalValue,
-    required this.totalCost,
-    required this.totalPnL,
-    required this.totalPnLPercent,
-    required this.dayPnL,
-    required this.dayPnLPercent,
-    required this.openPositions,
-    required this.winningPositions,
-    required this.losingPositions,
-    required this.winRate,
-  });
-}
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class PortfolioNotifier extends StateNotifier<AsyncValue<List<Position>>> {
+  final PortfolioService? _portfolioService;
   final MockDataService _mockDataService;
   
-  PortfolioNotifier(this._mockDataService) : super(const AsyncValue.loading()) {
+  PortfolioNotifier(this._portfolioService, this._mockDataService) : super(const AsyncValue.loading()) {
     loadPositions();
   }
 
   Future<void> loadPositions() async {
     try {
       state = const AsyncValue.loading();
-      // Mock positions data
-      final positions = _generateMockPositions();
-      state = AsyncValue.data(positions);
+      
+      // 실제 포트폴리오 서비스가 있으면 사용, 없으면 Mock 데이터 사용
+      if (_portfolioService != null) {
+        // TODO: 실제 포지션 데이터 가져오기 구현
+        // 현재는 Mock 데이터 사용
+        final positions = _generateMockPositions();
+        state = AsyncValue.data(positions);
+      } else {
+        // Mock positions data
+        final positions = _generateMockPositions();
+        state = AsyncValue.data(positions);
+      }
     } catch (e, stack) {
       state = AsyncValue.error(e, stack);
     }
@@ -267,10 +188,19 @@ class PortfolioNotifier extends StateNotifier<AsyncValue<List<Position>>> {
 }
 
 // Provider definitions
+final portfolioServiceProvider = Provider<PortfolioService?>((ref) {
+  final supabase = Supabase.instance.client;
+  if (supabase.auth.currentUser != null) {
+    return PortfolioService(supabase);
+  }
+  return null;
+});
+
 final portfolioProvider = 
     StateNotifierProvider<PortfolioNotifier, AsyncValue<List<Position>>>((ref) {
+  final portfolioService = ref.watch(portfolioServiceProvider);
   final mockDataService = ref.watch(mockDataServiceProvider);
-  return PortfolioNotifier(mockDataService);
+  return PortfolioNotifier(portfolioService, mockDataService);
 });
 
 final openPositionsProvider = Provider<List<Position>>((ref) {
