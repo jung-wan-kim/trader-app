@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../config/app_config.dart';
 import 'main_screen.dart';
+import 'signup_screen.dart';
 import 'privacy_policy_screen.dart';
 import 'terms_of_service_screen.dart';
 import '../generated/l10n/app_localizations.dart';
@@ -240,7 +241,35 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ],
                   ),
                 ),
-              const SizedBox(height: 60),
+              const SizedBox(height: 24),
+              // 회원가입 링크
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    l10n?.dontHaveAccount ?? "Don't have an account? ",
+                    style: TextStyle(color: Colors.grey[400]),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignupScreen(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      l10n?.signUp ?? 'Sign Up',
+                      style: const TextStyle(
+                        color: Color(0xFF00D632),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 40),
               // 법적 링크
               Wrap(
                 alignment: WrapAlignment.center,

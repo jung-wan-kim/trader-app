@@ -33,6 +33,36 @@ class SupabaseAuthService {
     }
   }
   
+  // 이메일 회원가입
+  Future<AuthResponse?> signUpWithEmail(String email, String password, String name) async {
+    try {
+      final response = await _supabase.auth.signUp(
+        email: email,
+        password: password,
+        data: {
+          'full_name': name,
+          'created_at': DateTime.now().toIso8601String(),
+        },
+      );
+      
+      // 사용자 프로필 생성
+      if (response.user != null) {
+        await _supabase.from('user_profiles').insert({
+          'id': response.user!.id,
+          'email': email,
+          'full_name': name,
+          'created_at': DateTime.now().toIso8601String(),
+          'subscription_tier': 'free',
+        });
+      }
+      
+      return response;
+    } catch (e) {
+      print('이메일 회원가입 에러: $e');
+      rethrow;
+    }
+  }
+  
   // 로그아웃
   Future<void> signOut() async {
     try {
