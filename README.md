@@ -35,16 +35,59 @@ AI 기반 주식 추천 애플리케이션 - 전설적인 트레이더들의 투
 
 ## 📦 설치 방법
 
+### 필수 요구사항
+- Flutter SDK (>=3.0.0 <4.0.0)
+- Dart SDK
+- iOS/Android 개발 환경
+- Supabase 계정
+
+### 환경 설정
+
 ```bash
-# Clone the repository
+# 1. 저장소 클론
 git clone https://github.com/jung-wan-kim/trader-app.git
 cd trader-app
 
-# Install dependencies
-flutter pub get
+# 2. 환경 파일 설정
+cp config/development.env.example config/development.env
 
-# Run the app
-flutter run
+# 3. config/development.env 파일을 열어 실제 값으로 업데이트
+# SUPABASE_URL=https://your-project.supabase.co
+# SUPABASE_ANON_KEY=your-actual-anon-key
+
+# 4. 의존성 설치
+flutter pub get
+```
+
+### 앱 실행
+
+```bash
+# iOS 시뮬레이터에서 실행
+flutter run -d iPhone
+
+# Android 에뮬레이터에서 실행
+flutter run -d android
+
+# 웹에서 실행
+flutter run -d chrome
+
+# 사용 가능한 디바이스 확인
+flutter devices
+```
+
+### 빌드
+
+```bash
+# Android APK 빌드
+flutter build apk --debug    # 디버그 빌드
+flutter build apk --release  # 릴리즈 빌드
+
+# iOS 빌드
+flutter build ios --debug    # 디버그 빌드
+flutter build ios --release  # 릴리즈 빌드 (Xcode에서 추가 설정 필요)
+
+# 웹 빌드
+flutter build web --release
 ```
 
 ## 📱 지원 플랫폼

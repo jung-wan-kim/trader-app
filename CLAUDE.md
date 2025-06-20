@@ -2,11 +2,12 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+모든 RP를 활용해서 프로젝트 진행해.
+
 ## 프로젝트 개요
 - **프로젝트명**: Trader App - AI 기반 주식 추천 애플리케이션
-- **설명**: 전설적인 트레이더들의 투자 전략을 AI로 분석하여 매수/매도 포지션을 추천하는 구독 서비스
 - **Flutter 버전**: SDK '>=3.0.0 <4.0.0'
-- **상태관리**: flutter_riverpod ^2.4.9
+- **상태관리**: flutter_riverpod
 - **백엔드**: Supabase (trader-api 프로젝트)
 - **다국어 지원**: 11개 언어 (한국어, 영어, 일본어, 중국어 등)
 
@@ -127,7 +128,7 @@ recommendations.when(
 );
 ```
 
-## 최근 주요 변경사항 (2025-06-19)
+## 최근 주요 변경사항 (2025-06-20)
 1. **TradingView Webhook 연동**
    - `tradingview_webhooks` 테이블에서 실시간 신호 가져오기
    - W%R 지표 기반 자동 매매 액션 (1=buy, 0=sell)
@@ -137,6 +138,11 @@ recommendations.when(
    - 환경 변수 사용으로 하드코딩 제거
    - Null 안전성 강화
    - 타입 캐스팅 안전성 개선
+
+3. **환경 설정 개선**
+   - `development.env.example` 파일 추가
+   - 환경 변수 설정 가이드 문서화
+   - README.md에 상세한 설치 및 실행 가이드 추가
 
 ## 데이터베이스 스키마 (Supabase)
 - **tradingview_webhooks**: 매매 신호 저장
