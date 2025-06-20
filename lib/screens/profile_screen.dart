@@ -3,14 +3,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../generated/l10n/app_localizations.dart';
 import '../providers/subscription_provider.dart';
 import '../providers/language_provider.dart';
+import '../providers/user_profile_provider.dart';
 import 'subscription_screen.dart';
 import 'privacy_policy_screen.dart';
 import 'terms_of_service_screen.dart';
 import 'language_settings_screen.dart';
 import 'investment_performance_screen.dart';
 import 'watchlist_screen.dart';
+import 'notification_settings_screen.dart';
 import '../providers/supabase_auth_provider.dart';
 import 'login_screen.dart';
+import 'package:intl/intl.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
@@ -24,6 +27,8 @@ class ProfileScreen extends ConsumerWidget {
       loading: () => null,
       error: (_, __) => null,
     );
+    final userProfileAsync = ref.watch(userProfileProvider);
+    final userStatsAsync = ref.watch(userStatsProvider);
     final languageNotifier = ref.read(languageProvider.notifier);
     final currentLocale = ref.watch(languageProvider);
 
@@ -47,23 +52,53 @@ class ProfileScreen extends ConsumerWidget {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  const CircleAvatar(
-                    radius: 50,
-                    child: Icon(Icons.person, size: 50),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    l10n?.trader ?? 'Trader',
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+                  userProfileAsync.when(
+                    data: (profile) => Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 50,
+                          backgroundImage: profile?.avatarUrl != null
+                              ? NetworkImage(profile!.avatarUrl!)
+                              : null,
+                          child: profile?.avatarUrl == null
+                              ? const Icon(Icons.person, size: 50)
+                              : null,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          profile?.fullName ?? l10n?.trader ?? 'Trader',
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          profile?.email ?? 'trader@example.com',
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'trader@example.com',
-                    style: TextStyle(
-                      color: Colors.grey[600],
+                    loading: () => const CircularProgressIndicator(
+                      color: Color(0xFF00D632),
+                    ),
+                    error: (_, __) => Column(
+                      children: [
+                        const CircleAvatar(
+                          radius: 50,
+                          child: Icon(Icons.person, size: 50),
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          l10n?.trader ?? 'Trader',
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -95,6 +130,37 @@ class ProfileScreen extends ConsumerWidget {
               ),
             ),
             const Divider(),
+            // 사용자 통계
+            userStatsAsync.when(
+              data: (stats) => Container(
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.grey[900],
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _buildStatItem(
+                      label: l10n?.totalTrades ?? 'Total Trades',
+                      value: '${stats.totalTrades}',
+                    ),
+                    _buildStatItem(
+                      label: l10n?.watchlist ?? 'Watchlist',
+                      value: '${stats.watchlistCount}',
+                    ),
+                    _buildStatItem(
+                      label: l10n?.activePositions ?? 'Active',
+                      value: '${stats.activePositions}',
+                    ),
+                  ],
+                ),
+              ),
+              loading: () => const SizedBox.shrink(),
+              error: (_, __) => const SizedBox.shrink(),
+            ),
+            const SizedBox(height: 8),
             // 메뉴 리스트
             _buildMenuItem(
               context,
@@ -146,7 +212,12 @@ class ProfileScreen extends ConsumerWidget {
               title: l10n?.notificationSettings ?? 'Notification Settings',
               subtitle: l10n?.notificationDescription ?? 'Manage recommendation and market alerts',
               onTap: () {
-                // 알림 설정 화면으로 이동
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const NotificationSettingsScreen(),
+                  ),
+                );
               },
             ),
             _buildMenuItem(
@@ -166,20 +237,6 @@ class ProfileScreen extends ConsumerWidget {
             const Divider(),
             // 계정 관리 섹션
             _buildSectionTitle(l10n?.accountManagement ?? 'Account Management'),
-            _buildMenuItem(
-              context,
-              icon: Icons.language,
-              title: l10n?.languageSettings ?? 'Language Settings',
-              subtitle: _getLanguageName(currentLocale.languageCode),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LanguageSettingsScreen(),
-                  ),
-                );
-              },
-            ),
             if (subscription?.isActive == true)
               _buildMenuItem(
                 context,
@@ -194,6 +251,28 @@ class ProfileScreen extends ConsumerWidget {
               title: l10n?.deleteAccount ?? 'Delete Account',
               subtitle: 'Permanently delete your account',
               onTap: () => _showDeleteAccountDialog(context, ref),
+            ),
+            const Divider(),
+            // 가입일 표시
+            userStatsAsync.when(
+              data: (stats) => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Row(
+                  children: [
+                    Icon(Icons.calendar_today, color: Colors.grey[600], size: 16),
+                    const SizedBox(width: 8),
+                    Text(
+                      '${l10n?.memberSince ?? 'Member since'} ${DateFormat('MMM yyyy').format(stats.memberSince)}',
+                      style: TextStyle(
+                        color: Colors.grey[600],
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              loading: () => const SizedBox.shrink(),
+              error: (_, __) => const SizedBox.shrink(),
             ),
             const Divider(),
             // 법적 정보 섹션
@@ -484,6 +563,29 @@ class ProfileScreen extends ConsumerWidget {
       subtitle: subtitle != null ? Text(subtitle) : null,
       trailing: onTap != null ? const Icon(Icons.chevron_right) : null,
       onTap: onTap,
+    );
+  }
+  
+  Widget _buildStatItem({required String label, required String value}) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: TextStyle(
+            color: Colors.grey[400],
+            fontSize: 12,
+          ),
+        ),
+      ],
     );
   }
 }
